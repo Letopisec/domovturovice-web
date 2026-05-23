@@ -21,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
 .zadost-list li{font-size:var(--font-size-base);padding-left:24px;position:relative;color:var(--clr-text-body)}
 .zadost-list li::before{content:'✓';position:absolute;left:0;color:var(--clr-green);font-weight:700}
 .zadost-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.zadost-note{font-size:15px;color:var(--clr-text-muted);line-height:1.60;margin-top:16px;display:flex;align-items:flex-start;gap:8px}
+.zadost-note{font-size:var(--font-size-base);color:var(--clr-text-muted);line-height:1.60;margin-top:16px;display:flex;align-items:flex-start;gap:8px}
 .zadost-note svg{width:16px;height:16px;stroke:var(--clr-text-muted);fill:none;flex-shrink:0;margin-top:3px}
 .zadost-card-preview{background:white;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.10);padding:28px;border:1px solid var(--clr-border)}
 .zadost-card-preview-header{display:flex;gap:16px;align-items:center;margin-bottom:20px}
@@ -53,7 +53,7 @@ import Layout from '../layouts/Layout.astro';
 .doc-card.green .doc-card-icon svg{stroke:var(--clr-green)}
 .doc-card h3{margin:0 0 10px}
 .doc-card p{font-size:var(--font-size-base);color:var(--clr-text-body);line-height:1.65;margin:0 0 20px}
-.doc-card-btn{display:inline-flex;align-items:center;gap:6px;color:var(--clr-primary);font-size:15px;font-weight:600;text-decoration:none;transition:gap 0.2s}
+.doc-card-btn{display:inline-flex;align-items:center;gap:6px;color:var(--clr-primary);font-size:16px;font-weight:600;text-decoration:none;transition:gap 0.2s}
 .doc-card-btn:hover{gap:10px;text-decoration:none}
 .doc-card-btn svg{width:16px;height:16px;stroke:var(--clr-primary);fill:none}
 .help-section{background:white}
@@ -65,7 +65,7 @@ import Layout from '../layouts/Layout.astro';
 .cta-section{padding:80px 0;background:#EDE8E3;text-align:center}
 .cta-inner{max-width:680px;margin:0 auto}
 .cta-inner h2{color:var(--clr-primary);margin-bottom:16px}
-.cta-inner p{font-size:18px;line-height:1.60;margin-bottom:36px}
+.cta-inner p{font-size:20px;line-height:1.60;margin-bottom:36px}
 .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 @media(max-width:1024px){.zadost-grid{grid-template-columns:1fr;gap:40px}.zadost-visual{order:-1}.docs-grid{grid-template-columns:1fr}}
 @media(max-width:768px){.page-hero{padding:120px 0 56px}.zadost-actions{flex-direction:column}.help-inner{flex-direction:column}.help-actions{justify-content:center}.cta-buttons{flex-direction:column;align-items:center}}
