@@ -50,7 +50,7 @@ function formatDate(date: Date): string {
   display: flex;
   gap: 8px;
   align-items: center;
-  font-size: 13px;
+  font-size: var(--font-size-meta);
   color: var(--clr-muted);
   margin-bottom: 28px;
   flex-wrap: wrap;
@@ -75,10 +75,10 @@ function formatDate(date: Date): string {
   border-radius: 20px;
   background: rgba(155,66,73,.12);
   color: var(--clr-primary);
-  font-size: 13px;
+  font-size: var(--font-size-meta);
   font-weight: 700;
 }
-.article-date { font-size: 14px; color: var(--clr-muted); }
+.article-date { font-size: var(--font-size-caption); color: var(--clr-muted); }
 .article-header h1 {
   font-family: var(--ff-head);
   font-size: clamp(1.6rem, 3.5vw, 2.3rem);
@@ -128,7 +128,7 @@ function formatDate(date: Date): string {
 }
 
 /* prose styles */
-.article-prose { font-size: 16px; line-height: 1.75; color: var(--clr-text); }
+.article-prose { font-size: var(--font-size-ui); line-height: 1.75; color: var(--clr-text); }
 .article-prose h2 {
   font-family: var(--ff-head);
   font-size: 1.45rem;
@@ -168,7 +168,7 @@ function formatDate(date: Date): string {
   width: 100%;
   border-collapse: collapse;
   margin: 24px 0;
-  font-size: 15px;
+  font-size: var(--font-size-small);
 }
 .article-prose th, .article-prose td {
   padding: 10px 14px;
@@ -203,8 +203,8 @@ function formatDate(date: Date): string {
 }
 .article-nav-item:hover { border-color: var(--clr-primary); box-shadow: 0 4px 14px rgba(155,66,73,.1); }
 .article-nav-item.next { text-align: right; }
-.article-nav-label { font-size: 12px; font-weight: 700; color: var(--clr-muted); text-transform: uppercase; letter-spacing: .08em; }
-.article-nav-title { font-size: 14px; font-weight: 600; color: var(--clr-heading); line-height: 1.4; }
+.article-nav-label { font-size: var(--font-size-label); font-weight: 700; color: var(--clr-muted); text-transform: uppercase; letter-spacing: .08em; }
+.article-nav-title { font-size: var(--font-size-caption); font-weight: 600; color: var(--clr-heading); line-height: 1.4; }
 
 /* ── SIDEBAR ── */
 .sidebar { position: sticky; top: 90px; }
@@ -233,7 +233,7 @@ function formatDate(date: Date): string {
   border-radius: 6px;
   text-decoration: none;
   color: var(--clr-text);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   transition: background .18s;
 }
 .category-list a:hover { background: var(--clr-bg-alt); color: var(--clr-primary); }
@@ -241,7 +241,7 @@ function formatDate(date: Date): string {
   background: var(--clr-bg-alt);
   color: var(--clr-muted);
   border-radius: 12px;
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 700;
   padding: 2px 8px;
 }
@@ -256,13 +256,13 @@ function formatDate(date: Date): string {
 }
 .recent-post-item a:hover .rp-title { color: var(--clr-primary); }
 .rp-title {
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 600;
   color: var(--clr-heading);
   line-height: 1.4;
   margin: 0 0 4px;
 }
-.rp-date { font-size: 12px; color: var(--clr-muted); }
+.rp-date { font-size: var(--font-size-label); color: var(--clr-muted); }
 
 /* contact widget */
 .contact-widget {
@@ -278,7 +278,7 @@ function formatDate(date: Date): string {
   color: #fff;
   margin: 0 0 10px;
 }
-.contact-widget p { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.85); margin: 0 0 18px; }
+.contact-widget p { font-size: var(--font-size-caption); line-height: 1.6; color: rgba(255,255,255,.85); margin: 0 0 18px; }
 .cw-btn {
   display: block;
   background: #fff;
@@ -287,7 +287,7 @@ function formatDate(date: Date): string {
   padding: 10px;
   border-radius: 8px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   text-decoration: none;
   margin-bottom: 10px;
   transition: opacity .2s;
@@ -298,7 +298,7 @@ function formatDate(date: Date): string {
   text-align: center;
   color: rgba(255,255,255,.9);
   font-weight: 600;
-  font-size: 15px;
+  font-size: var(--font-size-small);
   text-decoration: none;
 }
 .cw-phone:hover { color: #fff; }

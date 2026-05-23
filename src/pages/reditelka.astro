@@ -10,7 +10,7 @@ import Layout from '../layouts/Layout.astro';
 <style>
 .section-label {
   display: block;
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -51,7 +51,7 @@ import Layout from '../layouts/Layout.astro';
   justify-content: center;
   gap: 12px;
   color: var(--clr-muted);
-  font-size: 13px;
+  font-size: var(--font-size-meta);
   text-align: center;
   padding: 16px;
 }
@@ -61,7 +61,7 @@ import Layout from '../layouts/Layout.astro';
   background: var(--clr-primary);
   color: #fff;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: var(--font-size-meta);
   font-weight: 700;
   padding: 8px 14px;
   text-align: center;
@@ -76,13 +76,13 @@ import Layout from '../layouts/Layout.astro';
   line-height: 1.25;
 }
 .director-title {
-  font-size: 15px;
+  font-size: var(--font-size-small);
   color: var(--clr-muted);
   font-weight: 600;
   margin: 0 0 20px;
 }
 .director-perex {
-  font-size: 15px;
+  font-size: var(--font-size-small);
   line-height: 1.75;
   color: var(--clr-text);
   margin: 0 0 24px;
@@ -93,7 +93,7 @@ import Layout from '../layouts/Layout.astro';
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 15px;
+  font-size: var(--font-size-small);
   color: var(--clr-text);
 }
 .contact-row svg {
@@ -111,7 +111,7 @@ import Layout from '../layouts/Layout.astro';
   padding: 12px 22px;
   border-radius: 8px;
   font-weight: 700;
-  font-size: 15px;
+  font-size: var(--font-size-small);
   text-decoration: none;
   transition: all .2s;
 }
@@ -138,7 +138,7 @@ import Layout from '../layouts/Layout.astro';
   margin-bottom: 8px;
 }
 .stat-label {
-  font-size: 13px;
+  font-size: var(--font-size-meta);
   color: rgba(255,255,255,.8);
   line-height: 1.45;
 }
@@ -178,7 +178,7 @@ import Layout from '../layouts/Layout.astro';
   color: var(--clr-heading);
   margin: 0 0 10px;
 }
-.profile-card p { font-size: 14px; line-height: 1.7; color: var(--clr-text); margin: 0; }
+.profile-card p { font-size: var(--font-size-caption); line-height: 1.7; color: var(--clr-text); margin: 0; }
 
 /* ── QUOTE ── */
 .quote-section { padding: 64px 0; background: var(--clr-bg); }
@@ -205,7 +205,7 @@ blockquote {
   margin: 0 0 20px;
 }
 .quote-author {
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 700;
   color: var(--clr-primary);
   margin: 0;
@@ -247,17 +247,17 @@ blockquote {
 }
 .edu-degree {
   font-weight: 700;
-  font-size: 15px;
+  font-size: var(--font-size-small);
   color: var(--clr-heading);
   margin-bottom: 3px;
 }
-.edu-school { font-size: 13px; color: var(--clr-muted); }
+.edu-school { font-size: var(--font-size-meta); color: var(--clr-muted); }
 
 .cert-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
 .cert-list li {
   padding: 12px 0;
   border-bottom: 1px solid var(--clr-border);
-  font-size: 15px;
+  font-size: var(--font-size-small);
   color: var(--clr-text);
   display: flex;
   align-items: center;
@@ -307,7 +307,7 @@ blockquote {
   background: rgba(155,66,73,.09);
   color: var(--clr-primary);
   border-radius: 20px;
-  font-size: 13px;
+  font-size: var(--font-size-meta);
   font-weight: 600;
   padding: 5px 12px;
 }

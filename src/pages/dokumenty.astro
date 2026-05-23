@@ -11,8 +11,8 @@ import Layout from '../layouts/Layout.astro';
 .page-hero{padding:140px 0 72px;background:var(--clr-surface);border-bottom:1px solid var(--clr-border);position:relative;overflow:hidden}
 .page-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;background:var(--clr-primary-soft);opacity:0.5;pointer-events:none}
 .page-hero-inner{position:relative;z-index:1;max-width:720px}
-.page-hero-kicker{font-size:12px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--clr-primary);margin-bottom:16px;display:block}
-.page-hero-perex{font-size:20px;line-height:1.65;color:var(--clr-text-body);max-width:640px;margin:0}
+.page-hero-kicker{font-size:var(--font-size-label);font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--clr-primary);margin-bottom:16px;display:block}
+.page-hero-perex{font-size:var(--font-size-perex);line-height:1.65;color:var(--clr-text-body);max-width:640px;margin:0}
 .zadost-section{background:white}
 .zadost-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center}
 .zadost-text h2{margin:0 0 20px;font-family:var(--font-display);font-size:clamp(26px,3.5vw,38px);font-weight:700;color:var(--clr-primary)}
@@ -27,12 +27,12 @@ import Layout from '../layouts/Layout.astro';
 .zadost-card-preview-header{display:flex;gap:16px;align-items:center;margin-bottom:20px}
 .zadost-card-preview-icon{width:52px;height:52px;border-radius:12px;background:var(--clr-primary-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .zadost-card-preview-icon svg{width:24px;height:24px;stroke:var(--clr-primary);fill:none}
-.zadost-card-preview-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--clr-text-dark)}
-.zadost-card-preview-sub{font-size:13px;color:var(--clr-text-muted);margin-top:3px}
+.zadost-card-preview-title{font-family:var(--font-display);font-size:var(--font-size-base);font-weight:700;color:var(--clr-text-dark)}
+.zadost-card-preview-sub{font-size:var(--font-size-meta);color:var(--clr-text-muted);margin-top:3px}
 .zadost-card-lines{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
 .zadost-card-line{height:10px;background:var(--clr-border);border-radius:5px}
 .zadost-card-line.full{width:100%}.zadost-card-line.medium{width:70%}.zadost-card-line.short{width:45%}
-.zadost-card-preview-badge{display:inline-flex;align-items:center;gap:6px;background:var(--clr-green-soft);color:var(--clr-green);font-size:13px;font-weight:600;padding:6px 12px;border-radius:20px}
+.zadost-card-preview-badge{display:inline-flex;align-items:center;gap:6px;background:var(--clr-green-soft);color:var(--clr-green);font-size:var(--font-size-meta);font-weight:600;padding:6px 12px;border-radius:20px}
 .zadost-card-preview-badge svg{width:14px;height:14px;fill:var(--clr-green)}
 .docs-section{background:var(--clr-surface)}
 .section-header{max-width:700px;margin:0 0 48px}
@@ -53,7 +53,7 @@ import Layout from '../layouts/Layout.astro';
 .doc-card.green .doc-card-icon svg{stroke:var(--clr-green)}
 .doc-card h3{margin:0 0 10px}
 .doc-card p{font-size:var(--font-size-base);color:var(--clr-text-body);line-height:1.65;margin:0 0 20px}
-.doc-card-btn{display:inline-flex;align-items:center;gap:6px;color:var(--clr-primary);font-size:16px;font-weight:600;text-decoration:none;transition:gap 0.2s}
+.doc-card-btn{display:inline-flex;align-items:center;gap:6px;color:var(--clr-primary);font-size:var(--font-size-ui);font-weight:600;text-decoration:none;transition:gap 0.2s}
 .doc-card-btn:hover{gap:10px;text-decoration:none}
 .doc-card-btn svg{width:16px;height:16px;stroke:var(--clr-primary);fill:none}
 .help-section{background:white}
@@ -65,7 +65,7 @@ import Layout from '../layouts/Layout.astro';
 .cta-section{padding:80px 0;background:#EDE8E3;text-align:center}
 .cta-inner{max-width:680px;margin:0 auto}
 .cta-inner h2{color:var(--clr-primary);margin-bottom:16px}
-.cta-inner p{font-size:20px;line-height:1.60;margin-bottom:36px}
+.cta-inner p{font-size:var(--font-size-perex);line-height:1.60;margin-bottom:36px}
 .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 @media(max-width:1024px){.zadost-grid{grid-template-columns:1fr;gap:40px}.zadost-visual{order:-1}.docs-grid{grid-template-columns:1fr}}
 @media(max-width:768px){.page-hero{padding:120px 0 56px}.zadost-actions{flex-direction:column}.help-inner{flex-direction:column}.help-actions{justify-content:center}.cta-buttons{flex-direction:column;align-items:center}}

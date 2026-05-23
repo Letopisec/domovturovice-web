@@ -38,7 +38,7 @@ function formatDate(date: Date): string {
 .page-hero-inner { position: relative; z-index: 2; max-width: 680px; }
 .label {
   display: inline-block;
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -54,7 +54,7 @@ function formatDate(date: Date): string {
   line-height: 1.2;
 }
 .perex {
-  font-size: 20px;
+  font-size: var(--font-size-perex);
   line-height: 1.65;
   color: rgba(255,255,255,.85);
   margin: 0;
@@ -80,7 +80,7 @@ function formatDate(date: Date): string {
   background: #fff;
   color: var(--clr-text);
   font-family: var(--ff-body);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 500;
   cursor: pointer;
   transition: all .18s;
@@ -149,7 +149,7 @@ function formatDate(date: Date): string {
   display: inline-block;
   padding: 3px 10px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 700;
   background: rgba(155,66,73,.12);
   color: var(--clr-primary);
@@ -159,19 +159,19 @@ function formatDate(date: Date): string {
 .news-card-tag.orange { background: rgba(218,136,65,.12); color: var(--clr-orange); }
 .news-card-tag.blue { background: rgba(75,119,171,.12); color: var(--clr-blue); }
 .news-card-date {
-  font-size: 13px;
+  font-size: var(--font-size-meta);
   color: var(--clr-muted);
 }
 .news-card-body h2 {
   font-family: var(--ff-head);
-  font-size: 20px;
+  font-size: var(--font-size-perex);
   font-weight: 700;
   color: var(--clr-heading);
   line-height: 1.35;
   margin: 0 0 10px;
 }
 .news-card-body p {
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   line-height: 1.65;
   color: var(--clr-text);
   margin: 0 0 16px;
@@ -185,7 +185,7 @@ function formatDate(date: Date): string {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 700;
   color: var(--clr-primary);
   text-decoration: none;
@@ -222,7 +222,7 @@ function formatDate(date: Date): string {
   border: 1.5px solid var(--clr-border);
   background: #fff;
   color: var(--clr-text);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -265,7 +265,7 @@ function formatDate(date: Date): string {
   margin: 0 0 14px;
 }
 .cta-inner p {
-  font-size: 20px;
+  font-size: var(--font-size-perex);
   line-height: 1.65;
   color: rgba(255,255,255,.85);
   margin: 0 0 32px;
@@ -278,7 +278,7 @@ function formatDate(date: Date): string {
   padding: 13px 24px;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--font-size-ui);
   text-decoration: none;
   transition: all .2s;
 }

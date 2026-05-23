@@ -14,7 +14,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
 /* ── SECTION LABELS ── */
 .section-label-sm {
   font-family: var(--ff-body);
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -51,7 +51,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
   line-height: 1.2;
 }
 .jak-hero-perex {
-  font-size: 20px;
+  font-size: var(--font-size-perex);
   line-height: 1.65;
   color: rgba(255,255,255,.88);
   margin: 0;
@@ -68,7 +68,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
   margin: 0 0 12px;
 }
 .care-grid-section .lead {
-  font-size: 20px;
+  font-size: var(--font-size-perex);
   color: var(--clr-text);
   max-width: 640px;
   line-height: 1.65;
@@ -118,7 +118,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
   margin: 0 0 10px;
 }
 .care-card p {
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   line-height: 1.7;
   color: var(--clr-text);
   margin: 0;
@@ -160,7 +160,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
   justify-content: center;
   gap: 12px;
   color: var(--clr-muted);
-  font-size: 14px;
+  font-size: var(--font-size-caption);
   text-align: center;
   border: 1.5px dashed var(--clr-border);
 }
@@ -181,7 +181,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
   margin: 0 0 8px;
 }
 .steps-section .steps-lead {
-  font-size: 20px;
+  font-size: var(--font-size-perex);
   color: var(--clr-text);
   max-width: 600px;
   margin: 0 0 40px;
@@ -218,7 +218,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
   color: var(--clr-heading);
   margin: 0 0 8px;
 }
-.step p { font-size: 14px; line-height: 1.7; color: var(--clr-text); margin: 0; }
+.step p { font-size: var(--font-size-caption); line-height: 1.7; color: var(--clr-text); margin: 0; }
 
 /* ── HIGHLIGHT BLOCK ── */
 .highlight-section { padding: 56px 0; background: #fff; }
@@ -240,11 +240,11 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
 .highlight-block__author {
   font-weight: 700;
   color: var(--clr-primary);
-  font-size: 15px;
+  font-size: var(--font-size-small);
   margin: 0 0 4px;
 }
 .highlight-block__role {
-  font-size: 13px;
+  font-size: var(--font-size-meta);
   color: var(--clr-muted);
   margin: 0;
 }
@@ -259,7 +259,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
   margin: 0 0 8px;
 }
 .family-block .family-lead {
-  font-size: 20px;
+  font-size: var(--font-size-perex);
   color: var(--clr-text);
   max-width: 640px;
   line-height: 1.65;
@@ -283,7 +283,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
   border: 2px solid var(--clr-primary);
   text-decoration: none;
   font-weight: 700;
-  font-size: 16px;
+  font-size: var(--font-size-ui);
   transition: all .2s;
 }
 .family-block .btn:hover { background: transparent; color: var(--clr-primary); }
@@ -306,7 +306,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
   color: #fff;
   margin: 0 0 14px;
 }
-.cta-inner p { font-size: 20px; line-height: 1.65; color: rgba(255,255,255,.85); margin: 0 0 32px; }
+.cta-inner p { font-size: var(--font-size-perex); line-height: 1.65; color: rgba(255,255,255,.85); margin: 0 0 32px; }
 .cta-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .cta-group .btn {
   display: inline-flex;
@@ -315,7 +315,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
   padding: 13px 24px;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--font-size-ui);
   text-decoration: none;
   transition: all .2s;
 }
@@ -349,7 +349,7 @@ section, .family-block, .cta-section, .related-links { padding: 72px 0; }
   text-decoration: none;
   color: var(--clr-heading);
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--font-size-ui);
   transition: all .2s;
 }
 .related-item:hover { border-color: var(--clr-primary); color: var(--clr-primary); box-shadow: 0 4px 14px rgba(155,66,73,.1); }

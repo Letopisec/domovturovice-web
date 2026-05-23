@@ -20,7 +20,7 @@ import Layout from '../layouts/Layout.astro';
 .page-hero-kicker {
   display: inline-block;
   font-family: var(--ff-body);
-  font-size: 13px;
+  font-size: var(--font-size-meta);
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -36,7 +36,7 @@ import Layout from '../layouts/Layout.astro';
   margin: 0 0 20px;
 }
 .page-hero-perex {
-  font-size: 20px;
+  font-size: var(--font-size-perex);
   line-height: 1.65;
   color: rgba(255,255,255,.88);
   margin: 0;
@@ -54,7 +54,7 @@ import Layout from '../layouts/Layout.astro';
 .faq-section { padding: 72px 0 80px; background: var(--clr-bg); }
 .faq-label {
   font-family: var(--ff-body);
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -86,7 +86,7 @@ import Layout from '../layouts/Layout.astro';
   background: var(--clr-bg-alt);
   color: var(--clr-text);
   font-family: var(--ff-body);
-  font-size: 16px;
+  font-size: var(--font-size-ui);
   font-weight: 500;
   cursor: pointer;
   text-align: left;
@@ -126,7 +126,7 @@ import Layout from '../layouts/Layout.astro';
   background: var(--clr-primary);
   color: #fff;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 700;
   padding: 2px 8px;
   min-width: 24px;
@@ -172,7 +172,7 @@ import Layout from '../layouts/Layout.astro';
   cursor: pointer;
   text-align: left;
   font-family: var(--ff-body);
-  font-size: 16px;
+  font-size: var(--font-size-ui);
   font-weight: 600;
   color: var(--clr-heading);
   line-height: 1.4;
@@ -264,7 +264,7 @@ import Layout from '../layouts/Layout.astro';
   padding: 13px 22px;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--font-size-ui);
   text-decoration: none;
   transition: all .2s;
   white-space: nowrap;
@@ -293,7 +293,7 @@ import Layout from '../layouts/Layout.astro';
 .cta-inner { text-align: center; max-width: 600px; margin: 0 auto; }
 .cta-kicker {
   display: inline-block;
-  font-size: 12px;
+  font-size: var(--font-size-label);
   font-weight: 700;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -308,7 +308,7 @@ import Layout from '../layouts/Layout.astro';
   margin: 0 0 16px;
 }
 .cta-inner p {
-  font-size: 20px;
+  font-size: var(--font-size-perex);
   line-height: 1.65;
   color: rgba(255,255,255,.85);
   margin: 0 0 36px;
@@ -321,7 +321,7 @@ import Layout from '../layouts/Layout.astro';
   padding: 14px 26px;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--font-size-ui);
   text-decoration: none;
   transition: all .2s;
 }
@@ -354,7 +354,7 @@ import Layout from '../layouts/Layout.astro';
   .faq-layout { grid-template-columns: 1fr; }
   .faq-sidebar { position: static; }
   .faq-cat-list { flex-direction: row; flex-wrap: wrap; gap: 8px; }
-  .faq-cat-btn { width: auto; flex: 0 0 auto; font-size: 14px; padding: 10px 14px; }
+  .faq-cat-btn { width: auto; flex: 0 0 auto; font-size: var(--font-size-caption); padding: 10px 14px; }
   .contact-hint-inner { flex-direction: column; align-items: flex-start; }
   .contact-hint-btns { width: 100%; }
 }
@@ -363,7 +363,7 @@ import Layout from '../layouts/Layout.astro';
   .faq-section { padding: 48px 0 56px; }
   .contact-hint { padding: 40px 0; }
   .cta-section { padding: 56px 0; }
-  .faq-cat-btn { font-size: 13px; }
+  .faq-cat-btn { font-size: var(--font-size-meta); }
   .contact-hint-btns .btn { flex: 1 1 auto; justify-content: center; }
 }
 </style>
