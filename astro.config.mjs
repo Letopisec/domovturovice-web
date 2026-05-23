@@ -3,8 +3,8 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://domovturovice.cz',
-  integrations: [mdx(), sitemap({ filter: (page) => !!page })],
+  site: 'https://domovturovice-web.pages.dev',
+  integrations: [mdx(), sitemap({ customPages: [] })],
   output: 'static',
   build: {
     outDir: 'dist',
