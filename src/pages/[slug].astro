@@ -1,0 +1,426 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const allPosts = await getCollection('blog');
+const sorted = allPosts.sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf());
+const currentIndex = sorted.findIndex(p => p.slug === post.slug);
+const prevPost = sorted[currentIndex + 1] ?? null;
+const nextPost = sorted[currentIndex - 1] ?? null;
+const recentPosts = sorted.filter(p => p.slug !== post.slug).slice(0, 5);
+const categories = Array.from(new Set(sorted.map(p => p.data.kategorie)));
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+
+<Layout
+  title={`${post.data.titulek} | Domov Turovice`}
+  description={post.data.perex}
+  image={post.data.nahledovyObrazek}
+>
+
+<style>
+/* ── SINGLE LAYOUT ── */
+.single-layout {
+  padding: 60px 0 80px;
+  background: var(--clr-bg);
+}
+.single-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 48px;
+  align-items: start;
+}
+
+/* ── BREADCRUMB ── */
+.breadcrumb {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  color: var(--clr-muted);
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.breadcrumb a { color: var(--clr-primary); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb-sep { color: var(--clr-border); }
+
+/* ── ARTICLE ── */
+.article-body { min-width: 0; }
+.article-header { margin-bottom: 28px; }
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.article-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(155,66,73,.12);
+  color: var(--clr-primary);
+  font-size: 13px;
+  font-weight: 700;
+}
+.article-date { font-size: 14px; color: var(--clr-muted); }
+.article-header h1 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+  font-weight: 700;
+  color: var(--clr-heading);
+  line-height: 1.25;
+  margin: 0 0 16px;
+}
+.article-perex {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--clr-text);
+  border-left: 4px solid var(--clr-primary);
+  padding-left: 20px;
+  margin: 0;
+}
+
+/* featured image */
+.article-featured-img {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 28px 0;
+  aspect-ratio: 16/8;
+}
+.article-featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.article-featured-img-placeholder {
+  width: 100%;
+  border-radius: 14px;
+  aspect-ratio: 16/8;
+  background: var(--clr-bg-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 28px 0;
+}
+.article-featured-img-placeholder svg {
+  width: 64px; height: 64px;
+  stroke: var(--clr-border);
+  fill: none;
+  stroke-width: 1;
+}
+
+/* prose styles */
+.article-prose { font-size: 16px; line-height: 1.75; color: var(--clr-text); }
+.article-prose h2 {
+  font-family: var(--ff-head);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 40px 0 14px;
+  line-height: 1.3;
+}
+.article-prose h3 {
+  font-family: var(--ff-head);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 28px 0 10px;
+}
+.article-prose p { margin: 0 0 18px; }
+.article-prose a { color: var(--clr-primary); font-weight: 600; }
+.article-prose a:hover { text-decoration: underline; }
+.article-prose ul, .article-prose ol {
+  margin: 0 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.article-prose li { line-height: 1.65; }
+.article-prose blockquote {
+  border-left: 4px solid var(--clr-primary);
+  padding: 14px 20px;
+  margin: 28px 0;
+  background: rgba(155,66,73,.04);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--clr-heading);
+}
+.article-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 15px;
+}
+.article-prose th, .article-prose td {
+  padding: 10px 14px;
+  border: 1px solid var(--clr-border);
+  text-align: left;
+}
+.article-prose th {
+  background: var(--clr-bg-alt);
+  font-weight: 700;
+  color: var(--clr-heading);
+}
+
+/* prev/next nav */
+.article-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--clr-border);
+}
+.article-nav-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--clr-text);
+  transition: border-color .2s, box-shadow .2s;
+}
+.article-nav-item:hover { border-color: var(--clr-primary); box-shadow: 0 4px 14px rgba(155,66,73,.1); }
+.article-nav-item.next { text-align: right; }
+.article-nav-label { font-size: 12px; font-weight: 700; color: var(--clr-muted); text-transform: uppercase; letter-spacing: .08em; }
+.article-nav-title { font-size: 14px; font-weight: 600; color: var(--clr-heading); line-height: 1.4; }
+
+/* ── SIDEBAR ── */
+.sidebar { position: sticky; top: 90px; }
+.sidebar-widget {
+  background: #fff;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+.sidebar-widget-h {
+  font-family: var(--ff-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--clr-border);
+}
+.category-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.category-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--clr-text);
+  font-size: 14px;
+  transition: background .18s;
+}
+.category-list a:hover { background: var(--clr-bg-alt); color: var(--clr-primary); }
+.cat-count {
+  background: var(--clr-bg-alt);
+  color: var(--clr-muted);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 8px;
+}
+.recent-posts { list-style: none; margin: 0; padding: 0; }
+.recent-post-item { border-bottom: 1px solid var(--clr-border); }
+.recent-post-item:last-child { border-bottom: none; }
+.recent-post-item a {
+  display: block;
+  padding: 10px 0;
+  text-decoration: none;
+  transition: color .18s;
+}
+.recent-post-item a:hover .rp-title { color: var(--clr-primary); }
+.rp-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--clr-heading);
+  line-height: 1.4;
+  margin: 0 0 4px;
+}
+.rp-date { font-size: 12px; color: var(--clr-muted); }
+
+/* contact widget */
+.contact-widget {
+  background: var(--clr-primary);
+  border-radius: 12px;
+  padding: 24px;
+  color: #fff;
+}
+.contact-widget h3 {
+  font-family: var(--ff-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 10px;
+}
+.contact-widget p { font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.85); margin: 0 0 18px; }
+.cw-btn {
+  display: block;
+  background: #fff;
+  color: var(--clr-primary);
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: opacity .2s;
+}
+.cw-btn:hover { opacity: .9; }
+.cw-phone {
+  display: block;
+  text-align: center;
+  color: rgba(255,255,255,.9);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+}
+.cw-phone:hover { color: #fff; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .single-grid { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+}
+@media (max-width: 640px) {
+  .single-layout { padding: 40px 0 56px; }
+  .article-nav { grid-template-columns: 1fr; }
+}
+</style>
+
+<main class="single-layout">
+  <div class="container">
+
+    <!-- breadcrumb -->
+    <nav class="breadcrumb" aria-label="Drobečková navigace">
+      <a href="/">Domov</a>
+      <span class="breadcrumb-sep">›</span>
+      <a href="/aktuality">Aktuality</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>{post.data.titulek}</span>
+    </nav>
+
+    <div class="single-grid">
+
+      <!-- article -->
+      <article class="article-body">
+        <header class="article-header">
+          <div class="article-meta">
+            <span class="article-tag">{post.data.kategorie}</span>
+            <span class="article-date">{formatDate(post.data.datum)}</span>
+          </div>
+          <h1>{post.data.titulek}</h1>
+          <p class="article-perex">{post.data.perex}</p>
+        </header>
+
+        {post.data.nahledovyObrazek
+          ? (
+            <div class="article-featured-img">
+              <img src={post.data.nahledovyObrazek} alt={post.data.titulek} />
+            </div>
+          )
+          : (
+            <div class="article-featured-img-placeholder">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </div>
+          )
+        }
+
+        <div class="article-prose">
+          <Content />
+        </div>
+
+        <!-- prev/next nav -->
+        {(prevPost || nextPost) && (
+          <nav class="article-nav" aria-label="Navigace mezi příspěvky">
+            {prevPost
+              ? (
+                <a href={`/${prevPost.slug}`} class="article-nav-item prev">
+                  <span class="article-nav-label">← Předchozí příspěvek</span>
+                  <span class="article-nav-title">{prevPost.data.titulek}</span>
+                </a>
+              )
+              : <div></div>
+            }
+            {nextPost && (
+              <a href={`/${nextPost.slug}`} class="article-nav-item next">
+                <span class="article-nav-label">Další příspěvek →</span>
+                <span class="article-nav-title">{nextPost.data.titulek}</span>
+              </a>
+            )}
+          </nav>
+        )}
+      </article>
+
+      <!-- sidebar -->
+      <aside class="sidebar">
+
+        <div class="sidebar-widget">
+          <h2 class="sidebar-widget-h">Témata</h2>
+          <ul class="category-list">
+            <li><a href="/aktuality"><span>Vše</span><span class="cat-count">{sorted.length}</span></a></li>
+            {categories.map(cat => (
+              <li>
+                <a href="/aktuality">
+                  <span>{cat}</span>
+                  <span class="cat-count">{sorted.filter(p => p.data.kategorie === cat).length}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="sidebar-widget">
+          <h2 class="sidebar-widget-h">Nejnovější příspěvky</h2>
+          <ul class="recent-posts">
+            {recentPosts.map(p => (
+              <li class="recent-post-item">
+                <a href={`/${p.slug}`}>
+                  <p class="rp-title">{p.data.titulek}</p>
+                  <span class="rp-date">{formatDate(p.data.datum)}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="contact-widget">
+          <h3>Máte zájem o pobyt?</h3>
+          <p>Rádi vám odpovíme na všechny otázky. Zavolejte nebo napište — odpovídáme do 24 hodin.</p>
+          <a href="/kontakt" class="cw-btn">Napsat nám</a>
+          <a href="tel:+420724211589" class="cw-phone">+420 724 211 589</a>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+</Layout>

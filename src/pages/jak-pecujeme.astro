@@ -1,0 +1,595 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Jak pečujeme | Domov Turovice"
+  description="Komplexní ošetřovatelská a osobní péče v Domově Turovice. Individuální plán péče, vlastní lékař, spolupráce s nemocnicí v Hranicích, aktivizace a ergoterapie."
+>
+
+<style>
+/* ── SHARED SECTION PADDING ── */
+section, .family-block, .cta-section, .related-links { padding: 72px 0; }
+
+/* ── SECTION LABELS ── */
+.section-label-sm {
+  font-family: var(--ff-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--clr-primary);
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* ── PAGE HERO (reusing global .page-hero) ── */
+.jak-hero {
+  background: linear-gradient(135deg, var(--clr-primary) 0%, #7a3238 100%);
+  color: #fff;
+  padding: 80px 0 64px;
+  position: relative;
+  overflow: hidden;
+}
+.jak-hero::after {
+  content: '';
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.06);
+  pointer-events: none;
+}
+.jak-hero-inner { position: relative; z-index: 2; max-width: 700px; }
+.jak-hero .section-label-sm { color: rgba(255,255,255,.7); }
+.jak-hero h1 {
+  font-family: var(--ff-head);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 18px;
+  line-height: 1.2;
+}
+.jak-hero-perex {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,.88);
+  margin: 0;
+  max-width: 580px;
+}
+
+/* ── CARE GRID ── */
+.care-grid-section { padding: 72px 0; background: var(--clr-bg); }
+.care-grid-section h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.7rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 12px;
+}
+.care-grid-section .lead {
+  font-size: 1.05rem;
+  color: var(--clr-text);
+  max-width: 640px;
+  line-height: 1.65;
+  margin: 0 0 48px;
+}
+.care-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.care-card {
+  background: #fff;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 14px;
+  padding: 28px 24px;
+  border-top: 4px solid var(--clr-primary);
+}
+.care-card--orange { border-top-color: var(--clr-orange); }
+.care-card--green  { border-top-color: var(--clr-green); }
+.care-card--blue   { border-top-color: var(--clr-blue); }
+.care-card__icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(155,66,73,.1);
+  margin-bottom: 16px;
+}
+.care-card__icon svg {
+  width: 22px; height: 22px;
+  stroke: var(--clr-primary);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.care-card--orange .care-card__icon { background: rgba(218,136,65,.1); }
+.care-card--orange .care-card__icon svg { stroke: var(--clr-orange); }
+.care-card--green .care-card__icon  { background: rgba(89,152,108,.1); }
+.care-card--green .care-card__icon svg  { stroke: var(--clr-green); }
+.care-card--blue .care-card__icon   { background: rgba(75,119,171,.1); }
+.care-card--blue .care-card__icon svg   { stroke: var(--clr-blue); }
+.care-card h3 {
+  font-family: var(--ff-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 10px;
+}
+.care-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--clr-text);
+  margin: 0;
+}
+
+/* ── SPLIT SECTIONS ── */
+.split-section { padding: 72px 0; }
+.split-section.bg-white { background: #fff; }
+.split-section.bg-bg    { background: var(--clr-bg); }
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.split--reverse { direction: rtl; }
+.split--reverse > * { direction: ltr; }
+.split h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 16px;
+  line-height: 1.3;
+}
+.split p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--clr-text);
+  margin: 0 0 14px;
+}
+.split__img-placeholder {
+  background: var(--clr-bg-alt);
+  border-radius: 14px;
+  aspect-ratio: 4/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--clr-muted);
+  font-size: 14px;
+  text-align: center;
+  border: 1.5px dashed var(--clr-border);
+}
+.split__img-placeholder svg {
+  width: 48px; height: 48px;
+  stroke: var(--clr-border);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+/* ── STEPS ── */
+.steps-section { padding: 72px 0; background: var(--clr-bg); }
+.steps-section h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 8px;
+}
+.steps-section .steps-lead {
+  font-size: 1.05rem;
+  color: var(--clr-text);
+  max-width: 600px;
+  margin: 0 0 40px;
+  line-height: 1.65;
+}
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  counter-reset: step;
+}
+.step {
+  background: #fff;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 12px;
+  padding: 24px 20px;
+  position: relative;
+  counter-increment: step;
+}
+.step::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--ff-head);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: rgba(155,66,73,.15);
+  display: block;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+.step h3 {
+  font-family: var(--ff-head);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 8px;
+}
+.step p { font-size: 14px; line-height: 1.7; color: var(--clr-text); margin: 0; }
+
+/* ── HIGHLIGHT BLOCK ── */
+.highlight-section { padding: 56px 0; background: #fff; }
+.highlight-block {
+  background: rgba(155,66,73,.05);
+  border-left: 5px solid var(--clr-primary);
+  border-radius: 0 14px 14px 0;
+  padding: 36px 40px;
+  max-width: 780px;
+}
+.highlight-block__quote {
+  font-family: var(--ff-head);
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-style: italic;
+  color: var(--clr-heading);
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+.highlight-block__author {
+  font-weight: 700;
+  color: var(--clr-primary);
+  font-size: 15px;
+  margin: 0 0 4px;
+}
+.highlight-block__role {
+  font-size: 13px;
+  color: var(--clr-muted);
+  margin: 0;
+}
+
+/* ── FAMILY BLOCK ── */
+.family-block { background: var(--clr-bg-alt); padding: 72px 0; }
+.family-block h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 8px;
+}
+.family-block .family-lead {
+  font-size: 1.05rem;
+  color: var(--clr-text);
+  max-width: 640px;
+  line-height: 1.65;
+  margin: 0 0 24px;
+}
+.family-block__accent p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--clr-text);
+  margin: 0 0 14px;
+}
+.family-block .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  background: var(--clr-primary);
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 8px;
+  border: 2px solid var(--clr-primary);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  transition: all .2s;
+}
+.family-block .btn:hover { background: transparent; color: var(--clr-primary); }
+
+/* ── CTA ── */
+.cta-section {
+  background: linear-gradient(135deg, var(--clr-primary) 0%, #7a3238 100%);
+  padding: 72px 0;
+}
+.cta-inner {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #fff;
+}
+.cta-inner h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 14px;
+}
+.cta-inner p { font-size: 1.05rem; line-height: 1.65; color: rgba(255,255,255,.85); margin: 0 0 32px; }
+.cta-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.cta-group .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all .2s;
+}
+.btn-primary { background: #fff; color: var(--clr-primary); border: 2px solid #fff; }
+.btn-primary:hover { background: transparent; color: #fff; }
+.btn-secondary { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.6); }
+.btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,.12); }
+
+/* ── RELATED LINKS ── */
+.related-links { padding: 56px 0; background: var(--clr-bg); }
+.related-links h2 {
+  font-family: var(--ff-head);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 24px;
+}
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.related-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  background: #fff;
+  border: 1.5px solid var(--clr-border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--clr-heading);
+  font-weight: 600;
+  font-size: 15px;
+  transition: all .2s;
+}
+.related-item:hover { border-color: var(--clr-primary); color: var(--clr-primary); box-shadow: 0 4px 14px rgba(155,66,73,.1); }
+.related-item svg {
+  width: 20px; height: 20px;
+  stroke: var(--clr-primary);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .care-grid { grid-template-columns: repeat(2, 1fr); }
+  .related-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .split { grid-template-columns: 1fr; gap: 32px; }
+  .split--reverse { direction: ltr; }
+}
+@media (max-width: 640px) {
+  .care-grid { grid-template-columns: 1fr; }
+  .related-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .jak-hero { padding: 56px 0 44px; }
+}
+</style>
+
+<!-- HERO -->
+<section class="jak-hero">
+  <div class="container">
+    <div class="jak-hero-inner">
+      <span class="section-label-sm">Co u nás zahrnuje péče</span>
+      <h1>Jak pečujeme o naše klienty</h1>
+      <p class="jak-hero-perex">Nabídka péče vychází z toho, co klient skutečně potřebuje. Každý klient má svůj individuální plán péče, který tým pravidelně přehodnocuje.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CARE GRID -->
+<section class="care-grid-section">
+  <div class="container">
+    <span class="section-label-sm">Komplexní péče pod jednou střechou</span>
+    <h2>Péče přizpůsobená každému klientovi</h2>
+    <p class="lead">Každý klient má svůj individuální plán péče, který tým pravidelně přehodnocuje. Nabídka vychází z toho, co klient skutečně potřebuje.</p>
+
+    <div class="care-grid">
+      <article class="care-card">
+        <div class="care-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Ošetřovatelská péče</h3>
+        <p>Všeobecné sestry pečují o klienty nepřetržitě, 24 hodin denně. Zajišťují podávání léků, ošetřování ran, sledování zdravotního stavu a komunikaci s lékaři. Na každém pokoji i toaletě je signalizační zařízení.</p>
+      </article>
+
+      <article class="care-card">
+        <div class="care-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
+        <h3>Přímá osobní péče</h3>
+        <p>Pracovníci v přímé péči pomáhají s hygienou, oblékáním, pohybem a dalšími každodenními úkony. Přístup je vždy šetrný, respektuje soukromí i tempo každého klienta. Podporuje se to, co klient zvládne sám.</p>
+      </article>
+
+      <article class="care-card care-card--orange">
+        <div class="care-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h3>Stravování z vlastní kuchyně</h3>
+        <p>Klienti dostávají pět jídel denně. Jídla se připravují přímo v domově — v sezóně s čerstvou zeleninou z vlastního skleníku. O výživu pečuje nutriční terapeutka spolupracující s kuchyní a zdravotním týmem.</p>
+      </article>
+
+      <article class="care-card care-card--green">
+        <div class="care-card__icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <h3>Aktivizace a volný čas</h3>
+        <p>Každý den probíhají aktivity přizpůsobené kondici klientů — canisterapie, muzikoterapie, arteterapie, ergoterapie nebo trénink paměti. Domov pravidelně pořádá kulturní akce a oslavy svátků.</p>
+      </article>
+
+      <article class="care-card care-card--blue">
+        <div class="care-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Sociální poradenství</h3>
+        <p>Sociální pracovnice pomáhají klientům i rodinám s veškerou administrativou — od vyřízení příspěvku na péči přes zákonná práva až po komunikaci s úřady. Podpora nekončí nástupem do domova.</p>
+      </article>
+
+      <article class="care-card care-card--orange">
+        <div class="care-card__icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>Rehabilitace a ergoterapie</h3>
+        <p>Rehabilitační program podporuje pohyblivost a soběstačnost klientů. Ergoterapie pomáhá nacvičovat každodenní dovednosti, které přispívají k pocitu nezávislosti a smysluplnému trávení dne.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- INDIVIDUÁLNÍ PLÁN PÉČE -->
+<section class="split-section bg-bg">
+  <div class="container">
+    <div class="split">
+      <div>
+        <span class="section-label-sm">Individuální přístup</span>
+        <h2>Plán péče, který vychází z člověka</h2>
+        <p>Každý klient má svůj individuální plán péče. Vzniká po příchodu do domova na základě rozhovoru s klientem, jeho rodinou a zdravotnickým týmem. Zahrnuje péči zdravotní, osobní i aktivizační.</p>
+        <p>Plán se pravidelně přehodnocuje — reaguje na změny zdravotního stavu, přání klienta i podněty rodiny. Není to dokument do šuplíku. Je to každodenní pracovní nástroj celého týmu.</p>
+        <p>Individuální přístup není fráze. Je to denní praxe, která vychází z 22leté přímé zkušenosti ředitelky Mgr. Ziny Filip Dadlíkové, DiS., s péčí o seniory a osoby s demencí.</p>
+      </div>
+      <div class="split__img-wrap">
+        <div class="split__img-placeholder">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <p>Fotografie<br>individuální péče</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LÉKAŘSKÁ PÉČE -->
+<section class="split-section bg-white">
+  <div class="container">
+    <div class="split split--reverse">
+      <div>
+        <span class="section-label-sm">Zdravotní péče</span>
+        <h2>Vlastní lékař a spolupráce s nemocnicí v&nbsp;Hranicích</h2>
+        <p>V budově C v 1. nadpodlaží má vyhrazené prostory lékař, který domov pravidelně navštěvuje. Klienti tak nemusejí dojíždět za základní lékařskou péčí.</p>
+        <p>Domov úzce spolupracuje s nemocnicí v Hranicích. Klienti jsou v případě potřeby převáženi sanitou a mají zajištěno přednostní ošetření u odborných lékařů. Léky zajišťuje hranická lékárna formou pravidelných dodávek.</p>
+        <p>V domově působí také nutriční terapeutka, která spolupracuje s kuchyní a dbá na to, aby strava každého klienta odpovídala jeho zdravotním potřebám.</p>
+      </div>
+      <div class="split__img-wrap">
+        <div class="split__img-placeholder">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <p>Fotografie<br>zdravotní péče</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KROKY -->
+<section class="steps-section">
+  <div class="container">
+    <span class="section-label-sm">Jak to funguje</span>
+    <h2>Co se děje po příchodu do domova</h2>
+    <p class="steps-lead">Přijetí nekončí podpisem smlouvy. Teprve tehdy začíná to nejdůležitější.</p>
+    <div class="steps" role="list">
+      <div class="step" role="listitem">
+        <h3>Poznáváme vás</h3>
+        <p>Hned po příchodu si sedneme s klientem a rodinou. Povídáme si o zvyklostech, přáních, zdravotním stavu i obavách. Adaptace je pro nás priorita, ne formalita.</p>
+      </div>
+      <div class="step" role="listitem">
+        <h3>Sestavujeme plán péče</h3>
+        <p>Na základě prvního setkání tým sestaví individuální plán péče. Zahrnuje ošetřovatelská opatření, aktivizační program i doporučení pro stravování.</p>
+      </div>
+      <div class="step" role="listitem">
+        <h3>Péče se přizpůsobuje</h3>
+        <p>Plán není statický. Pravidelně se přehodnocuje — reagujeme na změny stavu, přání klienta i podněty rodiny. To, co platilo při příchodu, nemusí platit za půl roku.</p>
+      </div>
+      <div class="step" role="listitem">
+        <h3>Rodina je partnerem</h3>
+        <p>Rodiny pravidelně informujeme o zdravotním stavu klienta. Mohou se účastnit tvorby plánu péče a podílet se na rozhodnutích, která se jejich blízkého týkají.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CITÁT ŘEDITELKY -->
+<section class="highlight-section">
+  <div class="container">
+    <div class="highlight-block">
+      <p class="highlight-block__quote">„Péče o seniory není o tom udělat vše správně podle protokolu. Je o tom vidět před sebou člověka se svým příběhem, svými hodnotami a svou důstojností. To je základ, od kterého se vše ostatní odvíjí."</p>
+      <p class="highlight-block__author">Mgr. Zina Filip Dadlíková, DiS.</p>
+      <p class="highlight-block__role">Ředitelka Domova Turovice | 22 let praxe v péči o seniory</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRO RODINY -->
+<div class="family-block">
+  <div class="container">
+    <span class="section-label-sm">Pro rodiny</span>
+    <h2>Rodina není jen návštěvník</h2>
+    <p class="family-lead">Víme, že umístění blízkého do domova je těžké rozhodnutí. Neztrácíte kontakt — stáváte se partnery v péči.</p>
+    <div class="family-block__accent" style="max-width:640px;">
+      <p>Pravidelně informujeme o zdravotním stavu klienta a o tom, jak se mu daří. Rodina se může účastnit tvorby individuálního plánu a podílet se na rozhodnutích.</p>
+      <p>Pro rodiny, které chtějí být svému blízkému nablízku v náročných chvílích, máme k dispozici hostinské pokoje přímo v domově. V případě závěru života nabízíme ubytování a pietní místnost pro důstojné poslední rozloučení.</p>
+    </div>
+    <a href="/kontakt" class="btn">Informace pro rodiny a blízké →</a>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>Přijeďte se podívat</h2>
+      <p>Prohlídka je nezávazná. Ukážeme vám prostory, seznámíme vás s týmem a zodpovíme všechny otázky, které vás zajímají.</p>
+      <div class="cta-group">
+        <a href="/kontakt" class="btn btn-primary">Domluvte si prohlídku</a>
+        <a href="/prijeti" class="btn btn-secondary">Zjistit podmínky přijetí</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED LINKS -->
+<div class="related-links">
+  <div class="container">
+    <h2>Zjistěte více</h2>
+    <nav class="related-grid" aria-label="Související stránky">
+      <a href="/cenik" class="related-item">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Ceník
+      </a>
+      <a href="/prijeti" class="related-item">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Jak probíhá přijetí
+      </a>
+      <a href="/faq" class="related-item">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Časté otázky
+      </a>
+      <a href="/kontakt" class="related-item">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.4a16 16 0 0 0 6 6l.86-.86a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Kontakt
+      </a>
+      <a href="/dokumenty" class="related-item">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Dokumenty ke stažení
+      </a>
+      <a href="/reditelka" class="related-item">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        O ředitelce
+      </a>
+    </nav>
+  </div>
+</div>
+
+</Layout>

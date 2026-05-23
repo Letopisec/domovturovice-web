@@ -1,0 +1,225 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Jak probíhá přijetí do Domova Turovice"
+  description="Průvodce přijetím do Domova Turovice – od podání žádosti až po první dny v domově. 4 kroky přehledně."
+>
+
+<style>
+.page-hero{padding:140px 0 72px;background:var(--clr-surface);border-bottom:1px solid var(--clr-border);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;background:var(--clr-primary-soft);opacity:0.5;pointer-events:none}
+.page-hero-inner{position:relative;z-index:1;max-width:720px}
+.label{font-size:12px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--clr-primary);margin-bottom:16px;display:block}
+.perex{font-size:20px;line-height:1.65;color:var(--clr-text-body);max-width:640px;margin:0}
+.steps-section{padding:88px 0;background:white}
+.section-header{max-width:740px;margin:0 auto 48px;text-align:center}
+.tab2-nav{display:flex;border:2px solid var(--clr-primary);border-radius:var(--radius-card) var(--radius-card) 0 0;overflow:hidden;background:var(--clr-surface)}
+.tab2-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 12px;font-size:15px;font-weight:600;color:var(--clr-text-muted);background:none;border:none;border-right:1px solid var(--clr-border);cursor:pointer;transition:color 0.2s,background 0.2s}
+.tab2-btn:last-child{border-right:none}
+.tab2-btn:hover{color:var(--clr-primary);background:var(--clr-primary-soft)}
+.tab2-btn.active{color:var(--clr-primary);background:white}
+.tab2-btn-num{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--clr-border);color:var(--clr-text-muted);font-size:16px;font-weight:700;flex-shrink:0;transition:background 0.2s,color 0.2s}
+.tab2-btn.active .tab2-btn-num{background:var(--clr-primary);color:white}
+.tab2-panel{display:none;padding:40px;border:2px solid var(--clr-primary);border-top:none;border-radius:0 0 var(--radius-card) var(--radius-card);background:white;display:none;grid-template-columns:1fr 1fr;gap:48px}
+.tab2-panel.active{display:grid}
+.tab2-panel h3{margin:0 0 16px;color:var(--clr-text-dark)}
+.tab2-panel p{font-size:var(--font-size-base);line-height:1.70;margin-bottom:16px}
+.tab2-panel p:last-child{margin-bottom:0}
+.tab2-panel-visual{background:var(--clr-surface);border-radius:12px;padding:28px 32px}
+.tab2-panel-visual h4{margin:0 0 16px;color:var(--clr-primary)}
+.tab2-checklist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.tab2-checklist li{font-size:var(--font-size-base);line-height:1.60;color:var(--clr-text-body);padding-left:24px;position:relative}
+.tab2-checklist li::before{content:'✓';position:absolute;left:0;color:var(--clr-green);font-weight:700}
+.inline-link{color:var(--clr-primary);font-weight:600}
+.docs-section{padding:88px 0;background:var(--clr-surface)}
+.docs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px}
+.doc-card{background:white;border-radius:var(--radius-card);border:1px solid var(--clr-border);padding:28px 32px;display:flex;gap:20px;align-items:flex-start;box-shadow:var(--shadow-card);transition:box-shadow 0.25s,transform 0.25s}
+.doc-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-3px)}
+.doc-card-icon{width:48px;height:48px;border-radius:10px;background:var(--clr-primary-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.doc-card-icon svg{width:24px;height:24px;stroke:var(--clr-primary);fill:none}
+.doc-card-body h4{margin:0 0 8px;color:var(--clr-text-dark)}
+.doc-card-body p{margin:0;font-size:var(--font-size-base);color:var(--clr-text-body);line-height:1.65}
+.doc-card-body a{color:var(--clr-primary);font-weight:600}
+.cta-section{padding:80px 0;background:#EDE8E3;text-align:center}
+.cta-inner{max-width:680px;margin:0 auto}
+.cta-inner h2{color:var(--clr-primary);margin-bottom:16px}
+.cta-inner p{font-size:18px;line-height:1.60;margin-bottom:36px}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-primary-local{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--clr-primary);color:white;font-size:16px;font-weight:600;border-radius:var(--radius-btn);text-decoration:none;transition:background 0.2s;border:2px solid var(--clr-primary)}
+.btn-primary-local:hover{background:var(--clr-primary-hover);color:white;text-decoration:none}
+.btn-outline-local{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;background:transparent;color:var(--clr-primary);font-size:16px;font-weight:600;border-radius:var(--radius-btn);text-decoration:none;transition:all 0.2s;border:2px solid var(--clr-primary)}
+.btn-outline-local:hover{background:var(--clr-primary);color:white;text-decoration:none}
+@media(max-width:768px){
+  .page-hero{padding:120px 0 56px}
+  .tab2-nav{flex-direction:column}
+  .tab2-btn{border-right:none;border-bottom:1px solid var(--clr-border);flex-direction:row;gap:12px;padding:16px 20px}
+  .tab2-btn:last-child{border-bottom:none}
+  .tab2-panel.active{display:block}
+  .tab2-panel{padding:28px 20px}
+  .tab2-panel-visual{margin-top:28px}
+  .docs-grid{grid-template-columns:1fr}
+  .doc-card{flex-direction:column}
+  .cta-buttons{flex-direction:column;align-items:center}
+}
+</style>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <span class="label">Přijetí do domova</span>
+      <h1>Jak probíhá přijetí do Domova Turovice</h1>
+      <p class="perex">Přijetí do domova pro seniory je důležité rozhodnutí. Chceme, aby byl celý proces pro vás i vaše blízké srozumitelný a klidný. Provázíme vás každým krokem – od první žádosti až po první dny v domově.</p>
+    </div>
+  </div>
+</section>
+
+<!-- KROKY PŘIJETÍ -->
+<section class="steps-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Postup krok za krokem</span>
+      <h2 class="section-h2">Čtyři kroky k přijetí do domova</h2>
+      <p class="perex">Žádost o přijetí nemusí být složitá. Níže najdete přehledný průvodce celým procesem.</p>
+    </div>
+
+    <div class="tab2-nav" id="prijetiTabNav">
+      <button class="tab2-btn active" data-panel="tab-panel-1"><span class="tab2-btn-num">1</span>Podání žádosti</button>
+      <button class="tab2-btn" data-panel="tab-panel-2"><span class="tab2-btn-num">2</span>Posouzení žádosti</button>
+      <button class="tab2-btn" data-panel="tab-panel-3"><span class="tab2-btn-num">3</span>Příprava nástupu</button>
+      <button class="tab2-btn" data-panel="tab-panel-4"><span class="tab2-btn-num">4</span>Adaptace v domově</button>
+    </div>
+
+    <div class="tab2-panel active" id="tab-panel-1">
+      <div class="tab2-panel-text">
+        <h3>Podání žádosti o přijetí</h3>
+        <p>Prvním krokem je vyplnění žádosti o přijetí do domova pro seniory. Formulář si můžete stáhnout na stránce <a href="/dokumenty" class="inline-link">Dokumenty ke stažení</a> nebo o něj požádat přímo v domově.</p>
+        <p>K žádosti přiložte vyjádření praktického lékaře o zdravotním stavu a doklady týkající se příspěvku na péči, pokud vám byl přiznán. Vyplněnou žádost zašlete poštou nebo ji osobně doručte do sídla domova.</p>
+        <p>Pokud si nevíte rady s vyplněním, naše sociální pracovnice vám rády pomohou – stačí zavolat nebo přijít na konzultaci.</p>
+      </div>
+      <div class="tab2-panel-visual">
+        <h4>Co budete potřebovat</h4>
+        <ul class="tab2-checklist">
+          <li>Vyplněná žádost o přijetí (ke stažení na <a href="/dokumenty">/dokumenty</a>)</li>
+          <li>Vyjádření praktického lékaře o zdravotním stavu</li>
+          <li>Rozhodnutí o přiznání příspěvku na péči (pokud byl přiznán)</li>
+          <li>Kopie průkazu totožnosti (občanský průkaz)</li>
+          <li>Kopie průkazu pojištěnce zdravotní pojišťovny</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab2-panel" id="tab-panel-2">
+      <div class="tab2-panel-text">
+        <h3>Posouzení vaší žádosti</h3>
+        <p>Po doručení žádosti ji posoudí naše sociální pracovnice spolu s vedením domova. Hodnotíme zdravotní stav žadatele, míru závislosti na péči a naše aktuální možnosti.</p>
+        <p>O výsledku posouzení vás budeme informovat písemně. Pokud v daném okamžiku nemáme volnou kapacitu, zařadíme vás do pořadníku a budeme vás kontaktovat, jakmile se místo uvolní.</p>
+      </div>
+      <div class="tab2-panel-visual">
+        <h4>Kritéria posouzení</h4>
+        <ul class="tab2-checklist">
+          <li>Zdravotní stav a míra závislosti na péči</li>
+          <li>Stupeň přiznaného příspěvku na péči</li>
+          <li>Naléhavost situace žadatele</li>
+          <li>Aktuální volná kapacita domova (104 lůžek)</li>
+          <li>Soulad potřeb klienta s rozsahem naší péče</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab2-panel" id="tab-panel-3">
+      <div class="tab2-panel-text">
+        <h3>Příprava nástupu a podpis smlouvy</h3>
+        <p>Jakmile je přijetí schváleno, domluvíme s vámi termín podpisu smlouvy o poskytování sociálních služeb. Smlouvu si můžete předem prostudovat – vzor je k dispozici na stránce <a href="/dokumenty" class="inline-link">Dokumenty ke stažení</a>.</p>
+        <p>Na nástupní den si připravte osobní doklady, pojistný průkaz a věci, které budoucímu klientovi zpříjemní nový domov – oblíbenou deku, fotografie rodiny nebo oblíbenou knihu. Pokoj je zařízený.</p>
+      </div>
+      <div class="tab2-panel-visual">
+        <h4>Co zajišťujeme my</h4>
+        <ul class="tab2-checklist">
+          <li>Elektricky polohovatelná postel, noční stolek a skříně</li>
+          <li>Jídelní stůl a židle, barevný televizor</li>
+          <li>Vlastní sociální zázemí (koupelna, WC)</li>
+          <li>Signalizační zařízení „pacient–sestra"</li>
+          <li>Stravování – 5 jídel denně z vlastní kuchyně</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab2-panel" id="tab-panel-4">
+      <div class="tab2-panel-text">
+        <h3>Adaptace a první týdny v domově</h3>
+        <p>Příchod do nového prostředí může být náročný. Proto každému novému klientovi přidělíme klíčového pracovníka – člověka z našeho týmu, který ho provází prvními dny a pomáhá mu zorientovat se.</p>
+        <p>Klíčový pracovník spolupracuje s rodinou i s klientem na individuálním plánu péče. Zjišťujeme zvyky, přání a potřeby každého člověka, abychom péči od začátku přizpůsobili jemu.</p>
+      </div>
+      <div class="tab2-panel-visual">
+        <h4>Co adaptaci usnadní</h4>
+        <ul class="tab2-checklist">
+          <li>Klíčový pracovník po celou dobu adaptace</li>
+          <li>Individuální plán péče sestavený s klientem a rodinou</li>
+          <li>Zapojení do aktivizačních programů</li>
+          <li>Návštěvy bez omezení – rodina je vždy vítána</li>
+          <li>Možnost ubytování rodiny v hostinských pokojích</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOKUMENTY -->
+<section class="docs-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Potřebné dokumenty</span>
+      <h2 class="section-h2">Co přiložit k žádosti o přijetí</h2>
+      <p class="perex">Žádost o přijetí do domova pro seniory se podává písemně. Připravte si tyto dokumenty.</p>
+    </div>
+    <div class="docs-grid">
+      <div class="doc-card">
+        <div class="doc-card-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="doc-card-body"><h4>Žádost o přijetí</h4><p>Vyplněný formulář ke stažení na stránce <a href="/dokumenty">Dokumenty ke stažení</a>. Vyplní žadatel nebo jeho zákonný zástupce.</p></div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-card-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div class="doc-card-body"><h4>Vyjádření praktického lékaře</h4><p>Lékař potvrzuje zdravotní stav žadatele a míru soběstačnosti. Formulář je součástí žádosti o přijetí.</p></div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-card-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="doc-card-body"><h4>Rozhodnutí o příspěvku na péči</h4><p>Pokud byl příspěvek přiznán, přiložte kopii rozhodnutí Úřadu práce ČR.</p></div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-card-icon"><svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        <div class="doc-card-body"><h4>Kopie průkazu totožnosti</h4><p>Občanský průkaz nebo pas žadatele. Přiložte kopii průkazu pojištěnce zdravotní pojišťovny.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>Máte otázky? Rádi poradíme.</h2>
+      <p>Naše sociální pracovnice vám pomůže s vyplněním žádosti i se všemi dalšími kroky. První konzultace je vždy zdarma a nezávazná.</p>
+      <div class="cta-buttons">
+        <a href="/dokumenty" class="btn-primary-local">Stáhnout žádost o přijetí</a>
+        <a href="/kontakt" class="btn-outline-local">Kontaktovat nás</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Layout>
+
+<script>
+  document.getElementById('prijetiTabNav')?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.tab2-btn') as HTMLElement;
+    if (!btn) return;
+    const panelId = btn.dataset.panel;
+    document.querySelectorAll('.tab2-btn').forEach((b) => b.classList.remove('active'));
+    document.querySelectorAll('.tab2-panel').forEach((p) => p.classList.remove('active'));
+    btn.classList.add('active');
+    if (panelId) document.getElementById(panelId)?.classList.add('active');
+  });
+</script>

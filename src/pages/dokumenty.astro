@@ -1,0 +1,216 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Dokumenty ke stažení – Domov Turovice"
+  description="Formuláře a dokumenty Domova Turovice ke stažení: žádost o přijetí, domovní řád, ceník, vzor smlouvy, etický kodex."
+>
+
+<style>
+.page-hero{padding:140px 0 72px;background:var(--clr-surface);border-bottom:1px solid var(--clr-border);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;background:var(--clr-primary-soft);opacity:0.5;pointer-events:none}
+.page-hero-inner{position:relative;z-index:1;max-width:720px}
+.page-hero-kicker{font-size:12px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--clr-primary);margin-bottom:16px;display:block}
+.page-hero-perex{font-size:20px;line-height:1.65;color:var(--clr-text-body);max-width:640px;margin:0}
+.zadost-section{background:white}
+.zadost-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:center}
+.zadost-text h2{margin:0 0 20px;font-family:var(--font-display);font-size:clamp(26px,3.5vw,38px);font-weight:700;color:var(--clr-primary)}
+.zadost-text p{font-size:var(--font-size-base);line-height:1.70;margin-bottom:16px}
+.zadost-list{list-style:none;padding:0;margin:20px 0;display:flex;flex-direction:column;gap:10px}
+.zadost-list li{font-size:var(--font-size-base);padding-left:24px;position:relative;color:var(--clr-text-body)}
+.zadost-list li::before{content:'✓';position:absolute;left:0;color:var(--clr-green);font-weight:700}
+.zadost-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.zadost-note{font-size:15px;color:var(--clr-text-muted);line-height:1.60;margin-top:16px;display:flex;align-items:flex-start;gap:8px}
+.zadost-note svg{width:16px;height:16px;stroke:var(--clr-text-muted);fill:none;flex-shrink:0;margin-top:3px}
+.zadost-card-preview{background:white;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.10);padding:28px;border:1px solid var(--clr-border)}
+.zadost-card-preview-header{display:flex;gap:16px;align-items:center;margin-bottom:20px}
+.zadost-card-preview-icon{width:52px;height:52px;border-radius:12px;background:var(--clr-primary-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.zadost-card-preview-icon svg{width:24px;height:24px;stroke:var(--clr-primary);fill:none}
+.zadost-card-preview-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--clr-text-dark)}
+.zadost-card-preview-sub{font-size:13px;color:var(--clr-text-muted);margin-top:3px}
+.zadost-card-lines{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.zadost-card-line{height:10px;background:var(--clr-border);border-radius:5px}
+.zadost-card-line.full{width:100%}.zadost-card-line.medium{width:70%}.zadost-card-line.short{width:45%}
+.zadost-card-preview-badge{display:inline-flex;align-items:center;gap:6px;background:var(--clr-green-soft);color:var(--clr-green);font-size:13px;font-weight:600;padding:6px 12px;border-radius:20px}
+.zadost-card-preview-badge svg{width:14px;height:14px;fill:var(--clr-green)}
+.docs-section{background:var(--clr-surface)}
+.section-header{max-width:700px;margin:0 0 48px}
+.docs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.doc-card{background:white;border-radius:var(--radius-card);border-top:3px solid transparent;padding:28px 32px;box-shadow:var(--shadow-card);transition:box-shadow 0.25s,transform 0.25s}
+.doc-card:hover{box-shadow:var(--shadow-hover);transform:translateY(-4px)}
+.doc-card.primary{border-top-color:var(--clr-primary)}
+.doc-card.orange{border-top-color:var(--clr-orange)}
+.doc-card.blue{border-top-color:var(--clr-blue)}
+.doc-card.green{border-top-color:var(--clr-green)}
+.doc-card-icon{width:48px;height:48px;border-radius:10px;background:var(--clr-primary-soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.doc-card.orange .doc-card-icon{background:var(--clr-orange-soft)}
+.doc-card.blue .doc-card-icon{background:var(--clr-blue-soft)}
+.doc-card.green .doc-card-icon{background:var(--clr-green-soft)}
+.doc-card-icon svg{width:24px;height:24px;stroke:var(--clr-primary);fill:none}
+.doc-card.orange .doc-card-icon svg{stroke:var(--clr-orange)}
+.doc-card.blue .doc-card-icon svg{stroke:var(--clr-blue)}
+.doc-card.green .doc-card-icon svg{stroke:var(--clr-green)}
+.doc-card h3{margin:0 0 10px}
+.doc-card p{font-size:var(--font-size-base);color:var(--clr-text-body);line-height:1.65;margin:0 0 20px}
+.doc-card-btn{display:inline-flex;align-items:center;gap:6px;color:var(--clr-primary);font-size:15px;font-weight:600;text-decoration:none;transition:gap 0.2s}
+.doc-card-btn:hover{gap:10px;text-decoration:none}
+.doc-card-btn svg{width:16px;height:16px;stroke:var(--clr-primary);fill:none}
+.help-section{background:white}
+.help-inner{display:flex;justify-content:space-between;align-items:center;gap:48px;flex-wrap:wrap}
+.help-text{max-width:600px}
+.help-text h2{margin:0 0 16px;font-family:var(--font-display);font-size:clamp(26px,3.5vw,36px);font-weight:700;color:var(--clr-primary)}
+.help-text p{font-size:var(--font-size-base);line-height:1.70;margin:0}
+.help-actions{display:flex;gap:12px;flex-wrap:wrap}
+.cta-section{padding:80px 0;background:#EDE8E3;text-align:center}
+.cta-inner{max-width:680px;margin:0 auto}
+.cta-inner h2{color:var(--clr-primary);margin-bottom:16px}
+.cta-inner p{font-size:18px;line-height:1.60;margin-bottom:36px}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+@media(max-width:1024px){.zadost-grid{grid-template-columns:1fr;gap:40px}.zadost-visual{order:-1}.docs-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.page-hero{padding:120px 0 56px}.zadost-actions{flex-direction:column}.help-inner{flex-direction:column}.help-actions{justify-content:center}.cta-buttons{flex-direction:column;align-items:center}}
+</style>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <span class="page-hero-kicker">Dokumenty ke stažení</span>
+      <h1>Formuláře a dokumenty Domova Turovice</h1>
+      <p class="page-hero-perex">Vše potřebné ke stažení na jednom místě. Žádost o přijetí, domovní řád, ceník i vzor smlouvy — přehledně a bez zbytečného hledání.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ŽÁDOST O PŘIJETÍ -->
+<section class="section zadost-section" id="zadost">
+  <div class="container">
+    <div class="zadost-grid">
+      <div class="zadost-text">
+        <span class="section-label">Nejdůležitější dokument</span>
+        <h2>Žádost o přijetí do domova pro seniory</h2>
+        <p>Prvním krokem ke vstupu do Domova Turovice je podání žádosti o přijetí. Formulář slouží k posouzení vaší situace a ke zařazení do evidence žadatelů.</p>
+        <p>K žádosti je nutné přiložit vyjádření praktického lékaře o zdravotním stavu.</p>
+        <ul class="zadost-list">
+          <li>Vyplněný formulář žádosti o přijetí</li>
+          <li>Vyjádření lékaře o zdravotním stavu žadatele</li>
+          <li>Rozhodnutí o přiznání příspěvku na péči (pokud byl přiznán)</li>
+          <li>Kopie průkazu ZTP nebo ZTP/P (je-li vydán)</li>
+        </ul>
+        <div class="zadost-actions">
+          <a href="/files/zadost-o-prijeti.pdf" class="btn btn-primary" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Stáhnout žádost (PDF)
+          </a>
+          <a href="/prijeti" class="btn btn-secondary">Jak probíhá přijetí</a>
+        </div>
+        <p class="zadost-note">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Formulář si také můžete vyzvednout osobně v sídle domova (Turovice 104) nebo požádat o zaslání poštou na čísle +420 724 211 589.
+        </p>
+      </div>
+      <div class="zadost-visual" aria-hidden="true">
+        <div class="zadost-card-preview">
+          <div class="zadost-card-preview-header">
+            <div class="zadost-card-preview-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+            <div><div class="zadost-card-preview-title">Žádost o přijetí</div><div class="zadost-card-preview-sub">Domov Turovice, z.ú. · formát PDF</div></div>
+          </div>
+          <div class="zadost-card-lines">
+            <div class="zadost-card-line full"></div><div class="zadost-card-line medium"></div>
+            <div class="zadost-card-line full"></div><div class="zadost-card-line short"></div>
+            <div class="zadost-card-line medium"></div><div class="zadost-card-line full"></div>
+          </div>
+          <div class="zadost-card-preview-badge"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Aktuální verze · 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POVINNÉ DOKUMENTY -->
+<section class="section docs-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Povinné dokumenty</span>
+      <h2 class="section-h2">Vše, co máte právo znát</h2>
+      <p>Dle zákona č. 108/2006 Sb. jsme povinni zveřejnit klíčové dokumenty. Najdete je zde přehledně pohromadě.</p>
+    </div>
+    <div class="docs-grid">
+      <div class="doc-card primary">
+        <div class="doc-card-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3>Domovní řád</h3>
+        <p>Pravidla každodenního soužití v domově. Práva a povinnosti klientů, provozní režim, návštěvní hodiny a způsob řešení situací.</p>
+        <a href="#" class="doc-card-btn">Zobrazit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="doc-card orange">
+        <div class="doc-card-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Ceník služeb</h3>
+        <p>Aktuální úhrady za ubytování, stravu a fakultativní služby. Ceník odpovídá zákonným limitům a je každoročně aktualizován.</p>
+        <a href="/cenik" class="doc-card-btn">Zobrazit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="doc-card primary">
+        <div class="doc-card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <h3>Vzor smlouvy o poskytování služby</h3>
+        <p>Dokument, který podepisuje každý nový klient při nástupu. Prostudujte si ho předem, v klidu a bez časového tlaku.</p>
+        <a href="#" class="doc-card-btn">Zobrazit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="doc-card blue">
+        <div class="doc-card-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Pravidla pro podávání stížností</h3>
+        <p>Každý klient i jeho blízcí mají právo vznést stížnost. Dokument vysvětluje, jak a komu stížnost podat a v jaké lhůtě obdržíte odpověď.</p>
+        <a href="#" class="doc-card-btn">Zobrazit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="doc-card blue">
+        <div class="doc-card-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Ochrana osobních údajů (GDPR)</h3>
+        <p>Informace o zpracování osobních údajů. Dokument splňuje požadavky nařízení EU 2016/679.</p>
+        <a href="#" class="doc-card-btn">Zobrazit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="doc-card green">
+        <div class="doc-card-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Výroční zpráva</h3>
+        <p>Přehled činnosti a hospodaření Domova Turovice za uplynulý rok. Dokládá transparentní fungování domova.</p>
+        <a href="#" class="doc-card-btn">Zobrazit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="doc-card green">
+        <div class="doc-card-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h3>Etický kodex pracovníka</h3>
+        <p>Hodnoty a zásady, kterými se řídí každý člen našeho týmu při práci s klienty a jejich rodinami.</p>
+        <a href="#" class="doc-card-btn">Zobrazit <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POMOC -->
+<section class="section help-section">
+  <div class="container">
+    <div class="help-inner">
+      <div class="help-text">
+        <span class="section-label">Jsme tu pro vás</span>
+        <h2>Potřebujete pomoc s vyplněním žádosti?</h2>
+        <p>Naše sociální pracovnice vám rády pomohou s vyplněním žádosti o přijetí do domova pro seniory. Poradí vám, které doklady přiložit, a provedou vás celým procesem krok za krokem.</p>
+      </div>
+      <div class="help-actions">
+        <a href="tel:+420724211589" class="btn btn-primary">Zavolat nám</a>
+        <a href="mailto:info@domovturovice.cz" class="btn btn-secondary">Napsat e-mail</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>Připraveni podat žádost o přijetí?</h2>
+      <p>Podání žádosti je nezávazné. Pomůžeme vám s každým krokem.</p>
+      <div class="cta-buttons">
+        <a href="/files/zadost-o-prijeti.pdf" class="btn btn-cta-main" download>Stáhnout žádost</a>
+        <a href="/prijeti" class="btn btn-cta-sec">Jak probíhá přijetí</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</Layout>

@@ -1,0 +1,595 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Ředitelka | Domov Turovice"
+  description="Mgr. Zina Filip Dadlíková, DiS. — ředitelka Domova Turovice s 22 lety praxe v péči o seniory a osoby s demencí."
+>
+
+<style>
+.section-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--clr-primary);
+  margin-bottom: 14px;
+}
+.section-intro {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--clr-text);
+  max-width: 700px;
+  margin: 0 0 40px;
+}
+
+/* ── DIRECTOR HERO ── */
+.director-hero {
+  padding: 72px 0 64px;
+  background: var(--clr-bg);
+}
+.director-hero-inner {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 56px;
+  align-items: start;
+}
+.director-photo {
+  width: 220px; height: 260px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--clr-bg-alt);
+  border: 1.5px solid var(--clr-border);
+}
+.director-photo-placeholder {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--clr-muted);
+  font-size: 13px;
+  text-align: center;
+  padding: 16px;
+}
+.director-photo-placeholder svg { width: 56px; height: 56px; fill: var(--clr-border); }
+.director-badge {
+  margin-top: 12px;
+  background: var(--clr-primary);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 14px;
+  text-align: center;
+  width: 220px;
+}
+.director-intro h1 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 8px 0 6px;
+  line-height: 1.25;
+}
+.director-title {
+  font-size: 15px;
+  color: var(--clr-muted);
+  font-weight: 600;
+  margin: 0 0 20px;
+}
+.director-perex {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--clr-text);
+  margin: 0 0 24px;
+  max-width: 600px;
+}
+.director-contacts { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--clr-text);
+}
+.contact-row svg {
+  width: 18px; height: 18px;
+  fill: var(--clr-primary);
+  flex-shrink: 0;
+}
+.contact-row a { color: var(--clr-primary); font-weight: 600; text-decoration: none; }
+.contact-row a:hover { text-decoration: underline; }
+.director-cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all .2s;
+}
+.btn-primary { background: var(--clr-primary); color: #fff; border: 2px solid var(--clr-primary); }
+.btn-primary:hover { background: #7a3238; border-color: #7a3238; }
+.btn-secondary { background: #fff; color: var(--clr-primary); border: 2px solid var(--clr-primary); }
+.btn-secondary:hover { background: var(--clr-primary); color: #fff; }
+
+/* ── STATS STRIP ── */
+.stats-strip { background: var(--clr-primary); padding: 40px 0; }
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.stat-item { text-align: center; }
+.stat-number {
+  display: block;
+  font-family: var(--ff-head);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,.8);
+  line-height: 1.45;
+}
+
+/* ── PROFILE SECTION ── */
+.profile-section { padding: 72px 0; background: #fff; }
+.profile-section h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 12px;
+}
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.profile-card {
+  background: var(--clr-bg-alt);
+  border: 1.5px solid var(--clr-border);
+  border-radius: 14px;
+  padding: 28px 24px;
+  border-top: 4px solid var(--clr-primary);
+}
+.profile-card-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.profile-card-icon svg { width: 26px; height: 26px; }
+.profile-card h3 {
+  font-family: var(--ff-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 10px;
+}
+.profile-card p { font-size: 14px; line-height: 1.7; color: var(--clr-text); margin: 0; }
+
+/* ── QUOTE ── */
+.quote-section { padding: 64px 0; background: var(--clr-bg); }
+.quote-inner {
+  max-width: 720px;
+  position: relative;
+  padding-left: 60px;
+}
+.quote-mark {
+  position: absolute;
+  left: 0; top: -20px;
+  font-family: var(--ff-head);
+  font-size: 8rem;
+  color: rgba(155,66,73,.15);
+  line-height: 1;
+  pointer-events: none;
+}
+blockquote {
+  font-family: var(--ff-head);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-style: italic;
+  color: var(--clr-heading);
+  line-height: 1.65;
+  margin: 0 0 20px;
+}
+.quote-author {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--clr-primary);
+  margin: 0;
+}
+
+/* ── EDUCATION ── */
+.edu-section { padding: 72px 0; background: #fff; }
+.edu-section h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 12px;
+}
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 40px;
+}
+.edu-block h3 {
+  font-family: var(--ff-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1.5px solid var(--clr-border);
+}
+.edu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
+.edu-list li { display: flex; gap: 14px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--clr-border); }
+.edu-list li:last-child { border-bottom: none; }
+.edu-dot {
+  flex-shrink: 0;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--clr-primary);
+  margin-top: 5px;
+}
+.edu-degree {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--clr-heading);
+  margin-bottom: 3px;
+}
+.edu-school { font-size: 13px; color: var(--clr-muted); }
+
+.cert-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0; }
+.cert-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--clr-border);
+  font-size: 15px;
+  color: var(--clr-text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cert-list li:last-child { border-bottom: none; }
+.cert-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--clr-green);
+}
+
+/* ── SKILLS ── */
+.skills-section { padding: 72px 0; background: var(--clr-bg); }
+.skills-section h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 12px;
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 40px;
+}
+.skills-card {
+  background: #fff;
+  border: 1.5px solid var(--clr-border);
+  border-top: 4px solid var(--clr-primary);
+  border-radius: 14px;
+  padding: 28px 24px;
+}
+.skills-card h3 {
+  font-family: var(--ff-head);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin: 0 0 18px;
+}
+.skill-tag-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.skill-tag {
+  display: inline-block;
+  background: rgba(155,66,73,.09);
+  color: var(--clr-primary);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 12px;
+}
+.skill-tag.green { background: rgba(89,152,108,.09); color: var(--clr-green); }
+
+/* ── CTA ── */
+.cta-section {
+  padding: 72px 0;
+  background: linear-gradient(135deg, var(--clr-primary) 0%, #7a3238 100%);
+}
+.cta-inner {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  color: #fff;
+}
+.cta-inner .section-label { color: rgba(255,255,255,.7); }
+.cta-inner h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 14px 0;
+}
+.cta-inner p { font-size: 1.05rem; line-height: 1.65; color: rgba(255,255,255,.85); margin: 0 0 32px; }
+.cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.cta-buttons .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+}
+.btn-cta-main { background: #fff; color: var(--clr-primary); border: 2px solid #fff; }
+.btn-cta-main:hover { background: transparent; color: #fff; }
+.btn-cta-sec { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.6); }
+.btn-cta-sec:hover { border-color: #fff; background: rgba(255,255,255,.12); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .director-hero-inner { grid-template-columns: 1fr; gap: 32px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .profile-grid, .edu-grid, .skills-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .director-hero { padding: 48px 0 40px; }
+  .stats-strip { padding: 28px 0; }
+  .quote-inner { padding-left: 0; }
+  .quote-mark { display: none; }
+}
+</style>
+
+<div class="page-content">
+
+  <!-- DIRECTOR HERO -->
+  <section class="director-hero">
+    <div class="container">
+      <div class="director-hero-inner">
+
+        <div class="director-photo-wrap">
+          <div class="director-photo">
+            <div class="director-photo-placeholder">
+              <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+              <span>Fotografie bude doplněna</span>
+            </div>
+          </div>
+          <div class="director-badge">Ředitelka Domova Turovice</div>
+        </div>
+
+        <div class="director-intro">
+          <span class="section-label">Vedení domova</span>
+          <h1>Mgr. Zina Filip Dadlíková, DiS.</h1>
+          <p class="director-title">Ředitelka · Odbornice v sociálních službách</p>
+          <p class="director-perex">
+            Domov Turovice vede zkušená manažerka a sociální pracovnice s <strong>22 lety praxe</strong> v přímé práci s klienty. Zina Filip Dadlíková stojí za odbornou koncepcí péče od samého počátku — ještě dříve, než vznikl samotný domov. Její vize se stala základem, na kterém celý projekt vyrostl.
+          </p>
+          <div class="director-contacts">
+            <div class="contact-row">
+              <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <span>Kancelář: <a href="tel:+420588003888">+420 588 003 888</a></span>
+            </div>
+            <div class="contact-row">
+              <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+              <span>Mobil: <a href="tel:+420724211589">+420 724 211 589</a></span>
+            </div>
+            <div class="contact-row">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <span><a href="mailto:reditelka@domovturovice.cz">reditelka@domovturovice.cz</a></span>
+            </div>
+            <div class="contact-row">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+              <span>Turovice 104, 751 14 Turovice — kancelář v budově C, 1. nadpodlaží</span>
+            </div>
+          </div>
+          <div class="director-cta-row">
+            <a href="mailto:reditelka@domovturovice.cz" class="btn btn-primary">Napište ředitelce</a>
+            <a href="/kontakt" class="btn btn-secondary">Kontakt a prohlídka</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTIKY -->
+  <div class="stats-strip">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number">22</span>
+          <span class="stat-label">let v přímé práci s klienty</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">2017</span>
+          <span class="stat-label">rok, kdy stála za odbornou koncepcí domova</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">6</span>
+          <span class="stat-label">specializací v péči o seniory a osoby s demencí</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">104</span>
+          <span class="stat-label">míst v domově, za jehož kvalitu péče ručí</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFIL -->
+  <section class="profile-section">
+    <div class="container">
+      <span class="section-label">Odborný profil</span>
+      <h2>Zkušenost, která přináší klid vám i vašemu blízkému</h2>
+      <p class="section-intro">Celých 22 let pracovala Zina Filip Dadlíková přímo s klienty — seniory i lidmi s demencí. Řídila aktivizační programy, plánovala individuální péči a podporovala rodiny v těžkých chvílích. Teprve na základě této hluboké zkušenosti se stala ředitelkou Domova Turovice.</p>
+
+      <div class="profile-grid">
+        <div class="profile-card">
+          <div class="profile-card-icon" style="background:rgba(155,66,73,.1)">
+            <svg viewBox="0 0 24 24" style="fill:var(--clr-primary)"><path d="M12 2C8.13 2 5 5.13 5 9c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 19 9c0-3.87-3.13-7-7-7z"/></svg>
+          </div>
+          <h3>Péče a podpora klientů</h3>
+          <p>Dvacet dva let pracovala přímo s klienty — seniory a osoby se sníženou soběstačností. Zajišťovala jejich podporu v každodenních činnostech a metodicky vedla proces adaptace v zařízení.</p>
+        </div>
+        <div class="profile-card">
+          <div class="profile-card-icon" style="background:rgba(89,152,108,.1)">
+            <svg viewBox="0 0 24 24" style="fill:var(--clr-green)"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+          </div>
+          <h3>Individuální plánování a odborná činnost</h3>
+          <p>Realizovala individuální plánování služeb a vedla komplexní dokumentaci. Koordinovala spolupráci s lékaři, terapeuty a dalšími odborníky tak, aby péče skutečně odpovídala potřebám každého konkrétního člověka.</p>
+        </div>
+        <div class="profile-card">
+          <div class="profile-card-icon" style="background:rgba(218,136,65,.1)">
+            <svg viewBox="0 0 24 24" style="fill:var(--clr-orange)"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          </div>
+          <h3>Aktivizace a trénink kognitivních funkcí</h3>
+          <p>Vedla skupinové aktivity, tréninky kognitivních funkcí a reminiscenční terapii. Vytvářela koncepce aktivizačních programů, které dodnes tvoří základ každodenního programu v Domově Turovice.</p>
+        </div>
+        <div class="profile-card">
+          <div class="profile-card-icon" style="background:rgba(75,119,171,.1)">
+            <svg viewBox="0 0 24 24" style="fill:var(--clr-blue)"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+          </div>
+          <h3>Podpora rodin a krizová komunikace</h3>
+          <p>Zaměřuje se na práci s rodinami klientů — od první konzultace přes náročná rozhodnutí až po doprovázení v závěru života. Působila v oblasti krizové komunikace a prevence konfliktů.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CITÁT -->
+  <section class="quote-section">
+    <div class="container">
+      <div class="quote-inner">
+        <span class="quote-mark" aria-hidden="true">"</span>
+        <blockquote>Každý člověk si zaslouží domov, kde se cítí bezpečně a kde je vnímán jako člověk — ne jako diagnóza. To byl záměr od prvního dne a zůstává naším závazkem každý den.</blockquote>
+        <p class="quote-author">Mgr. Zina Filip Dadlíková, DiS. — ředitelka Domova Turovice</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VZDĚLÁNÍ A CERTIFIKACE -->
+  <section class="edu-section">
+    <div class="container">
+      <span class="section-label">Vzdělání a kvalifikace</span>
+      <h2>Odborné zázemí garantuje kvalitu péče</h2>
+      <p class="section-intro">Vzdělání Ziny Filip Dadlíkové kombinuje sociální práci, pedagogiku dospělých a odborné řízení. To není náhoda — péče o seniory vyžaduje všechny tři.</p>
+
+      <div class="edu-grid">
+        <div class="edu-block">
+          <h3>Vzdělání</h3>
+          <ul class="edu-list">
+            <li>
+              <div class="edu-dot"></div>
+              <div class="edu-item-text">
+                <div class="edu-degree">Mgr. — Rozvoj a řízení v sociální práci</div>
+                <div class="edu-school">Ostravská univerzita v Ostravě</div>
+              </div>
+            </li>
+            <li>
+              <div class="edu-dot"></div>
+              <div class="edu-item-text">
+                <div class="edu-degree">Bc. — Andragogika</div>
+                <div class="edu-school">Univerzita Jana Amose Komenského Praha (UJAK)</div>
+              </div>
+            </li>
+            <li>
+              <div class="edu-dot"></div>
+              <div class="edu-item-text">
+                <div class="edu-degree">DiS. — Sociální práce a sociální pedagogika</div>
+                <div class="edu-school">Vyšší odborná škola, Ostrava</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="edu-block">
+          <h3>Certifikace a kurzy</h3>
+          <ul class="cert-list">
+            <li>Trenér paměti II. stupně</li>
+            <li>Bazální stimulace</li>
+            <li>Aktivizace seniorů</li>
+            <li>Komunikace s osobami s demencí</li>
+            <li>Standardy kvality sociálních služeb</li>
+            <li>Základy krizové intervence</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOVEDNOSTI -->
+  <section class="skills-section">
+    <div class="container">
+      <span class="section-label">Kompetence</span>
+      <h2>Co přináší do každodenního řízení domova</h2>
+      <p class="section-intro">Řízení domova pro seniory vyžaduje kombinaci odbornosti, empatie a organizačního myšlení. Zina Filip Dadlíková tuto kombinaci přináší ze dvou desetiletí praxe.</p>
+
+      <div class="skills-grid">
+        <div class="skills-card">
+          <h3>Odborné dovednosti</h3>
+          <div class="skill-tag-list">
+            <span class="skill-tag">Individuální plánování péče</span>
+            <span class="skill-tag">Trénink paměti</span>
+            <span class="skill-tag">Bazální stimulace</span>
+            <span class="skill-tag">Reminiscenční terapie</span>
+            <span class="skill-tag">Komunikace s demencí</span>
+            <span class="skill-tag">Aktivizace seniorů</span>
+            <span class="skill-tag">Sociální poradenství</span>
+            <span class="skill-tag">Správa dokumentace</span>
+            <span class="skill-tag">Zákon č. 108/2006 Sb.</span>
+            <span class="skill-tag">Standardy kvality MPSV</span>
+          </div>
+        </div>
+        <div class="skills-card" style="border-top-color:var(--clr-green);">
+          <h3>Manažerské a lidské dovednosti</h3>
+          <div class="skill-tag-list">
+            <span class="skill-tag green">Vedení týmu v přímé péči</span>
+            <span class="skill-tag green">Strategické řízení služby</span>
+            <span class="skill-tag green">Krizová komunikace</span>
+            <span class="skill-tag green">Podpora rodinných příslušníků</span>
+            <span class="skill-tag green">Empatie a trpělivost</span>
+            <span class="skill-tag green">Etika v sociálních službách</span>
+            <span class="skill-tag green">Prevence vyhoření týmu</span>
+            <span class="skill-tag green">Adaptační procesy klientů</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-inner">
+        <span class="section-label">Máte otázky?</span>
+        <h2>Ředitelka je vám k dispozici</h2>
+        <p>Chcete se dozvědět více o péči v Domově Turovice, promluvit si o přijetí vašeho blízkého nebo se jen podívat, jak to u nás chodí? Obraťte se přímo na Zinu Filip Dadlíkovou.</p>
+        <div class="cta-buttons">
+          <a href="mailto:reditelka@domovturovice.cz" class="btn btn-cta-main">Napsat ředitelce</a>
+          <a href="/kontakt" class="btn btn-cta-sec">Kontakt a prohlídka</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</Layout>
