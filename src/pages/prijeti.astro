@@ -41,6 +41,10 @@ import Layout from '../layouts/Layout.astro';
 .section-tag{display:inline-block;font-size:var(--font-size-label);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--clr-primary);background:var(--clr-primary-soft);padding:5px 14px;border-radius:100px;margin-bottom:16px}
 .section-intro h2{margin-bottom:16px}
 .section-intro p{font-size:var(--font-size-subhead);color:var(--clr-text-muted);max-width:540px;margin:0 auto}
+/* Kruhy – steps sekce */
+.steps-section.has-circles{position:relative;overflow:hidden}
+.steps-section.has-circles::before{content:'';position:absolute;border-radius:50%;pointer-events:none;width:380px;height:380px;top:-140px;right:-100px;background:rgba(155,66,73,0.04)}
+.steps-section.has-circles::after{content:'';position:absolute;border-radius:50%;pointer-events:none;width:240px;height:240px;bottom:-80px;left:-60px;background:rgba(155,66,73,0.03)}
 
 /* ── Steps ── */
 .steps-list{display:flex;flex-direction:column;gap:0;position:relative;max-width:820px;margin:0 auto}
@@ -214,7 +218,7 @@ details[open] .faq-q svg{transform:rotate(45deg)}
 </section>
 
 <!-- KROKY -->
-<section class="section" id="kroky" aria-labelledby="kroky-h2">
+<section class="section steps-section has-circles" id="kroky" aria-labelledby="kroky-h2">
   <div class="container">
     <div class="section-intro">
       <span class="section-tag">Průvodce přijetím</span>
@@ -396,7 +400,7 @@ details[open] .faq-q svg{transform:rotate(45deg)}
 </section>
 
 <!-- CTA -->
-<section class="cta-section" aria-labelledby="cta-h2">
+<section class="cta-section has-circles" aria-labelledby="cta-h2">
   <div class="container">
     <h2 id="cta-h2">Máte otázky? Zavolejte nám.</h2>
     <p>Rádi vám popovídáme a pomůžeme zorientovat se v celém procesu. Bez závazků.</p>
