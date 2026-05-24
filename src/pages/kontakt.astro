@@ -103,11 +103,11 @@ import Layout from '../layouts/Layout.astro';
 .contact-list a { color: var(--clr-primary); text-decoration: none; font-weight: 600; }
 .contact-list a:hover { text-decoration: underline; }
 
-.hours-table { width: 100%; border-collapse: collapse; font-size: var(--font-size-caption); }
+.hours-table { width: 100%; border-collapse: collapse; font-size: var(--font-size-small); }
 .hours-table td { padding: 7px 0; color: var(--clr-text); }
 .hours-table td:last-child { text-align: right; font-weight: 600; color: var(--clr-heading); }
 .hours-table tr:not(:last-child) td { border-bottom: 1px solid var(--clr-border); }
-.hours-note { font-size: var(--font-size-meta); color: var(--clr-muted); line-height: 1.55; margin: 12px 0 0; }
+.hours-note { font-size: var(--font-size-small); color: var(--clr-muted); line-height: 1.55; margin: 12px 0 0; }
 
 .ico-card {
   display: flex;
@@ -123,7 +123,7 @@ import Layout from '../layouts/Layout.astro';
   display: flex; align-items: center; justify-content: center;
 }
 .ico-icon svg { width: 20px; height: 20px; fill: var(--clr-primary); }
-.ico-card p { font-size: var(--font-size-meta); color: var(--clr-text); margin: 0; line-height: 1.55; }
+.ico-card p { font-size: var(--font-size-small); color: var(--clr-text); margin: 0; line-height: 1.55; }
 .ico-card strong { font-weight: 700; color: var(--clr-heading); display: block; margin-bottom: 2px; }
 .ico-card span { display: block; }
 
@@ -172,7 +172,7 @@ textarea { min-height: 130px; resize: vertical; }
   display: flex;
   gap: 12px;
   align-items: flex-start;
-  font-size: var(--font-size-meta);
+  font-size: var(--font-size-small);
   line-height: 1.55;
   color: var(--clr-text);
 }
@@ -196,7 +196,7 @@ textarea { min-height: 130px; resize: vertical; }
 }
 .btn-submit:hover { background: #7a3238; }
 .btn-submit svg { width: 18px; height: 18px; fill: #fff; }
-.form-note { font-size: var(--font-size-meta); color: var(--clr-muted); margin: 0; }
+.form-note { font-size: var(--font-size-small); color: var(--clr-muted); margin: 0; }
 .form-success {
   display: none;
   background: rgba(89,152,108,.1);
@@ -261,7 +261,7 @@ textarea { min-height: 130px; resize: vertical; }
   color: var(--clr-heading);
   margin: 0 0 8px;
 }
-.dir-card p { font-size: var(--font-size-caption); line-height: 1.7; color: var(--clr-text); margin: 0; }
+.dir-card p { font-size: var(--font-size-base); line-height: 1.7; color: var(--clr-text); margin: 0; }
 
 /* ── CTA ── */
 .cta-section {

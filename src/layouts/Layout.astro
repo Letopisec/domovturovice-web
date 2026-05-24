@@ -44,7 +44,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   </head>
   <body>
     <Header />
-    <main>
+    <main style="padding-top: var(--nav-height);">
       <slot />
     </main>
     <Footer />
