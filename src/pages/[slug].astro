@@ -46,18 +46,6 @@ function formatDate(date: Date): string {
 }
 
 /* ── BREADCRUMB ── */
-.breadcrumb {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  font-size: var(--font-size-meta);
-  color: var(--clr-muted);
-  margin-bottom: 28px;
-  flex-wrap: wrap;
-}
-.breadcrumb a { color: var(--clr-primary); text-decoration: none; }
-.breadcrumb a:hover { text-decoration: underline; }
-.breadcrumb-sep { color: var(--clr-border); }
 
 /* ── ARTICLE ── */
 .article-body { min-width: 0; }
@@ -358,14 +346,6 @@ function formatDate(date: Date): string {
 <main class="single-layout">
   <div class="container">
 
-    <!-- breadcrumb -->
-    <nav class="breadcrumb" aria-label="Drobečková navigace">
-      <a href="/">Domov</a>
-      <span class="breadcrumb-sep">›</span>
-      <a href="/aktuality">Aktuality</a>
-      <span class="breadcrumb-sep">›</span>
-      <span>{post.data.titulek}</span>
-    </nav>
 
     <div class="single-grid">
 
