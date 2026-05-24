@@ -97,6 +97,12 @@ p { font-size: var(--font-size-base); line-height: 1.70; color: var(--clr-text-b
 a { color: var(--clr-primary); font-family: var(--font-body); font-size: inherit; line-height: inherit; text-decoration: none; }
 a:hover { text-decoration: underline; }
 
+/* Výjimka — nav elementy nesmí dědit global "a" styly */
+.nav a,
+.nav a:hover,
+.mobile-menu a,
+.mobile-menu a:hover { font-size: unset; text-decoration: none; color: unset; }
+
 blockquote {
   font-family: var(--font-display);
   font-size: var(--font-size-perex);
