@@ -103,10 +103,6 @@ a:hover { text-decoration: underline; }
 .mobile-menu a,
 .mobile-menu a:hover { font-size: unset; text-decoration: none; color: unset; }
 
-/* Tlačítko telefonu — vždy bílý text */
-.nav-phone-btn,
-.nav-phone-btn:hover,
-.nav-phone-btn:visited { color: white !important; text-decoration: none; }
 
 blockquote {
   font-family: var(--font-display);

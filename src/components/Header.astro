@@ -351,11 +351,15 @@ const currentPath = Astro.url.pathname;
   font-weight: 600;
   line-height: 1;
   background: var(--clr-primary);
-  color: white;
+  color: white !important;
   border-radius: 6px;
-  text-decoration: none;
+  text-decoration: none !important;
   transition: background 0.2s, padding 0.3s;
   white-space: nowrap;
+}
+
+.nav-phone-btn:visited {
+  color: white !important;
 }
 
 .nav.scrolled .nav-phone-btn {
