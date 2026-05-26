@@ -114,45 +114,23 @@ import Layout from '../layouts/Layout.astro';
 @media(max-width:768px){.page-hero{padding:120px 0 56px}.pnp-grid{grid-template-columns:1fr}.fakultativni-grid{grid-template-columns:1fr}.pricing-meals{grid-template-columns:1fr 1fr}.cta-buttons{flex-direction:column;align-items:center}.example-grid{grid-template-columns:1fr}.tab2-btn{font-size:var(--font-size-meta);padding:14px 8px;gap:6px}.tab2-num{width:32px;height:32px;font-size:var(--font-size-caption)}.tab2-body{padding:24px 20px}}
 @media(max-width:480px){.pricing-meals{grid-template-columns:1fr}}
 
-.related-links { padding: 56px 0; background: var(--clr-bg); }
-.related-links h2 {
-  font-family: var(--ff-head);
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--clr-heading);
-  margin: 0 0 24px;
-}
-.related-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-}
-.related-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 18px;
-  background: #fff;
-  border: 1.5px solid var(--clr-border);
-  border-radius: 10px;
-  text-decoration: none;
-  color: var(--clr-heading);
-  font-weight: 600;
-  font-size: var(--font-size-ui);
-  transition: all .2s;
-}
-.related-item:hover { border-color: var(--clr-primary); color: var(--clr-primary); box-shadow: 0 4px 14px rgba(155,66,73,.1); }
-.related-item svg {
-  width: 20px; height: 20px;
-  stroke: var(--clr-primary);
-  fill: none;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  flex-shrink: 0;
-}
-@media (max-width: 768px) { .related-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .related-grid { grid-template-columns: 1fr; } }
+
+
+/* ══ RELATED SEKCE – STYL D ══ */
+.related-d-section{background:var(--clr-surface,#F5F3F0);padding:72px 0}
+.related-d-section h2{font-family:var(--ff-head,var(--font-display,'Playfair Display',Georgia,serif));font-size:clamp(1.6rem,3vw,2.1rem);font-weight:700;color:var(--clr-heading,var(--clr-primary,#9B4249));margin:0 0 8px}
+.related-d-label{font-family:var(--ff-body,var(--font-body,'Source Sans 3',sans-serif));font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--clr-primary,#9B4249);display:block;margin-bottom:12px}
+.related-d-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:36px}
+.related-d-card{background:#fff;border-radius:var(--radius-card,12px);box-shadow:0 2px 12px rgba(0,0,0,.06);padding:28px 24px;text-decoration:none;display:flex;flex-direction:column;gap:12px;border-top:3px solid var(--clr-border,#E8E4E0);transition:box-shadow .22s,transform .22s,border-top-color .22s;color:inherit}
+.related-d-card:hover{box-shadow:0 6px 24px rgba(0,0,0,.11);transform:translateY(-4px);border-top-color:var(--clr-primary,#9B4249)}
+.related-d-card-label{font-family:var(--ff-body,var(--font-body,'Source Sans 3',sans-serif));font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--clr-text-muted,#787268)}
+.related-d-card-title{font-family:var(--ff-head,var(--font-display,'Playfair Display',Georgia,serif));font-size:18px;font-weight:600;color:var(--clr-text-dark,#1A1A1A);line-height:1.35}
+.related-d-card-desc{font-family:var(--ff-body,var(--font-body,'Source Sans 3',sans-serif));font-size:15px;color:var(--clr-text-muted,#787268);line-height:1.55;flex:1}
+.related-d-card-arrow{display:flex;align-items:center;gap:6px;font-family:var(--ff-body,var(--font-body,'Source Sans 3',sans-serif));font-size:14px;font-weight:600;color:var(--clr-primary,#9B4249);margin-top:4px;transition:gap .18s}
+.related-d-card:hover .related-d-card-arrow{gap:10px}
+.related-d-card-arrow svg{width:16px;height:16px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:1024px){.related-d-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.related-d-grid{grid-template-columns:1fr}}
 
 </style>
 
@@ -350,29 +328,40 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
-<!-- RELATED LINKS -->
-<div class="related-links">
+
+<!-- ══ CO DÁL – STYL D ══ -->
+<section class="related-d-section" aria-label="Co si přečíst dál">
   <div class="container">
-    <h2>Mohlo by vás zajímat</h2>
-    <nav class="related-grid" aria-label="Související stránky">
-      <a href="/prijeti" class="related-item">
-        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        Jak probíhá přijetí
+    <span class="related-d-label">Prozkoumejte dál</span>
+    <h2>Co vás může zajímat</h2>
+    <div class="related-d-grid">
+      <a href="/prijeti" class="related-d-card">
+        <span class="related-d-card-label">Přijetí do domova</span>
+        <span class="related-d-card-title">Jak probíhá přijetí</span>
+        <span class="related-d-card-desc">Průvodce krok za krokem – od žádosti přes osobní setkání až po první den v domově.</span>
+        <span class="related-d-card-arrow">Průvodce přijetím <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-      <a href="/jak-pecujeme" class="related-item">
-        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-        Jak pečujeme
+      <a href="/jak-pecujeme" class="related-d-card">
+        <span class="related-d-card-label">Péče a služby</span>
+        <span class="related-d-card-title">Jak pečujeme</span>
+        <span class="related-d-card-desc">24hodinová ošetřovatelská péče, individuální plány a spolupráce s lékaři přímo v domově.</span>
+        <span class="related-d-card-arrow">Přečíst o péči <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-      <a href="/faq" class="related-item">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-        Časté otázky
+      <a href="/faq" class="related-d-card">
+        <span class="related-d-card-label">Přijetí do domova</span>
+        <span class="related-d-card-title">Časté otázky</span>
+        <span class="related-d-card-desc">Odpovědi na nejčastější dotazy o přijetí, péči a financování pobytu.</span>
+        <span class="related-d-card-arrow">Přečíst FAQ <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-      <a href="/dokumenty" class="related-item">
-        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Dokumenty ke stažení
+      <a href="/dokumenty" class="related-d-card">
+        <span class="related-d-card-label">Přijetí do domova</span>
+        <span class="related-d-card-title">Dokumenty ke stažení</span>
+        <span class="related-d-card-desc">Žádost o přijetí, vyjádření lékaře a další formuláře ke stažení.</span>
+        <span class="related-d-card-arrow">Stáhnout dokumenty <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
       </a>
-    </nav>
+    </div>
   </div>
+</section>
 </div>
 
 </Layout>
