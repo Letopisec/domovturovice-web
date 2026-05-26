@@ -456,6 +456,79 @@ blockquote.reditelka-quote{
   .galerie-grid{grid-template-columns:1fr;}
   .cta-btns{flex-direction:column;align-items:center;}
 }
+
+/* ══ PROLINKOVÁNÍ ══ */
+.prolinks-section{
+  padding:72px 0;
+  background:var(--clr-surface);
+}
+.prolinks-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+.prolink-card{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  background:var(--clr-white);
+  border-radius:var(--radius-card);
+  padding:24px 28px;
+  text-decoration:none;
+  box-shadow:var(--shadow-card);
+  border:1px solid var(--clr-border);
+  border-left:3px solid var(--clr-border);
+  transition:border-color .2s,box-shadow .2s,transform .2s;
+}
+.prolink-card:hover{
+  border-left-color:var(--clr-primary);
+  box-shadow:var(--shadow-hover);
+  transform:translateY(-2px);
+}
+.prolink-card.prolink-primary{
+  border-left-color:var(--clr-primary);
+}
+.prolink-icon{
+  width:44px;height:44px;flex-shrink:0;
+  border-radius:10px;
+  background:var(--clr-primary-soft);
+  display:flex;align-items:center;justify-content:center;
+}
+.prolink-icon svg{
+  width:22px;height:22px;
+  stroke:var(--clr-primary);
+}
+.prolink-text{flex:1;}
+.prolink-text h3{
+  font-family:var(--font-display);
+  font-size:var(--font-size-h4);
+  font-weight:600;
+  color:var(--clr-text-dark);
+  margin-bottom:4px;
+  transition:color .2s;
+}
+.prolink-card:hover .prolink-text h3{color:var(--clr-primary);}
+.prolink-text p{
+  font-size:var(--font-size-small);
+  color:var(--clr-text-muted);
+  line-height:1.55;
+  margin:0;
+}
+.prolink-arrow{
+  width:20px;height:20px;flex-shrink:0;
+  stroke:var(--clr-border);
+  transition:stroke .2s,transform .2s;
+}
+.prolink-card:hover .prolink-arrow{
+  stroke:var(--clr-primary);
+  transform:translateX(4px);
+}
+/* blog section on subpage needs white bg */
+.blog-section{background:var(--clr-bg);}
+@media(max-width:768px){
+  .prolinks-grid{grid-template-columns:1fr;}
+  .prolinks-section{padding:56px 0;}
+}
 </style>
 
 <!-- ══ 1. HERO ══ -->
@@ -680,6 +753,144 @@ blockquote.reditelka-quote{
   </div>
 </section>
 
+<!-- ══ BLOG SLIDER ══ -->
+<section class="section blog-section">
+  <div class="container">
+    <div class="blog-header">
+      <div>
+        <span class="section-label">Aktuality a blog</span>
+        <h2 style="margin-bottom:0">Co se u nás děje</h2>
+      </div>
+      <a href="/aktuality" class="btn-outline">Všechny aktuality →</a>
+    </div>
+    <div class="blog-track-outer">
+      <div class="blog-track" id="blogTrackPribeh">
+        <a href="/canisterapie-prinasla-radost" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img1.jpg" alt="Canisterapie">
+          <div class="blog-card-body">
+            <span class="blog-cat">Aktivizace</span>
+            <div class="blog-card-date">15. května 2026</div>
+            <h4>Canisterapie přinesla do domova radost a úsměvy</h4>
+            <p>Pravidelná canisterapeutická návštěva proběhla v pátek odpoledne.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
+        </a>
+        <a href="/arteterapie-jarni-krajiny" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img2.jpg" alt="Arteterapie">
+          <div class="blog-card-body">
+            <span class="blog-cat">Aktivizace</span>
+            <div class="blog-card-date">3. května 2026</div>
+            <h4>Arteterapie: Jarní krajiny z rukou našich klientů</h4>
+            <p>Na arteterapeutickém setkání vznikly krásné jarní krajiny. Tvoření pomáhá procvičit jemnou motoriku.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
+        </a>
+        <a href="/jaro-v-zahrade" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img3.jpg" alt="Jaro v zahradě">
+          <div class="blog-card-body">
+            <span class="blog-cat">Ze života domova</span>
+            <div class="blog-card-date">22. dubna 2026</div>
+            <h4>Jaro přišlo do naší zahrady – vítáme novou sezónu</h4>
+            <p>S příchodem teplého počasí se přesouváme ven. Klienti se těší na bylinky a skleník.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
+        </a>
+        <a href="/vareni-ze-zahrady" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img4.jpg" alt="Vaření ze zahrady">
+          <div class="blog-card-body">
+            <span class="blog-cat">Stravování</span>
+            <div class="blog-card-date">10. dubna 2026</div>
+            <h4>Z naší zahrady přímo na stůl – sezóna zeleniny začíná</h4>
+            <p>V domácí kuchyni zahajujeme sezónu čerstvé zeleniny ze skleníku.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
+        </a>
+        <a href="/muzikoterapie-s-harmonikou" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img5.jpg" alt="Muzikoterapie">
+          <div class="blog-card-body">
+            <span class="blog-cat">Aktivizace</span>
+            <div class="blog-card-date">1. dubna 2026</div>
+            <h4>Muzikoterapie s harmonikou: společný zpěv léčí duši</h4>
+            <p>Pravidelné setkání s harmonikou – jeden z nejoblíbenějších programů.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
+        </a>
+        <a href="/spoluprace-s-nemocnici" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img6.jpg" alt="Spolupráce s nemocnicí">
+          <div class="blog-card-body">
+            <span class="blog-cat">Oznámení</span>
+            <div class="blog-card-date">20. března 2026</div>
+            <h4>Zahajujeme spolupráci s hranickou nemocnicí</h4>
+            <p>Klienti mají zajištěno přednostní ošetření u odborných lékařů.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="blog-nav">
+      <button class="blog-btn" id="pribehBlogPrev" aria-label="Předchozí">
+        <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>
+      </button>
+      <div class="blog-dots" id="pribehBlogDots"></div>
+      <button class="blog-btn" id="pribehBlogNext" aria-label="Další">
+        <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROLINKOVÁNÍ ══ -->
+<section class="prolinks-section">
+  <div class="container">
+    <div class="section-intro" style="margin-bottom:36px;">
+      <span class="section-label">Prozkoumejte dál</span>
+      <h2>Co vás může zajímat</h2>
+    </div>
+    <div class="prolinks-grid">
+      <a href="/jak-pecujeme" class="prolink-card prolink-primary">
+        <div class="prolink-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="prolink-text">
+          <h3>Jak pečujeme</h3>
+          <p>Ošetřovatelská péče, individuální plánování a 24hodinový zdravotní dohled.</p>
+        </div>
+        <svg class="prolink-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/nas-tym" class="prolink-card">
+        <div class="prolink-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="prolink-text">
+          <h3>Náš tým</h3>
+          <p>Seznamte se s lidmi, kteří o vaše blízké pečují každý den.</p>
+        </div>
+        <svg class="prolink-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/prostory" class="prolink-card">
+        <div class="prolink-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="prolink-text">
+          <h3>Prostory a zázemí</h3>
+          <p>Byty, terasy, zahrada s jezírkem a společné místnosti.</p>
+        </div>
+        <svg class="prolink-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/prijeti" class="prolink-card">
+        <div class="prolink-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="prolink-text">
+          <h3>Jak probíhá přijetí</h3>
+          <p>Průvodce přijetím krok za krokem – od žádosti po adaptaci.</p>
+        </div>
+        <svg class="prolink-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ══ 9. CTA ══ -->
 <section class="cta-section">
   <div class="container">
@@ -718,6 +929,58 @@ blockquote.reditelka-quote{
     }
   }
 }
+</script>
+
+
+<script>
+  {
+    const track = document.getElementById('blogTrackPribeh') as HTMLElement;
+    const dotsContainer = document.getElementById('pribehBlogDots') as HTMLElement;
+    const prevBtn = document.getElementById('pribehBlogPrev');
+    const nextBtn = document.getElementById('pribehBlogNext');
+    if (track && dotsContainer) {
+      const cards = track.querySelectorAll('.blog-card');
+      const total = cards.length;
+      const visibleCount = () => window.innerWidth > 1024 ? 3 : window.innerWidth > 768 ? 2 : 1;
+      let current = 0;
+      let autoInterval: ReturnType<typeof setInterval>;
+
+      function maxSlide() { return Math.max(0, total - visibleCount()); }
+
+      function buildDots() {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i <= maxSlide(); i++) {
+          const dot = document.createElement('button');
+          dot.className = 'blog-dot' + (i === current ? ' active' : '');
+          dot.setAttribute('aria-label', `Příspěvek ${i + 1}`);
+          dot.addEventListener('click', () => goTo(i));
+          dotsContainer.appendChild(dot);
+        }
+      }
+
+      function goTo(idx: number) {
+        current = Math.max(0, Math.min(idx, maxSlide()));
+        const cardWidth = (cards[0] as HTMLElement).offsetWidth + 16;
+        track.style.transform = `translateX(-${current * cardWidth}px)`;
+        dotsContainer.querySelectorAll('.blog-dot').forEach((d, i) => {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      function startAuto() {
+        autoInterval = setInterval(() => goTo(current < maxSlide() ? current + 1 : 0), 4000);
+      }
+
+      track.addEventListener('mouseenter', () => clearInterval(autoInterval));
+      track.addEventListener('mouseleave', startAuto);
+      prevBtn?.addEventListener('click', () => goTo(current - 1));
+      nextBtn?.addEventListener('click', () => goTo(current + 1));
+
+      buildDots();
+      startAuto();
+      window.addEventListener('resize', () => { buildDots(); goTo(Math.min(current, maxSlide())); });
+    }
+  }
 </script>
 
 </Layout>
