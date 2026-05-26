@@ -1,0 +1,725 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Náš příběh – Domov Turovice, domov pro seniory v Olomouckém kraji"
+  description="Domov Turovice vznikl ze snu o důstojném domově pro seniory. Příběh zapsaného ústavu v Turovicích, který otevřel brány 1. 8. 2025 v okrese Přerov."
+>
+
+<style>
+/* ══ HERO ══ */
+.page-hero{
+  position:relative;
+  min-height:480px;
+  display:flex;
+  align-items:flex-end;
+  padding:140px 0 80px;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+.hero-bg img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 30%;
+  display:block;
+}
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,rgba(20,10,12,0.78) 0%,rgba(20,10,12,0.32) 100%);
+  z-index:1;
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:680px;
+}
+.hero-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  background:rgba(155,66,73,0.88);
+  color:#fff;
+  font-family:var(--font-body);
+  font-size:var(--font-size-label);
+  font-weight:700;
+  letter-spacing:0.10em;
+  text-transform:uppercase;
+  padding:5px 13px;
+  border-radius:4px;
+  margin-bottom:18px;
+}
+.page-hero h1{
+  color:#fff;
+  text-shadow:0 2px 16px rgba(0,0,0,0.4);
+  margin-bottom:18px;
+}
+.page-hero h1 em{
+  font-style:italic;
+  font-weight:600;
+  color:rgba(255,255,255,0.88);
+}
+.hero-perex{
+  font-size:var(--font-size-perex);
+  color:rgba(255,255,255,0.90);
+  line-height:1.6;
+  max-width:560px;
+  margin:0;
+}
+
+/* ══ STORY SECTIONS ══ */
+.story-section{padding:88px 0;}
+.story-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:72px;
+  align-items:center;
+}
+.story-grid.reverse{direction:rtl;}
+.story-grid.reverse > *{direction:ltr;}
+
+.story-year{
+  font-family:var(--font-display);
+  font-size:80px;
+  font-weight:700;
+  color:var(--clr-primary-soft);
+  line-height:1;
+  margin-bottom:-20px;
+  display:block;
+}
+.story-text h2{margin-bottom:20px;}
+.story-text p{
+  font-size:var(--font-size-base);
+  color:var(--clr-text-body);
+  line-height:1.75;
+  margin-bottom:16px;
+}
+.story-text p:last-child{margin-bottom:0;}
+
+/* ══ PHOTO PLACEHOLDER ══ */
+.photo-slot{
+  border-radius:var(--radius-card);
+  background:var(--clr-surface);
+  border:2px dashed var(--clr-border);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  color:var(--clr-text-muted);
+  text-align:center;
+  padding:32px 24px;
+}
+.photo-slot svg{
+  width:36px;height:36px;
+  opacity:0.30;
+  flex-shrink:0;
+}
+.photo-slot-label{
+  font-size:var(--font-size-caption);
+  line-height:1.5;
+  color:var(--clr-text-muted);
+}
+.photo-slot-dim{
+  font-size:var(--font-size-meta);
+  font-weight:700;
+  color:var(--clr-primary);
+  background:var(--clr-primary-soft);
+  padding:3px 10px;
+  border-radius:20px;
+  margin-top:4px;
+}
+/* portrait = ředitelka */
+.photo-slot.portrait{aspect-ratio:3/4;}
+/* landscape = story */
+.photo-slot.landscape{aspect-ratio:4/3;}
+
+/* ══ ZÁVAZEK ══ */
+.zavazek-section{
+  padding:88px 0;
+  background:var(--clr-primary-soft);
+  position:relative;
+  overflow:hidden;
+}
+.zavazek-section::before{
+  content:'';position:absolute;
+  width:340px;height:340px;border-radius:50%;
+  background:rgba(155,66,73,0.06);
+  top:-80px;right:-60px;
+}
+.zavazek-section::after{
+  content:'';position:absolute;
+  width:200px;height:200px;border-radius:50%;
+  background:rgba(155,66,73,0.04);
+  bottom:-40px;left:-40px;
+}
+.zavazek-inner{
+  max-width:820px;
+  margin:0 auto;
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+.zavazek-inner h2{margin-bottom:12px;}
+.zavazek-lead{
+  font-size:var(--font-size-base);
+  color:var(--clr-text-body);
+  line-height:1.7;
+  margin-bottom:0;
+}
+.zavazek-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+  text-align:left;
+  margin-top:40px;
+}
+.zavazek-card{
+  background:var(--clr-white);
+  border-radius:var(--radius-card);
+  padding:28px 24px;
+  box-shadow:var(--shadow-card);
+  border-top:3px solid var(--clr-primary);
+}
+.zavazek-card h3{
+  font-family:var(--font-display);
+  font-size:var(--font-size-h4);
+  font-weight:600;
+  color:var(--clr-text-dark);
+  margin-bottom:10px;
+}
+.zavazek-card p{
+  font-size:var(--font-size-small);
+  color:var(--clr-text-body);
+  line-height:1.65;
+  margin:0;
+}
+
+/* ══ HODNOTY ══ */
+.hodnoty-section{padding:88px 0;}
+.section-intro{
+  text-align:center;
+  max-width:580px;
+  margin:0 auto 52px;
+}
+.section-intro h2{margin-bottom:14px;}
+.section-intro p{
+  font-size:var(--font-size-base);
+  color:var(--clr-text-muted);
+  line-height:1.7;
+  margin:0;
+}
+.hodnoty-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.hodnota-card{
+  background:var(--clr-bg);
+  border-radius:var(--radius-card);
+  padding:36px 28px;
+  box-shadow:var(--shadow-card);
+  text-align:center;
+  transition:transform .25s,box-shadow .25s;
+}
+.hodnota-card:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-hover);
+}
+.hodnota-icon{
+  width:56px;height:56px;
+  border-radius:50%;
+  background:var(--clr-primary-soft);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+}
+.hodnota-icon svg{
+  width:24px;height:24px;
+  stroke:var(--clr-primary);
+  fill:none;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.hodnota-card h3{
+  font-family:var(--font-display);
+  font-size:var(--font-size-h4);
+  font-weight:600;
+  color:var(--clr-text-dark);
+  margin-bottom:10px;
+}
+.hodnota-card p{
+  font-size:var(--font-size-small);
+  color:var(--clr-text-body);
+  line-height:1.65;
+  margin:0;
+}
+
+/* ══ ŘEDITELKA ══ */
+.reditelka-section{
+  padding:88px 0;
+  background:var(--clr-surface);
+}
+.reditelka-grid{
+  display:grid;
+  grid-template-columns:1fr 1.5fr;
+  gap:72px;
+  align-items:center;
+}
+.reditelka-text h2{margin-bottom:6px;}
+.reditelka-title{
+  display:block;
+  font-family:var(--font-body);
+  font-size:var(--font-size-meta);
+  font-weight:700;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--clr-text-muted);
+  margin-bottom:24px;
+}
+blockquote.reditelka-quote{
+  font-family:var(--font-display);
+  font-size:var(--font-size-perex);
+  font-style:italic;
+  font-weight:400;
+  color:var(--clr-text-muted);
+  border-left:3px solid var(--clr-primary);
+  padding-left:24px;
+  margin:0 0 24px;
+  line-height:1.6;
+}
+.reditelka-text p{
+  font-size:var(--font-size-base);
+  color:var(--clr-text-body);
+  line-height:1.75;
+  margin-bottom:14px;
+}
+.reditelka-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:18px 0 28px;
+}
+.r-tag{
+  font-family:var(--font-body);
+  font-size:var(--font-size-meta);
+  font-weight:600;
+  color:var(--clr-primary);
+  background:var(--clr-primary-soft);
+  padding:4px 12px;
+  border-radius:20px;
+}
+
+/* ══ GALERIE ══ */
+.galerie-section{padding:88px 0;}
+.galerie-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.galerie-item{
+  border-radius:10px;
+  background:var(--clr-surface);
+  border:2px dashed var(--clr-border);
+  aspect-ratio:4/3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  text-align:center;
+  padding:16px;
+  transition:transform .22s,box-shadow .22s;
+}
+.galerie-item:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-hover);
+}
+.galerie-item svg{
+  width:28px;height:28px;
+  opacity:0.28;
+}
+.galerie-item-label{
+  font-size:var(--font-size-meta);
+  color:var(--clr-text-muted);
+  line-height:1.4;
+}
+.galerie-item-rok{
+  font-size:var(--font-size-meta);
+  font-style:italic;
+  color:var(--clr-text-muted);
+}
+.galerie-note{
+  text-align:center;
+  margin-top:14px;
+  font-size:var(--font-size-caption);
+  color:var(--clr-text-muted);
+  font-style:italic;
+}
+
+/* ══ CTA ══ */
+.cta-section{
+  padding:88px 0;
+  background:#EDE8E3;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.cta-section::before{
+  content:'';position:absolute;
+  width:360px;height:360px;border-radius:50%;
+  background:rgba(155,66,73,0.08);
+  top:-100px;right:-80px;
+}
+.cta-section::after{
+  content:'';position:absolute;
+  width:220px;height:220px;border-radius:50%;
+  background:rgba(155,66,73,0.05);
+  bottom:-50px;left:-50px;
+}
+.cta-section .container{position:relative;z-index:1;}
+.cta-section h2{margin-bottom:14px;}
+.cta-section p{
+  font-size:var(--font-size-perex);
+  color:var(--clr-text-body);
+  max-width:540px;
+  margin:0 auto 36px;
+  line-height:1.65;
+}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+
+/* ══ SECTION LABEL ══ */
+.section-label{
+  font-family:var(--font-body);
+  font-size:var(--font-size-label);
+  font-weight:700;
+  letter-spacing:0.10em;
+  text-transform:uppercase;
+  color:var(--clr-primary);
+  margin-bottom:12px;
+  display:block;
+}
+
+/* ══ BUTTONS ══ */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--clr-primary);color:#fff;
+  font-family:var(--font-body);font-size:var(--font-size-ui);font-weight:600;
+  padding:13px 26px;border-radius:var(--radius-btn);
+  text-decoration:none;
+  transition:background .2s,transform .2s,box-shadow .2s;
+}
+.btn-primary:hover{
+  background:var(--clr-primary-hover);
+  transform:translateY(-1px);
+  box-shadow:0 4px 16px rgba(155,66,73,0.28);
+}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  border:2px solid var(--clr-primary);color:var(--clr-primary);
+  font-family:var(--font-body);font-size:var(--font-size-ui);font-weight:600;
+  padding:11px 26px;border-radius:var(--radius-btn);
+  text-decoration:none;
+  transition:background .2s,transform .2s;
+}
+.btn-outline:hover{
+  background:var(--clr-primary-soft);
+  transform:translateY(-1px);
+}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1024px){
+  .story-grid,.reditelka-grid{gap:48px;}
+  .hodnoty-grid{grid-template-columns:repeat(2,1fr);}
+  .zavazek-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .story-section,.zavazek-section,.hodnoty-section,
+  .reditelka-section,.galerie-section,.cta-section{padding:64px 0;}
+  .story-grid{grid-template-columns:1fr;gap:36px;}
+  .story-grid.reverse{direction:ltr;}
+  .story-year{font-size:56px;}
+  .hodnoty-grid{grid-template-columns:1fr;}
+  .zavazek-grid{grid-template-columns:1fr;}
+  .reditelka-grid{grid-template-columns:1fr;gap:36px;}
+  .galerie-grid{grid-template-columns:repeat(2,1fr);}
+  .page-hero{padding:120px 0 64px;}
+}
+@media(max-width:480px){
+  .galerie-grid{grid-template-columns:1fr;}
+  .cta-btns{flex-direction:column;align-items:center;}
+}
+</style>
+
+<!-- ══ 1. HERO ══ -->
+<section class="page-hero">
+  <div class="hero-bg">
+    <img src="/images/hero-bg.jpg" alt="Domov Turovice – pohled na budovu a zahradu">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        O nás
+      </div>
+      <h1>Příběh, který začal snem<br><em>o důstojném domově</em></h1>
+      <p class="hero-perex">Domov Turovice je registrovaný domov pro seniory v Olomouckém kraji. Vznik z prázdné budovy, přes covidovou pandemii, až k otevření v srpnu 2025.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 2. VZNIK 2016 ══ -->
+<section class="story-section" style="background:var(--clr-bg);">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-text">
+        <span class="section-label">2016 – 2017</span>
+        <span class="story-year">2016</span>
+        <h2>Prázdná budova a jeden nápad, který vše změnil</h2>
+        <p>V roce 2016 vydražila soukromá osoba nedokončenou obecní budovu v Turovicích. Budova stála prázdná a čekala na svůj osud. Různé možnosti přicházely a odcházely – až do chvíle, kdy zazněl záměr Ziny Filip Dadlíkové.</p>
+        <p>Myšlenka byla jednoduchá a zároveň velmi konkrétní: vybudovat domov pro seniory, který bude skutečným domovem. Ne ústavem, ne čekárnou. Místem, kde má každý člověk svůj prostor, svůj rytmus a svou důstojnost.</p>
+        <p>Investor záměr přijal. V srpnu 2017 byl založen <strong>zapsaný ústav Domov Turovice</strong>. Zakladatelkou se stala Michaela Hubačová, dcera investora. Přípravy mohly začít.</p>
+      </div>
+      <div>
+        <div class="photo-slot landscape">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span class="photo-slot-label">Budova před rekonstrukcí nebo první skica záměru</span>
+          <span class="photo-slot-dim">800 × 600 px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3. STAVBA 2017–2025 ══ -->
+<section class="story-section" style="background:var(--clr-surface);">
+  <div class="container">
+    <div class="story-grid reverse">
+      <div class="story-text">
+        <span class="section-label">2017 – 2025</span>
+        <span class="story-year">2017</span>
+        <h2>Dlouhá cesta od vize ke skutečnosti</h2>
+        <p>Následovaly roky příprav. Projektanti převáděli odborné vize Ziny Filip Dadlíkové do konkrétních řešení. Hledaly se vhodné stavební firmy. Pak přišla covidová pandemie a vše zpomalila.</p>
+        <p>Investor však ve svém úsilí nepolevil. Stavební práce postupovaly, byť pomalu. Poté přišlo období kontrol, revizí a schvalování. Nesoulady mezi projektovou dokumentací a požadavky komisařů HZS si vyžádaly opravy a trpělivé čekání.</p>
+        <p>Po celou dobu byl tým zaměstnanců připraven. Pokoje čekaly vystlané. Kuchyně vybavená. Jen kolaudace nepřicházela. Byla to zkouška odhodlání, které nakonec obstálo.</p>
+      </div>
+      <div>
+        <div class="photo-slot landscape">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span class="photo-slot-label">Průběh rekonstrukce nebo stavba interiérů</span>
+          <span class="photo-slot-dim">800 × 600 px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. OTEVŘENÍ 2025 ══ -->
+<section class="story-section" style="background:var(--clr-bg);">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-text">
+        <span class="section-label">1. 8. 2025</span>
+        <span class="story-year">2025</span>
+        <h2>Přišla první klientka. Domov otevřel brány.</h2>
+        <p>Dne 1. 8. 2025 přijela do Turovic první obyvatelka nového domova. Čekaly na ni vzdušné chodby, výhled do zahrady a jednolůžkový pokoj o velikosti 12,6 m². Polohovatelná postel, uzamykatelná skříň, televize. A hlavně – lidé, kteří na ni celé roky čekali.</p>
+        <p>Domov Turovice poskytuje pobytové sociální služby dle § 49 zákona č. 108/2006 Sb. pro seniory se sníženou soběstačností. Kapacita domova je <strong>104 klientů</strong> ve vzájemně propojených budovách A, B, C.</p>
+        <p>Každý klient má k dispozici byt – dva samostatné pokoje, vlastní sociální zázemí a prostornou předsíň. Některé byty mají lodžii nebo přístup na bezbariérovou terasu. To vše v obci Turovice, v tiché krajině okresu Přerov.</p>
+      </div>
+      <div>
+        <div class="photo-slot landscape">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span class="photo-slot-label">Otevření / první klientka / interiér pokoje nebo zahrada</span>
+          <span class="photo-slot-dim">800 × 600 px</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. VEŘEJNÝ ZÁVAZEK ══ -->
+<section class="zavazek-section">
+  <div class="container">
+    <div class="zavazek-inner">
+      <span class="section-label">Veřejný závazek poskytovatele</span>
+      <h2>Naše poslání, cíle a zásady péče</h2>
+      <p class="zavazek-lead">Jsme registrovaný poskytovatel pobytových sociálních služeb dle zákona č. 108/2006 Sb. Níže uvádíme veřejný závazek, který tvoří základ naší práce.</p>
+      <div class="zavazek-grid">
+        <div class="zavazek-card">
+          <h3>Poslání</h3>
+          <p>Poskytovat seniorům se sníženou soběstačností bezpečné, důstojné a podnětné prostředí, kde mohou žít podle svých potřeb a přání – s respektem k jejich individualitě a životní historii.</p>
+        </div>
+        <div class="zavazek-card">
+          <h3>Cílová skupina</h3>
+          <p>Osoby starší 60 let se sníženou soběstačností z důvodu věku nebo zdravotního stavu, které nemohou žít ve vlastní domácnosti a potřebují celoroční pobytovou péči.</p>
+        </div>
+        <div class="zavazek-card">
+          <h3>Zásady péče</h3>
+          <p>Individuální přístup ke každému klientovi. Respekt k soukromí, autonomii a důstojnosti. Podpora rodiny jako přirozeného zázemí. Transparentnost a otevřená komunikace.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 6. HODNOTY ══ -->
+<section class="hodnoty-section" style="background:var(--clr-white);">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">Naše hodnoty</span>
+      <h2>Na čem stavíme každý den</h2>
+      <p>Tři hodnoty, které prostupují vším, co v Domově Turovice děláme. Od prvního telefonátu rodiny až po každodenní péči.</p>
+    </div>
+    <div class="hodnoty-grid">
+      <div class="hodnota-card">
+        <div class="hodnota-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3>Lidskost</h3>
+        <p>Každý klient je pro nás člověk s příběhem, ne číslo v evidenci. Snažíme se poznat jeho zvyky, přání a přinést mu to, co má rád.</p>
+      </div>
+      <div class="hodnota-card">
+        <div class="hodnota-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Spolehlivost</h3>
+        <p>Rodiny svěřují Domovu Turovice svého nejbližšího. Tuto důvěru bereme vážně. Péče je zajištěna 24 hodin denně, 7 dní v týdnu.</p>
+      </div>
+      <div class="hodnota-card">
+        <div class="hodnota-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Otevřenost</h3>
+        <p>Rodina je naším partnerem. Vítáme ji kdykoliv, komunikujeme pravidelně a zapojujeme ji do rozhodování o péči o jejich blízkého.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 7. ŘEDITELKA ══ -->
+<section class="reditelka-section">
+  <div class="container">
+    <div class="reditelka-grid">
+      <div>
+        <div class="photo-slot portrait">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="photo-slot-label">Foto: Mgr. Zina Filip Dadlíková, DiS.</span>
+          <span class="photo-slot-dim">600 × 800 px</span>
+        </div>
+      </div>
+      <div class="reditelka-text">
+        <span class="section-label">Za příběhem stojí člověk</span>
+        <h2>Mgr. Zina Filip Dadlíková, DiS.</h2>
+        <span class="reditelka-title">Ředitelka Domova Turovice</span>
+        <blockquote class="reditelka-quote">
+          „Dobrý domov pro seniory nevznikne ze dne na den. Vzniká z respektu – k člověku, k jeho historii a k tomu, co mu dělá radost."
+        </blockquote>
+        <p>Zina Filip Dadlíková stojí za odbornou vizí Domova Turovice od samého počátku. S <strong>22letou praxí</strong> v přímé práci s klienty – seniory i osobami s demencí – přinesla do projektu více než zkušenosti. Přinesla přesvědčení, že seniorská péče může být jiná.</p>
+        <p>Je certifikovanou trenérkou paměti II. stupně, absolventkou kurzů bazální stimulace a komunikace s osobami s demencí. Vystudovala sociální práci a andragogiku, magisterský titul získala v oboru řízení v sociální práci.</p>
+        <div class="reditelka-tags">
+          <span class="r-tag">Trenérka paměti II. stupně</span>
+          <span class="r-tag">Bazální stimulace</span>
+          <span class="r-tag">Komunikace s osobami s demencí</span>
+          <span class="r-tag">22 let praxe</span>
+        </div>
+        <a href="/reditelka" class="btn-primary">
+          Celý profil ředitelky
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 8. FOTOGALERIE ══ -->
+<section class="galerie-section" style="background:var(--clr-bg);">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">Z naší historie</span>
+      <h2>Jak domov vznikal</h2>
+      <p>Fotografie z různých etap – od prázdné budovy až po první klienty. Příběh v obrazech.</p>
+    </div>
+    <div class="galerie-grid">
+      <div class="galerie-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span class="galerie-item-label">Budova před rekonstrukcí</span>
+        <span class="galerie-item-rok">2016</span>
+      </div>
+      <div class="galerie-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span class="galerie-item-label">Zakládání zapsaného ústavu</span>
+        <span class="galerie-item-rok">2017</span>
+      </div>
+      <div class="galerie-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span class="galerie-item-label">Průběh stavebních prací</span>
+        <span class="galerie-item-rok">2018 – 2022</span>
+      </div>
+      <div class="galerie-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span class="galerie-item-label">Dokončování interiérů</span>
+        <span class="galerie-item-rok">2022 – 2024</span>
+      </div>
+      <div class="galerie-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span class="galerie-item-label">Přípravy na otevření</span>
+        <span class="galerie-item-rok">2025</span>
+      </div>
+      <div class="galerie-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span class="galerie-item-label">Příchod prvních klientů</span>
+        <span class="galerie-item-rok">srpen 2025</span>
+      </div>
+    </div>
+    <p class="galerie-note">Galerie bude doplněna fotografiemi z historie domova. Optimální rozměr: 800 × 600 px, formát WebP nebo JPG.</p>
+  </div>
+</section>
+
+<!-- ══ 9. CTA ══ -->
+<section class="cta-section">
+  <div class="container">
+    <span class="section-label" style="display:block;margin-bottom:12px;">Zjistěte více</span>
+    <h2>Rádi vás provedeme domovem</h2>
+    <p>Máte zájem o přijetí nebo chcete jen nahlédnout? Zavolejte nám nebo si přečtěte, jak přijetí probíhá.</p>
+    <div class="cta-btns">
+      <a href="/kontakt" class="btn-primary">
+        Kontaktujte nás
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/prijeti" class="btn-outline">Jak probíhá přijetí</a>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "Náš příběh – Domov Turovice",
+  "url": "https://domovturovice.cz/nas-pribeh",
+  "description": "Historie vzniku a příběh Domova Turovice, zapsaného ústavu poskytujícího pobytové sociální služby v Turovicích, okres Přerov.",
+  "mainEntity": {
+    "@type": "Organization",
+    "@id": "https://domovturovice.cz/#organization",
+    "name": "Domov Turovice, z.ú.",
+    "foundingDate": "2017",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Turovice 104",
+      "postalCode": "751 14",
+      "addressLocality": "Turovice",
+      "addressRegion": "Olomoucký kraj",
+      "addressCountry": "CZ"
+    }
+  }
+}
+</script>
+
+</Layout>
