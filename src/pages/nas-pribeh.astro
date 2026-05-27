@@ -462,28 +462,136 @@ blockquote.reditelka-quote{
 
 /* ══ TIMELINE ══ */
 .timeline-section{padding:88px 0;background:var(--clr-bg);}
-.timeline{position:relative;max-width:860px;margin:0 auto;}
-.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--clr-border);transform:translateX(-50%);}
-.tl-item{display:flex;align-items:flex-start;margin-bottom:48px;position:relative;}
-.tl-item:nth-child(odd){flex-direction:row;}
-.tl-item:nth-child(even){flex-direction:row-reverse;}
-.tl-content{width:calc(50% - 36px);background:var(--clr-white);border-radius:var(--radius-card);border:1px solid var(--clr-border);padding:28px;box-shadow:var(--shadow-card);transition:box-shadow .25s,transform .25s;}
-.tl-content:hover{box-shadow:var(--shadow-hover);transform:translateY(-3px);}
-.tl-year-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--clr-primary);background:var(--clr-primary-soft);padding:4px 10px;border-radius:20px;margin-bottom:12px;}
-.tl-content h3{font-family:var(--font-display);font-size:var(--font-size-subhead);font-weight:600;color:var(--clr-text-dark);margin-bottom:10px;line-height:1.35;}
-.tl-content p{font-size:var(--font-size-base);color:var(--clr-text-body);line-height:1.65;margin:0;}
-.tl-dot{position:absolute;left:50%;top:28px;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;background:var(--clr-primary);border:3px solid var(--clr-white);box-shadow:0 0 0 3px var(--clr-border);z-index:2;}
-.tl-item.tl-highlight .tl-dot{width:24px;height:24px;top:24px;background:var(--clr-green);box-shadow:0 0 0 4px rgba(91,125,91,.20);}
-.tl-item.tl-highlight .tl-content{border-color:rgba(91,125,91,.30);border-left:3px solid var(--clr-green);}
-.tl-item.tl-highlight .tl-year-tag{background:var(--clr-green-soft);color:var(--clr-green);}
-.tl-spacer{width:calc(50% - 36px);}
+
+/* ── LINKA VLEVO ── */
+.timeline{
+  position:relative;
+  max-width:760px;
+  margin:0 auto;
+  padding-left:52px;   /* místo pro čáru + tečky */
+}
+
+/* Šedý track – celá výška */
+.timeline::before{
+  content:'';
+  position:absolute;
+  left:16px;
+  top:0;bottom:0;
+  width:3px;
+  background:var(--clr-border);
+  border-radius:2px;
+}
+
+/* Barevná progress čára – roste JS-em přes CSS var */
+.timeline::after{
+  content:'';
+  position:absolute;
+  left:16px;
+  top:0;
+  width:3px;
+  height:var(--tl-progress, 0%);
+  background:linear-gradient(to bottom, var(--clr-primary) 0%, var(--clr-green) 100%);
+  border-radius:2px;
+  transition:height .1s linear;
+  z-index:1;
+}
+
+/* ── POLOŽKA ── */
+.tl-item{
+  display:flex;
+  align-items:flex-start;
+  gap:28px;
+  margin-bottom:44px;
+  position:relative;
+}
+
+/* Tečka na čáře */
+.tl-dot{
+  position:absolute;
+  left:-44px;       /* 52px offset - 8px (polovina tečky) */
+  top:24px;
+  width:16px;height:16px;
+  border-radius:50%;
+  background:var(--clr-border);
+  border:3px solid var(--clr-bg);
+  z-index:2;
+  transition:background .4s, transform .4s, box-shadow .4s;
+  flex-shrink:0;
+}
+
+/* Aktivní tečka (při scroll) */
+.tl-item.tl-active .tl-dot{
+  background:var(--clr-primary);
+  transform:scale(1.3);
+  box-shadow:0 0 0 4px rgba(155,66,73,.18);
+}
+.tl-item.tl-highlight.tl-active .tl-dot{
+  background:var(--clr-green);
+  box-shadow:0 0 0 5px rgba(91,125,91,.22);
+}
+
+/* ── KARTA ── */
+.tl-content{
+  flex:1;
+  background:var(--clr-white);
+  border-radius:var(--radius-card);
+  border:1px solid var(--clr-border);
+  border-left:3px solid var(--clr-border);
+  padding:24px 28px;
+  box-shadow:var(--shadow-card);
+  transition:box-shadow .3s, transform .3s, border-left-color .4s, opacity .4s;
+  opacity:.55;
+  transform:translateX(10px);
+}
+.tl-item.tl-active .tl-content{
+  opacity:1;
+  transform:translateX(0);
+  border-left-color:var(--clr-primary);
+  box-shadow:var(--shadow-hover);
+}
+.tl-item.tl-highlight.tl-active .tl-content{
+  border-left-color:var(--clr-green);
+}
+.tl-content:hover{
+  box-shadow:0 8px 32px rgba(0,0,0,.13);
+  transform:translateX(2px);
+}
+
+.tl-year-tag{
+  display:inline-block;
+  font-size:11px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--clr-primary);
+  background:var(--clr-primary-soft);
+  padding:3px 10px;border-radius:20px;
+  margin-bottom:10px;
+}
+.tl-item.tl-highlight .tl-year-tag{
+  background:var(--clr-green-soft);
+  color:var(--clr-green);
+}
+.tl-content h3{
+  font-family:var(--font-display);
+  font-size:var(--font-size-subhead);
+  font-weight:600;
+  color:var(--clr-text-dark);
+  margin-bottom:8px;line-height:1.35;
+}
+.tl-content p{
+  font-size:var(--font-size-base);
+  color:var(--clr-text-body);
+  line-height:1.65;margin:0;
+}
+
+/* Odstraníme spacer – už ho nepotřebujeme */
+.tl-spacer{display:none;}
+
 @media(max-width:768px){
   .timeline-section{padding:64px 0;}
-  .timeline::before{left:22px;}
-  .tl-item,.tl-item:nth-child(even){flex-direction:column;padding-left:56px;}
-  .tl-content{width:100%;}
-  .tl-spacer{display:none;}
-  .tl-dot{left:22px;}
+  .timeline{padding-left:40px;}
+  .timeline::before,.timeline::after{left:12px;}
+  .tl-dot{left:-34px;}
+  .tl-content{padding:20px;}
 }
 
 /* ══ RELATED SEKCE – STYL D ══ */
@@ -528,20 +636,18 @@ blockquote.reditelka-quote{
       <h2>Cesta od prázdných zdí k prvnímu klientovi</h2>
       <p>Přípravy trvaly roky. Pandemie, technické komplikace, kolaudační procesy. Nikdo se nevzdal.</p>
     </div>
-    <div class="timeline">
+    <div class="timeline" id="tlTrack">
 
-      <div class="tl-item">
+      <div class="tl-item" data-index="0">
+        <div class="tl-dot"></div>
         <div class="tl-content">
           <div class="tl-year-tag">2016</div>
           <h3>Vydražená budova, otevřená možnost</h3>
           <p>Soukromá osoba vydražila nedokončenou obecní budovu v Turovicích u Přerova. Různé možnosti přicházely a odcházely – až do chvíle, kdy zazněl záměr Ziny Filip Dadlíkové.</p>
         </div>
-        <div class="tl-dot"></div>
-        <div class="tl-spacer"></div>
       </div>
 
-      <div class="tl-item">
-        <div class="tl-spacer"></div>
+      <div class="tl-item" data-index="1">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <div class="tl-year-tag">Srpen 2017</div>
@@ -550,18 +656,16 @@ blockquote.reditelka-quote{
         </div>
       </div>
 
-      <div class="tl-item">
+      <div class="tl-item" data-index="2">
+        <div class="tl-dot"></div>
         <div class="tl-content">
           <div class="tl-year-tag">2018–2020</div>
           <h3>Projektování a hledání partnerů</h3>
           <p>Projektanti převáděli odborné vize do konkrétních stavebních řešení. Probíhalo hledání spolehlivých firem. Stavební záměr se pomalu měnil v realizovatelný plán.</p>
         </div>
-        <div class="tl-dot"></div>
-        <div class="tl-spacer"></div>
       </div>
 
-      <div class="tl-item">
-        <div class="tl-spacer"></div>
+      <div class="tl-item" data-index="3">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <div class="tl-year-tag">2020–2022</div>
@@ -570,18 +674,16 @@ blockquote.reditelka-quote{
         </div>
       </div>
 
-      <div class="tl-item">
+      <div class="tl-item" data-index="4">
+        <div class="tl-dot"></div>
         <div class="tl-content">
           <div class="tl-year-tag">Srpen 2023</div>
           <h3>Přípravy na registraci sociální služby</h3>
           <p>Spuštění přijímání zaměstnanců nutných pro registraci dle zákona č. 108/2006 Sb. Tým byl připraven. Přišly ale neshody dokumentace s požadavky HZS a kolaudace se odkládala.</p>
         </div>
-        <div class="tl-dot"></div>
-        <div class="tl-spacer"></div>
       </div>
 
-      <div class="tl-item tl-highlight">
-        <div class="tl-spacer"></div>
+      <div class="tl-item tl-highlight" data-index="5">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <div class="tl-year-tag">1. 8. 2025</div>
@@ -915,6 +1017,44 @@ blockquote.reditelka-quote{
 }
 </script>
 
+
+<script>
+  {
+    const track = document.getElementById('tlTrack') as HTMLElement | null;
+    if (track) {
+      const items = Array.from(track.querySelectorAll('.tl-item')) as HTMLElement[];
+      const trackRect = () => track.getBoundingClientRect();
+
+      function update() {
+        const tr = track.getBoundingClientRect();
+        const winH = window.innerHeight;
+
+        // Výška progress čáry: kolik trackу prorolováno přes střed viewportu
+        const scrolled = winH * 0.65 - tr.top;
+        const total = tr.height;
+        const pct = Math.max(0, Math.min(100, (scrolled / total) * 100));
+        track.style.setProperty('--tl-progress', pct + '%');
+
+        // Aktivace jednotlivých položek
+        items.forEach((item) => {
+          const dot = item.querySelector('.tl-dot') as HTMLElement | null;
+          const rect = item.getBoundingClientRect();
+          const dotY = rect.top + 28; // tečka je 28px od vrcholu položky
+          if (dotY < winH * 0.72) {
+            item.classList.add('tl-active');
+          } else {
+            item.classList.remove('tl-active');
+          }
+        });
+      }
+
+      // První průchod
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+    }
+  }
+</script>
 
 <script>
   {
