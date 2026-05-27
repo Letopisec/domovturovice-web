@@ -1,0 +1,836 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Aktivizace seniorů – canisterapie, muzikoterapie, ergoterapie | Domov Turovice"
+  description="Aktivizace seniorů v Domově Turovice: canisterapie s border kolií Kirou, muzikoterapie s harmonikářem Ivanem, ergoterapie každý všední den, trénink paměti, rehabilitace a duchovní péče."
+>
+
+<style>
+/* ── HERO ── */
+.akt-hero {
+  background: linear-gradient(135deg, rgba(20,10,12,0.82) 0%, rgba(139,26,47,0.55) 100%),
+              url('https://images.unsplash.com/photo-1581579439006-a3b3a13ae5b5?w=1400&q=80') center 40%/cover no-repeat;
+  min-height: 340px;
+  display: flex;
+  align-items: center;
+}
+.akt-hero-inner { max-width: 740px; padding: 60px 0 56px; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(155,66,73,0.88);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-family: var(--ff-body);
+  font-size: var(--font-size-label);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.hero-badge svg { width: 14px; height: 14px; fill: white; flex-shrink: 0; }
+.akt-hero h1 {
+  font-family: var(--ff-head);
+  font-size: clamp(2rem, 4.8vw, 3.2rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  margin-bottom: 20px;
+}
+.akt-hero-perex {
+  font-family: var(--ff-body);
+  font-size: var(--font-size-perex);
+  line-height: 1.55;
+  color: rgba(255,255,255,0.93);
+  max-width: 600px;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .akt-hero { min-height: 280px; }
+  .akt-hero-perex { font-size: var(--font-size-base); }
+}
+
+/* ── STAT STRIP ── */
+.strip {
+  background: #fff;
+  border-bottom: 1px solid var(--clr-border);
+}
+.strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
+}
+.strip-item {
+  padding: 36px 20px;
+  border-right: 1px solid var(--clr-border);
+}
+.strip-item:last-child { border-right: none; }
+.strip-number {
+  font-family: var(--ff-head);
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  color: var(--clr-green);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.strip-label {
+  font-family: var(--ff-body);
+  font-size: var(--font-size-label);
+  color: var(--clr-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+@media (max-width: 768px) {
+  .strip-grid { grid-template-columns: repeat(2, 1fr); }
+  .strip-item:nth-child(2) { border-right: none; }
+  .strip-item:nth-child(3) { border-right: 1px solid var(--clr-border); }
+}
+@media (max-width: 480px) {
+  .strip-grid { grid-template-columns: 1fr; }
+  .strip-item { border-right: none; border-bottom: 1px solid var(--clr-border); }
+  .strip-item:last-child { border-bottom: none; }
+}
+
+/* ── SHARED SECTION LABEL ── */
+.section-label-sm {
+  font-family: var(--ff-body);
+  font-size: var(--font-size-label);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--clr-primary);
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* ── INTRO – dvousloupcový ── */
+.intro-section { background: var(--clr-bg); padding: 88px 0; }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.about-text h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--clr-primary);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+.about-text p {
+  font-size: var(--font-size-base);
+  line-height: 1.75;
+  color: var(--clr-text);
+  margin-bottom: 18px;
+}
+.benefit-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+.benefit-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: var(--ff-body);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--clr-text);
+}
+.benefit-check {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--clr-green-soft);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.benefit-check svg { width: 12px; height: 12px; stroke: var(--clr-green); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.about-visual {
+  background: var(--clr-green-soft);
+  border-radius: 16px;
+  padding: 44px 40px;
+  text-align: center;
+}
+.av-number {
+  font-family: var(--ff-head);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--clr-green);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.av-label {
+  font-family: var(--ff-body);
+  font-size: var(--font-size-label);
+  color: var(--clr-green);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 28px;
+}
+.av-divider { width: 40px; height: 2px; background: var(--clr-green); margin: 0 auto 28px; }
+.av-quote {
+  font-family: var(--ff-head);
+  font-size: var(--font-size-subhead);
+  font-style: italic;
+  color: var(--clr-heading);
+  line-height: 1.55;
+}
+.av-quote-author {
+  margin-top: 14px;
+  font-family: var(--ff-body);
+  font-size: var(--font-size-small);
+  color: var(--clr-muted);
+  font-weight: 600;
+}
+@media (max-width: 1024px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+/* ── PROGRAMY ── */
+.programs-section { background: var(--clr-surface); padding: 88px 0; }
+.section-intro { text-align: center; max-width: 680px; margin: 0 auto 52px; }
+.section-intro h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+  font-weight: 700;
+  color: var(--clr-primary);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.section-intro p { font-size: var(--font-size-base); line-height: 1.65; color: var(--clr-text); }
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.prog-card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .25s, transform .25s;
+}
+.prog-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+.prog-card-accent { height: 4px; background: var(--clr-green); }
+.prog-card-accent.orange { background: var(--clr-orange); }
+.prog-card-accent.blue   { background: var(--clr-blue); }
+.prog-card-accent.primary { background: var(--clr-primary); }
+.prog-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+
+.prog-icon {
+  width: 46px; height: 46px;
+  border-radius: 10px;
+  background: var(--clr-green-soft);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px; flex-shrink: 0;
+}
+.prog-icon svg { width: 22px; height: 22px; stroke: var(--clr-green); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.prog-icon.orange { background: var(--clr-orange-soft); }
+.prog-icon.orange svg { stroke: var(--clr-orange); }
+.prog-icon.blue { background: var(--clr-blue-soft); }
+.prog-icon.blue svg { stroke: var(--clr-blue); }
+.prog-icon.primary { background: var(--clr-primary-soft); }
+.prog-icon.primary svg { stroke: var(--clr-primary); }
+
+.prog-card h3 {
+  font-family: var(--ff-head);
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.prog-card-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.prog-tag {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: var(--ff-body);
+  font-size: var(--font-size-label);
+  font-weight: 700;
+  background: var(--clr-green-soft);
+  color: var(--clr-green);
+}
+.prog-tag svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+.prog-tag.orange { background: var(--clr-orange-soft); color: var(--clr-orange); }
+.prog-tag.blue   { background: var(--clr-blue-soft);   color: var(--clr-blue);   }
+.prog-tag.primary { background: var(--clr-primary-soft); color: var(--clr-primary); }
+
+.prog-card p { font-size: var(--font-size-base); line-height: 1.7; color: var(--clr-text); flex: 1; }
+.prog-card-who {
+  margin-top: 16px; padding-top: 14px;
+  border-top: 1px solid var(--clr-border);
+  font-family: var(--ff-body);
+  font-size: var(--font-size-small);
+  color: var(--clr-muted);
+}
+.prog-card-who strong { color: var(--clr-heading); font-weight: 600; }
+
+@media (max-width: 1024px) { .programs-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px)  { .programs-grid { grid-template-columns: 1fr; } }
+
+/* ── REHABILITACE ── */
+.rehab-section { background: #fff; padding: 88px 0; }
+.rehab-box {
+  background: var(--clr-orange-soft);
+  border-radius: 16px;
+  padding: 52px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 52px;
+  align-items: center;
+}
+.rehab-icon-big {
+  width: 68px; height: 68px;
+  border-radius: 18px;
+  background: rgba(200,144,42,0.15);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+}
+.rehab-icon-big svg { width: 34px; height: 34px; stroke: var(--clr-orange); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.rehab-box h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin-bottom: 16px;
+  line-height: 1.25;
+}
+.rehab-box p { font-size: var(--font-size-base); line-height: 1.75; color: var(--clr-text); margin-bottom: 16px; }
+.rehab-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+.rehab-list li {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-family: var(--ff-body);
+  font-size: var(--font-size-base);
+  color: var(--clr-text);
+  line-height: 1.55;
+}
+.rehab-list li::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--clr-orange);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+@media (max-width: 768px) { .rehab-box { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px; } }
+
+/* ── DUCHOVNÍ PÉČE ── */
+.spirit-section { background: var(--clr-bg); padding: 88px 0; }
+.spirit-card {
+  background: var(--clr-primary-soft);
+  border-radius: 16px;
+  padding: 48px;
+  display: flex;
+  gap: 36px;
+  align-items: flex-start;
+}
+.spirit-icon {
+  width: 60px; height: 60px;
+  border-radius: 16px;
+  background: rgba(155,66,73,0.12);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.spirit-icon svg { width: 28px; height: 28px; stroke: var(--clr-primary); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.spirit-card h3 {
+  font-family: var(--ff-head);
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  color: var(--clr-primary);
+  margin-bottom: 12px;
+}
+.spirit-card p { font-size: var(--font-size-base); line-height: 1.75; color: var(--clr-text); margin-bottom: 14px; }
+.spirit-card p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) { .spirit-card { flex-direction: column; gap: 20px; padding: 28px 24px; } }
+
+/* ── PÉČE O SEBE ── */
+.pece-section { background: var(--clr-surface); padding: 88px 0; }
+.pece-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 0;
+}
+.pece-item {
+  background: #fff;
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pece-item-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: var(--clr-blue-soft);
+  display: flex; align-items: center; justify-content: center;
+}
+.pece-item-icon svg { width: 22px; height: 22px; stroke: var(--clr-blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pece-item h4 {
+  font-family: var(--ff-head);
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  color: var(--clr-heading);
+}
+.pece-item p { font-size: var(--font-size-base); line-height: 1.65; color: var(--clr-text); margin: 0; }
+@media (max-width: 768px) { .pece-grid { grid-template-columns: 1fr; } }
+
+/* ── AKCE ── */
+.events-section { background: #fff; padding: 88px 0; }
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.event-card {
+  background: #fff;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-card);
+  padding: 28px 24px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  transition: box-shadow .2s, border-color .2s;
+}
+.event-card:hover { box-shadow: var(--shadow-hover); border-color: var(--clr-primary); }
+.event-emoji {
+  width: 50px; height: 50px;
+  border-radius: 12px;
+  background: var(--clr-green-soft);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.event-card h4 {
+  font-family: var(--ff-head);
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  color: var(--clr-heading);
+  margin-bottom: 8px;
+}
+.event-card p { font-size: var(--font-size-base); line-height: 1.65; color: var(--clr-text); margin: 0; }
+@media (max-width: 768px) { .events-grid { grid-template-columns: 1fr; } }
+
+/* ── CTA ── */
+.cta-section {
+  background: #EDE8E3;
+  padding: 88px 0;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before { content: ''; position: absolute; width: 360px; height: 360px; border-radius: 50%; background: rgba(155,66,73,0.08); top: -80px; right: -80px; pointer-events: none; }
+.cta-section::after  { content: ''; position: absolute; width: 220px; height: 220px; border-radius: 50%; background: rgba(155,66,73,0.05); bottom: -60px; left: -60px; pointer-events: none; }
+.cta-inner { text-align: center; max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
+.cta-inner h2 {
+  font-family: var(--ff-head);
+  font-size: clamp(1.7rem, 3.5vw, 2.3rem);
+  font-weight: 700;
+  color: var(--clr-primary);
+  margin-bottom: 14px;
+}
+.cta-inner p { font-size: var(--font-size-perex); line-height: 1.65; color: var(--clr-text-body); margin-bottom: 32px; }
+.cta-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.cta-group .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: 8px;
+  font-family: var(--ff-body);
+  font-weight: 600;
+  font-size: var(--font-size-ui);
+  text-decoration: none;
+  transition: all .2s;
+}
+.btn-primary { background: var(--clr-primary); color: #fff; border: 2px solid var(--clr-primary); }
+.btn-primary:hover { background: var(--clr-primary-hover); border-color: var(--clr-primary-hover); }
+.btn-secondary { background: transparent; color: var(--clr-primary); border: 2px solid var(--clr-primary); }
+.btn-secondary:hover { background: var(--clr-primary); color: #fff; }
+
+/* ── RELATED ── */
+.related-d-section { background: var(--clr-surface); padding: 72px 0; }
+.related-d-section h2 { font-family: var(--ff-head); font-size: var(--font-size-h2); font-weight: 700; color: var(--clr-primary); margin: 0 0 8px; }
+.related-d-label { font-family: var(--ff-body); font-size: var(--font-size-label); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--clr-primary); display: block; margin-bottom: 12px; }
+.related-d-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 36px; }
+.related-d-card { background: #fff; border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: 28px 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; border-top: 3px solid var(--clr-border); transition: box-shadow .22s, transform .22s, border-top-color .22s; color: inherit; }
+.related-d-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); border-top-color: var(--clr-primary); }
+.related-d-card-label { font-family: var(--ff-body); font-size: var(--font-size-label); font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--clr-muted); }
+.related-d-card-title { font-family: var(--ff-head); font-size: var(--font-size-subhead); font-weight: 600; color: var(--clr-text-dark); line-height: 1.35; }
+.related-d-card-desc { font-family: var(--ff-body); font-size: var(--font-size-base); color: var(--clr-muted); line-height: 1.55; flex: 1; }
+.related-d-card-arrow { display: flex; align-items: center; gap: 6px; font-family: var(--ff-body); font-size: var(--font-size-caption); font-weight: 600; color: var(--clr-primary); margin-top: 4px; transition: gap .18s; }
+.related-d-card:hover .related-d-card-arrow { gap: 10px; }
+.related-d-card-arrow svg { width: 16px; height: 16px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (max-width: 1024px) { .related-d-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px)  { .related-d-section { padding: 56px 0; } .related-d-section h2 { font-size: var(--font-size-h2-mob); } }
+@media (max-width: 480px)  { .related-d-grid { grid-template-columns: 1fr; } }
+</style>
+
+<!-- ══ HERO ══ -->
+<header class="akt-hero">
+  <div class="container">
+    <div class="akt-hero-inner">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Péče a služby
+      </div>
+      <h1>Aktivizace seniorů v Domově Turovice</h1>
+      <p class="akt-hero-perex">Canisterapie, muzikoterapie, ergoterapie i trénink paměti. Každý den u nás něco živého probíhá – proto tu klienti mají důvod ráno vstát.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ══ STAT STRIP ══ -->
+<div class="strip">
+  <div class="container">
+    <div class="strip-grid">
+      <div class="strip-item">
+        <div class="strip-number">7+</div>
+        <div class="strip-label">různých programů</div>
+      </div>
+      <div class="strip-item">
+        <div class="strip-number">5×</div>
+        <div class="strip-label">ergoterapie týdně</div>
+      </div>
+      <div class="strip-item">
+        <div class="strip-number">Kira</div>
+        <div class="strip-label">border kolie – canisterapie</div>
+      </div>
+      <div class="strip-item">
+        <div class="strip-number">kaple</div>
+        <div class="strip-label">vlastní pro bohoslužby</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ INTRO ══ -->
+<section class="intro-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="section-label-sm">Proč nám na aktivizaci záleží</span>
+        <h2>Aktivní den je dobrý den</h2>
+        <p>Aktivizace není jen vyplnění volného času. Je to způsob, jak udržovat mozek čilý, ruce v pohybu a srdce otevřené. U seniorů se sníženou soběstačností má pravidelná stimulace přímý dopad na kvalitu života, náladu i zdravotní stav.</p>
+        <p>V Domově Turovice nabízíme pestrý program každý všední den. Nezáleží na tom, jak je klient pohyblivý – máme aktivity pro skupiny i pro ty, kdo tráví den na pokoji.</p>
+        <ul class="benefit-list">
+          <li>
+            <span class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Program přizpůsobený individuálním schopnostem každého klienta</span>
+          </li>
+          <li>
+            <span class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Aktivity skupinové i individuální – nikdo není vynechaný</span>
+          </li>
+          <li>
+            <span class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Propojení fyzické, kognitivní i emocionální složky pohody</span>
+          </li>
+          <li>
+            <span class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>Certifikovaný trénink paměti vedený zkušenými pracovnicemi</span>
+          </li>
+        </ul>
+      </div>
+      <div class="about-visual">
+        <div class="av-number">104</div>
+        <div class="av-label">klientů v péči</div>
+        <div class="av-divider"></div>
+        <p class="av-quote">„Aktivní senior je spokojený senior. Každý den hledáme cesty, jak probudit radost z tvoření i pohybu."</p>
+        <p class="av-quote-author">Aktivizační tým Domova Turovice</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROGRAMY ══ -->
+<section class="programs-section" id="programy">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label-sm">Co u nás probíhá</span>
+      <h2>Naše aktivizační programy</h2>
+      <p>Každý program má svůj rytmus, svého průvodce a svůj účel. Podívejte se, co u nás každý týden probíhá.</p>
+    </div>
+
+    <div class="programs-grid">
+
+      <article class="prog-card">
+        <div class="prog-card-accent"></div>
+        <div class="prog-card-body">
+          <div class="prog-icon">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="2"/><path d="M4 12c0-3.314 2.686-6 6-6s6 2.686 6 6-2.686 6-6 6"/><path d="M14 12c0-2.206 1.794-4 4-4v8c-2.206 0-4-1.794-4-4z"/></svg>
+          </div>
+          <h3>Canisterapie</h3>
+          <div class="prog-card-meta">
+            <span class="prog-tag"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1× měsíčně</span>
+            <span class="prog-tag">Skupinová</span>
+          </div>
+          <p>Border kolie Kira navštěvuje klienty spolu se svou cvičitelkou Nikolou Petříkovou z Přerova. Dotek srsti, přítomnost zvířete a klidný kontakt dělají s náladou klientů zázraky – zvláště u těch, kdo celý život psy milovali.</p>
+          <div class="prog-card-who"><strong>Vede:</strong> Nikola Petříková, Přerov &nbsp;·&nbsp; <strong>Pes:</strong> Kira (border kolie)</div>
+        </div>
+      </article>
+
+      <article class="prog-card">
+        <div class="prog-card-accent orange"></div>
+        <div class="prog-card-body">
+          <div class="prog-icon orange">
+            <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <h3>Muzikoterapie</h3>
+          <div class="prog-card-meta">
+            <span class="prog-tag orange"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Každé úterý, 2 hod.</span>
+            <span class="prog-tag orange">Živá hudba</span>
+          </div>
+          <p>Harmonikář Ivan Nečacký z Hlinska pod Hostýnem přichází každé úterý odpoledne. Společný zpěv v jídelně stmelí i ty, kdo jinak moc nemluví. Po skončení Ivan obchází imobilní klienty přímo na pokojích – aby hudba došla ke každému.</p>
+          <div class="prog-card-who"><strong>Vede:</strong> Ivan Nečacký, Hlínsko pod Hostýnem &nbsp;·&nbsp; <strong>Nástroj:</strong> harmonika</div>
+        </div>
+      </article>
+
+      <article class="prog-card">
+        <div class="prog-card-accent"></div>
+        <div class="prog-card-body">
+          <div class="prog-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          </div>
+          <h3>Ergoterapie</h3>
+          <div class="prog-card-meta">
+            <span class="prog-tag"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Každý všední den dopoledne</span>
+          </div>
+          <p>Stříhání, malování, vybarvování, lepení, kreslení, modelování, keramika i pečení – ruce se musí hýbat. Aktivizační pracovnice Alenka a Daniela vedou dopolední program tak, aby si každý mohl vybrat podle svých sil a nálady.</p>
+          <div class="prog-card-who"><strong>Vedou:</strong> Alenka a Daniela (aktivizační pracovnice)</div>
+        </div>
+      </article>
+
+      <article class="prog-card">
+        <div class="prog-card-accent primary"></div>
+        <div class="prog-card-body">
+          <div class="prog-icon primary">
+            <svg viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.46 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3C7.48 2.2 8 2 8.5 2H9.5z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.46 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3C15.52 2.2 15 2 14.5 2H14.5z"/></svg>
+          </div>
+          <h3>Trénink paměti</h3>
+          <div class="prog-card-meta">
+            <span class="prog-tag primary"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1× týdně</span>
+            <span class="prog-tag primary">Skupinový</span>
+          </div>
+          <p>Trénink paměti posiluje soustředění, logické myšlení a slovní zásobu. Cvičení přizpůsobujeme věku a kognitivním schopnostem každého klienta. Pravidelnost je klíč – proto ho řadíme do pevného týdenního programu.</p>
+          <div class="prog-card-who"><strong>Vedou:</strong> Alenka a Daniela (aktivizační pracovnice)</div>
+        </div>
+      </article>
+
+      <article class="prog-card">
+        <div class="prog-card-accent orange"></div>
+        <div class="prog-card-body">
+          <div class="prog-icon orange">
+            <svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+          </div>
+          <h3>Arteterapie</h3>
+          <div class="prog-card-meta">
+            <span class="prog-tag orange">Tvůrčí terapie</span>
+            <span class="prog-tag orange">Skupinová i individuální</span>
+          </div>
+          <p>Výtvarná tvorba jako cesta k sebevyjádření. Malování, koláže, práce s barvou a materiálem – arteterapie přesahuje oblast zábavy a pomáhá zpracovávat emoce i vzpomínky. Výsledky tvoření zdobí společné prostory domova.</p>
+          <div class="prog-card-who"><strong>Vedou:</strong> aktivizační pracovnice Domova Turovice</div>
+        </div>
+      </article>
+
+      <article class="prog-card">
+        <div class="prog-card-accent blue"></div>
+        <div class="prog-card-body">
+          <div class="prog-icon blue">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1"/><path d="m9 20 3-8 3 8"/><path d="M6.5 14.5h11"/></svg>
+          </div>
+          <h3>Pohybová aktivizace</h3>
+          <div class="prog-card-meta">
+            <span class="prog-tag blue"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Každý den</span>
+            <span class="prog-tag blue">Individuální i skupinová</span>
+          </div>
+          <p>Každodenní pohyb v různých podobách – cvičení na židli, cvičení v lůžku, skupinová rozcvička, procházky venku i ve vnitřních prostorách. Pohyb je základem fyzické kondice a dobrého spánku.</p>
+          <div class="prog-card-who"><strong>Koordinuje:</strong> rehabilitační sestra (od května 2026)</div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ REHABILITACE ══ -->
+<section class="rehab-section">
+  <div class="container">
+    <div class="rehab-box">
+      <div>
+        <div class="rehab-icon-big">
+          <svg viewBox="0 0 24 24"><path d="M8 6v6"/><path d="M15 13v-3a1 1 0 0 0-1-1h-1.372c-.04-.414-.18-.814-.408-1.158l-.97-1.456A2 2 0 0 0 9.585 5.5H9a2 2 0 0 0-2 2v1"/><rect x="2" y="14" width="20" height="6" rx="2"/></svg>
+        </div>
+        <span class="section-label-sm">Fyzická kondice a soběstačnost</span>
+        <h2>Rehabilitace a fyzioterapie</h2>
+        <p>Od května 2026 má domov vlastní rehabilitační sestru. Péče probíhá individuálně i skupinově a zahrnuje celou škálu cvičení – od lehkých cviků s pomůckami přes nácvik chůze až po orientaci v prostoru.</p>
+        <p>Cílem rehabilitace není jen udržet pohyblivost. Jde i o sebedůvěru – když senior zjistí, že zvládne projít chodbou sám, mění se jeho celkový pocit ze sebe.</p>
+      </div>
+      <div>
+        <ul class="rehab-list">
+          <li>Individuální cvičení přizpůsobené zdravotnímu stavu</li>
+          <li>Skupinové cvičení na židli i v lůžku</li>
+          <li>Cvičení s pomůckami (overball, theraband, obruče)</li>
+          <li>Nácvik chůze a chůze do schodů</li>
+          <li>Orientace v prostoru a nácvik stability</li>
+          <li>Procházky venku, jakmile to počasí dovolí</li>
+          <li>Cvičení v lehátku u rehabilitační sestry</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DUCHOVNÍ PÉČE ══ -->
+<section class="spirit-section">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label-sm">Duchovní rozměr péče</span>
+      <h2>Duchovní péče a bohoslužby</h2>
+      <p>Víra je pro mnoho seniorů přirozenou součástí života. Domov Turovice to respektuje a vytváří podmínky pro duchovní prožitky.</p>
+    </div>
+    <div class="spirit-card">
+      <div class="spirit-icon">
+        <svg viewBox="0 0 24 24"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+      </div>
+      <div>
+        <h3>Vlastní kaple a pravidelné bohoslužby</h3>
+        <p>Domov Turovice má vlastní kapli. Bohoslužby se konají jednou měsíčně a slouží je otec P. Mgr. Marek Výleta – farář místní farnosti Dřevohostice. Účast je dobrovolná a otevřená všem klientům bez ohledu na vyznání.</p>
+        <p>Pro věřící seniory je to chvíle klidu a duchovního ukotvení, která jim pomáhá prožívat pobyt v domově důstojně.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PÉČE O SEBE ══ -->
+<section class="pece-section">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label-sm">Osobní pohoda</span>
+      <h2>Péče o vzhled a tělesnou pohodu</h2>
+      <p>Každý člověk si zaslouží vypadat dobře. Kadeřnice, pedikérka i masérka docházejí do domova přímo – klient nemusí nikam cestovat.</p>
+    </div>
+    <div class="pece-grid">
+      <div class="pece-item">
+        <div class="pece-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 11l-4 4 4 4"/><path d="M15 11l4 4-4 4"/><path d="M12 3v10"/></svg>
+        </div>
+        <h4>Kadeřnice</h4>
+        <p>Pravidelné kadeřnické služby přímo v domově. Klient si přání sdělí pracovníkům v přímé péči nebo zdravotní sestře – koordinátorka zbytek zařídí.</p>
+      </div>
+      <div class="pece-item">
+        <div class="pece-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 4H6a2 2 0 0 0-2 2v14l4-2 4 2 4-2 4 2V6a2 2 0 0 0-2-2z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="10" y1="10" x2="14" y2="10"/></svg>
+        </div>
+        <h4>Pedikúra</h4>
+        <p>Pravidelná péče o nohy je zvlášť důležitá u seniorů s diabetem nebo problémy s chůzí. Pokud personál uzná, že je pedikúra potřeba, sám koordinátorku upozorní.</p>
+      </div>
+      <div class="pece-item">
+        <div class="pece-item-icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h4>Masáže a relaxace</h4>
+        <p>Doplňková relaxační péče externích pracovnic. Tyto služby jsou placené zvlášť a zajišťují je samostatně výdělečné pracovnice na základě dohody s koordinátorkou domova.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ AKCE ══ -->
+<section class="events-section">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label-sm">Život mimo domov</span>
+      <h2>Akce, výlety a soutěže</h2>
+      <p>Aktivizace nekončí za zdmi domova. Vyráží se ven, setkává se s ostatními a slaví se.</p>
+    </div>
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-emoji">🚪</div>
+        <div>
+          <h4>Den otevřených dveří</h4>
+          <p>Jednou ročně zveme veřejnost, aby se přišla podívat, jak to u nás chodí. Rodiny budoucích klientů si mohou prohlédnout prostory, poznat tým a zeptat se na cokoliv.</p>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-emoji">🎂</div>
+        <div>
+          <h4>Výročí otevření domova</h4>
+          <p>Domov Turovice slaví každoročně výročí od otevření v srpnu 2025. Je to den, kdy se sejdou klienti, rodiny i přátelé domova. Zpívá se, vzpomíná se a slaví se.</p>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-emoji">🚌</div>
+        <div>
+          <h4>Výlety do okolí</h4>
+          <p>Jakmile přijde hezké počasí, vyrážíme. Příroda Olomouckého kraje, zámky, zahrady nebo jen posezení na čerstvém vzduchu – výlety se plánují podle možností a přání klientů.</p>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-emoji">🏆</div>
+        <div>
+          <h4>Soutěže mezi domovy</h4>
+          <p>Naši klienti se účastní soutěží seniorů pořádaných jinými domovy pro seniory v okolí. Je to příležitost potkat nové tváře, změřit síly a přivézt domů trochu soutěžní hrdosti.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>Chcete vidět program na vlastní oči?</h2>
+      <p>Zavolejte nám a domluvte se na prohlídce. Rádi vám ukážeme, jak to u nás každý den vypadá – klidně i v průběhu aktivity.</p>
+      <div class="cta-group">
+        <a href="/kontakt" class="btn btn-primary">Domluvit prohlídku</a>
+        <a href="/prijeti" class="btn btn-secondary">Jak probíhá přijetí</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROZKOUMEJTE DÁL – STYL D ══ -->
+<section class="related-d-section" aria-label="Co si přečíst dál">
+  <div class="container">
+    <span class="related-d-label">Prozkoumejte dál</span>
+    <h2>Co vás může zajímat</h2>
+    <div class="related-d-grid">
+      <a href="/jak-pecujeme" class="related-d-card">
+        <span class="related-d-card-label">Péče a služby</span>
+        <span class="related-d-card-title">Jak pečujeme</span>
+        <span class="related-d-card-desc">Ošetřovatelská péče 24 hodin denně, individuální plán péče a spolupráce s nemocnicí v Hranicích.</span>
+        <span class="related-d-card-arrow">Zjistit více <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/prijeti" class="related-d-card">
+        <span class="related-d-card-label">Přijetí do domova</span>
+        <span class="related-d-card-title">Jak probíhá přijetí</span>
+        <span class="related-d-card-desc">Průvodce krok za krokem – od žádosti přes osobní setkání až po první den v domově.</span>
+        <span class="related-d-card-arrow">Průvodce přijetím <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/cenik" class="related-d-card">
+        <span class="related-d-card-label">Přijetí do domova</span>
+        <span class="related-d-card-title">Ceník</span>
+        <span class="related-d-card-desc">Aktuální sazby za ubytování a stravu, přehled fakultativních služeb a info o příspěvku na péči.</span>
+        <span class="related-d-card-arrow">Zobrazit ceník <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+      <a href="/faq" class="related-d-card">
+        <span class="related-d-card-label">Přijetí do domova</span>
+        <span class="related-d-card-title">Časté otázky</span>
+        <span class="related-d-card-desc">Odpovědi na nejčastější dotazy o přijetí, péči a každodenním životě v domově.</span>
+        <span class="related-d-card-arrow">Přečíst FAQ <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</Layout>
