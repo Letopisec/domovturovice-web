@@ -221,6 +221,7 @@ import Layout from '../layouts/Layout.astro';
   grid-template-columns:repeat(3,1fr);
   gap:24px;
 }
+/* 6 karet = 2 řady po 3 */
 .hodnota-card{
   background:var(--clr-bg);
   border-radius:var(--radius-card);
@@ -459,6 +460,32 @@ blockquote.reditelka-quote{
 
 
 
+/* ══ TIMELINE ══ */
+.timeline-section{padding:88px 0;background:var(--clr-bg);}
+.timeline{position:relative;max-width:860px;margin:0 auto;}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--clr-border);transform:translateX(-50%);}
+.tl-item{display:flex;align-items:flex-start;margin-bottom:48px;position:relative;}
+.tl-item:nth-child(odd){flex-direction:row;}
+.tl-item:nth-child(even){flex-direction:row-reverse;}
+.tl-content{width:calc(50% - 36px);background:var(--clr-white);border-radius:var(--radius-card);border:1px solid var(--clr-border);padding:28px;box-shadow:var(--shadow-card);transition:box-shadow .25s,transform .25s;}
+.tl-content:hover{box-shadow:var(--shadow-hover);transform:translateY(-3px);}
+.tl-year-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--clr-primary);background:var(--clr-primary-soft);padding:4px 10px;border-radius:20px;margin-bottom:12px;}
+.tl-content h3{font-family:var(--font-display);font-size:var(--font-size-subhead);font-weight:600;color:var(--clr-text-dark);margin-bottom:10px;line-height:1.35;}
+.tl-content p{font-size:var(--font-size-base);color:var(--clr-text-body);line-height:1.65;margin:0;}
+.tl-dot{position:absolute;left:50%;top:28px;transform:translateX(-50%);width:18px;height:18px;border-radius:50%;background:var(--clr-primary);border:3px solid var(--clr-white);box-shadow:0 0 0 3px var(--clr-border);z-index:2;}
+.tl-item.tl-highlight .tl-dot{width:24px;height:24px;top:24px;background:var(--clr-green);box-shadow:0 0 0 4px rgba(91,125,91,.20);}
+.tl-item.tl-highlight .tl-content{border-color:rgba(91,125,91,.30);border-left:3px solid var(--clr-green);}
+.tl-item.tl-highlight .tl-year-tag{background:var(--clr-green-soft);color:var(--clr-green);}
+.tl-spacer{width:calc(50% - 36px);}
+@media(max-width:768px){
+  .timeline-section{padding:64px 0;}
+  .timeline::before{left:22px;}
+  .tl-item,.tl-item:nth-child(even){flex-direction:column;padding-left:56px;}
+  .tl-content{width:100%;}
+  .tl-spacer{display:none;}
+  .tl-dot{left:22px;}
+}
+
 /* ══ RELATED SEKCE – STYL D ══ */
 .related-d-section{background:var(--clr-surface);padding:72px 0}
 .related-d-section h2{font-family:var(--ff-head);font-size:var(--font-size-h2);font-weight:700;color:var(--clr-primary);margin:0 0 8px}
@@ -493,71 +520,76 @@ blockquote.reditelka-quote{
   </div>
 </section>
 
-<!-- ══ 2. VZNIK 2016 ══ -->
-<section id="pribeh" class="story-section" style="background:var(--clr-bg);">
+<!-- ══ 2. TIMELINE ══ -->
+<section id="pribeh" class="timeline-section">
   <div class="container">
-    <div class="story-grid">
-      <div class="story-text">
-        <span class="section-label">2016 – 2017</span>
-        <span class="story-year">2016</span>
-        <h2>Prázdná budova a jeden nápad, který vše změnil</h2>
-        <p>V roce 2016 vydražila soukromá osoba nedokončenou obecní budovu v Turovicích. Budova stála prázdná a čekala na svůj osud. Různé možnosti přicházely a odcházely – až do chvíle, kdy zazněl záměr Ziny Filip Dadlíkové.</p>
-        <p>Myšlenka byla jednoduchá a zároveň velmi konkrétní: vybudovat domov pro seniory, který bude skutečným domovem. Ne ústavem, ne čekárnou. Místem, kde má každý člověk svůj prostor, svůj rytmus a svou důstojnost.</p>
-        <p>Investor záměr přijal. V srpnu 2017 byl založen <strong>zapsaný ústav Domov Turovice</strong>. Zakladatelkou se stala Michaela Hubačová, dcera investora. Přípravy mohly začít.</p>
-      </div>
-      <div>
-        <div class="photo-slot landscape">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span class="photo-slot-label">Budova před rekonstrukcí nebo první skica záměru</span>
-          <span class="photo-slot-dim">800 × 600 px</span>
-        </div>
-      </div>
+    <div class="section-intro">
+      <span class="section-label">Jak to šlo</span>
+      <h2>Cesta od prázdných zdí k prvnímu klientovi</h2>
+      <p>Přípravy trvaly roky. Pandemie, technické komplikace, kolaudační procesy. Nikdo se nevzdal.</p>
     </div>
-  </div>
-</section>
+    <div class="timeline">
 
-<!-- ══ 3. STAVBA 2017–2025 ══ -->
-<section class="story-section" style="background:var(--clr-surface);">
-  <div class="container">
-    <div class="story-grid reverse">
-      <div class="story-text">
-        <span class="section-label">2017 – 2025</span>
-        <span class="story-year">2017</span>
-        <h2>Dlouhá cesta od vize ke skutečnosti</h2>
-        <p>Následovaly roky příprav. Projektanti převáděli odborné vize Ziny Filip Dadlíkové do konkrétních řešení. Hledaly se vhodné stavební firmy. Pak přišla covidová pandemie a vše zpomalila.</p>
-        <p>Investor však ve svém úsilí nepolevil. Stavební práce postupovaly, byť pomalu. Poté přišlo období kontrol, revizí a schvalování. Nesoulady mezi projektovou dokumentací a požadavky komisařů HZS si vyžádaly opravy a trpělivé čekání.</p>
-        <p>Po celou dobu byl tým zaměstnanců připraven. Pokoje čekaly vystlané. Kuchyně vybavená. Jen kolaudace nepřicházela. Byla to zkouška odhodlání, které nakonec obstálo.</p>
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-year-tag">2016</div>
+          <h3>Vydražená budova, otevřená možnost</h3>
+          <p>Soukromá osoba vydražila nedokončenou obecní budovu v Turovicích u Přerova. Různé možnosti přicházely a odcházely – až do chvíle, kdy zazněl záměr Ziny Filip Dadlíkové.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-spacer"></div>
       </div>
-      <div>
-        <div class="photo-slot landscape">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span class="photo-slot-label">Průběh rekonstrukce nebo stavba interiérů</span>
-          <span class="photo-slot-dim">800 × 600 px</span>
+
+      <div class="tl-item">
+        <div class="tl-spacer"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year-tag">Srpen 2017</div>
+          <h3>Vznik zapsaného ústavu</h3>
+          <p>Investor uvěřil vizi Ziny Filip Dadlíkové. Byl založen <strong>zapsaný ústav Domov Turovice</strong>. Zakladatelkou se stala Michaela Hubačová, dcera investora. Začalo projektování.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- ══ 4. OTEVŘENÍ 2025 ══ -->
-<section id="pribeh" class="story-section" style="background:var(--clr-bg);">
-  <div class="container">
-    <div class="story-grid">
-      <div class="story-text">
-        <span class="section-label">1. 8. 2025</span>
-        <span class="story-year">2025</span>
-        <h2>Přišla první klientka. Domov otevřel brány.</h2>
-        <p>Dne 1. 8. 2025 přijela do Turovic první obyvatelka nového domova. Čekaly na ni vzdušné chodby, výhled do zahrady a jednolůžkový pokoj o velikosti 12,6 m². Polohovatelná postel, uzamykatelná skříň, televize. A hlavně – lidé, kteří na ni celé roky čekali.</p>
-        <p>Domov Turovice poskytuje pobytové sociální služby dle § 49 zákona č. 108/2006 Sb. pro seniory se sníženou soběstačností. Kapacita domova je <strong>104 klientů</strong> ve vzájemně propojených budovách A, B, C.</p>
-        <p>Každý klient má k dispozici byt – dva samostatné pokoje, vlastní sociální zázemí a prostornou předsíň. Některé byty mají lodžii nebo přístup na bezbariérovou terasu. To vše v obci Turovice, v tiché krajině okresu Přerov.</p>
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-year-tag">2018–2020</div>
+          <h3>Projektování a hledání partnerů</h3>
+          <p>Projektanti převáděli odborné vize do konkrétních stavebních řešení. Probíhalo hledání spolehlivých firem. Stavební záměr se pomalu měnil v realizovatelný plán.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-spacer"></div>
       </div>
-      <div>
-        <div class="photo-slot landscape">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span class="photo-slot-label">Otevření / první klientka / interiér pokoje nebo zahrada</span>
-          <span class="photo-slot-dim">800 × 600 px</span>
+
+      <div class="tl-item">
+        <div class="tl-spacer"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year-tag">2020–2022</div>
+          <h3>Pandemie nezastavila stavbu</h3>
+          <p>Přišel covid a hledání firem se zkomplikovalo. Investor však ve svém úsilí nepolevil. Stavba postupovala pomalu, ale jistě.</p>
         </div>
       </div>
+
+      <div class="tl-item">
+        <div class="tl-content">
+          <div class="tl-year-tag">Srpen 2023</div>
+          <h3>Přípravy na registraci sociální služby</h3>
+          <p>Spuštění přijímání zaměstnanců nutných pro registraci dle zákona č. 108/2006 Sb. Tým byl připraven. Přišly ale neshody dokumentace s požadavky HZS a kolaudace se odkládala.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-spacer"></div>
+      </div>
+
+      <div class="tl-item tl-highlight">
+        <div class="tl-spacer"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-year-tag">1. 8. 2025</div>
+          <h3>První klientka přichází domů</h3>
+          <p>Po letech příprav přivítal Domov Turovice svou první klientku. Zvolila si <strong>jednolůžkový pokoj</strong> 12,6 m², čekala ji polohovatelná postel a výhled do zahrady. Domov konečně žil.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -600,22 +632,43 @@ blockquote.reditelka-quote{
         <div class="hodnota-icon">
           <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
-        <h3>Lidskost</h3>
-        <p>Každý klient je pro nás člověk s příběhem, ne číslo v evidenci. Snažíme se poznat jeho zvyky, přání a přinést mu to, co má rád.</p>
-      </div>
-      <div class="hodnota-card">
-        <div class="hodnota-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <h3>Spolehlivost</h3>
-        <p>Rodiny svěřují Domovu Turovice svého nejbližšího. Tuto důvěru bereme vážně. Péče je zajištěna 24 hodin denně, 7 dní v týdnu.</p>
+        <h3>Důstojnost</h3>
+        <p>Každý člověk si zaslouží žít důstojně – bez ohledu na věk, zdravotní stav nebo míru závislosti na péči.</p>
       </div>
       <div class="hodnota-card">
         <div class="hodnota-icon">
           <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
+        <h3>Individualita</h3>
+        <p><strong>Individuální péče o seniory</strong> je naším základem. Plánujeme s ohledem na osobní historii, zvyky a přání každého klienta.</p>
+      </div>
+      <div class="hodnota-card">
+        <div class="hodnota-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Přítomnost</h3>
+        <p>Jsme tu fyzicky i emocionálně. <strong>24hodinová péče o seniory</strong> každý den v roce – i v sobotu, i ve svátek.</p>
+      </div>
+      <div class="hodnota-card">
+        <div class="hodnota-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Domov</h3>
+        <p>Chceme, aby se každý klient cítil doma – ne v instituci. Proto jsou pokoje byty a pravidla psána s ohledem na svobodu člověka.</p>
+      </div>
+      <div class="hodnota-card">
+        <div class="hodnota-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
         <h3>Otevřenost</h3>
-        <p>Rodina je naším partnerem. Vítáme ji kdykoliv, komunikujeme pravidelně a zapojujeme ji do rozhodování o péči o jejich blízkého.</p>
+        <p>Rodina je naším partnerem, ne návštěvníkem. Pravidelně informujeme, jsme dostupní a vítáme zpětnou vazbu.</p>
+      </div>
+      <div class="hodnota-card">
+        <div class="hodnota-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 12l2.5 2.5L16 9"/></svg>
+        </div>
+        <h3>Odbornost</h3>
+        <p>Pracujeme s metodikami <strong>bazální stimulace</strong> a kognitivního tréninku dle <strong>standardů kvality sociálních služeb</strong>.</p>
       </div>
     </div>
   </div>
