@@ -48,6 +48,62 @@ import Layout from '../layouts/Layout.astro';
 
 
 
+/* ── AKT STRIP ── */
+.akt-strip {
+  background: var(--clr-white);
+  padding: 56px 0;
+  border-bottom: 1px solid var(--clr-border);
+  position: relative; overflow: hidden;
+}
+.akt-strip::before {
+  content: ''; position: absolute;
+  top: -60px; right: -60px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: rgba(91,125,91,0.05);
+  pointer-events: none;
+}
+.akt-strip::after {
+  content: ''; position: absolute;
+  bottom: -50px; left: -50px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: rgba(91,125,91,0.035);
+  pointer-events: none;
+}
+.akt-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  position: relative; z-index: 1;
+}
+.akt-strip-item {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 14px; padding: 24px 16px;
+  border-radius: var(--radius-card);
+  transition: box-shadow .25s, transform .25s; cursor: default;
+}
+.akt-strip-item:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+.akt-icon-num {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--clr-green-soft);
+  border: 2px solid rgba(91,125,91,.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--ff-head);
+  font-size: 1.9rem; font-weight: 700;
+  color: var(--clr-green); line-height: 1;
+}
+.akt-icon-num.sm  { font-size: 1.3rem; }
+.akt-icon-num.sym { font-size: 1.7rem; }
+.akt-strip-item .caption {
+  font-size: var(--font-size-base);
+  line-height: 1.55;
+  color: var(--clr-text-muted);
+  font-weight: 600;
+  max-width: 120px;
+}
+@media (max-width: 768px) { .akt-strip-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 400px) { .akt-strip-grid { grid-template-columns: repeat(2, 1fr); } }
+
 /* ── SHARED SECTION LABEL ── */
 .section-label-sm {
   font-family: var(--ff-body);
@@ -435,6 +491,30 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </header>
 
+
+<!-- ══ STRIP ══ -->
+<section class="akt-strip">
+  <div class="container">
+    <div class="akt-strip-grid">
+      <div class="akt-strip-item">
+        <div class="akt-icon-num">7+</div>
+        <span class="caption">aktivizačních programů</span>
+      </div>
+      <div class="akt-strip-item">
+        <div class="akt-icon-num sm">každý<br>den</div>
+        <span class="caption">ergoterapie a pohyb</span>
+      </div>
+      <div class="akt-strip-item">
+        <div class="akt-icon-num sym">🐕</div>
+        <span class="caption">canisterapie s Kirou</span>
+      </div>
+      <div class="akt-strip-item">
+        <div class="akt-icon-num sym">⛪</div>
+        <span class="caption">vlastní kaple v domově</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ══ INTRO ══ -->
 <section class="intro-section">
