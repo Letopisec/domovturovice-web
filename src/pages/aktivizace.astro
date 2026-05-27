@@ -92,8 +92,11 @@ import Layout from '../layouts/Layout.astro';
   font-size: 1.9rem; font-weight: 700;
   color: var(--clr-green); line-height: 1;
 }
-.akt-icon-num.sm  { font-size: 1.3rem; }
-.akt-icon-num.sym { font-size: 1.7rem; }
+.akt-icon-num svg {
+  width: 28px; height: 28px;
+  stroke: var(--clr-green);
+}
+.akt-icon-num.sm  { font-size: 1.1rem; }
 .akt-strip-item .caption {
   font-size: var(--font-size-base);
   line-height: 1.55;
@@ -501,15 +504,19 @@ import Layout from '../layouts/Layout.astro';
         <span class="caption">aktivizačních programů</span>
       </div>
       <div class="akt-strip-item">
-        <div class="akt-icon-num sm">každý<br>den</div>
-        <span class="caption">ergoterapie a pohyb</span>
+        <div class="akt-icon-num">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <span class="caption">denně ergoterapie a pohyb</span>
       </div>
       <div class="akt-strip-item">
-        <div class="akt-icon-num sym">🐕</div>
-        <span class="caption">canisterapie s Kirou</span>
+        <div class="akt-icon-num">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <span class="caption">1× měsíčně canisterapie s Kirou</span>
       </div>
       <div class="akt-strip-item">
-        <div class="akt-icon-num sym">⛪</div>
+        <div class="akt-icon-num sm">kaple</div>
         <span class="caption">vlastní kaple v domově</span>
       </div>
     </div>
