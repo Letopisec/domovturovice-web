@@ -139,6 +139,38 @@ details[open] .faq-q svg{transform:rotate(45deg)}
 @media(max-width:768px){.related-d-section{padding:56px 0}.related-d-section h2{font-size:var(--font-size-h2-mob)}}
 @media(max-width:480px){.related-d-grid{grid-template-columns:1fr}}
 
+
+/* ══ HERO BUTTONS ══ */
+.hero-btn-wrap { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.hero-btn-primary {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: #fff; color: var(--clr-primary);
+  border: 2px solid #fff;
+  font-family: var(--ff-body); font-size: var(--font-size-ui); font-weight: 700;
+  padding: 14px 28px; border-radius: var(--radius-btn);
+  text-decoration: none; transition: background .2s, color .2s, border-color .2s;
+  letter-spacing: 0.01em;
+}
+.hero-btn-primary:hover {
+  background: transparent; color: #fff; border-color: #fff;
+}
+.hero-btn-secondary {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: transparent; color: #fff;
+  border: 2px solid rgba(255,255,255,0.65);
+  font-family: var(--ff-body); font-size: var(--font-size-ui); font-weight: 600;
+  padding: 14px 28px; border-radius: var(--radius-btn);
+  text-decoration: none; transition: background .2s, border-color .2s;
+  letter-spacing: 0.01em;
+}
+.hero-btn-secondary:hover {
+  border-color: #fff; background: rgba(255,255,255,0.12);
+}
+@media(max-width:480px){
+  .hero-btn-wrap { flex-direction: column; }
+  .hero-btn-primary, .hero-btn-secondary { justify-content: center; }
+}
+
 </style>
 
 <!-- Schema.org -->
@@ -195,15 +227,9 @@ details[open] .faq-q svg{transform:rotate(45deg)}
       </div>
       <h1>Žádost o přijetí do Domova Turovice – <em>průvodce krok za krokem</em></h1>
       <p class="hero-perex">Víme, že rozhodnutí není snadné. Proto jsme celý proces rozdělili do pěti kroků. Každý krok zvládnete – a my vám v tom pomůžeme.</p>
-      <div class="hero-actions">
-        <a href="#kroky" class="btn-primary">
-          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-          Zobrazit kroky přijetí
-        </a>
-        <a href="/dokumenty" class="btn-secondary">
-          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Stáhnout formulář
-        </a>
+            <div class="hero-btn-wrap">
+        <a href="#kroky" class="hero-btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg> Zobrazit kroky přijetí</a>
+        <a href="/dokumenty" class="hero-btn-secondary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg> Stáhnout formulář</a>
       </div>
     </div>
   </div>
