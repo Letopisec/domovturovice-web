@@ -1,0 +1,832 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Kariéra – práce v domově pro seniory u Hranic | Domov Turovice"
+  description="Hledáme sestry, pečovatele a sociální pracovníky. Domov seniorů Turovice, okres Přerov. Odborné vedení, nové prostředí, nástup dle dohody."
+>
+
+<style>
+/* ══ HERO ══ */
+.kar-hero {
+  background: linear-gradient(135deg, var(--clr-primary) 0%, #5a2a30 100%);
+  color: #fff;
+  padding: 72px 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+.kar-hero::before {
+  content: '';
+  position: absolute;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  top: -120px; right: -80px;
+  pointer-events: none;
+}
+.kar-hero::after {
+  content: '';
+  position: absolute;
+  width: 260px; height: 260px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  bottom: -80px; left: -60px;
+  pointer-events: none;
+}
+.kar-hero-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+.kar-hero-kicker {
+  display: inline-block;
+  font-family: var(--ff-body);
+  font-size: var(--font-size-label);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.70);
+  margin-bottom: 18px;
+}
+.kar-hero h1 {
+  font-family: var(--ff-head);
+  font-size: clamp(2.1rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.15;
+  margin: 0 0 20px;
+  max-width: 680px;
+}
+.kar-hero h1 em {
+  font-style: italic;
+  color: rgba(255,255,255,0.88);
+}
+.kar-hero-perex {
+  font-family: var(--ff-body);
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.86);
+  max-width: 580px;
+  margin: 0 0 28px;
+}
+.hero-btn-wrap {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.hero-btn-primary {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: #fff; color: var(--clr-primary);
+  border: 2px solid #fff;
+  font-family: var(--ff-body); font-size: var(--font-size-ui); font-weight: 700;
+  padding: 14px 28px; border-radius: var(--radius-btn);
+  text-decoration: none;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.hero-btn-primary:hover { background: transparent; color: #fff; border-color: #fff; }
+.hero-btn-secondary {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: transparent; color: #fff;
+  border: 2px solid rgba(255,255,255,0.65);
+  font-family: var(--ff-body); font-size: var(--font-size-ui); font-weight: 600;
+  padding: 14px 28px; border-radius: var(--radius-btn);
+  text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+.hero-btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.12); }
+@media(max-width:480px){
+  .hero-btn-wrap { flex-direction: column; }
+  .hero-btn-primary, .hero-btn-secondary { justify-content: center; }
+}
+
+/* ══ SEKCE – OBECNÉ ══ */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.section-intro {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 56px;
+}
+.section-intro h2 {
+  font-family: var(--ff-head);
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  color: var(--clr-primary);
+  line-height: 1.20;
+  margin: 0 0 14px;
+}
+.section-label {
+  display: block;
+  font-family: var(--ff-body);
+  font-size: var(--font-size-label);
+  font-weight: 700;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--clr-primary);
+  margin-bottom: 12px;
+  text-align: center;
+}
+.section-intro p {
+  font-family: var(--ff-body);
+  font-size: var(--font-size-perex);
+  color: var(--clr-text-body);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ══ PROČ U NÁS – 3 karty ══ */
+.proc-section {
+  background: var(--clr-bg);
+  padding: 88px 0;
+}
+.proc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.proc-card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border-top: 3px solid var(--clr-primary);
+  padding: 36px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: box-shadow .22s, transform .22s;
+}
+.proc-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+.proc-card-icon {
+  width: 48px; height: 48px;
+  background: var(--clr-primary-soft);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.proc-card-icon svg {
+  width: 24px; height: 24px;
+  stroke: var(--clr-primary);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.proc-card h3 {
+  font-family: var(--ff-head);
+  font-size: var(--font-size-subhead);
+  font-weight: 600;
+  color: var(--clr-text-dark);
+  line-height: 1.30;
+  margin: 0;
+}
+.proc-card p {
+  font-family: var(--ff-body);
+  font-size: var(--font-size-base);
+  color: var(--clr-text-body);
+  line-height: 1.70;
+  margin: 0;
+}
+@media(max-width:1024px){ .proc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:600px){ .proc-grid { grid-template-columns: 1fr; } }
+@media(max-width:768px){ .proc-section { padding: 64px 0; } }
+@media(max-width:480px){ .proc-section { padding: 48px 0; } }
+
+/* ══ CO U NÁS NAJDETE ══ */
+.podminky-section {
+  background: var(--clr-surface);
+  padding: 88px 0;
+}
+.podminky-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.podminky-text h2 {
+  font-family: var(--ff-head);
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  color: var(--clr-primary);
+  line-height: 1.20;
+  margin: 0 0 20px;
+}
+.podminky-text p {
+  font-family: var(--ff-body);
+  font-size: var(--font-size-base);
+  color: var(--clr-text-body);
+  line-height: 1.70;
+  margin: 0 0 16px;
+}
+.podminky-text p:last-child { margin-bottom: 0; }
+.podminky-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.podminky-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: var(--ff-body);
+  font-size: var(--font-size-base);
+  color: var(--clr-text-body);
+  line-height: 1.60;
+}
+.podminky-list li::before {
+  content: '';
+  width: 22px; height: 22px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  background: var(--clr-primary-soft);
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239B4249' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-size: 14px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.podminky-list li strong {
+  color: var(--clr-text-dark);
+  font-weight: 600;
+}
+@media(max-width:1024px){ .podminky-grid { grid-template-columns: 1fr; gap: 40px; } }
+@media(max-width:768px){ .podminky-section { padding: 64px 0; } }
+@media(max-width:480px){ .podminky-section { padding: 48px 0; } }
+
+/* ══ VOLNÉ POZICE ══ */
+.pozice-section {
+  background: var(--clr-bg);
+  padding: 88px 0;
+}
+.pozice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.pozice-card {
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  border-top: 3px solid var(--clr-primary);
+  padding: 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: box-shadow .22s, transform .22s;
+}
+.pozice-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+.pozice-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.pozice-card-icon {
+  width: 44px; height: 44px;
+  background: var(--clr-primary-soft);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.pozice-card-icon svg {
+  width: 22px; height: 22px;
+  stroke: var(--clr-primary);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pozice-card h3 {
+  font-family: var(--ff-head);
+  font-size: var(--font-size-subhead);
+  font-weight: 600;
+  color: var(--clr-text-dark);
+  line-height: 1.25;
+  margin: 0;
+}
+.pozice-card-type {
+  font-family: var(--ff-body);
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--clr-primary);
+  margin-top: 2px;
+}
+.pozice-card p {
+  font-family: var(--ff-body);
+  font-size: var(--font-size-base);
+  color: var(--clr-text-body);
+  line-height: 1.65;
+  margin: 0;
+}
+.pozice-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pozice-tag {
+  font-family: var(--ff-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--clr-primary);
+  background: var(--clr-primary-soft);
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+.pozice-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ff-body);
+  font-size: var(--font-size-caption);
+  font-weight: 700;
+  color: var(--clr-primary);
+  text-decoration: none;
+  margin-top: 4px;
+  transition: gap .18s;
+}
+.pozice-card:hover .pozice-card-cta { gap: 10px; }
+.pozice-card-cta svg {
+  width: 16px; height: 16px;
+  stroke: currentColor; fill: none;
+  stroke-width: 2;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.pozice-note {
+  text-align: center;
+  margin-top: 40px;
+  font-family: var(--ff-body);
+  font-size: var(--font-size-base);
+  color: var(--clr-text-muted);
+  line-height: 1.60;
+}
+.pozice-note a {
+  color: var(--clr-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.pozice-note a:hover { text-decoration: underline; }
+@media(max-width:768px){ .pozice-grid { grid-template-columns: 1fr; } .pozice-section { padding: 64px 0; } }
+@media(max-width:480px){ .pozice-section { padding: 48px 0; } }
+
+/* ══ CTA SEKCE ══ */
+.cta-section {
+  background: #EDE8E3;
+  padding: 88px 0;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  width: 360px; height: 360px;
+  border-radius: 50%;
+  background: rgba(155,66,73,0.08);
+  top: -100px; right: -60px;
+  pointer-events: none;
+}
+.cta-section::after {
+  content: '';
+  position: absolute;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: rgba(155,66,73,0.05);
+  bottom: -60px; left: -40px;
+  pointer-events: none;
+}
+.cta-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.cta-inner h2 {
+  font-family: var(--ff-head);
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  color: var(--clr-primary);
+  line-height: 1.20;
+  margin: 0 0 16px;
+}
+.cta-inner p {
+  font-family: var(--ff-body);
+  font-size: var(--font-size-base);
+  color: var(--clr-text-body);
+  line-height: 1.70;
+  margin: 0 0 32px;
+}
+.cta-inner p a {
+  color: var(--clr-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.cta-inner p a:hover { text-decoration: underline; }
+.cta-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-cta-main {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--clr-primary); color: #fff;
+  border: 2px solid var(--clr-primary);
+  font-family: var(--ff-body); font-size: var(--font-size-ui); font-weight: 700;
+  padding: 15px 32px; border-radius: var(--radius-btn);
+  text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+.btn-cta-main:hover { background: var(--clr-primary-hover); border-color: var(--clr-primary-hover); }
+.btn-cta-sec {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--clr-primary);
+  border: 2px solid var(--clr-primary);
+  font-family: var(--ff-body); font-size: var(--font-size-ui); font-weight: 600;
+  padding: 15px 32px; border-radius: var(--radius-btn);
+  text-decoration: none;
+  transition: background .2s;
+}
+.btn-cta-sec:hover { background: var(--clr-primary-soft); }
+@media(max-width:768px){ .cta-section { padding: 64px 0; } .cta-inner h2 { font-size: var(--font-size-h2-mob); } }
+@media(max-width:480px){ .cta-section { padding: 48px 0; } .cta-btns { flex-direction: column; } .btn-cta-main, .btn-cta-sec { justify-content: center; } }
+
+/* ══ RELATED KARTY ══ */
+.related-d-section { background: var(--clr-surface); padding: 72px 0; }
+.related-d-section h2 { font-family: var(--ff-head); font-size: var(--font-size-h2); font-weight: 700; color: var(--clr-primary); margin: 0 0 8px; text-align: center; }
+.related-d-label { font-family: var(--ff-body); font-size: var(--font-size-label); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--clr-primary); display: block; margin-bottom: 12px; text-align: center; }
+.related-d-intro { font-family: var(--ff-body); font-size: var(--font-size-base); color: var(--clr-text-muted); text-align: center; margin: 0 0 0; }
+.related-d-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-top: 36px; }
+.related-d-card { background: #fff; border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: 28px 24px; text-decoration: none; display: flex; flex-direction: column; gap: 12px; border-top: 3px solid var(--clr-border); transition: box-shadow .22s, transform .22s, border-top-color .22s; color: inherit; }
+.related-d-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); border-top-color: var(--clr-primary); }
+.related-d-card-label { font-family: var(--ff-body); font-size: var(--font-size-label); font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--clr-text-muted); }
+.related-d-card-title { font-family: var(--ff-head); font-size: var(--font-size-subhead); font-weight: 600; color: var(--clr-text-dark); line-height: 1.35; }
+.related-d-card-desc { font-family: var(--ff-body); font-size: var(--font-size-base); color: var(--clr-text-muted); line-height: 1.55; flex: 1; }
+.related-d-card-arrow { display: flex; align-items: center; gap: 6px; font-family: var(--ff-body); font-size: var(--font-size-caption); font-weight: 600; color: var(--clr-primary); margin-top: 4px; transition: gap .18s; }
+.related-d-card:hover .related-d-card-arrow { gap: 10px; }
+.related-d-card-arrow svg { width: 16px; height: 16px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media(max-width:1024px){ .related-d-grid { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:768px){ .related-d-section { padding: 56px 0; } .related-d-section h2 { font-size: var(--font-size-h2-mob); } }
+@media(max-width:480px){ .related-d-grid { grid-template-columns: 1fr; } }
+</style>
+
+<!-- ══ HERO ══ -->
+<section class="kar-hero">
+  <div class="kar-hero-inner">
+    <span class="kar-hero-kicker">Kariéra v Domově Turovice</span>
+    <h1>Práce v domově pro seniory u Hranic, <em>která dává smysl</em></h1>
+    <p class="kar-hero-perex">
+      Hledáme zdravotní sestry, pečovatele, sociální pracovníky a provozní personál.
+      Domov seniorů Turovice, okres Přerov – nové zařízení s odborným vedením
+      a zázemím, které vám umožní odvádět skutečně dobrou práci.
+    </p>
+    <div class="hero-btn-wrap">
+      <a href="#pozice" class="hero-btn-primary">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+        </svg>
+        Zobrazit volné pozice
+      </a>
+      <a href="/kontakt" class="hero-btn-secondary">
+        Napsat nám
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROČ U NÁS ══ -->
+<section class="proc-section">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">Proč pracovat u nás</span>
+      <h2>Prostředí, ve kterém má péče smysl</h2>
+      <p>
+        Práce v sociálních službách je náročná. Záleží nám na tom, abyste
+        ji vykonávali s dobrým zázemím, v týmu, kde se na někoho obrátit,
+        a pod vedením, které problematice skutečně rozumí.
+      </p>
+    </div>
+    <div class="proc-grid">
+      <div class="proc-card">
+        <div class="proc-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3>Odborné vedení s 22 lety praxe</h3>
+        <p>
+          Ředitelka Mgr. Zina Filip Dadlíková, DiS., pracuje v přímé péči přes
+          dvě dekády. Je certifikovanou trenérkou paměti II. stupně a specialistkou
+          na bazální stimulaci. Standardy kvality v sociálních službách jsou pro ni
+          každodenní praxí, ne papírem v šanonu.
+        </p>
+      </div>
+      <div class="proc-card">
+        <div class="proc-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Nové zařízení, příjemné prostředí</h3>
+        <p>
+          Domov byl otevřen v srpnu 2025. Tři propojené budovy A, B, C s výtahy,
+          signalizací pacient–sestra, vlastní prádelnou a zázemím pro personál.
+          K tomu zimní zahrada, terasy a venkovní areál s jezírkem, kde si klienti
+          i zaměstnanci oddechnou.
+        </p>
+      </div>
+      <div class="proc-card">
+        <div class="proc-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Zázemí a odborná spolupráce</h3>
+        <p>
+          Domov Turovice spolupracuje s nemocnicí v Hranicích – klienti mají
+          zajištěné přednostní ošetření u specialistů a sanitní převoz.
+          Pravidelně dochází smluvní lékař, nutriční terapeutka a lékárna
+          ze sousedních Hranic dodává léky přímo do domova.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CO U NÁS NAJDETE ══ -->
+<section class="podminky-section">
+  <div class="container">
+    <div class="podminky-grid">
+      <div class="podminky-text">
+        <h2>Co u nás jako zaměstnanec najdete</h2>
+        <p>
+          Domov seniorů Přerov–Turovice je strukturované pracoviště
+          s jasně rozdělými rolemi a procesy. Nebudete tápat v tom,
+          na koho se obrátit – vedení, vrchní sestra, sociální pracovnice
+          i technickohospodářský útvar mají svá pevná místa přímo v budově.
+        </p>
+        <p>
+          Kapacita 104 klientů ve třech budovách znamená přiměřené
+          pracovní zatížení s funkčním zázemím: signalizace na každé
+          toaletě, hygienicky prostupná prádelna, plně vybavená
+          kuchyně a dostatek prostoru i pro personál.
+        </p>
+      </div>
+      <ul class="podminky-list">
+        <li><span><strong>Nástup dle dohody</strong> – přizpůsobíme se vašim možnostem</span></li>
+        <li><span><strong>Zaškolení</strong> – metodické vedení od zkušeného týmu</span></li>
+        <li><span><strong>Přímé vedení na místě</strong> – ředitelka, vrchní sestra i sociální pracovnice jsou fyzicky přítomny v budově C</span></li>
+        <li><span><strong>Moderní signalizace</strong> pacient–sestra na pokojích i toaletách</span></li>
+        <li><span><strong>Prádelna</strong> s hygienicky prostupnou pračkou, sušičkou a mandlem</span></li>
+        <li><span><strong>Zázemí</strong> – odpočinková místa, zimní zahrada, terasy přístupné i personálu</span></li>
+        <li><span><strong>Spolupráce s nemocnicí Hranice</strong> – odborná podpora při komplikovaných stavech klientů</span></li>
+        <li><span><strong>Smysluplná práce</strong> v domově, kde péče o klienty není heslo, ale každodenní praxe</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ VOLNÉ POZICE ══ -->
+<section class="pozice-section" id="pozice">
+  <div class="container">
+    <div class="section-intro">
+      <span class="section-label">Volná místa</span>
+      <h2>Aktuálně hledáme</h2>
+      <p>
+        Pokud vás zaujala pozice, která tu přímo není, napište nám –
+        rádi se domluvíme. Domov seniorů Turovice tým průběžně buduje.
+      </p>
+    </div>
+    <div class="pozice-grid">
+
+      <!-- Zdravotní sestra -->
+      <div class="pozice-card">
+        <div class="pozice-card-head">
+          <div class="pozice-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div>
+            <div class="pozice-card-type">Zdravotnický personál</div>
+            <h3>Zdravotní sestra / zdravotnický asistent</h3>
+          </div>
+        </div>
+        <p>
+          Práce jako zdravotní sestra v domově pro seniory – 24hodinová
+          ošetřovatelská péče o klienty se sníženou soběstačností.
+          Spolupráce s lékařem, nutriční terapeutkou a externími
+          odborníky z hranické nemocnice.
+        </p>
+        <div class="pozice-tags">
+          <span class="pozice-tag">Plný úvazek</span>
+          <span class="pozice-tag">Nástup dle dohody</span>
+          <span class="pozice-tag">Turovice, okr. Přerov</span>
+        </div>
+        <a href="/kontakt" class="pozice-card-cta">
+          Mám zájem
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Pečovatel -->
+      <div class="pozice-card">
+        <div class="pozice-card-head">
+          <div class="pozice-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div>
+            <div class="pozice-card-type">Přímá péče</div>
+            <h3>Pečovatel / pracovník přímé péče</h3>
+          </div>
+        </div>
+        <p>
+          Každodenní podpora klientů v osobní hygieně, pohybu a
+          aktivitách. Jak pracovat v domově seniorů jako pečovatel –
+          zaškolíme vás, podmínkou je empatie a spolehlivost,
+          ne nutně předchozí praxe.
+        </p>
+        <div class="pozice-tags">
+          <span class="pozice-tag">Plný i částečný úvazek</span>
+          <span class="pozice-tag">Nástup dle dohody</span>
+          <span class="pozice-tag">Turovice, okr. Přerov</span>
+        </div>
+        <a href="/kontakt" class="pozice-card-cta">
+          Mám zájem
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Sociální pracovník -->
+      <div class="pozice-card">
+        <div class="pozice-card-head">
+          <div class="pozice-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <div class="pozice-card-type">Sociální služby</div>
+            <h3>Sociální pracovnice / sociální pracovník</h3>
+          </div>
+        </div>
+        <p>
+          Individuální plánování péče, spolupráce s rodinami klientů,
+          administrativa sociální služby dle zákona č. 108/2006 Sb.
+          Volná pracovní pozice sociálního pracovníka v domově
+          pro seniory, okres Přerov.
+        </p>
+        <div class="pozice-tags">
+          <span class="pozice-tag">Plný úvazek</span>
+          <span class="pozice-tag">VŠ vzdělání výhodou</span>
+          <span class="pozice-tag">Turovice, okr. Přerov</span>
+        </div>
+        <a href="/kontakt" class="pozice-card-cta">
+          Mám zájem
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Provoz a kuchyně -->
+      <div class="pozice-card">
+        <div class="pozice-card-head">
+          <div class="pozice-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
+          </div>
+          <div>
+            <div class="pozice-card-type">Provoz a kuchyně</div>
+            <h3>Kuchař / provozní a kuchyňský personál</h3>
+          </div>
+        </div>
+        <p>
+          Příprava pěti jídel denně pro až 104 klientů ve vlastní
+          kuchyni domova. Vaříme z čerstvých surovin – v létě
+          i z vlastní zeleniny ze skleníku. Hledáme spolehlivého
+          kuchaře nebo pomocnou sílu do kuchyně.
+        </p>
+        <div class="pozice-tags">
+          <span class="pozice-tag">Plný i částečný úvazek</span>
+          <span class="pozice-tag">Nástup dle dohody</span>
+          <span class="pozice-tag">Turovice, okr. Přerov</span>
+        </div>
+        <a href="/kontakt" class="pozice-card-cta">
+          Mám zájem
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+    <p class="pozice-note">
+      Hledáte jinou pozici nebo chcete zaslat životopis do budoucna?
+      <a href="/kontakt">Napište nám</a> – budeme rádi.
+    </p>
+  </div>
+</section>
+
+<!-- ══ CTA SEKCE ══ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <span class="section-label">Stabilní zaměstnavatel</span>
+      <h2>Zařízení s jistou budoucností</h2>
+      <p>
+        Domov Turovice je registrovaným poskytovatelem sociálních služeb
+        s kapacitou 104 klientů. Provoz je financován z úhrad klientů,
+        <a href="/aktuality/jak-ziskat-prispevek-na-peci-2026">příspěvku na péči</a>
+        a dotací – vícezdrojové financování, které zajišťuje stabilitu zařízení
+        i pracovních míst. Pokud vás zajímá, jak funguje ekonomika sociálních služeb
+        nebo jak příspěvek na péči ovlivňuje provoz domova, podíváme se
+        na to spolu při pohovoru.
+      </p>
+      <div class="cta-btns">
+        <a href="/kontakt" class="btn-cta-main">Kontaktujte nás</a>
+        <a href="/cenik" class="btn-cta-sec">Ceník a příspěvek na péči</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RELATED KARTY ══ -->
+<section class="related-d-section" aria-label="Co si přečíst dál">
+  <div class="container">
+    <span class="related-d-label">Prozkoumejte dál</span>
+    <h2>Další informace o Domově Turovice</h2>
+    <div class="related-d-grid">
+
+      <a href="/reditelka" class="related-d-card">
+        <span class="related-d-card-label">Vedení</span>
+        <span class="related-d-card-title">Ředitelka Mgr. Zina Filip Dadlíková, DiS.</span>
+        <span class="related-d-card-desc">22 let praxe v přímé péči, certifikovaný trenér paměti II. stupně. Poznejte vedení domova pro seniory.</span>
+        <span class="related-d-card-arrow">Číst více
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="/jak-pecujeme" class="related-d-card">
+        <span class="related-d-card-label">Péče</span>
+        <span class="related-d-card-title">Jak pečujeme o klienty</span>
+        <span class="related-d-card-desc">Ošetřovatelská péče 24 hodin denně, individuální plánování a aktivizační programy v domově seniorů Turovice.</span>
+        <span class="related-d-card-arrow">Číst více
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="/nas-tym" class="related-d-card">
+        <span class="related-d-card-label">Tým</span>
+        <span class="related-d-card-title">Lidé, kteří o vás pečují</span>
+        <span class="related-d-card-desc">Sestry, pečovatelé, sociální pracovnice – poznejte tým domova pro seniory, do kterého byste mohli patřit.</span>
+        <span class="related-d-card-arrow">Číst více
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a href="/kontakt" class="related-d-card">
+        <span class="related-d-card-label">Kontakt</span>
+        <span class="related-d-card-title">Napište nebo zavolejte</span>
+        <span class="related-d-card-desc">Domov Turovice, Turovice 104, okres Přerov. Zavolejte nebo pošlete životopis – odpovíme do 48 hodin.</span>
+        <span class="related-d-card-arrow">Kontaktovat nás
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SCHEMA.ORG ══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://domovturovice.cz/kariera",
+  "url": "https://domovturovice.cz/kariera",
+  "name": "Kariéra – práce v domově pro seniory u Hranic | Domov Turovice",
+  "description": "Volná pracovní místa v Domově Turovice – zdravotní sestry, pečovatelé, sociální pracovníci a provozní personál. Domov seniorů Turovice, okres Přerov.",
+  "inLanguage": "cs",
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": "https://domovturovice.cz"
+  },
+  "about": {
+    "@type": "Organization",
+    "@id": "https://domovturovice.cz/#organization"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Domov Turovice",
+        "item": "https://domovturovice.cz"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Kariéra",
+        "item": "https://domovturovice.cz/kariera"
+      }
+    ]
+  }
+}
+</script>
+
+</Layout>
