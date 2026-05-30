@@ -136,8 +136,17 @@ import Layout from '../layouts/Layout.astro';
   .stat-item:nth-child(3),.stat-item:last-child{border-bottom:none;padding-top:24px;}
 }
 
+/* ══ INTRO SEKCE ══ */
+.intro-section{
+  padding:72px 0;
+  background:var(--clr-surface);
+  border-bottom:1px solid var(--clr-border);
+}
+@media(max-width:768px){.intro-section{padding:52px 0;}}
+
 /* ══ POKOJE SEKCE ══ */
-.rooms-section{padding:88px 0;}
+.rooms-section{padding:88px 0;background:var(--clr-bg);}
+@media(max-width:768px){.rooms-section{padding:56px 0;}}
 .rooms-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -419,7 +428,7 @@ import Layout from '../layouts/Layout.astro';
 </div>
 
 <!-- ══ INTRO ══ -->
-<section style="padding:72px 0;background:var(--clr-bg);">
+<section class="intro-section">
   <div class="container">
     <div class="section-intro">
       <span class="section-label">Kde budete bydlet</span>
