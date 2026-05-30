@@ -72,6 +72,7 @@ import Layout from '../layouts/Layout.astro';
 }
 .hero-cta:hover{background:rgba(255,255,255,0.25);}
 
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;}
 /* ══ OBECNÉ ══ */
 .section-label{
   font-family:var(--font-body);
@@ -377,18 +378,24 @@ import Layout from '../layouts/Layout.astro';
       <h1>Prostory Domova Turovice –<br><em>byty, terasy a zahrada</em></h1>
       <p class="hero-perex">
         Bezbariérové byty s vlastním sociálním zázemím, terasy s výhledem do krajiny, zimní zahrada a jezírko s rybami.
-        Tohle je místo, kde se dá opravdu bydlet – <a href="/prijeti" class="hero-cta" style="display:inline;background:none;border:none;padding:0;font-size:inherit;font-weight:700;color:rgba(255,255,255,0.90);text-decoration:underline;">požádejte o přijetí</a> a přijeďte se podívat.
+        Přijeďte se podívat, nebo rovnou požádejte o přijetí, pokud už nás znáte.
       </p>
-      <a href="/kontakt" class="hero-cta">
-        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z"/></svg>
-        Domluvit prohlídku
-      </a>
+      <div class="hero-btns">
+        <a href="#prostory-obsah" class="hero-cta">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+          Více informací
+        </a>
+        <a href="/kontakt" class="hero-cta">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z"/></svg>
+          Domluvit prohlídku
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ══ STAT STRIP ══ -->
-<div class="stat-strip">
+<div class="stat-strip" id="prostory-obsah">
   <div class="container">
     <div class="stat-strip-grid">
       <div class="stat-item">
@@ -418,7 +425,7 @@ import Layout from '../layouts/Layout.astro';
       <span class="section-label">Kde budete bydlet</span>
       <h2>Domov postavený tak, aby se v něm žilo</h2>
       <p>
-        Budovy A, B a C jsou vzájemně propojeny chodbami ve všech patrech. Klienti se mohou pohybovat po celém areálu bez bariér – chodí po širokých chodbách, jezdí výtahem nebo si vyjdou na terasu. Každý byt má vlastní předsíň, sociální zázemí a skříně. Pokoje jsou v prvním, druhém i třetím nadpodlaží.
+        Všechny tři budovy jsou vzájemně propojeny chodbami ve všech patrech. Klienti se mohou pohybovat po celém areálu bez bariér – chodí po širokých chodbách, jezdí výtahem nebo si vyjdou na terasu. Každý byt má vlastní předsíň, sociální zázemí a skříně. Pokoje jsou v prvním, druhém i třetím nadpodlaží.
       </p>
     </div>
   </div>
@@ -432,7 +439,7 @@ import Layout from '../layouts/Layout.astro';
       <h2 id="rooms-h2">Jednolůžkové i dvoulůžkové pokoje s vlastním zázemím</h2>
       <p>
         Každý pokoj je součástí bytu. To znamená, že ke svému pokoji máte předsíň se skříněmi a vlastní koupelnu s WC. Nejste odkázáni na sdílené prostory na chodbě.
-        Vybavení je nové – <a href="/cenik" style="color:var(--clr-primary);font-weight:600;">elektricky polohovatelná postel</a>, noční stolek, stůl se dvěma židlemi a barevná televize jsou součástí standardu.
+        Vybavení je nové – elektricky polohovatelná postel, noční stolek, stůl se dvěma židlemi a barevná televize jsou součástí standardu.
       </p>
     </div>
     <div class="rooms-grid">
@@ -627,7 +634,7 @@ import Layout from '../layouts/Layout.astro';
     <span class="section-label">Chcete se přijít podívat?</span>
     <h2>Prohlídka domova vás nic nestojí</h2>
     <p>
-      Přijďte se podívat – ukážeme vám pokoje, zahradu i zázemí. Promluvte si s ředitelkou nebo sociální pracovnicí. A pokud jste připraveni podat žádost, poradíme vám, jak využít <strong>příspěvek na péči</strong>.
+      Přijďte se podívat – ukážeme vám pokoje, zahradu i zázemí. Promluvte si s ředitelkou nebo sociální pracovnicí. A pokud jste připraveni podat žádost, poradíme vám, jak <a href="/aktuality/jak-ziskat-prispevek-na-peci-2026" style="color:var(--clr-primary);font-weight:600;">využít příspěvek na péči</a>.
     </p>
     <div class="cta-btns">
       <a href="/prijeti" class="btn-primary">Podat žádost o přijetí</a>
