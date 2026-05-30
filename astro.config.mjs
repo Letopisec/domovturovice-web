@@ -1,3 +1,4 @@
+// build: 20260531
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
