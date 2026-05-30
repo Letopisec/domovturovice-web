@@ -45,7 +45,7 @@ section { padding: 80px 0; }
 
 /* ── HERO ── */
 .pr-hero {
-  background: linear-gradient(135deg, var(--clr-primary) 0%, #5a2a30 100%);
+  background: linear-gradient(135deg, var(--clr-primary) 0%, #7a3238 100%);
   color: #fff;
   padding: 80px 0 64px;
   position: relative;
@@ -127,39 +127,58 @@ section { padding: 80px 0; }
 /* ── STAT STRIP ── */
 .pr-strip {
   background: var(--clr-white);
-  padding: 52px 0;
+  padding: 56px 0;
   border-bottom: 1px solid var(--clr-border);
+  position: relative; overflow: hidden;
+}
+.pr-strip::before {
+  content: ''; position: absolute;
+  top: -60px; right: -60px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: rgba(90,155,181,0.05);
+  pointer-events: none;
+}
+.pr-strip::after {
+  content: ''; position: absolute;
+  bottom: -50px; left: -50px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: rgba(90,155,181,0.035);
+  pointer-events: none;
 }
 .pr-strip-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  text-align: center;
+  gap: 16px;
+  position: relative; z-index: 1;
 }
 .pr-strip-item {
-  padding: 0 32px;
-  border-right: 1px solid var(--clr-border);
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 14px; padding: 24px 20px;
+  border-radius: var(--radius-card);
+  transition: box-shadow .25s, transform .25s; cursor: default;
 }
-.pr-strip-item:last-child { border-right: none; }
-.pr-strip-num {
+.pr-strip-item:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+.pr-strip-icon-num {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--clr-blue-soft);
+  border: 2px solid rgba(90,155,181,.20);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
   font-family: var(--ff-head);
-  font-size: 2.6rem;
-  font-weight: 700;
-  color: var(--clr-blue);
-  line-height: 1.0;
-  display: block;
-  margin-bottom: 8px;
+  font-size: 1.7rem; font-weight: 700;
+  color: var(--clr-blue); line-height: 1;
 }
+.pr-strip-icon-num.sm { font-size: 1.3rem; }
 .pr-strip-text {
   font-family: var(--ff-body);
   font-size: var(--font-size-base);
+  font-weight: 600;
   color: var(--clr-text-muted);
-  line-height: 1.45;
+  line-height: 1.55;
+  max-width: 140px;
 }
 @media(max-width: 768px) {
-  .pr-strip-grid { grid-template-columns: 1fr; gap: 32px; }
-  .pr-strip-item { border-right: none; border-bottom: 1px solid var(--clr-border); padding-bottom: 32px; }
-  .pr-strip-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .pr-strip-grid { grid-template-columns: 1fr; gap: 8px; }
 }
 
 /* ── KOMUNIKACE KARTY ── */
