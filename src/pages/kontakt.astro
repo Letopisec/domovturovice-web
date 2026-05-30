@@ -27,6 +27,7 @@ import Layout from '../layouts/Layout.astro';
 }
 .page-hero-inner { position: relative; z-index: 2; max-width: 640px; }
 .section-label {
+  text-align: center;
   display: block;
   font-size: var(--font-size-label);
   font-weight: 700;
@@ -274,7 +275,8 @@ textarea { min-height: 130px; resize: vertical; }
   margin: 0 auto;
   color: var(--clr-primary);
 }
-.cta-inner .section-label { color: var(--clr-primary); display: block; margin-bottom: 14px; }
+.cta-inner .section-label {
+  text-align: center; color: var(--clr-primary); display: block; margin-bottom: 14px; }
 .cta-inner h2 {
   font-family: var(--ff-head);
   font-size: clamp(1.7rem, 3.5vw, 2.3rem);
@@ -311,6 +313,15 @@ textarea { min-height: 130px; resize: vertical; }
   .section-white { padding: 48px 0; }
   .map-wrapper { height: 280px; }
 }
+
+/* ══ SECTION HEADING ══ */
+.section-heading {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 40px;
+}
+.section-heading h2 { margin-bottom: 12px; }
+
 </style>
 
 <!-- PAGE HERO -->
@@ -473,7 +484,8 @@ textarea { min-height: 130px; resize: vertical; }
 <!-- JAK SE K NÁM DOSTAT -->
 <section class="directions-section">
   <div class="container">
-    <span class="section-label" style="color:var(--clr-primary)">Dostupnost</span>
+    <div class="section-heading">
+        <span class="section-label" style="color:var(--clr-primary)">Dostupnost</span>
     <h2>Jak se k nám dostat</h2>
     <p class="section-intro-lg">Domov Turovice se nachází v obci Turovice, přibližně 6 km od Lipníku nad Bečvou a 10 km od Hranic na Moravě.</p>
     <div class="directions-grid">
@@ -506,7 +518,8 @@ textarea { min-height: 130px; resize: vertical; }
 <section class="cta-section has-circles">
   <div class="container">
     <div class="cta-inner">
-      <span class="section-label">Jsme tu pro vás</span>
+      <div class="section-heading">
+        <span class="section-label">Jsme tu pro vás</span>
       <h2>Chcete se přijít podívat?</h2>
       <p>Rádi vás přivítáme na osobní prohlídce. Zavolejte nebo napište — domluvíme termín, který vám vyhovuje.</p>
       <div class="cta-btns">

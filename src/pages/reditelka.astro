@@ -9,6 +9,7 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
 .section-label {
+  text-align: center;
   display: block;
   font-size: var(--font-size-label);
   font-weight: 700;
@@ -18,6 +19,9 @@ import Layout from '../layouts/Layout.astro';
   margin-bottom: 14px;
 }
 .section-intro {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--clr-text);
@@ -324,7 +328,8 @@ blockquote {
   margin: 0 auto;
   color: var(--clr-primary);
 }
-.cta-inner .section-label { color: var(--clr-primary); }
+.cta-inner .section-label {
+  text-align: center; color: var(--clr-primary); }
 .cta-inner h2 {
   font-family: var(--ff-head);
   font-size: clamp(1.7rem, 3.5vw, 2.3rem);
