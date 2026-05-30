@@ -72,6 +72,7 @@ import Layout from '../layouts/Layout.astro';
   transition:background .2s;
 }
 .hero-cta:hover{background:rgba(255,255,255,0.25);}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;}
 
 /* ══ STORY SECTIONS ══ */
 .story-section{padding:88px 0;}
@@ -620,10 +621,16 @@ blockquote.reditelka-quote{
       <span class="page-hero-kicker">O nás</span>
       <h1>Příběh, který začal snem<br><em>o důstojném domově</em></h1>
       <p class="hero-perex">Domov Turovice je registrovaný domov pro seniory v Olomouckém kraji. Vznikl z prázdné budovy – přes covidovou pandemii – až po otevření v srpnu 2025. Za každým rozhodnutím stojí jeden člověk a 22 let praxe v péči o seniory.</p>
-      <a href="#pribeh" class="hero-cta">
-        Číst příběh
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
-      </a>
+      <div class="hero-btns">
+        <a href="#pribeh" class="hero-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          Číst příběh
+        </a>
+        <a href="/kontakt" class="hero-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z"/></svg>
+          Domluvit prohlídku
+        </a>
+      </div>
     </div>
   </div>
 </section>

@@ -123,6 +123,7 @@ import Layout from '../layouts/Layout.astro';
 .btn-primary:hover { background: #7a3238; border-color: #7a3238; }
 .btn-secondary { background: #fff; color: var(--clr-primary); border: 2px solid var(--clr-primary); }
 .btn-secondary:hover { background: var(--clr-primary); color: #fff; }
+.director-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
 
 /* ── STATS STRIP ── */
 .stats-strip { background: var(--clr-primary); padding: 40px 0; }
@@ -427,7 +428,16 @@ blockquote {
             </div>
           </div>
           <div class="director-cta-row">
-            <a href="mailto:reditelka@domovturovice.cz" class="btn btn-primary">Napište ředitelce</a>
+            <div class="director-hero-btns">
+              <a href="#reditelka-profil" class="btn btn-primary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                Číst více
+              </a>
+              <a href="/kontakt" class="btn btn-secondary">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z"/></svg>
+                Kontaktovat ředitelku
+              </a>
+            </div>
             <a href="/kontakt" class="btn btn-secondary">Kontakt a prohlídka</a>
           </div>
         </div>
@@ -461,7 +471,7 @@ blockquote {
   </div>
 
   <!-- PROFIL -->
-  <section class="profile-section">
+  <section class="profile-section" id="reditelka-profil">
     <div class="container">
       <span class="section-label">Odborný profil</span>
       <h2>Zkušenost, která přináší klid vám i vašemu blízkému</h2>

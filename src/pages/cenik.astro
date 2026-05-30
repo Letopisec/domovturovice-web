@@ -144,6 +144,7 @@ import Layout from '../layouts/Layout.astro';
   text-align: center;
 }
 
+.cenik-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
 </style>
 
 <!-- PAGE HERO -->
@@ -153,13 +154,23 @@ import Layout from '../layouts/Layout.astro';
       <span class="page-hero-kicker">Přijetí do domova</span>
       <h1>Ceník Domova Turovice</h1>
       <p class="perex">Přehledné ceny za ubytování, stravu a fakultativní služby. Zjistěte, jak funguje <strong>příspěvek na péči</strong> a kolik ve skutečnosti stojí pobyt v domově pro seniory.</p>
+      <div class="cenik-hero-btns">
+        <a href="#cenik-obsah" class="btn-primary-local">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          Zobrazit ceník
+        </a>
+        <a href="/prijeti" class="btn-outline-local">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+          Podat žádost
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- UBYTOVÁNÍ -->
 <section class="section">
-  <div class="container">
+  <div class="container" id="cenik-obsah">
     <span class="section-label">Ubytování</span>
     <h2 class="section-h2">Denní sazby za ubytování</h2>
     <p class="section-lead">Cena zahrnuje plně vybavený pokoj s vlastním sociálním zázemím, úklid, praní prádla a 24hodinovou dostupnost personálu.</p>

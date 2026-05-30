@@ -371,6 +371,23 @@ section, .family-block, .cta-section { padding: 72px 0; }
 @media(max-width:768px){.related-d-section{padding:56px 0}.related-d-section h2{font-size:var(--font-size-h2-mob)}}
 @media(max-width:480px){.related-d-grid{grid-template-columns:1fr}}
 
+
+.jak-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.jak-hero-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #fff; color: var(--clr-primary);
+  border: 2px solid #fff;
+  font-family: var(--ff-body); font-size: var(--font-size-ui); font-weight: 600;
+  padding: 11px 22px; border-radius: var(--radius-btn);
+  text-decoration: none; transition: all .2s;
+}
+.jak-hero-btn:hover { background: transparent; color: #fff; }
+.jak-hero-btn--sec {
+  background: transparent; color: #fff;
+  border: 2px solid rgba(255,255,255,.6);
+}
+.jak-hero-btn--sec:hover { border-color: #fff; background: rgba(255,255,255,.12); }
+
 </style>
 
 <!-- HERO -->
@@ -380,12 +397,22 @@ section, .family-block, .cta-section { padding: 72px 0; }
       <span class="section-label-sm">Co u nás zahrnuje péče</span>
       <h1>Jak pečujeme o naše klienty</h1>
       <p class="jak-hero-perex">Nabídka péče vychází z toho, co klient skutečně potřebuje. Každý klient má svůj individuální plán péče, který tým pravidelně přehodnocuje.</p>
+      <div class="jak-hero-btns">
+        <a href="#pece-obsah" class="jak-hero-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          Jak pečujeme
+        </a>
+        <a href="/prijeti" class="jak-hero-btn jak-hero-btn--sec">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
+          Podmínky přijetí
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CARE GRID -->
-<section class="care-grid-section">
+<section class="care-grid-section" id="pece-obsah">
   <div class="container">
     <div class="section-heading">
   <span class="section-label-sm">Komplexní péče pod jednou střechou</span>
