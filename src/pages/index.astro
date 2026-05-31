@@ -410,6 +410,8 @@ import Layout from '../layouts/Layout.astro';
       for (let i = 0; i <= maxSlide(); i++) {
         const dot = document.createElement('button');
         dot.className = 'blog-dot' + (i === current ? ' active' : '');
+        dot.setAttribute('aria-label', `Přejít na článek ${i + 1}`);
+        dot.setAttribute('aria-current', i === current ? 'true' : 'false');
         dot.addEventListener('click', () => goTo(i));
         dotsContainer.appendChild(dot);
       }
@@ -421,6 +423,7 @@ import Layout from '../layouts/Layout.astro';
       track.style.transform = `translateX(-${current * cardWidth}px)`;
       dotsContainer.querySelectorAll('.blog-dot').forEach((d, i) => {
         d.classList.toggle('active', i === current);
+        d.setAttribute('aria-current', i === current ? 'true' : 'false');
       });
     }
 
