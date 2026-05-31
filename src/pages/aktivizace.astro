@@ -576,7 +576,7 @@ import Layout from '../layouts/Layout.astro';
         <span class="section-label-sm">Proč nám na aktivizaci záleží</span>
         <h2>Aktivní den je dobrý den</h2>
         <p>Aktivizace není jen vyplnění volného času. Je to způsob, jak udržovat mozek čilý, ruce v pohybu a srdce otevřené. U seniorů se sníženou soběstačností má pravidelná stimulace přímý dopad na kvalitu života, náladu i zdravotní stav.</p>
-        <p>V Domově Turovice nabízíme pestrý program každý všední den. Nezáleží na tom, jak je klient pohyblivý – máme aktivity pro skupiny i pro ty, kdo tráví den na pokoji.</p>
+        <p>V Domově Turovice nabízíme pestrý program každý všední den. Nezáleží na tom, jak je klient pohyblivý – máme aktivity pro skupiny i pro ty, kdo tráví den na pokoji. Více o tom, jak se staráme o klienty každý den, najdete na stránce <a href="/jak-pecujeme" style="color:var(--clr-green);font-weight:600;">jak pečujeme</a>. Kde aktivity probíhají? Podívejte se na naše <a href="/prostory" style="color:var(--clr-green);font-weight:600;">prostory a zázemí</a>.</p>
         <ul class="benefit-list">
           <li>
             <span class="benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -660,7 +660,7 @@ import Layout from '../layouts/Layout.astro';
           <div class="prog-card-meta">
             <span class="prog-tag"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Každý všední den dopoledne</span>
           </div>
-          <p>Stříhání, malování, vybarvování, lepení, kreslení, modelování, keramika i pečení – ruce se musí hýbat. Aktivizační pracovnice Alenka a Daniela vedou dopolední program tak, aby si každý mohl vybrat podle svých sil a nálady.</p>
+          <p>Ergoterapie je léčebná metoda, která využívá cílenou činnost k udržení nebo obnově schopností potřebných v každodenním životě. V praxi to vypadá takto: stříhání, malování, vybarvování, lepení, kreslení, modelování, keramika i pečení – ruce se musí hýbat. Aktivizační pracovnice Alenka a Daniela vedou dopolední program tak, aby si každý mohl vybrat podle svých sil a nálady.</p>
           <div class="prog-card-who"><strong>Vedou:</strong> Alenka a Daniela (aktivizační pracovnice)</div>
         </div>
       </article>
@@ -676,7 +676,7 @@ import Layout from '../layouts/Layout.astro';
             <span class="prog-tag primary"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1× týdně</span>
             <span class="prog-tag primary">Skupinový</span>
           </div>
-          <p>Trénink paměti posiluje soustředění, logické myšlení a slovní zásobu. Cvičení přizpůsobujeme věku a kognitivním schopnostem každého klienta. Pravidelnost je klíč – proto ho řadíme do pevného týdenního programu.</p>
+          <p>Trénink paměti posiluje soustředění, logické myšlení a slovní zásobu. Jak trénovat paměť u seniorů účinně? Klíčem jsou krátká pravidelná cvičení zaměřená na asociace, vybavování, hry se slovy a čísly. Cvičení přizpůsobujeme věku a kognitivním schopnostem každého klienta. Pravidelnost je klíč – proto ho řadíme do pevného týdenního programu.</p>
           <div class="prog-card-who"><strong>Vedou:</strong> Alenka a Daniela (aktivizační pracovnice)</div>
         </div>
       </article>
@@ -846,10 +846,10 @@ import Layout from '../layouts/Layout.astro';
   <div class="container">
     <div class="cta-inner">
       <h2>Chcete vidět program na vlastní oči?</h2>
-      <p>Zavolejte nám a domluvte se na prohlídce. Rádi vám ukážeme, jak to u nás každý den vypadá – klidně i v průběhu aktivity.</p>
+      <p>Zavolejte nám a domluvte se na prohlídce. Rádi vám ukážeme, jak to u nás každý den vypadá – klidně i v průběhu aktivity. Na pobyt lze využít <strong>příspěvek na péči</strong> – jeho výši a podmínky najdete v našem <a href="/cenik" style="color:var(--clr-primary);font-weight:600;">ceníku</a>.</p>
       <div class="cta-group">
-        <a href="/kontakt" class="btn btn-primary">Domluvit prohlídku</a>
-        <a href="/prijeti" class="btn btn-secondary">Jak probíhá přijetí</a>
+        <a href="/prijeti" class="btn btn-primary">Podat žádost o přijetí</a>
+        <a href="/cenik" class="btn btn-secondary">Ceník a příspěvek na péči</a>
       </div>
     </div>
   </div>
@@ -888,6 +888,25 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </div>
 </section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Aktivizace seniorů – Domov Turovice",
+  "description": "Aktivizační programy pro seniory: canisterapie, muzikoterapie, ergoterapie, trénink paměti, pohybová aktivizace a arteterapie. Každý všední den v Domově Turovice v Turovicích, okres Přerov.",
+  "serviceType": "Aktivizace seniorů",
+  "url": "https://domovturovice.cz/aktivizace",
+  "provider": {
+    "@type": "Organization",
+    "@id": "https://domovturovice.cz/#organization"
+  },
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Olomoucký kraj"
+  }
+}
+</script>
 
 </Layout>
 
