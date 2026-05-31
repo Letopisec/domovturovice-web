@@ -14,7 +14,7 @@ const currentPath = Astro.url.pathname;
 <nav class="nav" id="mainNav">
   <div class="nav-inner">
     <a href="/" class="nav-logo">
-      <img class="nav-logo-img" src="/images/logo.svg" alt="Domov Turovice logo">
+      <img class="nav-logo-img" src="/images/logo.svg" alt="Domov Turovice logo" width="160" height="40">
       <span class="nav-logo-text">
         <span class="nav-logo-name">Domov Turovice</span>
         <span class="nav-logo-sub">domov pro seniory</span>
@@ -484,20 +484,9 @@ const currentPath = Astro.url.pathname;
 // Shrink při scrollu + update padding-top na main
 const nav = document.getElementById('mainNav') as HTMLElement;
 
-function updateMainPadding() {
-  const main = document.querySelector('main') as HTMLElement;
-  if (main) {
-    main.style.paddingTop = nav.getBoundingClientRect().height + 'px';
-  }
-}
-
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 30);
-  // padding-top se aktualizuje přes transitionend
 });
-
-nav.addEventListener('transitionend', updateMainPadding);
-updateMainPadding();
 
 // Hamburger — mobilní menu
 const hamburger = document.getElementById('hamburger') as HTMLButtonElement;
