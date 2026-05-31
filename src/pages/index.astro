@@ -6,20 +6,14 @@ import Layout from '../layouts/Layout.astro';
 
 <!-- ══ HERO ══ -->
 <section class="hero">
-  <!-- Desktop: full-screen foto na pozadí (beze změny) -->
-  <div class="hero-bg">
-    <picture>
-      <source srcset="/images/hero-bg.webp" type="image/webp" media="(min-width: 769px)">
-      <source srcset="/images/hero-bg.jpg" media="(min-width: 769px)">
-      <img src="/images/hero-bg.jpg" alt="Domov Turovice budova a zahrada" width="1920" height="1080" fetchpriority="high">
-    </picture>
-  </div>
+  <!-- Desktop: full-screen foto na pozadí přes CSS (mobil nestahuje) -->
+  <div class="hero-bg" role="img" aria-label="Domov Turovice budova a zahrada"></div>
   <div class="hero-overlay"></div>
   <!-- Mobilní foto banner — viditelný jen na mobilu, vložen do toku stránky -->
   <div class="hero-mobile-photo" aria-hidden="true">
     <picture>
       <source srcset="/images/hero-bg-mobile.webp" type="image/webp">
-      <img src="/images/hero-bg.jpg" alt="" width="900" height="360" loading="eager">
+      <img src="/images/hero-bg.jpg" alt="" width="860" height="344" loading="eager" fetchpriority="high">
     </picture>
   </div>
   <div class="hero-content">
@@ -83,7 +77,10 @@ import Layout from '../layouts/Layout.astro';
         <a href="/nas-pribeh" class="about-link">Přečtěte si náš příběh <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
       </div>
       <div class="about-image">
-        <img src="/images/about-foto.jpg" alt="Příběh Domova Turovice" loading="lazy">
+        <picture>
+              <source srcset="/images/about-foto.webp" type="image/webp">
+              <img src="/images/about-foto.jpg" alt="Příběh Domova Turovice" loading="lazy" width="720" height="321">
+            </picture>
       </div>
     </div>
   </div>
