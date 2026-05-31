@@ -153,6 +153,7 @@ const currentPath = Astro.url.pathname;
   gap: 14px;
   text-decoration: none;
   flex-shrink: 0;
+  align-self: center;
 }
 
 .nav-logo-img {
@@ -171,7 +172,8 @@ const currentPath = Astro.url.pathname;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 2px;
+  gap: 4px;
+  line-height: 1;
 }
 
 .nav-logo-text strong {
@@ -180,9 +182,11 @@ const currentPath = Astro.url.pathname;
   font-weight: 700;
   color: var(--clr-primary);
   display: block;
-  line-height: 1.1;
+  line-height: 1;
   letter-spacing: -0.01em;
   transition: font-size 0.3s;
+  margin: 0;
+  padding: 0;
 }
 
 .nav.scrolled .nav-logo-text strong {
@@ -196,6 +200,10 @@ const currentPath = Astro.url.pathname;
   color: var(--clr-text-muted);
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  display: block;
+  margin: 0;
+  padding: 0;
+  transform: translateY(-1px);
 }
 
 .nav-menu {
