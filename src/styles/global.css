@@ -91,6 +91,8 @@ h2 { font-family: var(--font-display); font-size: var(--font-size-h2); font-weig
 h3 { font-family: var(--font-display); font-size: var(--font-size-h3); font-weight: 600; line-height: 1.30; color: var(--clr-text-dark); }
 h4 { font-family: var(--font-display); font-size: var(--font-size-h4); font-weight: 600; line-height: 1.35; color: var(--clr-text-dark); }
 h5 { font-family: var(--font-body); font-size: var(--font-size-base); font-weight: 600; line-height: 1.40; color: var(--clr-text-dark); }
+/* Sémantické náhrady h5 – vizuálně identické, strukturně správné */
+.quick-title, .step-title { font-family: var(--font-body); font-size: var(--font-size-base); font-weight: 600; line-height: 1.40; color: var(--clr-text-dark); margin: 0; }
 h6 { font-family: var(--font-body); font-size: var(--font-size-small); font-weight: 600; line-height: 1.40; color: var(--clr-text-muted); }
 
 p { font-size: var(--font-size-base); line-height: 1.70; color: var(--clr-text-body); margin: 0 0 16px; }
