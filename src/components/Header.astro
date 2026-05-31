@@ -158,20 +158,19 @@ const currentPath = Astro.url.pathname;
 }
 
 .nav-logo-img {
-  height: 44px;
+  height: 40px;
   width: auto;
   display: block;
   transition: height 0.3s;
 }
 
 .nav.scrolled .nav-logo-img {
-  height: 34px;
+  height: 32px;
 }
 
 .nav-logo-text {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+  display: grid;
+  row-gap: 1px;
 }
 
 .nav-logo-name {
@@ -179,9 +178,11 @@ const currentPath = Astro.url.pathname;
   font-size: 20px;
   font-weight: 700;
   color: var(--clr-primary);
-  line-height: 1.2;
+  line-height: 1;
   letter-spacing: -0.01em;
   transition: font-size 0.3s;
+  /* Oříznutí prázdného prostoru Playfair Display */
+  margin-bottom: -2px;
 }
 
 .nav.scrolled .nav-logo-name {
@@ -192,10 +193,12 @@ const currentPath = Astro.url.pathname;
   font-family: var(--font-body);
   font-size: 10px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: 1;
   color: var(--clr-text-muted);
   letter-spacing: 0.07em;
   text-transform: uppercase;
+  /* Kompenzace baseline Source Sans 3 */
+  padding-top: 1px;
 }
 
 .nav-menu {
@@ -487,6 +490,13 @@ const currentPath = Astro.url.pathname;
     display: flex;
   }
 }
+
+/* === DEBUG - smazat po opravě === */
+.nav-logo-text { outline: 1px solid blue; }
+.nav-logo-name { outline: 1px solid red; }
+.nav-logo-sub  { outline: 1px solid green; }
+.nav-inner     { outline: 1px solid orange; }
+/* === END DEBUG === */
 </style>
 
 <script>
