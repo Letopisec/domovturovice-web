@@ -210,6 +210,82 @@ blockquote {
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(20,10,12,0.74) 0%, rgba(20,10,12,0.54) 55%, rgba(20,10,12,0.28) 100%); z-index: 1; }
 .hero-content { position: relative; z-index: 2; max-width: var(--container); margin: 0 auto; padding: 120px 24px 80px; width: 100%; }
+/* Mobilní foto banner — skrytý na desktopu */
+.hero-mobile-photo { display: none; }
+
+/* ── MOBILNÍ HERO LAYOUT (do 768px) ── */
+@media (max-width: 768px) {
+  /* Sekce přestane být full-screen, foto + text jsou pod sebou */
+  .hero {
+    min-height: unset;
+    flex-direction: column;
+    align-items: stretch;
+    background: linear-gradient(135deg, var(--clr-primary) 0%, #5a2a30 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Dekorativní kruhy — stejný vzor jako u ostatních podstránek */
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    top: -80px; right: -60px;
+    pointer-events: none; z-index: 0;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    bottom: 60px; left: -60px;
+    pointer-events: none; z-index: 0;
+  }
+  /* Skrýt absolutně pozicované pozadí a overlay */
+  .hero-bg { display: none; }
+  .hero-overlay { display: none; }
+  /* Zobrazit mobilní foto banner */
+  .hero-mobile-photo {
+    display: block;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+  .hero-mobile-photo picture,
+  .hero-mobile-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2.5 / 1;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+  /* Textový obsah hero — na burgundy pozadí */
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 36px 20px 48px;
+    margin: 0;
+    max-width: 100%;
+  }
+  /* H1 na mobilu — menší, ale čitelný */
+  .hero h1 {
+    font-size: clamp(26px, 7vw, 34px);
+    max-width: 100%;
+    text-shadow: none;
+  }
+  .hero-perex {
+    font-size: var(--font-size-base);
+    max-width: 100%;
+    text-shadow: none;
+    color: rgba(255,255,255,0.90);
+  }
+  /* Scroll indikátor na mobilu schovat */
+  .hero-scroll { display: none; }
+}
 .hero-badge {
   display: inline-flex; align-items: center; gap: 10px;
   background: rgba(155,66,73,0.88); color: white;
