@@ -127,24 +127,26 @@ const currentPath = Astro.url.pathname;
   background: rgba(255, 255, 255, 0.97);
   border-bottom: 1px solid var(--clr-border);
   backdrop-filter: blur(10px);
-  transition: box-shadow 0.3s, height 0.3s;
-  height: var(--nav-height);
+  transition: box-shadow 0.3s;
 }
 
 .nav.scrolled {
-  height: var(--nav-height-scrolled);
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.09);
 }
 
 .nav-inner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 24px;
-  height: 100%;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  transition: padding 0.3s;
+}
+
+.nav.scrolled .nav-inner {
+  padding: 8px 24px;
 }
 
 .nav-logo {
@@ -498,11 +500,23 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <script>
-// Shrink při scrollu
+// Shrink při scrollu + update padding-top na main
 const nav = document.getElementById('mainNav') as HTMLElement;
+
+function updateMainPadding() {
+  const main = document.querySelector('main') as HTMLElement;
+  if (main) {
+    main.style.paddingTop = nav.getBoundingClientRect().height + 'px';
+  }
+}
+
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 30);
+  // padding-top se aktualizuje přes transitionend
 });
+
+nav.addEventListener('transitionend', updateMainPadding);
+updateMainPadding();
 
 // Hamburger — mobilní menu
 const hamburger = document.getElementById('hamburger') as HTMLButtonElement;
