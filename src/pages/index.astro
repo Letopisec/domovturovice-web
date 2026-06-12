@@ -140,24 +140,27 @@ const trustItems = [
     background: rgba(155, 66, 73, 0.03);
   }
   .trust-bar {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
-    padding: 0 24px;
-    max-width: var(--container-max);
-    margin: 0 auto;
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 16px !important;
+    padding: 0 24px !important;
+    max-width: var(--container-max) !important;
+    margin: 0 auto !important;
     position: relative;
     z-index: 1;
+    flex-wrap: unset !important;
+    justify-content: unset !important;
+    align-items: unset !important;
   }
   .trust-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
     text-align: center;
     gap: 14px;
     padding: 28px 16px;
     border-radius: var(--radius-card);
-    min-width: 0;
+    min-width: 0 !important;
     border-right: none !important;
     transition: box-shadow 0.25s, transform 0.25s;
   }
@@ -181,11 +184,11 @@ const trustItems = [
     fill: none;
   }
   .trust-value {
-    font-size: var(--text-body);
+    font-size: var(--text-body) !important;
     font-weight: 600;
     font-family: var(--font-sans);
     color: var(--color-dark);
-    line-height: 1.4;
+    line-height: 1.4 !important;
     min-height: 2.8em;
     display: flex;
     align-items: center;
@@ -199,12 +202,12 @@ const trustItems = [
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
     .trust-bar {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, 1fr) !important;
     }
   }
   @media (max-width: 640px) {
     .trust-bar {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr) !important;
     }
     .page-hero__inner {
       padding: 60px 20px 48px;
