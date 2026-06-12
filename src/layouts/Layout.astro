@@ -1,0 +1,103 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Schema.org JSON-LD objekt (nebo pole objektů) specifický pro stránku.
+   *  Organizace se přidává automaticky – sem patří jen typ stránky
+   *  (Service, FAQPage, Article, ContactPage…). */
+  schema?: object | object[];
+  /** Fonty z Google Fonts – uprav podle tokens.css. */
+  fontsHref?: string;
+  /** noindex pro stránky, které nemají být ve vyhledávání */
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  schema,
+  noindex = false,
+  fontsHref = 'https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// Organization schema – generuje se automaticky z site.ts na KAŽDÉ stránce.
+// @id slouží jako reference, na kterou odkazují ostatní schémata.
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': SITE.schemaType,
+  '@id': `${SITE.url}/#organization`,
+  name: SITE.name,
+  legalName: SITE.legalName,
+  url: SITE.url,
+  telephone: SITE.phone,
+  ...(SITE.legal.ico && { taxID: SITE.legal.ico }),
+  email: SITE.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.city,
+    postalCode: SITE.address.zip,
+    addressRegion: SITE.address.region,
+    addressCountry: 'CZ',
+  },
+  ...(Object.values(SITE.social).some(Boolean) && {
+    sameAs: Object.values(SITE.social).filter(Boolean),
+  }),
+};
+
+// Stránkové schéma – pokud je zadané, doplní se referencí na organizaci.
+const pageSchemas = schema
+  ? (Array.isArray(schema) ? schema : [schema]).map((s) => ({
+      '@context': 'https://schema.org',
+      ...s,
+      publisher: { '@id': `${SITE.url}/#organization` },
+    }))
+  : [];
+
+const allSchemas = [orgSchema, ...pageSchemas];
+---
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:site_name" content={SITE.name} />
+  <meta property="og:locale" content="cs_CZ" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href={fontsHref} rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+  {allSchemas.map((s) => (
+    <script type="application/ld+json" set:html={JSON.stringify(s)} />
+  ))}
+</head>
+<body>
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

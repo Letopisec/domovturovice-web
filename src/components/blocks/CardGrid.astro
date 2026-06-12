@@ -1,0 +1,25 @@
+---
+// CardGrid.astro — mřížka karet (ikona + nadpis + popis)
+// Props: kicker, heading, lead, columns, cards[] (icon, title, text), id, bg
+const { kicker, heading, lead, columns = 4, cards = [], id, bg = 'bg' } = Astro.props;
+---
+<section class={`cardgrid-section bg-${bg}`} id={id}>
+  <div class="container">
+    {(kicker || heading) && (
+      <div class="section-heading">
+        {kicker && <span class="section-label">{kicker}</span>}
+        {heading && <h2>{heading}</h2>}
+        {lead && <p>{lead}</p>}
+      </div>
+    )}
+    <div class="cardgrid" style={`grid-template-columns:repeat(${columns},1fr)`}>
+      {cards.map((c) => (
+        <article class="card">
+          {c.icon && <div class="card__icon"><i class={`ti ti-${c.icon}`}></i></div>}
+          <h3>{c.title}</h3>
+          <p>{c.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,126 @@
+---
+// ProcessTabsConnected.astro — taby, kde aktivní OUŠKO a obsahový PANEL
+// tvoří jeden vizuálně spojený celek (ouško nasedá na panel stejným podkresem).
+// Splňuje závazné pravidlo provázanosti tabů (docs/STANDARD.md sekce 8).
+//
+// Props:
+//   kicker, heading, lead — nadpis sekce (volitelné)
+//   tabs[] — { label, content }   (content = HTML obsahu panelu)
+//   numbered — true => ouška mají čísla 1,2,3… (default true)
+const { kicker, heading, lead, tabs = [], numbered = true } = Astro.props;
+---
+<section class="ptc-section">
+  <div class="container">
+    {(kicker || heading) && (
+      <div class="section-heading">
+        {kicker && <span class="section-label">{kicker}</span>}
+        {heading && <h2>{heading}</h2>}
+        {lead && <p>{lead}</p>}
+      </div>
+    )}
+
+    <div class="ptc">
+      <div class="ptc-tabs" role="tablist">
+        {tabs.map((t, i) => (
+          <button class={`ptc-tab ${i === 0 ? 'is-active' : ''}`} data-tab={i} role="tab" aria-selected={i === 0 ? 'true' : 'false'}>
+            {numbered && <span class="ptc-tab__num">{i + 1}</span>}
+            <span class="ptc-tab__label">{t.label}</span>
+          </button>
+        ))}
+      </div>
+      <div class="ptc-panels">
+        {tabs.map((t, i) => (
+          <div class={`ptc-panel ${i === 0 ? 'is-active' : ''}`} data-panel={i} role="tabpanel" set:html={t.content} />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ptc-section { padding: var(--space-12) 0; }
+  .ptc { max-width: 920px; margin: 0 auto; }
+
+  /* Řada oušek — sedí na společné základní linii panelu */
+  .ptc-tabs {
+    display: flex; gap: 6px; position: relative; z-index: 2;
+    padding: 0 var(--space-2);
+  }
+  .ptc-tab {
+    display: flex; align-items: center; gap: var(--space-1);
+    padding: 14px 22px;
+    background: var(--color-bg);                 /* neaktivní ouško = ztlumené */
+    border: 1px solid var(--color-border);
+    border-bottom: none;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    cursor: pointer; font-family: var(--font-sans);
+    color: var(--color-text-muted);
+    position: relative; top: 1px;                /* nasedne na rámeček panelu */
+    transition: background .2s, color .2s;
+  }
+  .ptc-tab:hover { color: var(--color-primary); }
+
+  /* AKTIVNÍ ouško — stejný podkres jako panel, splývá s ním */
+  .ptc-tab.is-active {
+    background: var(--color-surface);            /* shodné s pozadím panelu */
+    color: var(--color-primary);
+    font-weight: var(--font-bold);
+    border-color: var(--color-border);
+    z-index: 3;
+  }
+  /* Maskovací proužek — překryje linku panelu pod aktivním ouškem,
+     takže ouško a panel opticky splývají v jeden celek */
+  .ptc-tab.is-active::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -2px;
+    height: 3px; background: var(--color-surface); z-index: 4;
+  }
+  /* Barevný „jazýček" nahoře na aktivním oušku (akcentová linka) */
+  .ptc-tab.is-active::before {
+    content: ''; position: absolute; left: 0; right: 0; top: -1px;
+    height: 3px; background: var(--color-accent);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+  .ptc-tab__num {
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--color-border); color: var(--color-text-muted);
+    font-size: var(--text-sm); font-weight: var(--font-bold);
+    transition: background .2s, color .2s; flex-shrink: 0;
+  }
+  .ptc-tab.is-active .ptc-tab__num { background: var(--color-accent); color: var(--color-white); }
+
+  /* PANEL — stejný podkres jako aktivní ouško, rámeček napojený */
+  .ptc-panels {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0 var(--radius-md) var(--radius-md) var(--radius-md);
+    padding: var(--space-5);
+    position: relative; z-index: 1;
+  }
+  .ptc-panel { font-size: var(--text-body); line-height: var(--leading-body); color: var(--color-text); }
+  .ptc-panel:not(.is-active) { display: none; }
+  .ptc-panel :global(strong) { color: var(--color-primary); }
+
+  @media (max-width: 768px) {
+    .ptc-section { padding: var(--space-8) 0; }
+    .ptc-tabs { flex-wrap: wrap; gap: 4px; }
+    .ptc-tab { padding: 10px 14px; top: 0; border-bottom: 1px solid var(--color-border); border-radius: var(--radius-md); }
+    .ptc-tab.is-active::after { display: none; }
+    .ptc-panels { border-radius: var(--radius-md); margin-top: var(--space-2); }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.ptc').forEach((sec) => {
+    const tabs = sec.querySelectorAll('.ptc-tab');
+    const panels = sec.querySelectorAll('.ptc-panel');
+    tabs.forEach((tab) => tab.addEventListener('click', () => {
+      const i = tab.getAttribute('data-tab');
+      tabs.forEach((t) => { t.classList.remove('is-active'); t.setAttribute('aria-selected', 'false'); });
+      panels.forEach((p) => p.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      tab.setAttribute('aria-selected', 'true');
+      sec.querySelector(`.ptc-panel[data-panel="${i}"]`)?.classList.add('is-active');
+    }));
+  });
+</script>

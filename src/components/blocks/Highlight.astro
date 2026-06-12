@@ -1,0 +1,14 @@
+---
+// Highlight.astro — zvýrazněný citát
+// Props: quote, author, role
+const { quote, author, role } = Astro.props;
+---
+<section class="section">
+  <div class="container">
+    <div style="background:var(--color-primary-ghost); border-left:5px solid var(--color-accent); border-radius:0 var(--radius-md) var(--radius-md) 0; padding:var(--space-4) var(--space-5); max-width:780px;">
+      <p style="font-family:var(--font-serif); font-style:italic; font-size:var(--text-xl); color:var(--color-primary); line-height:1.6; margin-bottom:var(--space-2);">„{quote}“</p>
+      {author && <p style="font-weight:var(--font-bold); color:var(--color-accent); margin-bottom:4px;">{author}</p>}
+      {role && <p style="font-size:var(--text-sm); color:var(--color-text-muted);">{role}</p>}
+    </div>
+  </div>
+</section>

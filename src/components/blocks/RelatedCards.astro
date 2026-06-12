@@ -1,0 +1,30 @@
+---
+// RelatedCards.astro — karty článků / "co dál" (obrázek, kategorie, nadpis, datum)
+// Props: kicker, heading, cards[] (href, img, cat, title, date), link
+const { kicker, heading, cards = [], link } = Astro.props;
+---
+<section class="related-section">
+  <div class="container">
+    <div class="section-heading">
+      {kicker && <span class="section-label">{kicker}</span>}
+      {heading && <h2>{heading}</h2>}
+    </div>
+    <div class="related-grid">
+      {cards.map((c) => (
+        <a href={c.href} class="related-card">
+          <span class="related-card__img">{c.img ? <img src={c.img} alt={c.title} /> : '[ foto ]'}</span>
+          <span class="related-card__body">
+            {c.cat && <span class="related-card__cat">{c.cat}</span>}
+            <span class="related-card__title">{c.title}</span>
+            {c.date && <span class="related-card__date">{c.date}</span>}
+          </span>
+        </a>
+      ))}
+    </div>
+    {link && (
+      <div style="text-align:right; margin-top:var(--space-3);">
+        <a href={link.href} class="btn btn-secondary">{link.text}</a>
+      </div>
+    )}
+  </div>
+</section>

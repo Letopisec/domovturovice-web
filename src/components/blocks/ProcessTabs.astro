@@ -1,0 +1,38 @@
+---
+// ProcessTabs.astro — číslované kroky procesu s přepínáním (1–5)
+// Props: kicker, heading, lead, steps[] (label, content)
+const { kicker, heading, lead, steps = [] } = Astro.props;
+---
+<section class="process-section">
+  <div class="container">
+    <div class="section-heading">
+      {kicker && <span class="section-label">{kicker}</span>}
+      {heading && <h2>{heading}</h2>}
+      {lead && <p>{lead}</p>}
+    </div>
+    <div class="process-tabs" role="tablist">
+      {steps.map((s, i) => (
+        <button class={`process-tab ${i === 0 ? 'is-active' : ''}`} data-tab={i} role="tab">
+          <span class="process-tab__num">{i + 1}</span>
+          <span class="process-tab__label">{s.label}</span>
+        </button>
+      ))}
+    </div>
+    {steps.map((s, i) => (
+      <div class={`process-panel ${i === 0 ? 'is-active' : ''}`} data-panel={i} set:html={s.content} />
+    ))}
+  </div>
+</section>
+<script>
+  document.querySelectorAll('.process-section').forEach((sec) => {
+    const tabs = sec.querySelectorAll('.process-tab');
+    const panels = sec.querySelectorAll('.process-panel');
+    tabs.forEach((tab) => tab.addEventListener('click', () => {
+      const i = tab.getAttribute('data-tab');
+      tabs.forEach((t) => t.classList.remove('is-active'));
+      panels.forEach((p) => p.classList.remove('is-active'));
+      tab.classList.add('is-active');
+      sec.querySelector(`.process-panel[data-panel="${i}"]`)?.classList.add('is-active');
+    }));
+  });
+</script>

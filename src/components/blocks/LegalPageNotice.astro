@@ -1,0 +1,145 @@
+---
+// LegalPageNotice.astro — nápadný upozorňovací blok do TĚLA nedoplněné právní podstránky.
+// Slouží zároveň jako STROJOVÁ ZNAČKA pro build kontrolu (integrations/legal-check.mjs):
+// dokud je <LegalPageNotice v souboru stránky, build hlásí podstránku jako nedoplněnou.
+//
+// Texty „co musí podstránka obsahovat" drží přesně znění z docs/PRAVNI_CHECKLIST.md kap. 5.3.
+// Princip: web připraví MÍSTO, text dodá klient / jeho právník — Claude právní text NESKLÁDÁ.
+//
+// Props:
+//   type      'zasady-ou' | 'vop' | 'odstoupeni' | 'cookies'   (povinné)
+//   sellsType (volitelné) — hodnota z client-profile.ts → sellsOnline,
+//             pro doladění textu VOP (§ 1837) a odstoupení (14 dní vs. zánik/nevznik)
+interface Props {
+  type: 'zasady-ou' | 'vop' | 'odstoupeni' | 'cookies';
+  sellsType?: string;
+}
+const { type, sellsType } = Astro.props as Props;
+
+// Mapa type → { nadpis, uvod, musi[] }. U vop/odstoupeni se obsah doladí dle sellsType.
+const nadpisy: Record<Props['type'], string> = {
+  'zasady-ou': 'Zásady zpracování osobních údajů',
+  'vop': 'Všeobecné obchodní podmínky (VOP)',
+  'odstoupeni': 'Odstoupení od smlouvy',
+  'cookies': 'Zásady používání cookies',
+};
+
+let uvod = '';
+let musi: string[] = [];
+
+if (type === 'zasady-ou') {
+  uvod = 'Toto jsou zásady zpracování osobních údajů (GDPR).';
+  musi = [
+    'identifikaci správce osobních údajů',
+    'účel a rozsah zpracování osobních údajů',
+    'dobu uchování údajů',
+    'práva subjektu údajů (přístup, oprava, výmaz, námitka…)',
+    'zpracovatele, kterým se údaje předávají (vč. FAPI / Google)',
+    'kontakt na správce',
+  ];
+} else if (type === 'vop') {
+  uvod = 'Toto jsou Všeobecné obchodní podmínky pro prodej přes tento web.';
+  musi = [
+    'identifikaci prodávajícího',
+    'popis produktu a cenu vč. DPH',
+    'způsob platby vč. uvedení zpracovatele platby (FAPI)',
+    'způsob a termín dodání / zpřístupnění plnění',
+    'reklamační podmínky',
+    'kontakt na ČOI a informaci o mimosoudním řešení sporů (ADR)',
+  ];
+  if (sellsType === 'digitalni') {
+    musi.push(
+      'výslovné poučení, že u digitálního obsahu spotřebitel souhlasem se zahájením dodání pozbývá právo na odstoupení (§ 1837 obč. zák.)'
+    );
+  }
+} else if (type === 'odstoupeni') {
+  if (sellsType === 'digitalni' || sellsType === 'terminovana') {
+    uvod = 'Toto je poučení o tom, že právo na odstoupení od smlouvy nevzniká / zaniká.';
+    musi = [
+      sellsType === 'digitalni'
+        ? 'poučení, že u digitálního obsahu právo na odstoupení ZANIKÁ, pokud spotřebitel souhlasil se zahájením dodání před uplynutím 14denní lhůty (§ 1837 obč. zák.)'
+        : 'poučení, že u služby vázané na určený termín (využití volného času) právo na odstoupení NEVZNIKÁ (§ 1837 obč. zák.)',
+      'podmínky, za kterých se výjimka uplatní',
+      'co se stane s již zaplacenou částkou',
+    ];
+  } else {
+    uvod = 'Toto je poučení o právu spotřebitele odstoupit od smlouvy do 14 dnů.';
+    musi = [
+      'právo odstoupit od smlouvy bez udání důvodu do 14 dnů',
+      'běh a počátek 14denní lhůty',
+      'způsob, jakým lze od smlouvy odstoupit (vč. vzorového formuláře)',
+      'podmínky vrácení peněz',
+    ];
+    if (sellsType === 'prubezna') {
+      musi.push('způsob výpočtu poměrné úhrady za již poskytnuté plnění');
+    }
+  }
+} else if (type === 'cookies') {
+  uvod = 'Toto jsou zásady používání cookies.';
+  musi = [
+    'druhy používaných cookies',
+    'účel jednotlivých cookies',
+    'dobu uchování cookies',
+    'způsob udělení a odvolání souhlasu',
+    'seznam použitých nástrojů',
+  ];
+}
+---
+
+<section class="legal-notice" role="alert">
+  <div class="legal-notice__inner">
+    <p class="legal-notice__heading">⚠️ TENTO TEXT JE NUTNÉ DOPLNIT — bez něj web nesmí jít na ostrou doménu.</p>
+    <p class="legal-notice__sub"><strong>{nadpisy[type]}</strong> — {uvod}</p>
+    <p class="legal-notice__label">Musí obsahovat:</p>
+    <ul class="legal-notice__list">
+      {musi.map((m) => <li>{m}</li>)}
+    </ul>
+    <p class="legal-notice__footer">Text dodá klient nebo jeho právník.</p>
+  </div>
+</section>
+
+<style>
+  .legal-notice {
+    padding: var(--space-5) var(--container-pad);
+  }
+  .legal-notice__inner {
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--color-accent-light);
+    border: 2px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    padding: var(--space-4) var(--space-5);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    line-height: var(--leading-body);
+  }
+  .legal-notice__heading {
+    color: var(--color-accent);
+    font-weight: var(--font-bold);
+    font-size: var(--text-h3);
+    line-height: var(--leading-heading);
+    margin: 0 0 var(--space-3);
+  }
+  .legal-notice__sub {
+    margin: 0 0 var(--space-3);
+    font-size: var(--text-body);
+  }
+  .legal-notice__label {
+    margin: 0 0 var(--space-1);
+    font-weight: var(--font-bold);
+  }
+  .legal-notice__list {
+    margin: 0 0 var(--space-3);
+    padding-left: var(--space-4);
+    font-size: var(--text-body);
+  }
+  .legal-notice__list li {
+    margin-bottom: var(--space-1);
+  }
+  .legal-notice__footer {
+    margin: 0;
+    font-style: italic;
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+// ════════════════════════════════════════════════════════════════
+// PLOCHÁ DYNAMICKÁ ROUTA — vše na domena.cz/[slug]
+// Rozlišuje 3 typy obsahu na stejné úrovni URL:
+//   1. ČLÁNEK     → domena.cz/jak-funguje-tepelne-cerpadlo
+//   2. KATEGORIE  → domena.cz/dotace (rozcestník článků kategorie)
+//   3. ŠTÍTEK     → domena.cz/novostavba (rozcestník článků se štítkem)
+// Žádné prefixy, žádné breadcrumbs.
+// ════════════════════════════════════════════════════════════════
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import { slugify } from '../utils/slug';
+
+export async function getStaticPaths() {
+  const clanky = await getCollection('clanky');
+
+  // 1) Cesty článků
+  const clanekPaths = clanky.map((clanek) => ({
+    params: { slug: clanek.slug },
+    props: { type: 'clanek', clanek },
+  }));
+
+  // 2) Cesty kategorií (unikátní)
+  const kategorie = [...new Set(clanky.map((c) => c.data.category))];
+  const kategoriePaths = kategorie.map((kat) => ({
+    params: { slug: slugify(kat) },
+    props: {
+      type: 'kategorie',
+      nazev: kat,
+      clanky: clanky.filter((c) => c.data.category === kat),
+    },
+  }));
+
+  // 3) Cesty štítků (unikátní)
+  const stitky = [...new Set(clanky.flatMap((c) => c.data.tags))];
+  const stitkyPaths = stitky.map((tag) => ({
+    params: { slug: slugify(tag) },
+    props: {
+      type: 'stitek',
+      nazev: tag,
+      clanky: clanky.filter((c) => c.data.tags.includes(tag)),
+    },
+  }));
+
+  // KONTROLA KOLIZÍ: žádné dva slugy se nesmí krýt
+  const all = [...clanekPaths, ...kategoriePaths, ...stitkyPaths];
+  const seen = new Set();
+  for (const p of all) {
+    if (seen.has(p.params.slug)) {
+      throw new Error(`KOLIZE SLUGU: "${p.params.slug}" existuje víckrát. Přejmenuj článek/kategorii/štítek.`);
+    }
+    seen.add(p.params.slug);
+  }
+
+  return all;
+}
+
+const { type } = Astro.props;
+
+// ── ČLÁNEK ──
+let Content, d;
+if (type === 'clanek') {
+  const rendered = await Astro.props.clanek.render();
+  Content = rendered.Content;
+  d = Astro.props.clanek.data;
+}
+
+// ── ROZCESTNÍK (kategorie / štítek) ──
+const { nazev, clanky: vypisClanky } = Astro.props;
+
+const schema = type === 'clanek'
+  ? { '@type': 'Article', headline: d.title, datePublished: d.publishDate, author: { '@type': 'Person', name: d.author }, articleSection: d.category }
+  : { '@type': 'CollectionPage', name: nazev };
+
+const pageTitle = type === 'clanek' ? `${d.title}` : `${nazev} – články`;
+const pageDesc = type === 'clanek' ? (d.metaDescription || d.excerpt) : `Články v kategorii ${nazev}.`;
+---
+<Layout title={pageTitle} description={pageDesc} schema={schema}>
+  {type === 'clanek' ? (
+    <article class="single-post">
+      <div class="container">
+        <div class="single-post__head">
+          <a class="single-post__cat" href={`/${slugify(d.category)}`}>{d.category}</a>
+          <h1>{d.title}</h1>
+          <p class="single-post__meta">{d.author} · {d.publishDate}</p>
+        </div>
+        {d.cover && <img class="single-post__cover" src={d.cover} alt={d.title} />}
+        <div class="single-post__body"><Content /></div>
+        {d.tags.length > 0 && (
+          <div class="single-post__tags">
+            {d.tags.map((t) => <a href={`/${slugify(t)}`} class="post-tag">{t}</a>)}
+          </div>
+        )}
+      </div>
+    </article>
+  ) : (
+    <section class="archive">
+      <div class="container">
+        <span class="section-label">{type === 'kategorie' ? 'Kategorie' : 'Štítek'}</span>
+        <h1>{nazev}</h1>
+        <div class="archive-grid">
+          {vypisClanky.map((c) => (
+            <a href={`/${c.slug}`} class="related-card">
+              <span class="related-card__img">{c.data.cover ? <img src={c.data.cover} alt={c.data.title} /> : '[ foto ]'}</span>
+              <span class="related-card__body">
+                <span class="related-card__cat">{c.data.category}</span>
+                <span class="related-card__title">{c.data.title}</span>
+                <span class="related-card__date">{c.data.publishDate}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</Layout>
+
+<style>
+  .single-post, .archive { padding: var(--space-12) 0; }
+  .single-post .container { max-width: 760px; }
+  .single-post__head { margin-bottom: var(--space-5); }
+  .single-post__cat { font-size: var(--text-xs); font-weight: var(--font-bold); letter-spacing: .07em; text-transform: uppercase; color: var(--color-accent); text-decoration: none; }
+  .single-post__cat:hover { text-decoration: underline; }
+  .single-post h1, .archive h1 { font-size: var(--text-h1); color: var(--color-primary); margin: var(--space-2) 0; }
+  .single-post__meta { color: var(--color-text-muted); font-size: var(--text-sm); }
+  .single-post__cover { width: 100%; border-radius: var(--radius-md); margin-bottom: var(--space-5); }
+  .single-post__body :global(h2) { font-size: var(--text-2xl); color: var(--color-primary); margin: var(--space-5) 0 var(--space-2); }
+  .single-post__body :global(h3) { font-size: var(--text-xl); color: var(--color-primary); margin: var(--space-4) 0 var(--space-2); }
+  .single-post__body :global(p) { margin-bottom: var(--space-3); line-height: var(--leading-body); }
+  .single-post__body :global(ul), .single-post__body :global(ol) { margin: 0 0 var(--space-3) var(--space-4); }
+  .single-post__body :global(a) { color: var(--color-accent); text-decoration: underline; }
+  .single-post__body :global(img) { border-radius: var(--radius-md); margin: var(--space-3) 0; }
+  .single-post__tags { display: flex; gap: var(--space-1); flex-wrap: wrap; margin-top: var(--space-5); }
+  .post-tag { font-size: var(--text-sm); background: var(--color-primary-ghost); color: var(--color-primary); padding: 4px 12px; border-radius: 999px; text-decoration: none; transition: background .2s; }
+  .post-tag:hover { background: var(--color-primary-light); }
+  .archive-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); margin-top: var(--space-5); }
+  @media (max-width: 768px) { .archive-grid { grid-template-columns: 1fr; } }
+</style>

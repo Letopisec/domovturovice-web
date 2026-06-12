@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/blocks/PageHero.astro';
+import TrustBar from '../components/blocks/TrustBar.astro';
+import CardGrid from '../components/blocks/CardGrid.astro';
+import CTASection from '../components/blocks/CTASection.astro';
+
+// UKÁZKOVÁ HOMEPAGE – nahraď obsahem konkrétního projektu.
+const cards = [
+  { icon: 'check', title: 'Výhoda 1', text: 'Popis první klíčové výhody nebo služby.' },
+  { icon: 'tool', title: 'Výhoda 2', text: 'Popis druhé výhody.' },
+  { icon: 'chart-bar', title: 'Výhoda 3', text: 'Popis třetí výhody.' },
+];
+
+const schema = { '@type': 'WebSite', name: 'Název firmy', url: 'https://PRODUKCNI-DOMENA.cz' };
+---
+<Layout title="Domovská stránka | Název firmy" description="Popis webu s CTA, max 155 znaků." schema={schema}>
+  <PageHero
+    kicker="Eyebrow text"
+    h1="Hlavní nadpis s <em>akcentem</em>"
+    perex="Úvodní perex, který vysvětlí návštěvníkovi, co web nabízí a proč by měl zůstat."
+    buttons={[
+      { text: 'Hlavní akce', href: '#konzultace' },
+      { text: 'Více informací', href: '#obsah', variant: 'secondary' },
+    ]}
+  />
+  <TrustBar items={[
+    { icon: 'award', value: '15+', label: 'let na trhu' },
+    { icon: 'badge-check', value: '500', label: 'realizací' },
+    { icon: 'clock', value: '24 h', label: 'odpovíme rychle' },
+    { icon: 'shield-check', value: 'Garance', label: 'spokojenosti' },
+  ]} />
+  <CardGrid kicker="Co nabízíme" heading="Naše výhody" columns={3} cards={cards} />
+  <CTASection heading="Máte zájem?" text="Ozvěte se nám." buttons={[{ text: 'Kontaktujte nás', href: '#konzultace' }]} />
+</Layout>

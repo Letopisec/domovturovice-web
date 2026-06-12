@@ -1,0 +1,24 @@
+---
+// PageHero.astro — tmavý hero (gradient přes volitelnou fotku)
+// Props: kicker, h1, perex, buttons[], bgImage
+const { kicker, h1, perex, buttons = [], bgImage } = Astro.props;
+const heroStyle = bgImage
+  ? `background-image: linear-gradient(to right, var(--hero-overlay-left) 0%, var(--hero-overlay-right) 100%), url('${bgImage}');`
+  : '';
+---
+<section class="page-hero" style={heroStyle}>
+  <div class="page-hero__inner">
+    <div class="page-hero-content">
+      {kicker && <span class="page-hero-kicker">{kicker}</span>}
+      <h1 set:html={h1} />
+      {perex && <p class="page-hero-perex">{perex}</p>}
+      {buttons.length > 0 && (
+        <div class="page-hero-btns">
+          {buttons.map((b) => (
+            <a href={b.href} class={`btn ${b.variant === 'secondary' ? 'btn-secondary' : b.variant === 'outline' ? 'btn-outline-white' : 'btn-primary'}`}>{b.text}</a>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

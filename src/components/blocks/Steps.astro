@@ -1,0 +1,22 @@
+---
+// Steps.astro — číslované kroky procesu
+// Props: kicker, heading, lead, steps[] (title, text), columns
+const { kicker, heading, lead, steps = [], columns = 4 } = Astro.props;
+---
+<section class="steps-section">
+  <div class="container">
+    <div class="section-heading">
+      {kicker && <span class="section-label">{kicker}</span>}
+      {heading && <h2>{heading}</h2>}
+    </div>
+    {lead && <p class="steps-lead">{lead}</p>}
+    <div class="steps" style={`grid-template-columns:repeat(${columns},1fr)`} role="list">
+      {steps.map((s) => (
+        <div class="step" role="listitem">
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

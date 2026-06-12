@@ -1,0 +1,27 @@
+---
+// TestimonialCards.astro — karty referencí (lokalita, citace, autor)
+// Props: kicker, heading, items[] (place, quote, author), link
+const { kicker, heading, items = [], link } = Astro.props;
+---
+<section class="testimonial-section">
+  <div class="container">
+    <div class="section-heading">
+      {kicker && <span class="section-label">{kicker}</span>}
+      {heading && <h2>{heading}</h2>}
+    </div>
+    <div class="testimonial-grid">
+      {items.map((it) => (
+        <div class="testimonial-card">
+          <h4>{it.place}</h4>
+          <p class="testimonial-card__quote">„{it.quote}“</p>
+          <span class="testimonial-card__author">{it.author}</span>
+        </div>
+      ))}
+    </div>
+    {link && (
+      <div style="text-align:right; margin-top:var(--space-3);">
+        <a href={link.href} class="btn btn-secondary">{link.text}</a>
+      </div>
+    )}
+  </div>
+</section>

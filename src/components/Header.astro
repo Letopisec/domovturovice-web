@@ -1,0 +1,70 @@
+---
+import { SITE } from '../config/site';
+
+// Menu se definuje zde. Položka s "sub" má dropdown.
+// Uprav podle struktury konkrétního webu.
+const menu = [
+  { label: 'Domů', href: '/' },
+  // { label: 'Služby', href: '/sluzby', sub: [
+  //   { label: 'Podstránka', href: '/podstranka' },
+  // ]},
+  { label: 'Kontakt', href: '/kontakt' },
+];
+---
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img class="nav-logo-img" src="/images/logo.svg" alt={`${SITE.name} logo`} />
+      <span class="nav-logo-text">
+        <strong>{SITE.name}</strong>
+        {SITE.tagline && <small>{SITE.tagline}</small>}
+      </span>
+    </a>
+    <ul class="nav-menu">
+      {menu.map((item) => (
+        <li class={`nav-item ${item.sub ? 'has-sub' : ''}`}>
+          <a href={item.href}>{item.label}</a>
+          {item.sub && (
+            <div class="nav-dropdown">
+              {item.sub.map((s) => <a href={s.href}>{s.label}</a>)}
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+    <a href={`tel:${SITE.phoneHref}`} class="nav-phone-btn">{SITE.phone}</a>
+    <button class="hamburger" id="hamburger" aria-label="Otevřít menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<style>
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: var(--nav-height); background: rgba(255,255,255,0.97); border-bottom: 1px solid var(--clr-border); backdrop-filter: blur(10px); transition: box-shadow .3s; }
+.nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.09); }
+.nav-inner { max-width: var(--container); margin: 0 auto; padding: 0 24px; height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; flex-shrink: 0; }
+.nav-logo-img { height: 52px; width: auto; display: block; }
+.nav-logo-text { display: flex; flex-direction: column; gap: 3px; }
+.nav-logo-text strong { font-family: var(--ff-head); font-size: 1.3rem; font-weight: 700; color: var(--clr-primary); line-height: 1; }
+.nav-logo-text small { font-size: 10px; color: var(--clr-text-muted); letter-spacing: .06em; text-transform: uppercase; }
+.nav-menu { display: flex; align-items: center; gap: 0; list-style: none; margin-left: auto; }
+.nav-item { position: relative; }
+.nav-item > a { display: flex; align-items: center; gap: 5px; padding: 8px 11px; font-family: var(--ff-body); font-size: 15px; font-weight: 600; color: var(--clr-text-dark); text-decoration: none; border-radius: 6px; transition: color .2s, background .2s; white-space: nowrap; }
+.nav-item > a:hover, .nav-item.open > a { color: var(--clr-primary); background: var(--clr-primary-soft); }
+.nav-dropdown { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%) translateY(-6px); background: #fff; border-radius: 10px; border: 1px solid var(--clr-border); box-shadow: 0 8px 32px rgba(0,0,0,0.12); min-width: 220px; padding: 8px; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .18s, transform .18s; }
+.nav-item:hover .nav-dropdown, .nav-item.open .nav-dropdown { opacity: 1; visibility: visible; pointer-events: all; transform: translateX(-50%) translateY(0); }
+.nav-dropdown a { display: block; padding: 9px 14px; font-size: 15px; color: var(--clr-text-body); text-decoration: none; border-radius: 6px; transition: background .15s, color .15s; white-space: nowrap; }
+.nav-dropdown a:hover { background: var(--clr-primary-soft); color: var(--clr-primary); }
+.nav-phone-btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: 15px; font-weight: 600; background: var(--clr-primary); color: #fff; border-radius: 6px; text-decoration: none; transition: background .2s; white-space: nowrap; }
+.nav-phone-btn:hover { background: var(--clr-primary-hover); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: none; background: none; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--clr-text-dark); border-radius: 2px; transition: all .3s; }
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width: 768px) { .nav-menu, .nav-phone-btn { display: none; } .hamburger { display: flex; } }
+</style>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav?.classList.toggle('scrolled', window.scrollY > 30));
+</script>

@@ -1,0 +1,15 @@
+---
+// StatStrip.astro — jednoduchý pruh statistik (alternativa k TrustBar bez ikon)
+// Props: stats[] (number, label)
+const { stats = [] } = Astro.props;
+---
+<div class="trust-bar-outer">
+  <div class="trust-bar">
+    {stats.map((s) => (
+      <div class="trust-item">
+        <span class="trust-value">{s.number}</span>
+        <span class="trust-label">{s.label}</span>
+      </div>
+    ))}
+  </div>
+</div>

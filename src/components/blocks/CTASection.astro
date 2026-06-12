@@ -1,0 +1,18 @@
+---
+// CTASection.astro — závěrečná výzva k akci
+// Props: heading, text, buttons[] (text, href, variant)
+const { heading, text, buttons = [] } = Astro.props;
+---
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 set:html={heading} />
+      {text && <p set:html={text} />}
+      <div class="cta-group">
+        {buttons.map((b) => (
+          <a href={b.href} class={`btn ${b.variant === 'secondary' ? 'btn-secondary' : 'btn-primary'}`}>{b.text}</a>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

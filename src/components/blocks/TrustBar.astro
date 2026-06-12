@@ -1,0 +1,16 @@
+---
+// TrustBar.astro — pruh důvěry pod hero (ikona + hodnota + popisek)
+// Props: items[] (icon = Tabler ikona název, value, label)
+const { items = [] } = Astro.props;
+---
+<div class="trust-bar-outer">
+  <div class="trust-bar">
+    {items.map((it) => (
+      <div class="trust-item">
+        {it.icon && <i class={`ti ti-${it.icon}`}></i>}
+        <span class="trust-value">{it.value}</span>
+        <span class="trust-label">{it.label}</span>
+      </div>
+    ))}
+  </div>
+</div>

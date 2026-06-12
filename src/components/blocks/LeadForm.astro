@@ -1,0 +1,391 @@
+---
+// LeadForm.astro — znovupoužitelný formulář (inline i modal).
+// Sbírá data a posílá je JEN na interní endpoint /api/lead. O cílech (Sheets atd.) NEVÍ NIC.
+// Pole se renderují z presetu (variant) z formPresets.ts, nebo z propu `fields` (únikový ventil).
+//
+// Props:
+//   mode         'inline' | 'modal'   (default 'inline')
+//   variant      klíč presetu          (default 'konzultace')
+//   fields       FieldDef[]            volitelné — když je zadané, přebije preset
+//   destination  string                (default 'poptavka') — kam endpoint data pošle
+//   heading, lead                      hlavička (HTML)
+//   buttonText   text odesílacího tlačítka (default 'Odeslat')
+//   contactLine  volitelný HTML pod formulářem
+//   triggerText  text otevíracího tlačítka (jen mode='modal')
+import { formPresets, type FieldDef } from '../../config/formPresets';
+
+interface Props {
+  mode?: 'inline' | 'modal';
+  variant?: string;
+  fields?: FieldDef[];
+  destination?: string;
+  heading?: string;
+  lead?: string;
+  buttonText?: string;
+  contactLine?: string;
+  triggerText?: string;
+  id?: string;
+}
+
+const {
+  mode = 'inline',
+  variant = 'konzultace',
+  fields,
+  destination = 'poptavka',
+  heading,
+  lead,
+  buttonText = 'Odeslat',
+  contactLine,
+  triggerText = 'Mám zájem',
+  id,
+} = Astro.props as Props;
+
+const fieldDefs: FieldDef[] = fields ?? formPresets[variant] ?? [];
+---
+
+{mode === 'modal' && (
+  <button type="button" class="leadform-trigger btn btn-primary" data-leadform-open>{triggerText}</button>
+)}
+
+<div class={`leadform leadform--${mode}`} id={id} data-destination={destination} {...(mode === 'modal' ? { 'data-leadform-overlay': '', hidden: true } : {})}>
+  <div class="leadform__panel">
+    {mode === 'modal' && (
+      <button type="button" class="leadform__close" aria-label="Zavřít" data-leadform-close>&times;</button>
+    )}
+
+    {(heading || lead) && (
+      <div class="leadform__heading">
+        {heading && <h2 set:html={heading} />}
+        {lead && <p class="leadform__lead" set:html={lead} />}
+      </div>
+    )}
+
+    <form class="leadform__form" novalidate>
+      {fieldDefs.map((f) => {
+        if (f.type === 'textarea') {
+          return (
+            <textarea
+              class="leadform__field leadform__field--message"
+              name={f.name}
+              placeholder={f.placeholder}
+              rows="4"
+              required={f.required}
+            />
+          );
+        }
+        if (f.type === 'select') {
+          return (
+            <select class="leadform__field" name={f.name} required={f.required}>
+              {f.placeholder && <option value="" disabled selected>{f.placeholder}</option>}
+              {(f.options ?? []).map((o) => <option value={o.value}>{o.label}</option>)}
+            </select>
+          );
+        }
+        if (f.type === 'checkbox') {
+          return (
+            <label class="leadform__checkbox">
+              <input type="checkbox" name={f.name} required={f.required} />
+              <span set:html={f.label} />
+            </label>
+          );
+        }
+        // text | tel | email
+        return (
+          <input
+            class="leadform__field"
+            type={f.type}
+            name={f.name}
+            placeholder={f.placeholder}
+            autocomplete={f.autocomplete}
+            required={f.required}
+          />
+        );
+      })}
+
+      <button type="submit" class="leadform__submit btn btn-primary">{buttonText}</button>
+
+      <p class="leadform__status" data-leadform-status hidden></p>
+    </form>
+
+    {contactLine && <p class="leadform__contact" set:html={contactLine} />}
+  </div>
+</div>
+
+<style>
+  /* ── INLINE: usazená sekce (vizuální základ z původní ContactForm) ── */
+  .leadform--inline {
+    padding: var(--section-y) 0;
+    background: var(--color-primary-light);
+  }
+  .leadform--inline .leadform__panel {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--container-pad, var(--space-4));
+  }
+  .leadform__heading {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .leadform__lead {
+    color: var(--color-text-muted);
+    margin-top: var(--space-2);
+  }
+
+  .leadform__form {
+    display: flex;
+    gap: var(--space-2);
+    max-width: 800px;
+    margin: var(--space-4) auto 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .leadform__field {
+    flex: 1;
+    min-width: 180px;
+    padding: 13px var(--space-3);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    background: var(--color-white);
+    color: var(--color-text);
+    transition: border-color var(--transition);
+  }
+  .leadform__field:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-soft);
+  }
+  .leadform__field--message {
+    flex: 1 0 100%;
+    width: 100%;
+    resize: vertical;
+    line-height: var(--leading-normal);
+  }
+
+  .leadform__checkbox {
+    flex: 1 0 100%;
+    display: flex;
+    gap: var(--space-1);
+    align-items: flex-start;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-align: left;
+    line-height: var(--leading-normal);
+  }
+  .leadform__checkbox input {
+    margin-top: 3px;
+    accent-color: var(--color-accent);
+    flex: 0 0 auto;
+  }
+
+  .leadform__submit {
+    flex: 0 0 auto;
+  }
+
+  .leadform__status {
+    flex: 1 0 100%;
+    text-align: center;
+    margin: 0;
+    font-size: var(--text-body);
+  }
+  .leadform__status[data-state="ok"] { color: var(--color-primary); }
+  .leadform__status[data-state="error"] { color: var(--color-accent); }
+
+  .leadform__contact {
+    text-align: center;
+    margin-top: var(--space-3);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+  .leadform__contact :global(a) { color: var(--color-accent); }
+
+  /* ── MODAL: overlay přes celou obrazovku + panel ── */
+  .leadform-trigger {
+    display: inline-flex;
+  }
+  .leadform--modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3);
+    background: rgba(44, 62, 80, 0.55);
+  }
+  .leadform--modal[hidden] {
+    display: none;
+  }
+  .leadform--modal .leadform__panel {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    box-shadow: var(--shadow-hover);
+  }
+  .leadform--modal .leadform__form {
+    margin-top: var(--space-3);
+  }
+  .leadform--modal .leadform__field {
+    flex: 1 0 100%;
+  }
+  .leadform--modal .leadform__submit {
+    flex: 1 0 100%;
+  }
+
+  .leadform__close {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    border-radius: var(--radius-full);
+    transition: background var(--transition), color var(--transition);
+  }
+  .leadform__close:hover {
+    background: var(--color-primary-light);
+    color: var(--color-text);
+  }
+
+  @media (max-width: 768px) {
+    .leadform__form { flex-direction: column; }
+    .leadform__field { flex: 1 0 100%; }
+  }
+</style>
+
+<script>
+  type LeadFieldValue = string | boolean;
+
+  function initLeadForm(root: HTMLElement) {
+    const form = root.querySelector<HTMLFormElement>('.leadform__form');
+    if (!form) return;
+    const destination = root.getAttribute('data-destination') || 'poptavka';
+    const status = root.querySelector<HTMLElement>('[data-leadform-status]');
+    const submitBtn = form.querySelector<HTMLButtonElement>('.leadform__submit');
+
+    function showStatus(message: string, state: 'ok' | 'error') {
+      if (!status) return;
+      status.textContent = message;
+      status.setAttribute('data-state', state);
+      status.hidden = false;
+    }
+
+    function clearStatus() {
+      if (!status) return;
+      status.hidden = true;
+      status.removeAttribute('data-state');
+    }
+
+    // Klientská validace required polí (vč. povinného checkboxu).
+    function validate(): boolean {
+      const controls = form!.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+        'input, textarea, select'
+      );
+      for (const el of controls) {
+        if (!el.required) continue;
+        if (el instanceof HTMLInputElement && el.type === 'checkbox') {
+          if (!el.checked) {
+            el.focus();
+            return false;
+          }
+          continue;
+        }
+        if (!el.value.trim()) {
+          el.focus();
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function collect(): Record<string, LeadFieldValue> {
+      const data: Record<string, LeadFieldValue> = {};
+      const controls = form!.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+        'input, textarea, select'
+      );
+      for (const el of controls) {
+        if (!el.name) continue;
+        if (el instanceof HTMLInputElement && el.type === 'checkbox') {
+          data[el.name] = el.checked;
+        } else {
+          data[el.name] = el.value.trim();
+        }
+      }
+      return data;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearStatus();
+
+      if (!validate()) {
+        showStatus('Vyplňte prosím všechna povinná pole.', 'error');
+        return;
+      }
+
+      // Zdroj = cesta + query stránky (bez domény a hashe), ať je v tabulce vidět odkud poptávka přišla.
+      const zdroj = window.location.pathname + window.location.search;
+      const payload = { destination, fields: collect(), zdroj };
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const res = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) {
+          form.reset();
+          showStatus('Děkujeme, ozveme se.', 'ok');
+        } else {
+          showStatus('Něco se nepovedlo, zkuste to prosím znovu.', 'error');
+        }
+      } catch {
+        showStatus('Něco se nepovedlo, zkuste to prosím znovu.', 'error');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+
+  function initModal(root: HTMLElement) {
+    // Otevírací tlačítko je sourozenec overlaye; najdeme nejbližší předcházející trigger.
+    const overlay = root;
+    const trigger = overlay.previousElementSibling as HTMLElement | null;
+    const open = () => { overlay.hidden = false; document.body.style.overflow = 'hidden'; };
+    const close = () => { overlay.hidden = true; document.body.style.overflow = ''; };
+
+    if (trigger && trigger.hasAttribute('data-leadform-open')) {
+      trigger.addEventListener('click', open);
+    }
+    overlay.querySelectorAll('[data-leadform-close]').forEach((el) =>
+      el.addEventListener('click', close)
+    );
+    // Klik mimo panel (na overlay) zavře.
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
+    // Esc zavře.
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay.hidden) close();
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('.leadform').forEach((root) => {
+    initLeadForm(root);
+    if (root.hasAttribute('data-leadform-overlay')) initModal(root);
+  });
+</script>

@@ -1,0 +1,101 @@
+/* ════════════════════════════════════════════════════════════════
+   TOKENS.CSS — THEME VRSTVA NOVÉHO PROJEKTU
+   ────────────────────────────────────────────────────────────────
+   TOHLE JE JEDINÝ SOUBOR, KTERÝ MĚNÍŠ PRO NOVÝ WEB.
+   Změň barvy + fonty zde a celý web se přebarví.
+   Systém: 8px spacing grid, --color-* paleta, dvě písma.
+   ════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── BARVY — primární (hlavní firemní barva) ── */
+  --color-primary:        #325096;   /* TODO: primární barva projektu */
+  --color-primary-90:     rgba(50, 80, 150, 0.39);
+  --color-primary-soft:   rgba(50, 80, 150, 0.20);
+  --color-primary-light:  rgba(50, 80, 150, 0.13);
+  --color-primary-ghost:  rgba(50, 80, 150, 0.08);
+  --color-primary-hover:  #28406f;   /* tmavší odstín pro hover */
+
+  /* ── BARVY — akcent (CTA tlačítka, zvýraznění) ── */
+  --color-accent:         #BE2832;   /* TODO: akcentová barva */
+  --color-accent-hover:   #9e2028;
+  --color-accent-light:   rgba(190, 40, 50, 0.10);
+
+  /* ── BARVY — neutrální (obvykle netřeba měnit) ── */
+  --color-dark:           #2C3E50;
+  --color-neutral-800:    #2C3E50;
+  --color-bg:             #F5F7FA;   /* pozadí stránky */
+  --color-surface:        #FFFFFF;   /* karty, povrchy */
+  --color-white:          #FFFFFF;
+  --color-text:           #2C3E50;
+  --color-text-muted:     #6B7A8D;
+  --color-border:         #DDE3EE;
+
+  /* ── BARVY — hero gradient přes fotku ── */
+  --hero-overlay-left:    rgba(50, 80, 150, 0.93);
+  --hero-overlay-right:   rgba(50, 80, 150, 0.25);
+
+  /* ── TYPOGRAFIE ── */
+  --font-serif:    'Crimson Text', Georgia, serif;       /* TODO: nadpisy */
+  --font-sans:     'Inter', system-ui, sans-serif;       /* TODO: tělo + UI */
+
+  --text-xs:    0.75rem;   /* 12px */
+  --text-sm:    0.875rem;  /* 14px */
+  --text-base:  1rem;      /* 16px */
+  --text-lg:    1.125rem;  /* 18px */
+  --text-xl:    1.25rem;   /* 20px */
+  --text-2xl:   1.5rem;    /* 24px */
+  --text-3xl:   2rem;      /* 32px */
+  --text-4xl:   2.75rem;   /* 44px */
+  --text-hero:  3.5rem;    /* 56px */
+
+  --text-h1:    clamp(36px, 4vw, 52px);
+  --text-h2:    clamp(28px, 3vw, 38px);
+  --text-h3:    clamp(1.15rem, 2vw, 1.4rem);
+  --text-perex: 19px;
+  --text-body:  17px;
+
+  --leading-tight:   1.2;
+  --leading-normal:  1.6;
+  --leading-heading: 1.2;
+  --leading-perex:   1.5;
+  --leading-body:    1.7;
+  --font-normal:     400;
+  --font-medium:     500;
+  --font-semibold:   600;
+  --font-bold:       700;
+
+  /* ── SPACING — 8px grid ── */
+  --space-1:   0.5rem;   /* 8px */
+  --space-2:   1rem;     /* 16px */
+  --space-3:   1.5rem;   /* 24px */
+  --space-4:   2rem;     /* 32px */
+  --space-5:   2.5rem;   /* 40px */
+  --space-6:   3rem;     /* 48px */
+  --space-8:   4rem;     /* 64px */
+  --space-12:  6rem;     /* 96px */
+  --space-16:  8rem;     /* 128px */
+
+  /* ── BREAKPOINTY ── */
+  --bp-mobile:  480px;
+  --bp-tablet:  768px;
+  --bp-desktop: 1024px;
+  --bp-wide:    1280px;
+
+  /* ── LAYOUT ── */
+  --container-max:    1200px;
+  --container-pad:    var(--space-4);
+  --nav-height:       70px;
+  --section-y:        var(--space-12);
+  --radius:           8px;
+  --radius-sm:        4px;
+  --radius-md:        8px;
+  --radius-lg:        16px;
+  --radius-full:      9999px;
+  --shadow-sm:        0 1px 4px rgba(50,80,150,0.06);
+  --shadow-md:        0 4px 12px rgba(50,80,150,0.12);
+  --shadow-card:      0 2px 12px rgba(50,80,150,0.10);
+  --shadow-hover:     0 6px 24px rgba(50,80,150,0.18);
+
+  --transition: 0.2s ease;
+  --transition-slow: 0.35s ease;
+}

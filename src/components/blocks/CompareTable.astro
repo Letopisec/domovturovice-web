@@ -1,0 +1,31 @@
+---
+// CompareTable.astro — srovnávací tabulka (zvýrazněný sloupec = nejlepší volba)
+// Props: kicker, heading, lead, columns[] (názvy sloupců), highlightCol (index),
+//        rows[] ({ label, values[] })
+const { kicker, heading, lead, columns = [], highlightCol = 0, rows = [] } = Astro.props;
+---
+<section class="compare-section">
+  <div class="container">
+    <div class="section-heading">
+      {kicker && <span class="section-label">{kicker}</span>}
+      {heading && <h2>{heading}</h2>}
+      {lead && <p>{lead}</p>}
+    </div>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          {columns.map((col, i) => <th class={i === highlightCol ? 'col-highlight' : ''}>{col}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr>
+            <th>{row.label}</th>
+            {row.values.map((v, i) => <td class={i === highlightCol ? 'col-highlight' : ''}>{v}</td>)}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</section>

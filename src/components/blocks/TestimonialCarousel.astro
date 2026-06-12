@@ -1,0 +1,239 @@
+---
+// TestimonialCarousel.astro — jednoduchý carousel referencí (port carousel varianty z Molti)
+// Props:
+//   kicker?   string   — sekční label nad nadpisem
+//   heading?  string   — nadpis sekce
+//   items[]   { quote, author, role, photo?, rating? }
+//             quote  = text reference
+//             author = jméno
+//             role   = role/popis (např. "majitel RD, Opava")
+//             photo  = URL fotky (volitelné — když chybí, placeholder kolečko)
+//             rating = číslo 1–5 (volitelné — když chybí, hvězdičky se nezobrazí)
+const { kicker, heading, items = [] } = Astro.props;
+---
+<section class="testimonial-carousel-section">
+  <div class="container">
+    {(kicker || heading) && (
+      <div class="section-heading">
+        {kicker && <span class="section-label">{kicker}</span>}
+        {heading && <h2>{heading}</h2>}
+      </div>
+    )}
+
+    <div class="tc-wrap">
+      <div class="tc-track">
+        {items.map((it, i) => (
+          <div class={`tc-slide${i === 0 ? ' is-active' : ''}`}>
+            <div class="tc-inner">
+              <div class="tc-quote"><i class="ti ti-quote"></i></div>
+              {it.rating && (
+                <div class="tc-stars">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <span class={`tc-star${n <= it.rating ? ' filled' : ''}`}>★</span>
+                  ))}
+                </div>
+              )}
+              <p class="tc-text">„{it.quote}“</p>
+              <div class="tc-author">
+                {it.photo ? (
+                  <img class="tc-photo" src={it.photo} alt={it.author} loading="lazy" />
+                ) : (
+                  <span class="tc-photo-placeholder" aria-hidden="true"></span>
+                )}
+                <span class="tc-author-meta">
+                  <strong class="tc-name">{it.author}</strong>
+                  <span class="tc-role">{it.role}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="tc-controls">
+        <button class="tc-btn tc-prev" type="button" aria-label="Předchozí reference">
+          <i class="ti ti-chevron-left"></i>
+        </button>
+        <div class="tc-dots">
+          {items.map((_, i) => (
+            <button class={`tc-dot${i === 0 ? ' is-active' : ''}`} type="button" aria-label={`Reference ${i + 1}`}></button>
+          ))}
+        </div>
+        <button class="tc-btn tc-next" type="button" aria-label="Další reference">
+          <i class="ti ti-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-carousel-section { padding: var(--section-y) 0; }
+
+  .tc-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  /* ── KARTA / SLIDE ── */
+  .tc-track {
+    display: grid;
+    grid-template-areas: "stack";   /* všechny slidy do jedné buňky → výška nejdelšího */
+  }
+  .tc-slide {
+    grid-area: stack;               /* všechny slidy přes sebe do stejné buňky */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;           /* neaktivní slidy neberou kliky */
+    transition: opacity var(--transition-slow) ease;
+  }
+  .tc-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .tc-inner {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-5) var(--space-6);
+    text-align: center;
+  }
+
+  .tc-quote {
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+  }
+  .tc-quote i { font-size: 40px; line-height: 1; }
+
+  /* ── HVĚZDIČKY ── */
+  .tc-stars { margin-bottom: var(--space-3); }
+  .tc-star { color: var(--color-border); font-size: var(--text-lg); }
+  .tc-star.filled { color: var(--color-accent); }
+
+  /* ── CITACE ── */
+  .tc-text {
+    font-size: var(--text-lg);
+    line-height: var(--leading-body);
+    color: var(--color-text);
+    font-style: italic;
+    margin-bottom: var(--space-4);
+  }
+
+  /* ── AUTOR ── */
+  .tc-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+  }
+  .tc-photo,
+  .tc-photo-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    flex: 0 0 auto;
+  }
+  .tc-photo-placeholder { background: var(--color-border); }
+  .tc-author-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .tc-name {
+    font-family: var(--font-serif);
+    color: var(--color-primary);
+    font-weight: var(--font-semibold);
+  }
+  .tc-role {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── OVLÁDÁNÍ ── */
+  .tc-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+  }
+  .tc-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: border-color var(--transition), color var(--transition);
+  }
+  .tc-btn i { font-size: 22px; line-height: 1; }
+  .tc-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .tc-dots {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+  .tc-dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--color-border);
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+  .tc-dot.is-active { background: var(--color-primary); }
+
+  /* ── RESPONSIVITA ── */
+  @media (max-width: 480px) {
+    .tc-inner { padding: var(--space-4); }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.tc-wrap').forEach((wrap) => {
+    const slides = Array.from(wrap.querySelectorAll('.tc-slide'));
+    const dots = Array.from(wrap.querySelectorAll('.tc-dot'));
+    const prev = wrap.querySelector('.tc-prev');
+    const next = wrap.querySelector('.tc-next');
+    if (slides.length <= 1) return;
+
+    let current = 0;
+    let timer;
+
+    const goTo = (n) => {
+      current = (n + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('is-active', i === current));
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+    };
+
+    const start = () => {
+      timer = setInterval(() => goTo(current + 1), 4000);
+    };
+    const stop = () => clearInterval(timer);
+
+    prev?.addEventListener('click', () => goTo(current - 1));
+    next?.addEventListener('click', () => goTo(current + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+    wrap.addEventListener('mouseenter', stop);
+    wrap.addEventListener('mouseleave', start);
+
+    start();
+  });
+</script>

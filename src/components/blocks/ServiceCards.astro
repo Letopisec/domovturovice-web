@@ -1,0 +1,275 @@
+---
+// ServiceCards.astro — karty služeb ve 4 designech (port ze Molti ServiceBoxes)
+// Props:
+//   design  1 | 2 | 3 | 4        výběr vizuálu (default 1)
+//            4 = horizontální karta s CTA (jako D2) + rozlití barvy z rohu (jako D3);
+//                texty/ikona po rozlití zbělají, CTA zůstane bílé — doporučeno 2 sloupce vedle sebe.
+//   kicker / heading / lead      volitelná hlavička sekce
+//   columns 2 | 3                počet sloupců na desktopu (default 3)
+//   bg      'bg' | 'white'       pozadí sekce (default 'bg', jako CardGrid)
+//   id                           kotva sekce
+//   items[] { title, text, icon, link?, cta? }
+//            icon = název Tabler ikony bez prefixu → <i class="ti ti-${icon}">
+//            link/cta se použijí jen v Design 2 a 4; Design 1 a 3 je ignorují.
+const {
+  design = 1,
+  kicker,
+  heading,
+  lead,
+  columns = 3,
+  bg = 'bg',
+  id,
+  items = [],
+} = Astro.props;
+---
+<section class={`service-cards-section service-cards--d${design} bg-${bg}`} id={id}>
+  <div class="container">
+    {(kicker || heading || lead) && (
+      <div class="section-heading">
+        {kicker && <span class="section-label">{kicker}</span>}
+        {heading && <h2>{heading}</h2>}
+        {lead && <p>{lead}</p>}
+      </div>
+    )}
+
+    {design === 2 ? (
+      <div class="service-cards service-cards--horizontal" style={`grid-template-columns:repeat(${columns === 3 ? 2 : columns},1fr)`}>
+        {items.map((it) => (
+          <article class="service-card-2">
+            <span class="service-card-2__corner" aria-hidden="true"></span>
+            <div class="service-card-2__icon"><i class={`ti ti-${it.icon}`}></i></div>
+            <div class="service-card-2__body">
+              <h3 class="service-card-2__title">{it.title}</h3>
+              <p class="service-card-2__text">{it.text}</p>
+              {it.link && (
+                <a class="btn btn-secondary service-card-2__cta" href={it.link}>
+                  {it.cta || 'Zjistit více'}<i class="ti ti-arrow-right"></i>
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : design === 3 ? (
+      <div class="service-cards" style={`grid-template-columns:repeat(${columns},1fr)`}>
+        {items.map((it) => (
+          <article class="service-card-3">
+            <div class="service-card-3__inner">
+              <div class="service-card-3__icon"><i class={`ti ti-${it.icon}`}></i></div>
+              <h3 class="service-card-3__title">{it.title}</h3>
+              <p class="service-card-3__text">{it.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : design === 4 ? (
+      <div class="service-cards service-cards--horizontal" style={`grid-template-columns:repeat(${columns === 3 ? 2 : columns},1fr)`}>
+        {items.map((it) => (
+          <article class="service-card-4">
+            <div class="service-card-4__inner">
+              <div class="service-card-4__icon"><i class={`ti ti-${it.icon}`}></i></div>
+              <div class="service-card-4__body">
+                <h3 class="service-card-4__title">{it.title}</h3>
+                <p class="service-card-4__text">{it.text}</p>
+                {it.link && (
+                  <a class="btn btn-secondary service-card-4__cta" href={it.link}>
+                    {it.cta || 'Zjistit více'}<i class="ti ti-arrow-right"></i>
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    ) : (
+      <div class="service-cards" style={`grid-template-columns:repeat(${columns},1fr)`}>
+        {items.map((it) => (
+          <article class="service-card-1">
+            <div class="service-card-1__icon"><i class={`ti ti-${it.icon}`}></i></div>
+            <h3 class="service-card-1__title">{it.title}</h3>
+            <p class="service-card-1__text">{it.text}</p>
+            <span class="service-card-1__arrow" aria-hidden="true"><i class="ti ti-arrow-right"></i></span>
+          </article>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  /* ── Sekce (shoduje se s konvencí cardgrid-section) ── */
+  .service-cards-section { padding: var(--section-y) 0; }
+  .service-cards-section.bg-bg { background: var(--color-primary-light); }
+  .service-cards-section.bg-white { background: var(--color-white); }
+
+  .service-cards { display: grid; gap: var(--space-3); }
+
+  /* ════════════ DESIGN 1 — jednoduchá karta s šipkou ════════════ */
+  .service-card-1 {
+    position: relative;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-3);
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  }
+  .service-card-1:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-card);
+  }
+  .service-card-1__icon {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: var(--radius-md);
+    background: var(--color-primary-light);
+    margin-bottom: var(--space-3);
+  }
+  .service-card-1__icon i { font-size: 28px; line-height: 1; color: var(--color-primary); }
+  .service-card-1__title { font-size: var(--text-h3); color: var(--color-primary); margin-bottom: var(--space-1); }
+  .service-card-1__text { font-size: var(--text-body); line-height: var(--leading-body); color: var(--color-text-muted); }
+  .service-card-1__arrow {
+    display: inline-flex; margin-top: var(--space-2);
+    color: var(--color-primary);
+    transition: transform var(--transition);
+  }
+  .service-card-1__arrow i { font-size: 22px; }
+  .service-card-1:hover .service-card-1__arrow { transform: translateX(6px); }
+
+  /* ════════════ DESIGN 2 — horizontální karta s CTA + rohový akcent ════════════ */
+  .service-card-2 {
+    position: relative;
+    display: flex;
+    gap: var(--space-3);
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-3);
+    overflow: hidden;
+    transition: box-shadow var(--transition), transform var(--transition);
+  }
+  .service-card-2:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+  .service-card-2__corner {
+    position: absolute; top: 0; right: 0;
+    width: 64px; height: 64px;
+    background: var(--color-accent);
+    border-bottom-left-radius: var(--radius-full);
+    opacity: 0.9;
+  }
+  .service-card-2__icon {
+    flex: 0 0 auto;
+    width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: var(--radius-md);
+    background: var(--color-primary-light);
+  }
+  .service-card-2__icon i { font-size: 30px; line-height: 1; color: var(--color-primary); }
+  .service-card-2__body { display: flex; flex-direction: column; align-items: flex-start; }
+  .service-card-2__title { font-size: var(--text-h3); color: var(--color-primary); margin-bottom: var(--space-1); padding-right: var(--space-4); }
+  .service-card-2__text { font-size: var(--text-body); line-height: var(--leading-body); color: var(--color-text-muted); margin-bottom: var(--space-2); }
+  .service-card-2__cta { margin-top: auto; }
+
+  /* ════════════ DESIGN 3 — rozlití barvy z rohu ════════════ */
+  .service-card-3 {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-accent-light);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-3);
+  }
+  .service-card-3::before {
+    content: "";
+    position: absolute;
+    top: -26px; right: -26px;
+    width: 75px; height: 75px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+    transform: scale(1);
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+  .service-card-3:hover::before { transform: scale(21); }
+  .service-card-3__inner { position: relative; z-index: 1; }
+  .service-card-3__icon {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: var(--space-3);
+  }
+  .service-card-3__icon i { font-size: 32px; line-height: 1; color: var(--color-accent); transition: color var(--transition); }
+  .service-card-3__title { font-size: var(--text-h3); color: var(--color-text); margin-bottom: var(--space-1); transition: color var(--transition); }
+  .service-card-3__text { font-size: var(--text-body); line-height: var(--leading-body); color: var(--color-text); transition: color var(--transition); }
+  .service-card-3:hover .service-card-3__icon i,
+  .service-card-3:hover .service-card-3__title,
+  .service-card-3:hover .service-card-3__text { color: var(--color-white); }
+
+  /* ════════════ DESIGN 4 — horizontální karta + rozlití z rohu (bílé CTA) ════════════ */
+  /* Kombinace: layout a CTA z D2 + nafukovací kruh z D3. Klid = bílá karta jako D2. */
+  .service-card-4 {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-3);
+    transition: box-shadow var(--transition), transform var(--transition);
+  }
+  .service-card-4:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+  /* nafukovací kruh z rohu (mechanismus z D3) — nahrazuje statický corner z D2 */
+  .service-card-4::before {
+    content: "";
+    position: absolute;
+    top: -26px; right: -26px;
+    width: 75px; height: 75px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+    transform: scale(1);
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+  .service-card-4:hover::before { transform: scale(21); }
+  /* obsah nad rozlitou barvou + horizontální layout jako D2 */
+  .service-card-4__inner { position: relative; z-index: 1; display: flex; gap: var(--space-3); }
+  /* Zvolená varianta ikony: bez barevného boxu (čistá ikona) — bělání na červeném pozadí
+     pak funguje čistě a nevyžaduje řešit barvu boxu při hoveru. */
+  .service-card-4__icon {
+    flex: 0 0 auto;
+    width: 56px; height: 56px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .service-card-4__icon i { font-size: 32px; line-height: 1; color: var(--color-primary); transition: color var(--transition); }
+  .service-card-4__body { display: flex; flex-direction: column; align-items: flex-start; }
+  .service-card-4__title { font-size: var(--text-h3); color: var(--color-primary); margin-bottom: var(--space-1); transition: color var(--transition); }
+  .service-card-4__text { font-size: var(--text-body); line-height: var(--leading-body); color: var(--color-text-muted); margin-bottom: var(--space-2); transition: color var(--transition); }
+  /* po rozlití zbělají texty i ikona */
+  .service-card-4:hover .service-card-4__title,
+  .service-card-4:hover .service-card-4__text,
+  .service-card-4:hover .service-card-4__icon i { color: var(--color-white); }
+  /* CTA: v klidu červené (jako btn-secondary), po rozlití bílé na červené ploše → vyskočí */
+  .service-card-4__cta {
+    margin-top: auto;
+    transition: color var(--transition), border-color var(--transition), background var(--transition);
+  }
+  /* Hover přepis CTA: globální .btn-secondary (color/border-color: --color-accent) přebíjíme
+     zřetězením třídy .btn-secondary (vyšší specificita) + !important, aby bílá zabrala
+     spolehlivě nezávisle na pořadí v cascade. Ikonu uvnitř bělíme explicitně.
+     transition zůstává na .service-card-4__cta → přechod je plynulý. */
+  .service-card-4:hover .service-card-4__cta.btn-secondary {
+    background: var(--color-white) !important;
+    color: var(--color-accent) !important;
+    border-color: var(--color-white) !important;
+  }
+  .service-card-4:hover .service-card-4__cta.btn-secondary i {
+    color: var(--color-accent) !important;
+  }
+
+  /* ════════════ RESPONSIVITA ════════════ */
+  @media (max-width: 768px) {
+    .service-cards { grid-template-columns: repeat(2, 1fr) !important; }
+    .service-card-2 { flex-direction: column; }
+    .service-card-2__title { padding-right: var(--space-5); }
+    .service-card-4__inner { flex-direction: column; }
+  }
+  @media (max-width: 480px) {
+    .service-cards { grid-template-columns: 1fr !important; }
+  }
+</style>
