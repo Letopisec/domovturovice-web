@@ -6,7 +6,7 @@ import legalCheck from './integrations/legal-check.mjs';
 // site MUSÍ být produkční doména, NIKDY pages.dev.
 // Špatná hodnota = špatné canonical URL + Cloudflare cache problém "Uploaded 0 files".
 // → Při zakládání nového webu zde nastav reálnou produkční doménu.
-const SITE_URL = 'https://PRODUKCNI-DOMENA.cz';
+const SITE_URL = 'https://domovturovice.cz';
 
 // Sitemap se zapne automaticky, jakmile je nastavena reálná doména
 // (s placeholderem by build spadl).
