@@ -64,8 +64,8 @@ const trustItems = [
     min-height: auto;
     background-image:
       linear-gradient(135deg, rgba(20,10,12,0.74) 0%, rgba(20,10,12,0.54) 55%, rgba(20,10,12,0.28) 100%),
-      url('/images/hero-bg.jpg');
-    background-size: cover;
+      url('/images/hero-bg.jpg') !important;
+    background-size: cover !important;
     background-position: center 30%;
   }
   .page-hero__inner {
@@ -142,6 +142,7 @@ const trustItems = [
   .trust-bar {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto auto 1fr;
     gap: 16px;
     padding: 0 24px;
     max-width: var(--container-max);
@@ -150,9 +151,10 @@ const trustItems = [
     z-index: 1;
   }
   .trust-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    justify-items: center;
     text-align: center;
     gap: 14px;
     padding: 28px 16px;
