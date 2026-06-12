@@ -1,58 +1,77 @@
 /* ════════════════════════════════════════════════════════════════
-   TOKENS.CSS — THEME VRSTVA NOVÉHO PROJEKTU
+   TOKENS.CSS — Domov Turovice (přestavba z astro-web-starter)
    ────────────────────────────────────────────────────────────────
-   TOHLE JE JEDINÝ SOUBOR, KTERÝ MĚNÍŠ PRO NOVÝ WEB.
-   Změň barvy + fonty zde a celý web se přebarví.
-   Systém: 8px spacing grid, --color-* paleta, dvě písma.
+   Hodnoty převzaty z původního Turovice global.css (burgundy paleta,
+   Playfair Display + Source Sans 3, 4 akcentové barvy).
+   Konvence názvů: --color-* (starter), aliasy --clr-* ponechány pro
+   kompatibilitu se scoped style staré stránky, kdyby se kopírovaly.
    ════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── BARVY — primární (hlavní firemní barva) ── */
-  --color-primary:        #325096;   /* TODO: primární barva projektu */
-  --color-primary-90:     rgba(50, 80, 150, 0.39);
-  --color-primary-soft:   rgba(50, 80, 150, 0.20);
-  --color-primary-light:  rgba(50, 80, 150, 0.13);
-  --color-primary-ghost:  rgba(50, 80, 150, 0.08);
-  --color-primary-hover:  #28406f;   /* tmavší odstín pro hover */
+  /* ── BARVY — primární (Burgundy) ── */
+  --color-primary:        #9B4249;
+  --color-primary-90:     rgba(155, 66, 73, 0.39);
+  --color-primary-soft:   #F5EAEB;
+  --color-primary-light:  rgba(155, 66, 73, 0.13);
+  --color-primary-ghost:  rgba(155, 66, 73, 0.08);
+  --color-primary-hover:  #7D3139;
 
-  /* ── BARVY — akcent (CTA tlačítka, zvýraznění) ── */
-  --color-accent:         #BE2832;   /* TODO: akcentová barva */
-  --color-accent-hover:   #9e2028;
-  --color-accent-light:   rgba(190, 40, 50, 0.10);
+  /* ── BARVY — akcent (zelená — CTA, zvýraznění) ── */
+  --color-accent:         #5B7D5B;
+  --color-accent-hover:   #486348;
+  --color-accent-light:   #EEF4EE;
+  --color-accent-soft:    #EEF4EE;
 
-  /* ── BARVY — neutrální (obvykle netřeba měnit) ── */
-  --color-dark:           #2C3E50;
-  --color-neutral-800:    #2C3E50;
-  --color-bg:             #F5F7FA;   /* pozadí stránky */
-  --color-surface:        #FFFFFF;   /* karty, povrchy */
+  /* ── BARVY — doplňkové akcenty (z Turovice — sekce „pro rodiny", atp.) ── */
+  --color-extra-orange:       #C8902A;
+  --color-extra-orange-soft:  #FDF6E9;
+  --color-extra-blue:         #5A9BB5;
+  --color-extra-blue-soft:    #EDF5F9;
+
+  /* ── BARVY — neutrální ── */
+  --color-dark:           #1A1A1A;
+  --color-neutral-800:    #1A1A1A;
+  --color-bg:             #FAFAF8;
+  --color-surface:        #F5F3F0;
   --color-white:          #FFFFFF;
-  --color-text:           #2C3E50;
-  --color-text-muted:     #6B7A8D;
-  --color-border:         #DDE3EE;
+  --color-text:           #3D3D3D;
+  --color-text-muted:     #787268;
+  --color-border:         #E8E4E0;
 
   /* ── BARVY — hero gradient přes fotku ── */
-  --hero-overlay-left:    rgba(50, 80, 150, 0.93);
-  --hero-overlay-right:   rgba(50, 80, 150, 0.25);
+  --hero-overlay-left:    rgba(155, 66, 73, 0.93);
+  --hero-overlay-right:   rgba(155, 66, 73, 0.25);
 
   /* ── TYPOGRAFIE ── */
-  --font-serif:    'Crimson Text', Georgia, serif;       /* TODO: nadpisy */
-  --font-sans:     'Inter', system-ui, sans-serif;       /* TODO: tělo + UI */
+  --font-serif:    'Playfair Display', Georgia, serif;
+  --font-sans:     'Source Sans 3', system-ui, sans-serif;
 
-  --text-xs:    0.75rem;   /* 12px */
-  --text-sm:    0.875rem;  /* 14px */
-  --text-base:  1rem;      /* 16px */
-  --text-lg:    1.125rem;  /* 18px */
-  --text-xl:    1.25rem;   /* 20px */
-  --text-2xl:   1.5rem;    /* 24px */
-  --text-3xl:   2rem;      /* 32px */
-  --text-4xl:   2.75rem;   /* 44px */
-  --text-hero:  3.5rem;    /* 56px */
+  --text-xs:    0.75rem;
+  --text-sm:    0.875rem;
+  --text-base:  1rem;
+  --text-lg:    1.125rem;
+  --text-xl:    1.25rem;
+  --text-2xl:   1.5rem;
+  --text-3xl:   2rem;
+  --text-4xl:   2.75rem;
+  --text-hero:  3.5rem;
 
   --text-h1:    clamp(36px, 4vw, 52px);
   --text-h2:    clamp(28px, 3vw, 38px);
-  --text-h3:    clamp(1.15rem, 2vw, 1.4rem);
-  --text-perex: 19px;
+  --text-h3:    clamp(22px, 2vw, 26px);
+  --text-h4:    20px;
+  --text-perex: 20px;
   --text-body:  17px;
+  --text-ui:    16px;
+  --text-small: 15px;
+  --text-caption: 14px;
+  --text-meta:  13px;
+  --text-label: 12px;
+
+  --text-price-lg: 34px;
+  --text-price-md: 28px;
+  --text-price-sm: 24px;
+  --text-display-sm: 22px;
 
   --leading-tight:   1.2;
   --leading-normal:  1.6;
@@ -64,38 +83,79 @@
   --font-semibold:   600;
   --font-bold:       700;
 
-  /* ── SPACING — 8px grid ── */
-  --space-1:   0.5rem;   /* 8px */
-  --space-2:   1rem;     /* 16px */
-  --space-3:   1.5rem;   /* 24px */
-  --space-4:   2rem;     /* 32px */
-  --space-5:   2.5rem;   /* 40px */
-  --space-6:   3rem;     /* 48px */
-  --space-8:   4rem;     /* 64px */
-  --space-12:  6rem;     /* 96px */
-  --space-16:  8rem;     /* 128px */
+  --space-1:   0.5rem;
+  --space-2:   1rem;
+  --space-3:   1.5rem;
+  --space-4:   2rem;
+  --space-5:   2.5rem;
+  --space-6:   3rem;
+  --space-8:   4rem;
+  --space-12:  6rem;
+  --space-16:  8rem;
 
-  /* ── BREAKPOINTY ── */
+  --container:      1200px;
+  --container-max:  1200px;
+  --radius-card:    12px;
+  --radius-btn:     6px;
+  --radius-sm:      6px;
+  --radius-md:      12px;
+  --radius-lg:      16px;
+  --shadow-card:    0 2px 12px rgba(0,0,0,0.06);
+  --shadow-hover:   0 6px 24px rgba(0,0,0,0.11);
+  --nav-height:     80px;
+
   --bp-mobile:  480px;
   --bp-tablet:  768px;
   --bp-desktop: 1024px;
-  --bp-wide:    1280px;
 
-  /* ── LAYOUT ── */
-  --container-max:    1200px;
-  --container-pad:    var(--space-4);
-  --nav-height:       70px;
-  --section-y:        var(--space-12);
-  --radius:           8px;
-  --radius-sm:        4px;
-  --radius-md:        8px;
-  --radius-lg:        16px;
-  --radius-full:      9999px;
-  --shadow-sm:        0 1px 4px rgba(50,80,150,0.06);
-  --shadow-md:        0 4px 12px rgba(50,80,150,0.12);
-  --shadow-card:      0 2px 12px rgba(50,80,150,0.10);
-  --shadow-hover:     0 6px 24px rgba(50,80,150,0.18);
+  /* ── LEGACY ALIASY pro scoped style ze staré verze ── */
+  --clr-primary:        var(--color-primary);
+  --clr-primary-hover:  var(--color-primary-hover);
+  --clr-primary-soft:   var(--color-primary-soft);
+  --clr-green:          var(--color-accent);
+  --clr-green-soft:     var(--color-accent-soft);
+  --clr-orange:         var(--color-extra-orange);
+  --clr-orange-soft:    var(--color-extra-orange-soft);
+  --clr-blue:           var(--color-extra-blue);
+  --clr-blue-soft:      var(--color-extra-blue-soft);
+  --clr-white:          var(--color-white);
+  --clr-bg:             var(--color-bg);
+  --clr-surface:        var(--color-surface);
+  --clr-border:         var(--color-border);
+  --clr-text-dark:      var(--color-dark);
+  --clr-text-body:      var(--color-text);
+  --clr-text-muted:     var(--color-text-muted);
+  --clr-heading:        var(--color-dark);
+  --clr-text:           var(--color-text);
+  --clr-muted:          var(--color-text-muted);
+  --clr-bg-alt:         var(--color-surface);
 
-  --transition: 0.2s ease;
-  --transition-slow: 0.35s ease;
+  --font-display:       var(--font-serif);
+  --font-body:          var(--font-sans);
+  --ff-head:            var(--font-serif);
+  --ff-body:            var(--font-sans);
+
+  --font-size-h1:       52px;
+  --font-size-h2:       38px;
+  --font-size-h3:       26px;
+  --font-size-h4:       20px;
+  --font-size-h5:       17px;
+  --font-size-h1-mob:   36px;
+  --font-size-h2-mob:   28px;
+  --font-size-h3-mob:   22px;
+  --font-size-h4-mob:   18px;
+  --font-size-base:     var(--text-body);
+  --font-size-perex:    var(--text-perex);
+  --font-size-ui:       var(--text-ui);
+  --font-size-subhead:  18px;
+  --font-size-small:    var(--text-small);
+  --font-size-caption:  var(--text-caption);
+  --font-size-meta:     var(--text-meta);
+  --font-size-label:    var(--text-label);
+  --font-size-micro:    11px;
+  --font-size-nano:     10px;
+  --font-size-display-sm: var(--text-display-sm);
+  --font-size-price-lg: var(--text-price-lg);
+  --font-size-price-md: var(--text-price-md);
+  --font-size-price-sm: var(--text-price-sm);
 }
