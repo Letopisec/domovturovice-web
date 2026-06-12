@@ -10,7 +10,7 @@ const heroProps = {
   bgImage: '/images/hero-bg.jpg',
   buttons: [
     { text: 'Zjistit podmínky přijetí', href: '/prijeti', variant: 'primary' },
-    { text: 'Prohlédnout si domov', href: '/prostory', variant: 'outline' },
+    { text: 'Prohlédnout si domov', href: '/prostory', variant: 'secondary' },
   ],
 };
 
@@ -193,6 +193,7 @@ const trustItems = [
     font-size: var(--text-body);
     line-height: 1.6;
     color: var(--color-text-muted);
+    align-self: start;
   }
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
