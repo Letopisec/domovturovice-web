@@ -1,4 +1,4 @@
 User-agent: *
-Allow: /
+Disallow:
 
-Sitemap: https://PRODUKCNI-DOMENA.cz/sitemap-index.xml
+Sitemap: https://domovturovice.cz/sitemap.xml
