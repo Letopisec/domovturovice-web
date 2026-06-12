@@ -2,34 +2,51 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/blocks/PageHero.astro';
 import TrustBar from '../components/blocks/TrustBar.astro';
-import CardGrid from '../components/blocks/CardGrid.astro';
-import CTASection from '../components/blocks/CTASection.astro';
 
-// UKÁZKOVÁ HOMEPAGE – nahraď obsahem konkrétního projektu.
-const cards = [
-  { icon: 'check', title: 'Výhoda 1', text: 'Popis první klíčové výhody nebo služby.' },
-  { icon: 'tool', title: 'Výhoda 2', text: 'Popis druhé výhody.' },
-  { icon: 'chart-bar', title: 'Výhoda 3', text: 'Popis třetí výhody.' },
+const heroProps = {
+  kicker: 'Registrovaný poskytovatel sociálních služeb',
+  h1: 'Domov pro seniory v Olomouckém kraji – důstojná péče v Turovicích',
+  perex: 'Péče o seniory v Domově Turovice stojí na jednoduchém principu – každý člověk si zaslouží žít důstojně, bezpečně a v místě, kde se cítí doma. Nabízíme individuální přístup, 24hodinový zdravotní dohled a prostředí, které podporuje samostatnost a zachovává životní radost.',
+  bgImage: '/images/hero-bg.jpg',
+  buttons: [
+    { text: 'Zjistit podmínky přijetí', href: '/prijeti', variant: 'primary' },
+    { text: 'Prohlédnout si domov', href: '/prostory', variant: 'outline' },
+  ],
+};
+
+const trustItems = [
+  {
+    icon: 'map-pin',
+    value: 'Klidná lokalita',
+    label: 'Turovice, okres Přerov – zahrada s jezírkem, ovocný sad a bylinkový záhon',
+  },
+  {
+    icon: 'building',
+    value: '104 klientů',
+    label: 'Každý v bytě s vlastním sociálním zázemím, lodžie, jídelna, zimní zahrada',
+  },
+  {
+    icon: 'heart-handshake',
+    value: 'Péče 24/7',
+    label: 'Všeobecné sestry a pracovníci v přímé péči nepřetržitě, signalizace na každém pokoji',
+  },
+  {
+    icon: 'mood-smile',
+    value: 'Aktivní život',
+    label: 'Canisterapie, muzikoterapie, arteterapie, ergoterapie a pravidelné kulturní akce',
+  },
+  {
+    icon: 'shield-check',
+    value: 'Ověřený provoz',
+    label: 'Registrovaná sociální služba dle zákona č. 108/2006 Sb., standardy kvality MPSV',
+  },
 ];
-
-const schema = { '@type': 'WebSite', name: 'Název firmy', url: 'https://PRODUKCNI-DOMENA.cz' };
 ---
-<Layout title="Domovská stránka | Název firmy" description="Popis webu s CTA, max 155 znaků." schema={schema}>
-  <PageHero
-    kicker="Eyebrow text"
-    h1="Hlavní nadpis s <em>akcentem</em>"
-    perex="Úvodní perex, který vysvětlí návštěvníkovi, co web nabízí a proč by měl zůstat."
-    buttons={[
-      { text: 'Hlavní akce', href: '#konzultace' },
-      { text: 'Více informací', href: '#obsah', variant: 'secondary' },
-    ]}
-  />
-  <TrustBar items={[
-    { icon: 'award', value: '15+', label: 'let na trhu' },
-    { icon: 'badge-check', value: '500', label: 'realizací' },
-    { icon: 'clock', value: '24 h', label: 'odpovíme rychle' },
-    { icon: 'shield-check', value: 'Garance', label: 'spokojenosti' },
-  ]} />
-  <CardGrid kicker="Co nabízíme" heading="Naše výhody" columns={3} cards={cards} />
-  <CTASection heading="Máte zájem?" text="Ozvěte se nám." buttons={[{ text: 'Kontaktujte nás', href: '#konzultace' }]} />
+
+<Layout
+  title="Domov pro seniory Olomoucký kraj – Domov Turovice, péče o seniory"
+  description="Domov Turovice — péče o seniory s úctou a respektem. 104 klientů, vlastní byty, péče 24/7, registrovaná sociální služba."
+>
+  <PageHero {...heroProps} />
+  <TrustBar items={trustItems} />
 </Layout>
