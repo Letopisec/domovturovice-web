@@ -86,7 +86,6 @@ const allSchemas = [orgSchema, ...pageSchemas];
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href={fontsHref} rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 
   {allSchemas.map((s) => (
     <script type="application/ld+json" set:html={JSON.stringify(s)} />
