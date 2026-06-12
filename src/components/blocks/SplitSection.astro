@@ -15,8 +15,9 @@ const {
 const _label = label ?? kicker;
 const _reverse = imagePosition ? imagePosition === 'left' : reverse;
 const _paragraphs = text ? text.split('\n\n') : paragraphs;
+const _bgStyle = (bg !== 'white' && bg !== 'bg') ? `background: var(--color-${bg});` : undefined;
 ---
-<section class={`split-section bg-${bg}`}>
+<section class={`split-section bg-${bg}`} style={_bgStyle}>
   <div class="container">
     <div class={`split ${_reverse ? 'split--reverse' : ''}`}>
       <div>

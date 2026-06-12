@@ -97,17 +97,150 @@ const trustItems = [
     link={{ text: 'Více o procesu přijetí a potřebných dokumentech', href: '/prijeti' }}
   />
 
+  <section class="section spaces-section" style="padding: 80px 0;">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:32px; flex-wrap:wrap; gap:16px;">
+        <div>
+          <span class="section-label">Prostory a zázemí</span>
+          <h2 class="section-h2" style="margin-bottom:0">Podívejte se, jak to u nás vypadá</h2>
+        </div>
+        <a href="/prostory" class="about-link" style="flex-shrink:0">
+          Prohlídka celého domova <i class="ti ti-arrow-right"></i>
+        </a>
+      </div>
+      <div style="display:grid; grid-template-columns:2fr 1fr; gap:12px;">
+        <img src="/images/spaces-main.jpg" alt="Prostory Domova Turovice"
+          style="width:100%; height:420px; object-fit:cover; border-radius:12px;" loading="lazy">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <img src="/images/spaces-side1.jpg" alt="Pokoj klienta"
+            style="width:100%; height:204px; object-fit:cover; border-radius:12px;" loading="lazy">
+          <img src="/images/spaces-side2.jpg" alt="Zahrada a jezírko"
+            style="width:100%; height:204px; object-fit:cover; border-radius:12px;" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pricing-section" style="padding: 80px 0; background: var(--color-primary-soft);">
+    <div class="container">
+      <span class="section-label">Ceník</span>
+      <h2 class="section-h2">Transparentní ceník bez překvapení</h2>
+      <p class="section-intro">Celá cena péče se skládá z úhrady z 11 925 Kč + příspěvek na péči od MPSV.</p>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; position:relative; z-index:1;">
+        <div style="background:var(--color-white); border-radius:var(--radius-card); box-shadow:var(--shadow-card); padding:32px 28px 36px; display:flex; flex-direction:column; gap:12px;">
+          <span style="display:inline-block; background:var(--color-primary-soft); color:var(--color-primary); font-size:var(--text-label); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:4px; align-self:flex-start;">JEDNOLŮŽKOVÝ POKOJ</span>
+          <p style="font-family:var(--font-serif); font-size:var(--text-price-lg); font-weight:700; color:var(--color-primary); line-height:1.1; margin:0;">670 Kč<span style="font-family:var(--font-sans); font-size:var(--text-caption); font-weight:400; color:var(--color-text-muted);">/den</span></p>
+          <p style="font-size:var(--text-body); line-height:1.70; color:var(--color-text);">Vlastní sociální zázemí, lodžie u vybraných pokojů.</p>
+        </div>
+        <div style="background:var(--color-white); border-radius:var(--radius-card); box-shadow:var(--shadow-card); padding:32px 28px 36px; display:flex; flex-direction:column; gap:12px; border:2px solid var(--color-primary); position:relative;">
+          <span style="position:absolute; top:-14px; left:24px; background:var(--color-primary); color:white; font-size:var(--text-label); font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:4px 12px; border-radius:4px;">NEJOBLÍBENĚJŠÍ</span>
+          <span style="display:inline-block; background:var(--color-primary-soft); color:var(--color-primary); font-size:var(--text-label); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:4px; align-self:flex-start;">JEDNOLŮŽKOVÝ S BALKONEM</span>
+          <p style="font-family:var(--font-serif); font-size:var(--text-price-lg); font-weight:700; color:var(--color-primary); line-height:1.1; margin:0;">625 Kč<span style="font-family:var(--font-sans); font-size:var(--text-caption); font-weight:400; color:var(--color-text-muted);">/den</span></p>
+          <p style="font-size:var(--text-body); line-height:1.70; color:var(--color-text);">Vlastní sociální zázemí + balkon s výhledem do zahrady.</p>
+        </div>
+        <div style="background:linear-gradient(135deg, #f0f8f0 0%, #e6f4e6 100%); border:2px solid var(--color-theme-green); border-radius:var(--radius-card); box-shadow:var(--shadow-card); padding:32px 28px 36px; display:flex; flex-direction:column; gap:12px;">
+          <span style="display:inline-block; background:var(--color-theme-green-soft); color:var(--color-theme-green); font-size:var(--text-label); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:4px; align-self:flex-start;">PŘÍSPĚVEK NA PÉČI</span>
+          <p style="font-family:var(--font-serif); font-size:var(--text-price-lg); font-weight:700; color:var(--color-theme-green); line-height:1.1; margin:0;">až 19 200 Kč<span style="font-family:var(--font-sans); font-size:var(--text-caption); font-weight:400; color:var(--color-text-muted);">/měs</span></p>
+          <p style="font-size:var(--text-body); line-height:1.70; color:var(--color-text);">Příspěvek na péči od MPSV hradí část nákladů. Pomůžeme s vyřízením.</p>
+        </div>
+      </div>
+      <p style="margin-top:24px; font-size:var(--text-small); color:var(--color-text-muted);">
+        Uvedené ceny jsou za ubytování a stravu. Péče je hrazena z příspěvku na péči a zdravotního pojištění.
+        <a href="/cenik" style="color:var(--color-primary); font-weight:600;">Podrobný ceník →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding: 80px 0;">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px; flex-wrap:wrap; gap:16px;">
+        <div>
+          <span class="section-label">Co se u nás děje</span>
+          <h2 class="section-h2" style="margin-bottom:0">Aktuality z domova</h2>
+        </div>
+        <a href="/aktuality" class="about-link">Všechny aktuality <i class="ti ti-arrow-right"></i></a>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+        <div style="background:var(--color-white); border-radius:var(--radius-card); overflow:hidden; box-shadow:var(--shadow-card);">
+          <img src="/images/blog-1.jpg" alt="Aktualita ze zahrady" style="width:100%; height:200px; object-fit:cover;" loading="lazy">
+          <div style="padding:24px;">
+            <p style="font-size:var(--text-meta); color:var(--color-text-muted); margin-bottom:8px;">Aktivity</p>
+            <h3 style="font-size:var(--text-h4); font-family:var(--font-serif); margin-bottom:12px; line-height:1.3;">Z naší zahrady přímo na stůl – sezóna sklizně začíná</h3>
+            <a href="/aktuality" class="about-link" style="font-size:var(--text-small);">Číst více <i class="ti ti-arrow-right"></i></a>
+          </div>
+        </div>
+        <div style="background:var(--color-white); border-radius:var(--radius-card); overflow:hidden; box-shadow:var(--shadow-card);">
+          <img src="/images/blog-2.jpg" alt="Muzikoterapie" style="width:100%; height:200px; object-fit:cover;" loading="lazy">
+          <div style="padding:24px;">
+            <p style="font-size:var(--text-meta); color:var(--color-text-muted); margin-bottom:8px;">Terapie</p>
+            <h3 style="font-size:var(--text-h4); font-family:var(--font-serif); margin-bottom:12px; line-height:1.3;">Muzikoterapie – senioři společně zpěv šíří dál</h3>
+            <a href="/aktuality" class="about-link" style="font-size:var(--text-small);">Číst více <i class="ti ti-arrow-right"></i></a>
+          </div>
+        </div>
+        <div style="background:var(--color-white); border-radius:var(--radius-card); overflow:hidden; box-shadow:var(--shadow-card);">
+          <img src="/images/blog-3.jpg" alt="Spolupráce s nemocnicí" style="width:100%; height:200px; object-fit:cover;" loading="lazy">
+          <div style="padding:24px;">
+            <p style="font-size:var(--text-meta); color:var(--color-text-muted); margin-bottom:8px;">Spolupráce</p>
+            <h3 style="font-size:var(--text-h4); font-family:var(--font-serif); margin-bottom:12px; line-height:1.3;">Zahajujeme spolupráci s hranickou nemocnicí</h3>
+            <a href="/aktuality" class="about-link" style="font-size:var(--text-small);">Číst více <i class="ti ti-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SplitSection
+    label=""
+    heading="Rozhodnutí, se kterým vám můžeme pomoci"
+    paragraphs={[
+      'Hledáte bezpečné a důstojné místo pro svého blízkého? Chápeme, že jde o jedno z nejtěžších rozhodnutí v životě rodiny.',
+      'V Domově Turovice jsme tu od toho, abychom vás celým procesem provedli – od první otázky až po nastěhování. Zavolejte nebo přijeďte na prohlídku.',
+    ]}
+    image="/images/about-foto2.jpg"
+    imageAlt="Péče v Domově Turovice"
+    imagePosition="left"
+    link={{ text: 'Domluvit prohlídku', href: '/kontakt' }}
+    bg="surface"
+  />
+
   <CTASection
-    heading="Máte zájem o místo v Domově Turovice?"
-    text="Rádi vám odpovíme na všechny otázky a provedeme celým procesem přijetí. Kontaktujte nás nebo si rovnou stáhněte žádost o přijetí."
+    heading="Přijeďte se podívat. Zavolejte. Napište."
+    text="Rádi vám ukážeme domov osobně a odpovíme na všechny otázky."
     buttons={[
       { text: 'Kontaktujte nás', href: '/kontakt', variant: 'primary' },
+      { text: 'Přijeďte na prohlídku', href: '/prostory', variant: 'secondary' },
       { text: 'Podmínky přijetí', href: '/prijeti', variant: 'secondary' },
     ]}
   />
 </Layout>
 
 <style is:global>
+  /* ── HELPER TŘÍDY pro inline sekce ── */
+  .section-h2 {
+    font-family: var(--font-serif);
+    font-size: var(--text-h2);
+    font-weight: var(--font-bold);
+    color: var(--color-primary);
+    line-height: var(--leading-heading);
+    margin-bottom: var(--space-1);
+  }
+  .section-intro {
+    font-size: var(--text-perex);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    line-height: var(--leading-body);
+    max-width: 680px;
+  }
+  .about-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: var(--text-body);
+  }
+  .about-link:hover { text-decoration: underline; }
+
   /* ── MEZERY SEKCÍ — homepage override ── */
   .split-section,
   .service-cards-section,
