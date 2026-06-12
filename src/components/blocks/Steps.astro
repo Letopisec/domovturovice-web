@@ -35,17 +35,31 @@ const { kicker, heading, lead, steps = [], columns = 4, link } = Astro.props;
     display: grid;
     gap: var(--space-5);
     counter-reset: step-counter;
+    position: relative;
+    align-items: start;
+  }
+  .steps::after {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: calc(24px + var(--space-5));
+    right: calc(24px + var(--space-5));
+    height: 2px;
+    background: var(--color-border);
+    z-index: 0;
   }
   .step {
     counter-increment: step-counter;
     position: relative;
-    padding-top: calc(56px + var(--space-3));
+    padding-top: calc(56px + var(--space-4));
+    text-align: center;
   }
   .step::before {
     content: counter(step-counter);
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -56,9 +70,10 @@ const { kicker, heading, lead, steps = [], columns = 4, link } = Astro.props;
     font-weight: var(--font-bold);
     line-height: 48px;
     text-align: center;
+    z-index: 1;
   }
   .step h3 {
-    font-size: var(--text-h3);
+    font-size: var(--text-h4);
     color: var(--color-primary);
     font-weight: var(--font-bold);
     margin-bottom: var(--space-1);
