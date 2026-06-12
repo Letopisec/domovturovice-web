@@ -142,7 +142,6 @@ const trustItems = [
   .trust-bar {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: auto auto 1fr;
     gap: 16px;
     padding: 0 24px;
     max-width: var(--container-max);
@@ -151,10 +150,9 @@ const trustItems = [
     z-index: 1;
   }
   .trust-item {
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 3;
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     gap: 14px;
     padding: 28px 16px;
@@ -188,12 +186,15 @@ const trustItems = [
     font-family: var(--font-sans);
     color: var(--color-dark);
     line-height: 1.4;
+    min-height: 2.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .trust-label {
     font-size: var(--text-body);
     line-height: 1.6;
     color: var(--color-text-muted);
-    align-self: start;
   }
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
