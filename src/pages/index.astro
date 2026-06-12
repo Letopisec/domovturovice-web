@@ -1,531 +1,445 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import PageHero from '../components/blocks/PageHero.astro';
-import TrustBar from '../components/blocks/TrustBar.astro';
-import SplitSection from '../components/blocks/SplitSection.astro';
-import Steps from '../components/blocks/Steps.astro';
-import CTASection from '../components/blocks/CTASection.astro';
-
-const heroProps = {
-  kicker: 'Registrovaný poskytovatel sociálních služeb',
-  h1: 'Domov pro seniory v Olomouckém kraji – důstojná péče v Turovicích',
-  perex: 'Péče o seniory v Domově Turovice stojí na jednoduchém principu – každý člověk si zaslouží žít důstojně, bezpečně a v místě, kde se cítí doma. Nabízíme individuální přístup, 24hodinový zdravotní dohled a prostředí, které podporuje samostatnost a zachovává životní radost.',
-  bgImage: '/images/hero-bg.jpg',
-  buttons: [
-    { text: 'Zjistit podmínky přijetí', href: '/prijeti', variant: 'primary' },
-    { text: 'Prohlédnout si domov', href: '/prostory', variant: 'secondary' },
-  ],
-};
-
-const aboutParagraphs = [
-  'Domov Turovice vznikl z iniciativy Ziny Filip Dadlíkové, která svou dvacetiletou zkušeností z přímé práce se seniory přesvědčila investora, aby ze zchátralé obecní budovy vybudoval moderní domov. Zapsaný ústav byl založen v roce 2017, první klientka přišla v srpnu 2025.',
-  '„Nejde o velký anonymní ústav. Jde o místo, kde personál zná každého klienta jménem, kde se vaří z vlastní zahrady a kde se o svátcích zpívá, tančí i slaví."',
-  'Právě takový domov jsme chtěli vybudovat – a dnes ho žijeme každý den společně s našimi klienty.',
-];
-
-const trustItems = [
-  {
-    icon: 'map-pin',
-    value: 'Klidná lokalita',
-    label: 'Turovice, okres Přerov – zahrada s jezírkem, ovocný sad a bylinkový záhon',
-  },
-  {
-    icon: 'building',
-    value: '104 klientů',
-    label: 'Každý v bytě s vlastním sociálním zázemím, lodžie, jídelna, zimní zahrada',
-  },
-  {
-    icon: 'heart-handshake',
-    value: 'Péče 24/7',
-    label: 'Všeobecné sestry a pracovníci v přímé péči nepřetržitě, signalizace na každém pokoji',
-  },
-  {
-    icon: 'mood-smile',
-    value: 'Aktivní život',
-    label: 'Canisterapie, muzikoterapie, arteterapie, ergoterapie a pravidelné kulturní akce',
-  },
-  {
-    icon: 'shield-check',
-    value: 'Ověřený provoz',
-    label: 'Registrovaná sociální služba dle zákona č. 108/2006 Sb., standardy kvality MPSV',
-  },
-];
 ---
-
 <Layout
   title="Domov pro seniory Olomoucký kraj – Domov Turovice, péče o seniory"
-  description="Domov Turovice — péče o seniory s úctou a respektem. 104 klientů, vlastní byty, péče 24/7, registrovaná sociální služba."
+  description="Domov Turovice nabízí seniorům důstojné bydlení, 24hodinovou péči a aktivizační program v Turovicích u Přerova."
 >
-  <PageHero {...heroProps} />
-  <TrustBar items={trustItems} />
 
-  <SplitSection
-    label="O nás"
-    heading="Náš příběh začal rozhodnutím udělat péči jinak"
-    paragraphs={aboutParagraphs}
-    image="/images/about-foto.jpg"
-    imageAlt="Příběh Domova Turovice"
-    link={{ text: 'Přečtěte si náš příběh', href: '/nas-pribeh' }}
-    imagePosition="right"
-  />
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <!-- Desktop: full-screen foto na pozadí přes CSS (mobil nestahuje) -->
+  <div class="hero-bg" role="img" aria-label="Domov Turovice budova a zahrada"></div>
+  <div class="hero-overlay"></div>
+  <!-- Mobilní foto banner — viditelný jen na mobilu, vložen do toku stránky -->
+  <div class="hero-mobile-photo" aria-hidden="true">
+    <picture>
+      <source srcset="/images/hero-bg-mobile.webp" type="image/webp">
+      <img src="/images/hero-bg.jpg" alt="" width="860" height="344" loading="eager" fetchpriority="high">
+    </picture>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+      Registrovaný poskytovatel sociálních služeb
+    </div>
+    <h1>Domov pro seniory v Olomouckém kraji – důstojná péče v Turovicích</h1>
+    <p class="hero-perex">Péče o seniory v Domově Turovice stojí na jednoduchém principu – každý člověk si zaslouží žít důstojně, bezpečně a v místě, kde se cítí doma. Nabízíme individuální přístup, 24hodinový zdravotní dohled a prostředí, které podporuje samostatnost a zachovává životní radost.</p>
+    <div class="hero-btn-wrap">
+      <a href="/prijeti" class="hero-btn-primary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Zjistit podmínky přijetí</a>
+      <a href="/prijeti" class="hero-btn-secondary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Zjistit podmínky přijetí</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div><span>Posunout dolů</span></div>
+</section>
 
-  <section class="section care-section" style="padding: 80px 0; background: var(--color-bg);">
-    <div class="container">
-      <span class="section-label">Péče a služby</span>
-      <h2 class="section-h2">Komplexní péče pod jednou střechou</h2>
-      <p class="section-intro">Nabídka péče vychází z toho, co klient skutečně potřebuje. Každý klient má svůj individuální plán péče, který tým pravidelně přehodnocuje.</p>
-      <div class="care-grid">
-
-        <div class="care-card c-burg">
-          <img class="care-card-img" src="/images/care-img1.jpg" alt="Ošetřovatelská péče" loading="lazy">
-          <div class="care-card-body">
-            <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
-            <h3>Ošetřovatelská péče</h3>
-            <p>Všeobecné sestry pečují o klienty nepřetržitě, 24 hodin denně. Starají se o podávání léků, ošetřování ran, sledování zdravotního stavu a komunikaci s lékaři.</p>
-            <a href="/jak-pecujeme" class="care-card-btn">Jak pečujeme →</a>
-          </div>
-        </div>
-
-        <div class="care-card c-burg">
-          <img class="care-card-img" src="/images/care-img2.jpg" alt="Přímá osobní péče" loading="lazy">
-          <div class="care-card-body">
-            <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
-            <h3>Přímá osobní péče</h3>
-            <p>Pracovníci v přímé péči pomáhají při hygieně, oblékání, pohybu a dalších každodenních činnostech. Přístup je vždy šetrný a respektuje soukromí každého klienta.</p>
-            <a href="/jak-pecujeme" class="care-card-btn">Náš přístup →</a>
-          </div>
-        </div>
-
-        <div class="care-card c-orng">
-          <img class="care-card-img" src="/images/care-img3.jpg" alt="Stravování" loading="lazy">
-          <div class="care-card-body">
-            <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M18.06 22.99h1.66c.84 0 1.53-.64 1.63-1.46L23 5.05h-5V1h-1.97v4.05h-4.97l.3 2.34c1.71.47 3.31 1.32 4.27 2.26 1.44 1.42 2.43 2.89 2.43 5.29v8.05zM1 21.99V21h15.03v.99c0 .55-.45 1-1.01 1H2.01c-.56 0-1.01-.45-1.01-1zm15.03-7c0-8-15.03-8-15.03 0h15.03zM1.02 17h15v2H1z"/></svg></div>
-            <h3>Stravování z vlastní kuchyně</h3>
-            <p>Klienti dostávají pět jídel denně. Jídla se připravují v domácí kuchyni, kde kuchaři v sezóně pracují i s vlastní zeleninou ze skleníku.</p>
-            <a href="/stravovani" class="care-card-btn">O stravování →</a>
-          </div>
-        </div>
-
-        <div class="care-card c-gren">
-          <img class="care-card-img" src="/images/care-img4.jpg" alt="Aktivizace seniorů" loading="lazy">
-          <div class="care-card-body">
-            <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm3.51 9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg></div>
-            <h3>Aktivizace a volný čas</h3>
-            <p>Každý den probíhají aktivity přizpůsobené kondici klientů – trénink paměti, arteterapie, canisterapie nebo muzikoterapie.</p>
-            <a href="/aktivizace" class="care-card-btn">Program aktivit →</a>
-          </div>
-        </div>
-
-        <div class="care-card c-blue">
-          <img class="care-card-img" src="/images/care-img5.jpg" alt="Sociální poradenství" loading="lazy">
-          <div class="care-card-body">
-            <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 9h-2V5h2v6zm0 4h-2v-2h2v2z"/></svg></div>
-            <h3>Sociální poradenství</h3>
-            <p>Sociální pracovnice pomáhají klientům i rodinám s administrativou – od vyřízení příspěvku na péči až po komunikaci s úřady.</p>
-            <a href="/prijeti" class="care-card-btn">Poradenství →</a>
-          </div>
-        </div>
-
-        <div class="care-card c-orng">
-          <img class="care-card-img" src="/images/care-img6.jpg" alt="Rehabilitace a ergoterapie" loading="lazy">
-          <div class="care-card-body">
-            <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg></div>
-            <h3>Rehabilitace a ergoterapie</h3>
-            <p>Rehabilitační program podporuje pohyblivost a soběstačnost. Ergoterapie pomáhá nacvičovat každodenní dovednosti.</p>
-            <a href="/jak-pecujeme" class="care-card-btn">Rehabilitace →</a>
-          </div>
-        </div>
-
+<!-- ══ RYCHLÝ PŘEHLED ══ -->
+<section class="quick-strip has-circles">
+  <div class="container">
+    <div class="quick-grid">
+      <div class="quick-item">
+        <div class="quick-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+        <p class="quick-title">Klidná lokalita</p>
+        <p class="caption">Turovice, okres Přerov – zahrada s jezírkem, ovocný sad a bylinkový záhon</p>
+      </div>
+      <div class="quick-item">
+        <div class="quick-icon"><svg viewBox="0 0 24 24"><path d="M4 10v7h3v-7H4zm6 0v7h3v-7h-3zM2 22h19v-3H2v3zm14-12v7h3v-7h-3zM11.5 1L2 6v2h19V6l-9.5-5z"/></svg></div>
+        <p class="quick-title">104 klientů</p>
+        <p class="caption">Každý v bytě s vlastním sociálním zázemím, lodžie, jídelna, zimní zahrada</p>
+      </div>
+      <div class="quick-item">
+        <div class="quick-icon"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+        <p class="quick-title">Péče 24/7</p>
+        <p class="caption">Všeobecné sestry a pracovníci v přímé péči nepřetržitě, signalizace na každém pokoji</p>
+      </div>
+      <div class="quick-item">
+        <div class="quick-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm3.51 9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg></div>
+        <p class="quick-title">Aktivní život</p>
+        <p class="caption">Canisterapie, muzikoterapie, arteterapie, ergoterapie a pravidelné kulturní akce</p>
+      </div>
+      <div class="quick-item">
+        <div class="quick-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
+        <p class="quick-title">Ověřený provoz</p>
+        <p class="caption">Registrovaná sociální služba dle zákona č. 108/2006 Sb., standardy kvality MPSV</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <Steps
-    kicker="Přijetí do domova"
-    heading="Cesta do Domova Turovice je jednoduchá"
-    lead="Přijetí do domova pro seniory nemusí být složitý proces. Provedeme vás každým krokem a odpovíme na všechny otázky, které vás zajímají."
-    steps={[
-      { title: 'Kontaktujte nás', text: 'Zavolejte nebo napište. Rádi vám odpovíme na první otázky a pomůžeme s žádostí o přijetí.' },
-      { title: 'Podejte žádost', text: 'Vyplníte žádost o přijetí spolu s vyjádřením lékaře o zdravotním stavu. Žádost posoudíme a zařadíme do evidence.' },
-      { title: 'Sociální šetření', text: 'Naše sociální pracovnice přijede za vámi domů, aby poznala situaci a potřeby vašeho blízkého.' },
-      { title: 'Podpis smlouvy a nastěhování', text: 'Po uvolnění místa vás kontaktujeme, domluvíme termín, podepíšeme smlouvu a váš blízký se nastěhuje.' },
-    ]}
-    link={{ text: 'Více o procesu přijetí a potřebných dokumentech', href: '/prijeti' }}
-  />
+<!-- ══ O NÁS ══ -->
+<section class="section about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="section-label">O nás</span>
+        <h2 class="section-h2">Náš příběh začal rozhodnutím udělat péči jinak</h2>
+        <p>Domov Turovice vznikl z iniciativy Ziny Filip Dadlíkové, která svou dvacetiletou zkušeností z přímé práce se seniory přesvědčila investora, aby ze zchátralé obecní budovy vybudoval moderní domov. Zapsaný ústav byl založen v roce 2017, první klientka přišla v srpnu 2025.</p>
+        <blockquote>„Nejde o velký anonymní ústav. Jde o místo, kde personál zná každého klienta jménem, kde se vaří z vlastní zahrady a kde se o svátcích zpívá, tančí i slaví."</blockquote>
+        <p>Právě takový domov jsme chtěli vybudovat – a dnes ho žijeme každý den společně s našimi klienty.</p>
+        <a href="/nas-pribeh" class="about-link">Přečtěte si náš příběh <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
+      </div>
+      <div class="about-image">
+        <picture>
+              <source srcset="/images/about-foto.webp" type="image/webp">
+              <img src="/images/about-foto.jpg" alt="Příběh Domova Turovice" loading="lazy" width="720" height="321">
+            </picture>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <section class="section spaces-section" style="padding: 80px 0;">
-    <div class="container">
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:32px; flex-wrap:wrap; gap:16px;">
-        <div>
-          <span class="section-label">Prostory a zázemí</span>
-          <h2 class="section-h2" style="margin-bottom:0">Podívejte se, jak to u nás vypadá</h2>
+<!-- ══ PÉČE A SLUŽBY ══ -->
+<section class="section care-section">
+  <div class="container">
+    <span class="section-label">Péče a služby</span>
+    <h2 class="section-h2">Komplexní péče pod jednou střechou</h2>
+    <p class="section-intro">Nabídka péče vychází z toho, co klient skutečně potřebuje. Každý klient má svůj individuální plán péče, který tým pravidelně přehodnocuje.</p>
+    <div class="care-grid">
+      <div class="care-card c-burg">
+        <img class="care-card-img" src="/images/care-img1.jpg" alt="Ošetřovatelská péče" loading="lazy">
+        <div class="care-card-body">
+          <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg></div>
+          <h3>Ošetřovatelská péče</h3>
+          <p>Všeobecné sestry pečují o klienty nepřetržitě, 24 hodin denně. Starají se o podávání léků, ošetřování ran, sledování zdravotního stavu a komunikaci s lékaři.</p>
+          <a href="/jak-pecujeme" class="care-card-btn">Jak pečujeme →</a>
         </div>
-        <a href="/prostory" class="about-link" style="flex-shrink:0">
-          Prohlídka celého domova <i class="ti ti-arrow-right"></i>
+      </div>
+      <div class="care-card c-burg">
+        <img class="care-card-img" src="/images/care-img2.jpg" alt="Přímá osobní péče" loading="lazy">
+        <div class="care-card-body">
+          <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+          <h3>Přímá osobní péče</h3>
+          <p>Pracovníci v přímé péči pomáhají při hygieně, oblékání, pohybu a dalších každodenních činnostech. Přístup je vždy šetrný a respektuje soukromí každého klienta.</p>
+          <a href="/jak-pecujeme" class="care-card-btn">Náš přístup →</a>
+        </div>
+      </div>
+      <div class="care-card c-orng">
+        <img class="care-card-img" src="/images/care-img3.jpg" alt="Stravování" loading="lazy">
+        <div class="care-card-body">
+          <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M18.06 22.99h1.66c.84 0 1.53-.64 1.63-1.46L23 5.05h-5V1h-1.97v4.05h-4.97l.3 2.34c1.71.47 3.31 1.32 4.27 2.26 1.44 1.42 2.43 2.89 2.43 5.29v8.05zM1 21.99V21h15.03v.99c0 .55-.45 1-1.01 1H2.01c-.56 0-1.01-.45-1.01-1zm15.03-7c0-8-15.03-8-15.03 0h15.03zM1.02 17h15v2H1z"/></svg></div>
+          <h3>Stravování z vlastní kuchyně</h3>
+          <p>Klienti dostávají pět jídel denně. Jídla se připravují v domácí kuchyni, kde kuchaři v sezóně pracují i s vlastní zeleninou ze skleníku.</p>
+          <a href="/stravovani" class="care-card-btn">O stravování →</a>
+        </div>
+      </div>
+      <div class="care-card c-gren">
+        <img class="care-card-img" src="/images/care-img4.jpg" alt="Aktivizace seniorů" loading="lazy">
+        <div class="care-card-body">
+          <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm3.51 9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg></div>
+          <h3>Aktivizace a volný čas</h3>
+          <p>Každý den probíhají aktivity přizpůsobené kondici klientů – trénink paměti, arteterapie, canisterapie nebo muzikoterapie.</p>
+          <a href="/aktivizace" class="care-card-btn">Program aktivit →</a>
+        </div>
+      </div>
+      <div class="care-card c-blue">
+        <img class="care-card-img" src="/images/care-img5.jpg" alt="Sociální poradenství" loading="lazy">
+        <div class="care-card-body">
+          <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 9h-2V5h2v6zm0 4h-2v-2h2v2z"/></svg></div>
+          <h3>Sociální poradenství</h3>
+          <p>Sociální pracovnice pomáhají klientům i rodinám s administrativou – od vyřízení příspěvku na péči až po komunikaci s úřady.</p>
+          <a href="/prijeti" class="care-card-btn">Poradenství →</a>
+        </div>
+      </div>
+      <div class="care-card c-orng">
+        <img class="care-card-img" src="/images/care-img6.jpg" alt="Rehabilitace a ergoterapie" loading="lazy">
+        <div class="care-card-body">
+          <div class="care-icon"><svg viewBox="0 0 24 24"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg></div>
+          <h3>Rehabilitace a ergoterapie</h3>
+          <p>Rehabilitační program podporuje pohyblivost a soběstačnost. Ergoterapie pomáhá nacvičovat každodenní dovednosti.</p>
+          <a href="/jak-pecujeme" class="care-card-btn">Rehabilitace →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROSTORY ══ -->
+<section class="spaces-section">
+  <div class="container">
+    <div class="spaces-title-row">
+      <div>
+        <span class="section-label">Prostory a zázemí</span>
+        <h2 class="section-h2" style="margin-bottom:0">Podívejte se, jak to u nás vypadá</h2>
+      </div>
+      <a href="/prostory" class="about-link" style="flex-shrink:0">Prohlídka celého domova <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
+    </div>
+    <div class="spaces-grid">
+      <div class="spaces-main"><img src="/images/spaces-main.jpg" alt="Prostory Domova Turovice" style="border-radius:12px" loading="lazy"></div>
+      <div class="spaces-col">
+        <div class="spaces-side"><img src="/images/spaces-side1.jpg" alt="Pokoj klienta" style="border-radius:12px" loading="lazy"></div>
+        <div class="spaces-side"><img src="/images/spaces-side2.jpg" alt="Zahrada a jezírko" style="border-radius:12px" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PŘIJETÍ – KROKY ══ -->
+<section class="section steps-section">
+  <div class="container">
+    <span class="section-label">Přijetí do domova</span>
+    <h2 class="section-h2">Cesta do Domova Turovice je jednoduchá</h2>
+    <p class="section-intro">Přijetí do domova pro seniory nemusí být složitý proces. Provedeme vás každým krokem a odpovíme na všechny otázky, které vás zajímají.</p>
+    <div class="steps-grid">
+      <div class="steps-connector"></div>
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <p class="step-title">Kontaktujte nás</p>
+        <p>Zavolejte nebo napište. Rádi vám odpovíme na první otázky a pomůžeme s žádostí o přijetí.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <p class="step-title">Prohlídka a první rozhovor</p>
+        <p>Ukážeme vám prostory, představíme tým a popovídáme si o potřebách vašeho blízkého.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <p class="step-title">Vyplnění žádosti</p>
+        <p>Vyplníte žádost o přijetí a přiložíte vyjádření lékaře. Poradíme, jak vyřídit příspěvek na péči.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <p class="step-title">Přijetí a adaptace</p>
+        <p>Po přijetí věnujeme každému klientovi zvýšenou pozornost. Tým zpracuje individuální plán péče.</p>
+      </div>
+    </div>
+    <div class="steps-cta">
+      <a href="/prijeti" class="about-link" style="justify-content:center">Více o procesu přijetí a potřebných dokumentech <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CENÍK ══ -->
+<section class="section pricing-section has-circles">
+  <div class="container">
+    <span class="section-label">Ceník</span>
+    <h2 class="section-h2">Transparentní ceník bez překvapení</h2>
+    <p class="section-intro">Ceny jsou stanoveny v souladu s vyhláškou č. 505/2006 Sb. Níže uvádíme orientační přehled.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3>Jednolůžkový pokoj</h3>
+        <div class="pricing-price">670 Kč <span>/ den</span></div>
+        <p>Celková denní úhrada za ubytování a stravu. Součástí je vlastní pokoj o velikosti 12,6 m² s předsíní a sociálním zázemím.</p>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-badge">S lodžií</div>
+        <h3>Dvoulůžkový pokoj s balkónem</h3>
+        <div class="pricing-price">625 Kč <span>/ den</span></div>
+        <p>Pokoj s lodžií o velikosti 9,2 m² a větší podlahovou plochou 15,1 m². Vhodný pro páry nebo jako komfortnější varianta.</p>
+      </div>
+      <div class="pricing-card positive">
+        <div class="pricing-badge">Státní podpora</div>
+        <div class="pricing-price-note">✓ Snižuje vaše náklady</div>
+        <h3>Příspěvek na péči</h3>
+        <div class="pricing-price">Až 19 200 Kč <span>/ měsíc</span></div>
+        <p>Velkou část nákladů pokryje příspěvek na péči přiznaný Úřadem práce ČR. Výše závisí na stupni závislosti klienta (I.–IV. stupeň). Pomůžeme vám ho vyřídit.</p>
+        <a href="/cenik" class="about-link" style="color:var(--clr-green)">Jak příspěvek vyřídit <svg viewBox="0 0 24 24" style="fill:var(--clr-green)"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
+      </div>
+    </div>
+    <p class="pricing-note">Měsíční náklady se pohybují v rozmezí 18 750 – 20 100 Kč dle počtu dní a typu pokoje. &nbsp;<a href="/cenik">Zobrazit úplný ceník →</a></p>
+  </div>
+</section>
+
+<!-- ══ BLOG SLIDER ══ -->
+<section class="section blog-section">
+  <div class="container">
+    <div class="blog-header">
+      <div>
+        <span class="section-label">Aktuality a blog</span>
+        <h2 class="section-h2" style="margin-bottom:0">Co se u nás děje</h2>
+      </div>
+      <a href="/aktuality" class="btn btn-secondary">Všechny aktuality →</a>
+    </div>
+    <div class="blog-track-outer">
+      <div class="blog-track" id="blogTrack">
+        <a href="/canisterapie-prinasla-radost" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img1.jpg" alt="Canisterapie" loading="lazy">
+          <div class="blog-card-body">
+            <span class="blog-cat">Aktivizace</span>
+            <div class="blog-card-date">15. května 2026</div>
+            <h3>Canisterapie přinesla do domova radost a úsměvy</h3>
+            <p>Pravidelná canisterapeutická návštěva proběhla v pátek odpoledne.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
+        </a>
+        <a href="/arteterapie-jarni-krajiny" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img2.jpg" alt="Arteterapie" loading="lazy">
+          <div class="blog-card-body">
+            <span class="blog-cat">Aktivizace</span>
+            <div class="blog-card-date">3. května 2026</div>
+            <h3>Arteterapie: Jarní krajiny z rukou našich klientů</h3>
+            <p>Na arteterapeutickém setkání vznikly krásné jarní krajiny. Tvoření pomáhá procvičit jemnou motoriku.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
+        </a>
+        <a href="/jaro-v-zahrade" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img3.jpg" alt="Jaro v zahradě" loading="lazy">
+          <div class="blog-card-body">
+            <span class="blog-cat">Ze života domova</span>
+            <div class="blog-card-date">22. dubna 2026</div>
+            <h3>Jaro přišlo do naší zahrady – vítáme novou sezónu</h3>
+            <p>S příchodem teplého počasí se přesouváme ven. Klienti se těší na bylinky a skleník.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
+        </a>
+        <a href="/vareni-ze-zahrady" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img4.jpg" alt="Vaření ze zahrady" loading="lazy">
+          <div class="blog-card-body">
+            <span class="blog-cat">Stravování</span>
+            <div class="blog-card-date">10. dubna 2026</div>
+            <h3>Z naší zahrady přímo na stůl – sezóna zeleniny začíná</h3>
+            <p>V domácí kuchyni zahajujeme sezónu čerstvé zeleniny ze skleníku.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
+        </a>
+        <a href="/muzikoterapie-s-harmonikou" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img5.jpg" alt="Muzikoterapie" loading="lazy">
+          <div class="blog-card-body">
+            <span class="blog-cat">Aktivizace</span>
+            <div class="blog-card-date">1. dubna 2026</div>
+            <h3>Muzikoterapie s harmonikou: společný zpěv léčí duši</h3>
+            <p>Pravidelné setkání s harmonikou – jeden z nejoblíbenějších programů.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
+        </a>
+        <a href="/spoluprace-s-nemocnici" class="blog-card">
+          <img class="blog-card-img" src="/images/blog-img6.jpg" alt="Nová spolupráce" loading="lazy">
+          <div class="blog-card-body">
+            <span class="blog-cat">Oznámení</span>
+            <div class="blog-card-date">20. března 2026</div>
+            <h3>Zahajujeme spolupráci s hranickou nemocnicí</h3>
+            <p>Klienti mají zajištěno přednostní ošetření u odborných lékařů.</p>
+            <span class="blog-more">Číst více →</span>
+          </div>
         </a>
       </div>
-      <div style="display:grid; grid-template-columns:2fr 1fr; gap:12px;">
-        <img src="/images/spaces-main.jpg" alt="Prostory Domova Turovice"
-          style="width:100%; height:420px; object-fit:cover; border-radius:12px;" loading="lazy">
-        <div style="display:flex; flex-direction:column; gap:12px;">
-          <img src="/images/spaces-side1.jpg" alt="Pokoj klienta"
-            style="width:100%; height:204px; object-fit:cover; border-radius:12px;" loading="lazy">
-          <img src="/images/spaces-side2.jpg" alt="Zahrada a jezírko"
-            style="width:100%; height:204px; object-fit:cover; border-radius:12px;" loading="lazy">
+    </div>
+    <div class="blog-nav">
+      <button class="blog-btn" id="blogPrev" aria-label="Předchozí">
+        <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>
+      </button>
+      <div class="blog-dots" id="blogDots"></div>
+      <button class="blog-btn" id="blogNext" aria-label="Následující">
+        <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRO RODINY ══ -->
+<section class="section families-section has-circles">
+  <div class="container">
+    <div class="families-grid">
+      <div class="families-image">
+        <img src="/images/families-img.jpg" alt="Rodina s klientem v domově" loading="lazy">
+      </div>
+      <div>
+        <span class="section-label">Pro rodiny</span>
+        <h2 class="section-h2">Rozhodnutí, se kterým vám můžeme pomoct</h2>
+        <p>Uvažujete o umístění blízkého člověka do domova pro seniory? Víme, že to není snadné rozhodnutí. Přinese s sebou otázky, pochybnosti i obavy.</p>
+        <blockquote style="border-left:4px solid var(--clr-blue);padding-left:20px;margin:24px 0;border-left-color:var(--clr-blue)">Jsme připraveni vás provést celým procesem. Odpovíme na vaše otázky, vysvětlíme podmínky přijetí a poradíme s vyřízením příspěvku na péči.</blockquote>
+        <p>A až váš blízký nastoupí, neztrácíte kontakt. Rodiny jsou pro nás partneři – nejen návštěvníci.</p>
+        <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+          <a href="/prijeti" class="btn btn-primary">Informace pro rodiny</a>
+          <a href="/faq" class="btn btn-secondary">Časté otázky (FAQ)</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section pricing-section" style="padding: 80px 0; background: var(--color-primary-soft);">
-    <div class="container">
-      <span class="section-label">Ceník</span>
-      <h2 class="section-h2">Transparentní ceník bez překvapení</h2>
-      <p class="section-intro">Celá cena péče se skládá z úhrady z 11 925 Kč + příspěvek na péči od MPSV.</p>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; position:relative; z-index:1;">
-        <div style="background:var(--color-white); border-radius:var(--radius-card); box-shadow:var(--shadow-card); padding:32px 28px 36px; display:flex; flex-direction:column; gap:12px;">
-          <span style="display:inline-block; background:var(--color-primary-soft); color:var(--color-primary); font-size:var(--text-label); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:4px; align-self:flex-start;">JEDNOLŮŽKOVÝ POKOJ</span>
-          <p style="font-family:var(--font-serif); font-size:var(--text-price-lg); font-weight:700; color:var(--color-primary); line-height:1.1; margin:0;">670 Kč<span style="font-family:var(--font-sans); font-size:var(--text-caption); font-weight:400; color:var(--color-text-muted);">/den</span></p>
-          <p style="font-size:var(--text-body); line-height:1.70; color:var(--color-text);">Vlastní sociální zázemí, lodžie u vybraných pokojů.</p>
-        </div>
-        <div style="background:var(--color-white); border-radius:var(--radius-card); box-shadow:var(--shadow-card); padding:32px 28px 36px; display:flex; flex-direction:column; gap:12px; border:2px solid var(--color-primary); position:relative;">
-          <span style="position:absolute; top:-14px; left:24px; background:var(--color-primary); color:white; font-size:var(--text-label); font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:4px 12px; border-radius:4px;">NEJOBLÍBENĚJŠÍ</span>
-          <span style="display:inline-block; background:var(--color-primary-soft); color:var(--color-primary); font-size:var(--text-label); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:4px; align-self:flex-start;">JEDNOLŮŽKOVÝ S BALKONEM</span>
-          <p style="font-family:var(--font-serif); font-size:var(--text-price-lg); font-weight:700; color:var(--color-primary); line-height:1.1; margin:0;">625 Kč<span style="font-family:var(--font-sans); font-size:var(--text-caption); font-weight:400; color:var(--color-text-muted);">/den</span></p>
-          <p style="font-size:var(--text-body); line-height:1.70; color:var(--color-text);">Vlastní sociální zázemí + balkon s výhledem do zahrady.</p>
-        </div>
-        <div style="background:linear-gradient(135deg, #f0f8f0 0%, #e6f4e6 100%); border:2px solid var(--color-theme-green); border-radius:var(--radius-card); box-shadow:var(--shadow-card); padding:32px 28px 36px; display:flex; flex-direction:column; gap:12px;">
-          <span style="display:inline-block; background:var(--color-theme-green-soft); color:var(--color-theme-green); font-size:var(--text-label); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; padding:4px 10px; border-radius:4px; align-self:flex-start;">PŘÍSPĚVEK NA PÉČI</span>
-          <p style="font-family:var(--font-serif); font-size:var(--text-price-lg); font-weight:700; color:var(--color-theme-green); line-height:1.1; margin:0;">až 19 200 Kč<span style="font-family:var(--font-sans); font-size:var(--text-caption); font-weight:400; color:var(--color-text-muted);">/měs</span></p>
-          <p style="font-size:var(--text-body); line-height:1.70; color:var(--color-text);">Příspěvek na péči od MPSV hradí část nákladů. Pomůžeme s vyřízením.</p>
-        </div>
-      </div>
-      <p style="margin-top:24px; font-size:var(--text-small); color:var(--color-text-muted);">
-        Uvedené ceny jsou za ubytování a stravu. Péče je hrazena z příspěvku na péči a zdravotního pojištění.
-        <a href="/cenik" style="color:var(--color-primary); font-weight:600;">Podrobný ceník →</a>
-      </p>
+<!-- ══ CTA SEKCE ══ -->
+<section class="cta-section has-circles">
+  <div class="container">
+    <h2>Přijeďte se podívat. Zavolejte. Napište.</h2>
+    <p>Podejte žádost o přijetí nebo nám napište. Rádi vám vysvětlíme, jak přijetí probíhá a co budete potřebovat.</p>
+    <div class="cta-btns">
+      <a href="/prijeti" class="btn btn-cta-main">Zjistit podmínky přijetí</a>
+      <a href="tel:+420724211589" class="btn btn-cta-sec">+420 724 211 589</a>
+      <a href="mailto:info@domovturovice.cz" class="btn btn-cta-sec">Napsat e-mail</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="section" style="padding: 80px 0;">
-    <div class="container">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px; flex-wrap:wrap; gap:16px;">
-        <div>
-          <span class="section-label">Co se u nás děje</span>
-          <h2 class="section-h2" style="margin-bottom:0">Aktuality z domova</h2>
-        </div>
-        <a href="/aktuality" class="about-link">Všechny aktuality <i class="ti ti-arrow-right"></i></a>
-      </div>
-      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
-        <div style="background:var(--color-white); border-radius:var(--radius-card); overflow:hidden; box-shadow:var(--shadow-card);">
-          <img src="/images/blog-1.jpg" alt="Aktualita ze zahrady" style="width:100%; height:200px; object-fit:cover;" loading="lazy">
-          <div style="padding:24px;">
-            <p style="font-size:var(--text-meta); color:var(--color-text-muted); margin-bottom:8px;">Aktivity</p>
-            <h3 style="font-size:var(--text-h4); font-family:var(--font-serif); margin-bottom:12px; line-height:1.3;">Z naší zahrady přímo na stůl – sezóna sklizně začíná</h3>
-            <a href="/aktuality" class="about-link" style="font-size:var(--text-small);">Číst více <i class="ti ti-arrow-right"></i></a>
-          </div>
-        </div>
-        <div style="background:var(--color-white); border-radius:var(--radius-card); overflow:hidden; box-shadow:var(--shadow-card);">
-          <img src="/images/blog-2.jpg" alt="Muzikoterapie" style="width:100%; height:200px; object-fit:cover;" loading="lazy">
-          <div style="padding:24px;">
-            <p style="font-size:var(--text-meta); color:var(--color-text-muted); margin-bottom:8px;">Terapie</p>
-            <h3 style="font-size:var(--text-h4); font-family:var(--font-serif); margin-bottom:12px; line-height:1.3;">Muzikoterapie – senioři společně zpěv šíří dál</h3>
-            <a href="/aktuality" class="about-link" style="font-size:var(--text-small);">Číst více <i class="ti ti-arrow-right"></i></a>
-          </div>
-        </div>
-        <div style="background:var(--color-white); border-radius:var(--radius-card); overflow:hidden; box-shadow:var(--shadow-card);">
-          <img src="/images/blog-3.jpg" alt="Spolupráce s nemocnicí" style="width:100%; height:200px; object-fit:cover;" loading="lazy">
-          <div style="padding:24px;">
-            <p style="font-size:var(--text-meta); color:var(--color-text-muted); margin-bottom:8px;">Spolupráce</p>
-            <h3 style="font-size:var(--text-h4); font-family:var(--font-serif); margin-bottom:12px; line-height:1.3;">Zahajujeme spolupráci s hranickou nemocnicí</h3>
-            <a href="/aktuality" class="about-link" style="font-size:var(--text-small);">Číst více <i class="ti ti-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <SplitSection
-    label=""
-    heading="Rozhodnutí, se kterým vám můžeme pomoci"
-    paragraphs={[
-      'Hledáte bezpečné a důstojné místo pro svého blízkého? Chápeme, že jde o jedno z nejtěžších rozhodnutí v životě rodiny.',
-      'V Domově Turovice jsme tu od toho, abychom vás celým procesem provedli – od první otázky až po nastěhování. Zavolejte nebo přijeďte na prohlídku.',
-    ]}
-    image="/images/about-foto2.jpg"
-    imageAlt="Péče v Domově Turovice"
-    imagePosition="left"
-    link={{ text: 'Domluvit prohlídku', href: '/kontakt' }}
-    bg="surface"
-  />
-
-  <CTASection
-    heading="Přijeďte se podívat. Zavolejte. Napište."
-    text="Rádi vám ukážeme domov osobně a odpovíme na všechny otázky."
-    buttons={[
-      { text: 'Kontaktujte nás', href: '/kontakt', variant: 'primary' },
-      { text: 'Přijeďte na prohlídku', href: '/prostory', variant: 'secondary' },
-      { text: 'Podmínky přijetí', href: '/prijeti', variant: 'secondary' },
-    ]}
-  />
 </Layout>
 
 <style is:global>
-  /* ── CARE GRID — Péče a služby ── */
-  .care-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .care-card {
-    background: var(--color-white, #fff);
-    border-radius: var(--radius-card, 12px);
-    box-shadow: var(--shadow-card, 0 2px 12px rgba(0,0,0,0.08));
-    overflow: hidden;
-    transition: box-shadow 0.25s, transform 0.25s;
-    position: relative;
-    display: flex; flex-direction: column;
-  }
-  .care-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; z-index: 1;
-  }
-  .care-card.c-burg::before { background: var(--color-primary); }
-  .care-card.c-orng::before { background: #c87d0e; }
-  .care-card.c-gren::before { background: #3d7a4a; }
-  .care-card.c-blue::before { background: #2e6f85; }
-  .care-card:hover { box-shadow: var(--shadow-hover, 0 8px 32px rgba(0,0,0,0.14)); transform: translateY(-4px); }
-  .care-card-img { width: 100%; height: 200px; object-fit: cover; display: block; flex-shrink: 0; }
-  .care-card-body { padding: 24px 24px 28px; display: flex; flex-direction: column; flex: 1; }
-  .care-icon {
-    width: 46px; height: 46px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 14px; flex-shrink: 0;
-  }
-  .care-card.c-burg .care-icon { background: var(--color-primary-soft); }
-  .care-card.c-burg .care-icon svg { fill: var(--color-primary); }
-  .care-card.c-orng .care-icon { background: #fef3e0; }
-  .care-card.c-orng .care-icon svg { fill: #c87d0e; }
-  .care-card.c-gren .care-icon { background: #e8f4ea; }
-  .care-card.c-gren .care-icon svg { fill: #3d7a4a; }
-  .care-card.c-blue .care-icon { background: #e0f0f5; }
-  .care-card.c-blue .care-icon svg { fill: #2e6f85; }
-  .care-icon svg { width: 24px; height: 24px; }
-  .care-card p { font-size: var(--text-body); line-height: 1.70; color: var(--color-text); flex: 1; margin-bottom: 20px; }
-  .care-card h3 { font-size: var(--text-h4); font-family: var(--font-serif); line-height: 1.3; margin-bottom: 10px; color: var(--color-dark); }
-  .care-card-btn {
-    display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px;
-    font-family: var(--font-sans); font-size: var(--text-small); font-weight: 600;
-    border-radius: var(--radius-btn, 8px); border: 2px solid; cursor: pointer;
-    text-decoration: none; transition: all 0.2s ease; align-self: flex-start;
-  }
-  .care-card-btn:hover { text-decoration: none; }
-  .care-card.c-burg .care-card-btn { color: var(--color-primary); border-color: var(--color-primary); }
-  .care-card.c-burg .care-card-btn:hover { background: var(--color-primary); color: white; text-decoration: none; }
-  .care-card.c-orng .care-card-btn { color: #9a6b10; border-color: #9a6b10; }
-  .care-card.c-orng .care-card-btn:hover { background: #9a6b10; color: white; text-decoration: none; }
-  .care-card.c-gren .care-card-btn { color: #3d7a4a; border-color: #3d7a4a; }
-  .care-card.c-gren .care-card-btn:hover { background: #3d7a4a; color: white; text-decoration: none; }
-  .care-card.c-blue .care-card-btn { color: #2e6f85; border-color: #2e6f85; }
-  .care-card.c-blue .care-card-btn:hover { background: #2e6f85; color: white; text-decoration: none; }
-  @media (max-width: 1024px) { .care-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 768px) { .care-grid { grid-template-columns: 1fr; } }
-
-  /* ── HELPER TŘÍDY pro inline sekce ── */
-  .section-h2 {
-    font-family: var(--font-serif);
-    font-size: var(--text-h2);
-    font-weight: var(--font-bold);
-    color: var(--color-primary);
-    line-height: var(--leading-heading);
-    margin-bottom: var(--space-1);
-  }
-  .section-intro {
-    font-size: var(--text-perex);
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-6);
-    line-height: var(--leading-body);
-    max-width: 680px;
-  }
-  .about-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--color-primary);
-    font-weight: 600;
-    font-size: var(--text-body);
-  }
-  .about-link:hover { text-decoration: underline; }
-
-  /* ── MEZERY SEKCÍ — homepage override ── */
-  .split-section,
-  .service-cards-section,
-  .cta-section {
-    padding-top: 80px !important;
-    padding-bottom: 80px !important;
-  }
-  .steps-section {
-    padding-top: 80px !important;
-    padding-bottom: 80px !important;
-  }
-
-  /* ════════════════════════════════════════════════════════════════
-     TUROVICE — scoped override pro homepage
-     ────────────────────────────────────────────────────────────────
-     Krátkodobý override komponent starteru pro vizuální shodu s původní
-     verzí webu. Bude refaktorováno do starteru po dokončení F3 (úprava
-     PageHero a TrustBar tak, aby nativně podporovaly Turovice režim).
-     ════════════════════════════════════════════════════════════════ */
-  /* ── HERO — kompaktnější výška, širší text ── */
-  .page-hero {
-    min-height: auto;
-    background-image:
-      linear-gradient(135deg, rgba(20,10,12,0.74) 0%, rgba(20,10,12,0.54) 55%, rgba(20,10,12,0.28) 100%),
-      url('/images/hero-bg.jpg') !important;
-    background-size: cover !important;
-    background-position: center 30%;
-  }
-  .page-hero__inner {
-    padding: 120px 24px 80px;
-  }
-  .page-hero-content {
-    max-width: 760px;
-  }
-  .page-hero h1 {
-    font-size: clamp(34px, 4.8vw, 52px);
-    line-height: 1.15;
-    max-width: 720px;
-    letter-spacing: -0.02em;
-    text-shadow: 0 2px 16px rgba(0,0,0,0.4);
-    margin-bottom: 24px;
-  }
-  .page-hero-perex {
-    font-size: var(--text-perex);
-    max-width: 580px;
-    line-height: 1.65;
-    color: rgba(255,255,255,0.93);
-    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
-    margin-bottom: 40px;
-  }
-  /* ── HERO KICKER → bílý badge s ikonou štítu ── */
-  .page-hero-kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(155, 66, 73, 0.88);
-    color: white;
-    font-family: var(--font-sans);
-    font-size: var(--text-meta);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 8px 18px;
-    border-radius: 4px;
-    margin-bottom: 28px;
-  }
-  .page-hero-kicker::before {
-    content: "\f3d2";  /* Tabler shield-check */
-    font-family: 'tabler-icons';
-    font-weight: normal;
-    font-size: 18px;
-  }
-  /* ── TRUST BAR → 5 sloupců + světlé pozadí + ikony v kruzích ── */
-  .trust-bar-outer {
-    background: var(--color-white);
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    padding: 64px 0;
-    position: relative;
-    overflow: hidden;
-  }
-  /* dekorativní kruhy z originálu */
-  .trust-bar-outer::before,
-  .trust-bar-outer::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-  }
-  .trust-bar-outer::before {
-    width: 280px; height: 280px;
-    top: -120px; right: -80px;
-    background: rgba(155, 66, 73, 0.045);
-  }
-  .trust-bar-outer::after {
-    width: 180px; height: 180px;
-    bottom: -70px; left: 4%;
-    background: rgba(155, 66, 73, 0.03);
-  }
-  .trust-bar {
-    display: grid !important;
-    grid-template-columns: repeat(5, 1fr) !important;
-    gap: 16px !important;
-    padding: 0 24px !important;
-    max-width: var(--container-max) !important;
-    margin: 0 auto !important;
-    position: relative;
-    z-index: 1;
-    flex-wrap: unset !important;
-    justify-content: unset !important;
-    align-items: unset !important;
-  }
-  .trust-item {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center;
-    gap: 14px;
-    padding: 28px 16px;
-    border-radius: var(--radius-card);
-    min-width: 0 !important;
-    border-right: none !important;
-    transition: box-shadow 0.25s, transform 0.25s;
-  }
-  .trust-item:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-3px);
-    background: transparent;
-  }
-  /* Ikona — kruh s primary-soft pozadím */
-  .trust-item i {
-    width: 54px;
-    height: 54px;
-    background: var(--color-primary-soft);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--color-primary);
-    font-size: 26px;
-    stroke: none;
-    fill: none;
-  }
-  .trust-value {
-    font-size: var(--text-body) !important;
-    font-weight: 600;
-    font-family: var(--font-sans);
-    color: var(--color-dark);
-    line-height: 1.4 !important;
-    min-height: 2.8em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .trust-label {
-    font-size: var(--text-body);
-    line-height: 1.6;
-    color: var(--color-text-muted);
-  }
-  /* ── RESPONSIVE ── */
-  @media (max-width: 1024px) {
-    .trust-bar {
-      grid-template-columns: repeat(3, 1fr) !important;
-    }
-  }
-  @media (max-width: 640px) {
-    .trust-bar {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
-    .page-hero__inner {
-      padding: 60px 20px 48px;
-    }
-    .page-hero h1 {
-      font-size: clamp(26px, 7vw, 34px);
-    }
-  }
+/* ══ HERO BUTTONS (global – index.astro nemá scoped style) ══ */
+.hero-btn-wrap { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.hero-btn-primary {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: #fff; color: var(--clr-primary);
+  border: 2px solid #fff;
+  font-family: var(--ff-body); font-size: var(--font-size-ui); font-weight: 700;
+  padding: 14px 28px; border-radius: var(--radius-btn);
+  text-decoration: none; transition: background .2s, color .2s, border-color .2s;
+  letter-spacing: 0.01em;
+}
+.hero-btn-primary:hover { background: transparent; color: #fff; border-color: #fff; }
+.hero-btn-secondary {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: transparent; color: #fff;
+  border: 2px solid rgba(255,255,255,0.65);
+  font-family: var(--ff-body); font-size: var(--font-size-ui); font-weight: 600;
+  padding: 14px 28px; border-radius: var(--radius-btn);
+  text-decoration: none; transition: background .2s, border-color .2s;
+  letter-spacing: 0.01em;
+}
+.hero-btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.12); }
+@media(max-width:480px){
+  .hero-btn-wrap { flex-direction: column; }
+  .hero-btn-primary, .hero-btn-secondary { justify-content: center; }
+}
 </style>
+
+<script>
+  // Blog slider
+  const track = document.getElementById('blogTrack') as HTMLElement;
+  const dotsContainer = document.getElementById('blogDots');
+  const prevBtn = document.getElementById('blogPrev');
+  const nextBtn = document.getElementById('blogNext');
+
+  if (track && dotsContainer) {
+    const cards = track.querySelectorAll('.blog-card');
+    const total = cards.length;
+    const visibleCount = () => window.innerWidth > 1024 ? 3 : window.innerWidth > 768 ? 2 : 1;
+    let current = 0;
+    let autoInterval: ReturnType<typeof setInterval>;
+
+    function maxSlide() { return Math.max(0, total - visibleCount()); }
+
+    function buildDots() {
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i <= maxSlide(); i++) {
+        const dot = document.createElement('button');
+        dot.className = 'blog-dot' + (i === current ? ' active' : '');
+        dot.setAttribute('aria-label', `Přejít na článek ${i + 1}`);
+        dot.setAttribute('aria-current', i === current ? 'true' : 'false');
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function goTo(idx: number) {
+      current = Math.max(0, Math.min(idx, maxSlide()));
+      const cardWidth = (cards[0] as HTMLElement).offsetWidth + 16;
+      track.style.transform = `translateX(-${current * cardWidth}px)`;
+      dotsContainer.querySelectorAll('.blog-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+        d.setAttribute('aria-current', i === current ? 'true' : 'false');
+      });
+    }
+
+    function startAuto() {
+      autoInterval = setInterval(() => goTo(current < maxSlide() ? current + 1 : 0), 4000);
+    }
+
+    track.addEventListener('mouseenter', () => clearInterval(autoInterval));
+    track.addEventListener('mouseleave', startAuto);
+    prevBtn?.addEventListener('click', () => goTo(current - 1));
+    nextBtn?.addEventListener('click', () => goTo(current + 1));
+
+    buildDots();
+    startAuto();
+    window.addEventListener('resize', () => { buildDots(); goTo(Math.min(current, maxSlide())); });
+  }
+</script>
