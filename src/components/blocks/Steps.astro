@@ -21,3 +21,58 @@ const { kicker, heading, lead, steps = [], columns = 4, link } = Astro.props;
     {link && <div class="steps-cta"><a href={link.href} class="btn btn-secondary">{link.text}<i class="ti ti-arrow-right"></i></a></div>}
   </div>
 </section>
+
+<style>
+  .steps-section { padding: var(--space-12) 0; }
+  .steps-lead {
+    font-size: var(--text-perex);
+    color: var(--color-text-muted);
+    max-width: 680px;
+    margin: 0 0 var(--space-6);
+    line-height: var(--leading-body);
+  }
+  .steps {
+    display: grid;
+    gap: var(--space-5);
+    counter-reset: step-counter;
+  }
+  .step {
+    counter-increment: step-counter;
+    position: relative;
+    padding-top: calc(56px + var(--space-3));
+  }
+  .step::before {
+    content: counter(step-counter);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-white);
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    line-height: 48px;
+    text-align: center;
+  }
+  .step h3 {
+    font-size: var(--text-h3);
+    color: var(--color-primary);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--space-1);
+  }
+  .step p {
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--color-text-muted);
+  }
+  .steps-cta { margin-top: var(--space-6); }
+  @media (max-width: 768px) {
+    .steps { grid-template-columns: repeat(2, 1fr) !important; }
+  }
+  @media (max-width: 480px) {
+    .steps { grid-template-columns: 1fr !important; }
+  }
+</style>
