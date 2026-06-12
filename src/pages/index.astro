@@ -2,6 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/blocks/PageHero.astro';
 import TrustBar from '../components/blocks/TrustBar.astro';
+import SplitSection from '../components/blocks/SplitSection.astro';
+import ServiceCards from '../components/blocks/ServiceCards.astro';
+import Steps from '../components/blocks/Steps.astro';
+import CTASection from '../components/blocks/CTASection.astro';
 
 const heroProps = {
   kicker: 'Registrovaný poskytovatel sociálních služeb',
@@ -13,6 +17,12 @@ const heroProps = {
     { text: 'Prohlédnout si domov', href: '/prostory', variant: 'secondary' },
   ],
 };
+
+const aboutParagraphs = [
+  'Domov Turovice vznikl z iniciativy Ziny Filip Dadlíkové, která svou dvacetiletou zkušeností z přímé práce se seniory přesvědčila investora, aby ze zchátralé obecní budovy vybudoval moderní domov. Zapsaný ústav byl založen v roce 2017, první klientka přišla v srpnu 2025.',
+  '„Nejde o velký anonymní ústav. Jde o místo, kde personál zná každého klienta jménem, kde se vaří z vlastní zahrady a kde se o svátcích zpívá, tančí i slaví."',
+  'Právě takový domov jsme chtěli vybudovat – a dnes ho žijeme každý den společně s našimi klienty.',
+];
 
 const trustItems = [
   {
@@ -49,6 +59,52 @@ const trustItems = [
 >
   <PageHero {...heroProps} />
   <TrustBar items={trustItems} />
+
+  <SplitSection
+    label="O nás"
+    heading="Náš příběh začal rozhodnutím udělat péči jinak"
+    paragraphs={aboutParagraphs}
+    image="/images/about-foto.jpg"
+    imageAlt="Příběh Domova Turovice"
+    link={{ text: 'Přečtěte si náš příběh', href: '/nas-pribeh' }}
+    imagePosition="right"
+  />
+
+  <ServiceCards
+    kicker="Péče a služby"
+    heading="Komplexní péče pod jednou střechou"
+    lead="Nabídka péče vychází z toho, co klient skutečně potřebuje. Každý klient má svůj individuální plán péče, který tým pravidelně přehodnocuje."
+    items={[
+      { icon: 'report-medical', title: 'Ošetřovatelská péče', text: 'Všeobecné sestry pečují o klienty nepřetržitě, 24 hodin denně. Starají se o podávání léků, ošetřování ran, sledování zdravotního stavu a komunikaci s lékaři.', link: { text: 'Jak pečujeme', href: '/jak-pecujeme' } },
+      { icon: 'users', title: 'Přímá osobní péče', text: 'Pracovníci v přímé péči pomáhají při hygieně, oblékání, pohybu a dalších každodenních činnostech. Přístup je vždy šetrný a respektuje soukromí každého klienta.', link: { text: 'Náš přístup', href: '/jak-pecujeme' } },
+      { icon: 'tools-kitchen-2', title: 'Stravování z vlastní kuchyně', text: 'Klienti dostávají pět jídel denně. Jídla se připravují v domácí kuchyni, kde kuchaři v sezóně pracují i s vlastní zeleninou ze skleníku.', link: { text: 'O stravování', href: '/stravovani' } },
+      { icon: 'mood-smile', title: 'Aktivizace a volný čas', text: 'Každý den probíhají aktivity přizpůsobené kondici klientů – trénink paměti, arteterapie, canisterapie nebo muzikoterapie.', link: { text: 'Program aktivit', href: '/aktivizace' } },
+      { icon: 'message-dots', title: 'Sociální poradenství', text: 'Sociální pracovnice pomáhají klientům i rodinám s administrativou – od vyřízení příspěvku na péči až po komunikaci s úřady.', link: { text: 'Poradenství', href: '/prijeti' } },
+      { icon: 'walk', title: 'Rehabilitace a ergoterapie', text: 'Rehabilitační program podporuje pohyblivost a soběstačnost. Ergoterapie pomáhá nacvičovat každodenní dovednosti.', link: { text: 'Rehabilitace', href: '/jak-pecujeme' } },
+    ]}
+  />
+
+  <Steps
+    kicker="Přijetí do domova"
+    heading="Cesta do Domova Turovice je jednoduchá"
+    lead="Přijetí do domova pro seniory nemusí být složitý proces. Provedeme vás každým krokem a odpovíme na všechny otázky, které vás zajímají."
+    steps={[
+      { title: 'Kontaktujte nás', text: 'Zavolejte nebo napište. Rádi vám odpovíme na první otázky a pomůžeme s žádostí o přijetí.' },
+      { title: 'Podejte žádost', text: 'Vyplníte žádost o přijetí spolu s vyjádřením lékaře o zdravotním stavu. Žádost posoudíme a zařadíme do evidence.' },
+      { title: 'Sociální šetření', text: 'Naše sociální pracovnice přijede za vámi domů, aby poznala situaci a potřeby vašeho blízkého.' },
+      { title: 'Podpis smlouvy a nastěhování', text: 'Po uvolnění místa vás kontaktujeme, domluvíme termín, podepíšeme smlouvu a váš blízký se nastěhuje.' },
+    ]}
+    link={{ text: 'Podmínky přijetí', href: '/prijeti' }}
+  />
+
+  <CTASection
+    heading="Máte zájem o místo v Domově Turovice?"
+    text="Rádi vám odpovíme na všechny otázky a provedeme celým procesem přijetí. Kontaktujte nás nebo si rovnou stáhněte žádost o přijetí."
+    buttons={[
+      { text: 'Kontaktujte nás', href: '/kontakt', variant: 'primary' },
+      { text: 'Podmínky přijetí', href: '/prijeti', variant: 'secondary' },
+    ]}
+  />
 </Layout>
 
 <style is:global>

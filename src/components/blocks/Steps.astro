@@ -1,7 +1,7 @@
 ---
 // Steps.astro — číslované kroky procesu
-// Props: kicker, heading, lead, steps[] (title, text), columns
-const { kicker, heading, lead, steps = [], columns = 4 } = Astro.props;
+// Props: kicker, heading, lead, steps[] (title, text), columns, link
+const { kicker, heading, lead, steps = [], columns = 4, link } = Astro.props;
 ---
 <section class="steps-section">
   <div class="container">
@@ -18,5 +18,6 @@ const { kicker, heading, lead, steps = [], columns = 4 } = Astro.props;
         </div>
       ))}
     </div>
+    {link && <div class="steps-cta"><a href={link.href} class="btn btn-secondary">{link.text}<i class="ti ti-arrow-right"></i></a></div>}
   </div>
 </section>

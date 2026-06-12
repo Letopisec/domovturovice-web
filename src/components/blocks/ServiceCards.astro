@@ -88,7 +88,13 @@ const {
             <div class="service-card-1__icon"><i class={`ti ti-${it.icon}`}></i></div>
             <h3 class="service-card-1__title">{it.title}</h3>
             <p class="service-card-1__text">{it.text}</p>
-            <span class="service-card-1__arrow" aria-hidden="true"><i class="ti ti-arrow-right"></i></span>
+            {it.link ? (
+              <a class="service-card-1__arrow" href={typeof it.link === 'string' ? it.link : it.link.href}>
+                {typeof it.link === 'object' && it.link.text ? it.link.text : (it.cta || 'Zjistit více')}<i class="ti ti-arrow-right"></i>
+              </a>
+            ) : (
+              <span class="service-card-1__arrow" aria-hidden="true"><i class="ti ti-arrow-right"></i></span>
+            )}
           </article>
         ))}
       </div>
