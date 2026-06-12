@@ -103,7 +103,10 @@ a:hover { text-decoration: underline; }
 .nav a,
 .nav a:hover,
 .mobile-menu a,
-.mobile-menu a:hover { font-size: inherit; text-decoration: none; color: unset; }
+.mobile-menu a:hover { font-size: 15px; text-decoration: none; color: unset; }
+
+.nav-phone-btn,
+.nav-phone-btn:hover { font-size: 15px; }
 
 
 blockquote {
