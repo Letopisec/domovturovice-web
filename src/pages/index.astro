@@ -69,7 +69,7 @@ const trustItems = [
     imagePosition="right"
   />
 
-  <section class="section care-section" style="padding: 80px 0; background: var(--color-surface, #f8f7f5);">
+  <section class="section care-section" style="padding: 80px 0; background: var(--color-white, #ffffff);">
     <div class="container">
       <span class="section-label">Péče a služby</span>
       <h2 class="section-h2">Komplexní péče pod jednou střechou</h2>
@@ -314,14 +314,15 @@ const trustItems = [
     border-radius: var(--radius-btn, 8px); border: 2px solid; cursor: pointer;
     text-decoration: none; transition: all 0.2s ease; align-self: flex-start;
   }
+  .care-card-btn:hover { text-decoration: none; }
   .care-card.c-burg .care-card-btn { color: var(--color-primary); border-color: var(--color-primary); }
-  .care-card.c-burg .care-card-btn:hover { background: var(--color-primary); color: white; }
+  .care-card.c-burg .care-card-btn:hover { background: var(--color-primary); color: white; text-decoration: none; }
   .care-card.c-orng .care-card-btn { color: #9a6b10; border-color: #9a6b10; }
-  .care-card.c-orng .care-card-btn:hover { background: #9a6b10; color: white; }
+  .care-card.c-orng .care-card-btn:hover { background: #9a6b10; color: white; text-decoration: none; }
   .care-card.c-gren .care-card-btn { color: #3d7a4a; border-color: #3d7a4a; }
-  .care-card.c-gren .care-card-btn:hover { background: #3d7a4a; color: white; }
+  .care-card.c-gren .care-card-btn:hover { background: #3d7a4a; color: white; text-decoration: none; }
   .care-card.c-blue .care-card-btn { color: #2e6f85; border-color: #2e6f85; }
-  .care-card.c-blue .care-card-btn:hover { background: #2e6f85; color: white; }
+  .care-card.c-blue .care-card-btn:hover { background: #2e6f85; color: white; text-decoration: none; }
   @media (max-width: 1024px) { .care-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 768px) { .care-grid { grid-template-columns: 1fr; } }
 
