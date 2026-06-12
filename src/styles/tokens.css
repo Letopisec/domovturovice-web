@@ -1,14 +1,20 @@
 /* ════════════════════════════════════════════════════════════════
-   TOKENS.CSS — Domov Turovice (přestavba z astro-web-starter)
+   TOKENS.CSS — Domov Turovice
    ────────────────────────────────────────────────────────────────
-   Hodnoty převzaty z původního Turovice global.css (burgundy paleta,
-   Playfair Display + Source Sans 3, 4 akcentové barvy).
-   Konvence názvů: --color-* (starter), aliasy --clr-* ponechány pro
-   kompatibilitu se scoped style staré stránky, kdyby se kopírovaly.
+   Barevný systém:
+   - 1 primární barva (burgundy) pro vše hlavní: CTA, nadpisy, navigace,
+     footer, section-label. NIKDY se nemění.
+   - 3 tématické barvy pro specifické stránky (border-top karet, ikony,
+     sekční pozadí):
+       zelená  → /aktivizace
+       oranžová → /stravovani
+       modrá    → /pro-rodiny
+   - Pozadí: bílá + povrchová šedá + krémová (CTA sekce)
    ════════════════════════════════════════════════════════════════ */
 
 :root {
   /* ── BARVY — primární (Burgundy) ── */
+  /* Použití: CTA tlačítka, H1/H2, navigace, footer, section-label */
   --color-primary:        #9B4249;
   --color-primary-90:     rgba(155, 66, 73, 0.39);
   --color-primary-soft:   #F5EAEB;
@@ -16,23 +22,29 @@
   --color-primary-ghost:  rgba(155, 66, 73, 0.08);
   --color-primary-hover:  #7D3139;
 
-  /* ── BARVY — akcent (zelená — CTA, zvýraznění) ── */
-  --color-accent:         #5B7D5B;
-  --color-accent-hover:   #486348;
-  --color-accent-light:   #EEF4EE;
-  --color-accent-soft:    #EEF4EE;
+  /* ── BARVY — akcent (= primary, kvůli kompatibilitě komponent starteru) ── */
+  /* Komponenty starteru používají --color-accent na CTA. V Turovice systému
+     je CTA = primary, takže accent přesměrujeme na primary. */
+  --color-accent:         var(--color-primary);
+  --color-accent-hover:   var(--color-primary-hover);
+  --color-accent-light:   var(--color-primary-soft);
+  --color-accent-soft:    var(--color-primary-soft);
 
-  /* ── BARVY — doplňkové akcenty (z Turovice — sekce „pro rodiny", atp.) ── */
-  --color-extra-orange:       #C8902A;
-  --color-extra-orange-soft:  #FDF6E9;
-  --color-extra-blue:         #5A9BB5;
-  --color-extra-blue-soft:    #EDF5F9;
+  /* ── BARVY — TÉMATICKÉ (per stránka) ── */
+  /* Použití: border-top karet, ikony, sekční pozadí JEN na příslušné stránce */
+  --color-theme-green:        #5B7D5B;  /* /aktivizace */
+  --color-theme-green-soft:   #EEF4EE;
+  --color-theme-orange:       #C8902A;  /* /stravovani */
+  --color-theme-orange-soft:  #FDF6E9;
+  --color-theme-blue:         #5A9BB5;  /* /pro-rodiny */
+  --color-theme-blue-soft:    #EDF5F9;
 
   /* ── BARVY — neutrální ── */
   --color-dark:           #1A1A1A;
   --color-neutral-800:    #1A1A1A;
-  --color-bg:             #FAFAF8;
-  --color-surface:        #F5F3F0;
+  --color-bg:             #FAFAF8;  /* teplá bílá — výchozí pozadí stránky */
+  --color-surface:        #F5F3F0;  /* povrchová šedá — karty, alternující sekce */
+  --color-cta-bg:         #EDE8E3;  /* krémová — pozadí CTA sekcí */
   --color-white:          #FFFFFF;
   --color-text:           #3D3D3D;
   --color-text-muted:     #787268;
@@ -108,16 +120,18 @@
   --bp-tablet:  768px;
   --bp-desktop: 1024px;
 
-  /* ── LEGACY ALIASY pro scoped style ze staré verze ── */
+  /* ════════════════════════════════════════════════════════════════
+     LEGACY ALIASY pro scoped style ze staré verze (--clr-*)
+     ──────────────────────────────────────────────────────────────── */
   --clr-primary:        var(--color-primary);
   --clr-primary-hover:  var(--color-primary-hover);
   --clr-primary-soft:   var(--color-primary-soft);
-  --clr-green:          var(--color-accent);
-  --clr-green-soft:     var(--color-accent-soft);
-  --clr-orange:         var(--color-extra-orange);
-  --clr-orange-soft:    var(--color-extra-orange-soft);
-  --clr-blue:           var(--color-extra-blue);
-  --clr-blue-soft:      var(--color-extra-blue-soft);
+  --clr-green:          var(--color-theme-green);
+  --clr-green-soft:     var(--color-theme-green-soft);
+  --clr-orange:         var(--color-theme-orange);
+  --clr-orange-soft:    var(--color-theme-orange-soft);
+  --clr-blue:           var(--color-theme-blue);
+  --clr-blue-soft:      var(--color-theme-blue-soft);
   --clr-white:          var(--color-white);
   --clr-bg:             var(--color-bg);
   --clr-surface:        var(--color-surface);
