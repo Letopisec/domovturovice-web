@@ -372,13 +372,14 @@ function formatDate(date: Date): string {
 <section class="blog-section">
   <div class="container">
 
-    <div class="section-filter" id="filterBar">
-      {categories.map(cat => (
-        <button class={`filter-btn${cat === 'Vše' ? ' active' : ''}`} data-cat={cat}>{cat}</button>
+    <div class="section-filter">
+      <a href="/aktuality" class="filter-btn active">Vše</a>
+      {categories.filter(cat => cat !== 'Vše').map(cat => (
+        <a href={`/${slugify(cat)}`} class="filter-btn">{cat}</a>
       ))}
     </div>
 
-    <div class="news-grid" id="newsGrid">
+    <div class="news-grid">
       {posts.length === 0 && (
         <div class="no-posts"><p>Zatím žádné příspěvky.</p></div>
       )}
@@ -425,23 +426,6 @@ function formatDate(date: Date): string {
     </div>
   </div>
 </section>
-
-<script>
-  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-  const cards = document.querySelectorAll<HTMLElement>('.news-card');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const cat = btn.dataset.cat;
-      cards.forEach(card => {
-        const match = cat === 'Vše' || card.dataset.kategorie === cat;
-        card.style.display = match ? '' : 'none';
-      });
-    });
-  });
-</script>
 
 <!-- RELATED LINKS -->
 <div class="related-links">
