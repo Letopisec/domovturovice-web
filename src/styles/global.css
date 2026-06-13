@@ -493,7 +493,19 @@ blockquote {
 .blog-card p { font-family: var(--font-body); font-size: var(--font-size-base); line-height: 1.65; color: var(--clr-text-body); margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .blog-more { font-family: var(--font-body); font-size: var(--font-size-caption); font-weight: 600; color: var(--clr-primary); text-decoration: none; }
 .blog-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 28px; position: relative; }
-.blog-all-link { position: absolute; right: 0; }
+.blog-all-link {
+  position: absolute;
+  right: 0;
+  background: var(--clr-primary);
+  color: white;
+  border-color: var(--clr-primary);
+}
+.blog-all-link:hover {
+  background: var(--clr-primary-hover);
+  border-color: var(--clr-primary-hover);
+  color: white;
+  transform: translateY(-1px);
+}
 .blog-btn {
   width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--clr-primary);
   background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center;
