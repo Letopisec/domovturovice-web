@@ -474,7 +474,7 @@ blockquote {
 
 /* ══ BLOG SLIDER ══ */
 .blog-section { background: var(--clr-bg); overflow: hidden; }
-.blog-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 16px; }
+.blog-header { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-bottom: 40px; }
 .blog-track-outer { overflow: hidden; }
 .blog-track { display: flex; transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1); will-change: transform; }
 .blog-card {
