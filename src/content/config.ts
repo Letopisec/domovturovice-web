@@ -13,6 +13,7 @@ const clanky = defineCollection({
     perex: z.string(),                      // krátký úvod do náhledu
     autor: z.string().default('Domov Turovice'),
     popis: z.string().optional(),           // SEO meta description
+    zdroj: z.string().optional(),           // URL nebo text zdroje článku
   }),
 });
 

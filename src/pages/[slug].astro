@@ -8,6 +8,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import SinglePost from '../components/blocks/SinglePost.astro';
+import BlogGrid from '../components/blocks/BlogGrid.astro';
 import { slugify } from '../utils/slug';
 
 function fmt(d: Date): string {
@@ -118,6 +119,7 @@ const pageDesc = type === 'clanek' ? (d.popis || d.perex) : `Články v kategori
       stitkySlugy={stitkySlugy}
       nahled={d.nahled}
       autor={d.autor}
+      zdroj={d.zdroj}
       kategorieList={kategorieList}
       dalsiClanky={dalsiClanky}
       prev={prev}
@@ -130,18 +132,7 @@ const pageDesc = type === 'clanek' ? (d.popis || d.perex) : `Články v kategori
       <div class="container">
         <span class="section-label">{type === 'kategorie' ? 'Kategorie' : 'Štítek'}</span>
         <h1>{nazev}</h1>
-        <div class="archive-grid">
-          {vypisClanky.map((c) => (
-            <a href={`/${c.slug}`} class="related-card">
-              <span class="related-card__img">{c.data.nahled ? <img src={c.data.nahled} alt={c.data.titulek} /> : '[ foto ]'}</span>
-              <span class="related-card__body">
-                <span class="related-card__cat">{c.data.kategorie}</span>
-                <span class="related-card__title">{c.data.titulek}</span>
-                <span class="related-card__date">{fmt(c.data.datum)}</span>
-              </span>
-            </a>
-          ))}
-        </div>
+        <BlogGrid posts={vypisClanky} columns={3} />
       </div>
     </section>
   )}

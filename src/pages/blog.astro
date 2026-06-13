@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BlogGrid from '../components/blocks/BlogGrid.astro';
+import BlogList from '../components/blocks/BlogList.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('clanky');
+const posts = allPosts.sort((a, b) =>
+  b.data.datum.valueOf() - a.data.datum.valueOf()
+);
+
+// KONFIGURACE — při zakládání webu upravit:
+const CONFIG = {
+  title: 'Aktuality z domova',
+  label: 'Aktuality a blog',
+  description: 'Zprávy o životě v Domově Turovice — aktivizace, péče, slavnosti i každodenní radosti.',
+  metaTitle: 'Aktuality | Domov Turovice',
+  metaDescription: 'Sledujte, co se u nás děje. Aktuality z Domova Turovice.',
+  variant: 'grid' as 'grid' | 'list',
+  columns: 3 as 2 | 3,
+  showFilter: true,
+};
+---
+
+<Layout title={CONFIG.metaTitle} description={CONFIG.metaDescription}>
+
+  <!-- HERO -->
+  <section class="blog-page-hero">
+    <div class="container">
+      <span class="section-label">{CONFIG.label}</span>
+      <h1>{CONFIG.title}</h1>
+      <p class="blog-page-perex">{CONFIG.description}</p>
+    </div>
+  </section>
+
+  <!-- VÝPIS -->
+  <section class="blog-page-body">
+    <div class="container">
+      {CONFIG.variant === 'grid'
+        ? <BlogGrid posts={posts} columns={CONFIG.columns}
+                    showFilter={CONFIG.showFilter} />
+        : <BlogList posts={posts} showFilter={CONFIG.showFilter} />
+      }
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  .blog-page-hero {
+    background: linear-gradient(135deg, var(--clr-primary) 0%,
+                color-mix(in srgb, var(--clr-primary) 80%, #000) 100%);
+    color: #fff;
+    padding: 72px 0 56px;
+  }
+  .blog-page-hero .section-label {
+    color: rgba(255,255,255,.7);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .blog-page-hero h1 {
+    font-family: var(--ff-head);
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 16px;
+    line-height: 1.2;
+  }
+  .blog-page-perex {
+    font-size: var(--font-size-perex);
+    color: rgba(255,255,255,.85);
+    margin: 0;
+    max-width: 600px;
+    line-height: 1.65;
+  }
+  .blog-page-body {
+    padding: 64px 0 80px;
+    background: var(--clr-bg);
+  }
+  @media (max-width: 640px) {
+    .blog-page-hero { padding: 52px 0 40px; }
+    .blog-page-body { padding: 44px 0 56px; }
+  }
+</style>

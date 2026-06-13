@@ -1,0 +1,194 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { slugify } from '../../utils/slug';
+
+interface Props {
+  posts: CollectionEntry<'clanky'>[];
+  limit?: number;
+  filterCategory?: string;
+  showFilter?: boolean;
+}
+
+const {
+  posts: rawPosts,
+  limit,
+  filterCategory,
+  showFilter = false,
+} = Astro.props;
+
+let posts = filterCategory
+  ? rawPosts.filter(p => p.data.kategorie === filterCategory)
+  : rawPosts;
+
+if (limit) posts = posts.slice(0, limit);
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+
+<div class="bl-list">
+  {posts.map(post => (
+    <article class="bl-item">
+      <a href={`/${post.slug}`} class="bl-item-img-wrap">
+        {post.data.nahled
+          ? <img class="bl-item-img" src={post.data.nahled}
+                 alt={post.data.titulek} loading="lazy" />
+          : <div class="bl-item-img-placeholder">
+              <svg viewBox="0 0 24 24">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </div>
+        }
+      </a>
+      <div class="bl-item-body">
+        <div class="bl-item-meta">
+          <a href={`/${slugify(post.data.kategorie)}`} class="bl-item-cat">
+            {post.data.kategorie}
+          </a>
+          <span class="bl-item-date">{formatDate(post.data.datum)}</span>
+        </div>
+        <h2 class="bl-item-title">
+          <a href={`/${post.slug}`}>{post.data.titulek}</a>
+        </h2>
+        <p class="bl-item-perex">{post.data.perex}</p>
+        <a href={`/${post.slug}`} class="bl-item-link">
+          Číst dál
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </article>
+  ))}
+  {posts.length === 0 && (
+    <p class="bl-empty">Zatím žádné příspěvky.</p>
+  )}
+</div>
+
+<style>
+  .bl-list {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .bl-item {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 28px;
+    background: #fff;
+    border: 1.5px solid var(--clr-border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .bl-item:hover {
+    box-shadow: 0 8px 28px rgba(0,0,0,.1);
+    transform: translateY(-2px);
+  }
+  .bl-item-img-wrap {
+    display: block;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .bl-item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .3s;
+  }
+  .bl-item:hover .bl-item-img { transform: scale(1.04); }
+  .bl-item-img-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+    background: var(--clr-bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bl-item-img-placeholder svg {
+    width: 48px; height: 48px;
+    stroke: var(--clr-border); fill: none; stroke-width: 1.5;
+  }
+  .bl-item-body {
+    padding: 24px 28px 24px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .bl-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .bl-item-cat {
+    font-size: var(--font-size-label);
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--clr-primary);
+    text-decoration: none;
+    background: rgba(0,0,0,.05);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .bl-item-cat:hover { text-decoration: underline; }
+  .bl-item-date {
+    font-size: var(--font-size-meta);
+    color: var(--clr-muted);
+  }
+  .bl-item-title {
+    font-family: var(--ff-head);
+    font-size: var(--font-size-subhead);
+    font-weight: 700;
+    color: var(--clr-heading);
+    line-height: 1.3;
+    margin: 0 0 10px;
+  }
+  .bl-item-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .bl-item-title a:hover { color: var(--clr-primary); }
+  .bl-item-perex {
+    font-size: var(--font-size-base);
+    line-height: 1.65;
+    color: var(--clr-text);
+    margin: 0 0 16px;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .bl-item-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--font-size-caption);
+    font-weight: 700;
+    color: var(--clr-primary);
+    text-decoration: none;
+    margin-top: auto;
+    transition: gap .2s;
+  }
+  .bl-item-link:hover { gap: 10px; }
+  .bl-item-link svg {
+    width: 16px; height: 16px;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .bl-empty {
+    text-align: center;
+    padding: 48px;
+    color: var(--clr-muted);
+  }
+  @media (max-width: 768px) {
+    .bl-item { grid-template-columns: 1fr; }
+    .bl-item-img-wrap { min-height: 200px; }
+    .bl-item-body { padding: 20px 20px 20px; }
+  }
+</style>
