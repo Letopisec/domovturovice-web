@@ -155,16 +155,16 @@ function formatDate(date: Date): string {
   background: rgba(155,66,73,.12);
   color: var(--clr-primary);
   letter-spacing: .04em;
-}
-.news-card-tag.green { background: rgba(89,152,108,.12); color: var(--clr-green); }
-.news-card-tag.orange { background: rgba(218,136,65,.12); color: var(--clr-orange); }
-.news-card-tag.blue { background: rgba(75,119,171,.12); color: var(--clr-blue); }
-.news-card-tag {
   text-decoration: none;
   cursor: pointer;
   transition: opacity .2s;
+  position: relative;
+  z-index: 2;
 }
 .news-card-tag:hover { opacity: .75; }
+.news-card-tag.green { background: rgba(89,152,108,.12); color: var(--clr-green); }
+.news-card-tag.orange { background: rgba(218,136,65,.12); color: var(--clr-orange); }
+.news-card-tag.blue { background: rgba(75,119,171,.12); color: var(--clr-blue); }
 .news-card-date {
   font-size: var(--font-size-meta);
   color: var(--clr-muted);
@@ -217,10 +217,6 @@ function formatDate(date: Date): string {
   z-index: 1;
 }
 .news-card-meta { position: relative; z-index: 2; }
-.news-card-tag {
-  position: relative;
-  z-index: 2;
-}
 .news-card-link {
   position: relative;
   z-index: 2;
