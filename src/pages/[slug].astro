@@ -36,7 +36,7 @@ function formatDate(date: Date): string {
 /* ── SINGLE LAYOUT ── */
 .single-layout {
   padding: 60px 0 80px;
-  background: var(--clr-bg);
+  background: #ffffff;
 }
 .single-grid {
   display: grid;
@@ -133,7 +133,7 @@ function formatDate(date: Date): string {
   margin: 28px 0 10px;
 }
 .article-prose p { margin: 0 0 18px; }
-.article-prose a { color: var(--clr-primary); font-weight: 600; }
+.article-prose a { color: var(--clr-primary); font-weight: 600; text-decoration: underline; }
 .article-prose a:hover { text-decoration: underline; }
 .article-prose ul, .article-prose ol {
   margin: 0 0 20px 20px;
@@ -190,7 +190,10 @@ function formatDate(date: Date): string {
   transition: border-color .2s, box-shadow .2s;
 }
 .article-nav-item:hover { border-color: var(--clr-primary); box-shadow: 0 4px 14px rgba(155,66,73,.1); }
-.article-nav-item.next { text-align: right; }
+.article-nav-item.next { text-align: right; background: var(--clr-primary); color: #fff; border-color: var(--clr-primary); }
+.article-nav-item.next:hover { background: var(--clr-primary-hover); border-color: var(--clr-primary-hover); }
+.article-nav-item.next .article-nav-title { color: #fff; }
+.article-nav-item.next .article-nav-label { color: rgba(255,255,255,0.75); }
 .article-nav-label { font-size: var(--font-size-label); font-weight: 700; color: var(--clr-muted); text-transform: uppercase; letter-spacing: .08em; }
 .article-nav-title { font-size: var(--font-size-caption); font-weight: 600; color: var(--clr-heading); line-height: 1.4; }
 
