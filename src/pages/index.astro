@@ -1,5 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('clanky');
+const latestPosts = allPosts
+  .sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf())
+  .slice(0, 6);
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
+}
 ---
 <Layout
   title="Domov pro seniory Olomoucký kraj – Domov Turovice, péče o seniory"
@@ -251,66 +261,21 @@ import Layout from '../layouts/Layout.astro';
     </div>
     <div class="blog-track-outer">
       <div class="blog-track" id="blogTrack">
-        <a href="/canisterapie-prinasla-radost" class="blog-card">
-          <img class="blog-card-img" src="/images/blog-img1.jpg" alt="Canisterapie" loading="lazy">
-          <div class="blog-card-body">
-            <span class="blog-cat">Aktivizace</span>
-            <div class="blog-card-date">15. května 2026</div>
-            <h3>Canisterapie přinesla do domova radost a úsměvy</h3>
-            <p>Pravidelná canisterapeutická návštěva proběhla v pátek odpoledne.</p>
-            <span class="blog-more">Číst více →</span>
-          </div>
-        </a>
-        <a href="/arteterapie-jarni-krajiny" class="blog-card">
-          <img class="blog-card-img" src="/images/blog-img2.jpg" alt="Arteterapie" loading="lazy">
-          <div class="blog-card-body">
-            <span class="blog-cat">Aktivizace</span>
-            <div class="blog-card-date">3. května 2026</div>
-            <h3>Arteterapie: Jarní krajiny z rukou našich klientů</h3>
-            <p>Na arteterapeutickém setkání vznikly krásné jarní krajiny. Tvoření pomáhá procvičit jemnou motoriku.</p>
-            <span class="blog-more">Číst více →</span>
-          </div>
-        </a>
-        <a href="/jaro-v-zahrade" class="blog-card">
-          <img class="blog-card-img" src="/images/blog-img3.jpg" alt="Jaro v zahradě" loading="lazy">
-          <div class="blog-card-body">
-            <span class="blog-cat">Ze života domova</span>
-            <div class="blog-card-date">22. dubna 2026</div>
-            <h3>Jaro přišlo do naší zahrady – vítáme novou sezónu</h3>
-            <p>S příchodem teplého počasí se přesouváme ven. Klienti se těší na bylinky a skleník.</p>
-            <span class="blog-more">Číst více →</span>
-          </div>
-        </a>
-        <a href="/vareni-ze-zahrady" class="blog-card">
-          <img class="blog-card-img" src="/images/blog-img4.jpg" alt="Vaření ze zahrady" loading="lazy">
-          <div class="blog-card-body">
-            <span class="blog-cat">Stravování</span>
-            <div class="blog-card-date">10. dubna 2026</div>
-            <h3>Z naší zahrady přímo na stůl – sezóna zeleniny začíná</h3>
-            <p>V domácí kuchyni zahajujeme sezónu čerstvé zeleniny ze skleníku.</p>
-            <span class="blog-more">Číst více →</span>
-          </div>
-        </a>
-        <a href="/muzikoterapie-s-harmonikou" class="blog-card">
-          <img class="blog-card-img" src="/images/blog-img5.jpg" alt="Muzikoterapie" loading="lazy">
-          <div class="blog-card-body">
-            <span class="blog-cat">Aktivizace</span>
-            <div class="blog-card-date">1. dubna 2026</div>
-            <h3>Muzikoterapie s harmonikou: společný zpěv léčí duši</h3>
-            <p>Pravidelné setkání s harmonikou – jeden z nejoblíbenějších programů.</p>
-            <span class="blog-more">Číst více →</span>
-          </div>
-        </a>
-        <a href="/spoluprace-s-nemocnici" class="blog-card">
-          <img class="blog-card-img" src="/images/blog-img6.jpg" alt="Nová spolupráce" loading="lazy">
-          <div class="blog-card-body">
-            <span class="blog-cat">Oznámení</span>
-            <div class="blog-card-date">20. března 2026</div>
-            <h3>Zahajujeme spolupráci s hranickou nemocnicí</h3>
-            <p>Klienti mají zajištěno přednostní ošetření u odborných lékařů.</p>
-            <span class="blog-more">Číst více →</span>
-          </div>
-        </a>
+        {latestPosts.map((post) => (
+          <a href={`/${post.slug}`} class="blog-card">
+            {post.data.nahled
+              ? <img class="blog-card-img" src={post.data.nahled} alt={post.data.titulek} loading="lazy" />
+              : <div class="blog-card-img" style="background:var(--clr-bg-alt);aspect-ratio:16/9;"></div>
+            }
+            <div class="blog-card-body">
+              <span class="blog-cat">{post.data.kategorie}</span>
+              <div class="blog-card-date">{formatDate(post.data.datum)}</div>
+              <h3>{post.data.titulek}</h3>
+              <p>{post.data.perex}</p>
+              <span class="blog-more">Číst více →</span>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
     <div class="blog-nav">
