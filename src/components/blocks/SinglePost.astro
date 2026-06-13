@@ -320,20 +320,26 @@ function fmt(d: Date): string {
   }
   .sp-nav-item {
     background: var(--clr-primary-soft); padding: 1.25rem 1.5rem;
-    text-decoration: none; display: flex; flex-direction: column; gap: 4px;
+    text-decoration: none; display: flex; flex-direction: column; gap: 6px;
     transition: transform .2s ease, box-shadow .2s ease;
   }
+  .sp-nav-item.prev { border-left: 4px solid var(--clr-primary); }
+  .sp-nav-item.next { border-right: 4px solid var(--clr-primary); text-align: right; }
   .sp-nav-item:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0,0,0,.13);
-    background: var(--clr-primary-soft);
   }
-  .sp-nav-empty { pointer-events: none; background: var(--clr-bg-alt); }
+  .sp-nav-empty {
+    pointer-events: none;
+    background: var(--clr-bg-alt);
+    border: none;
+  }
   .sp-nav-empty:hover { transform: none; box-shadow: none; }
-  .sp-nav-item.next { text-align: right; }
   .sp-nav-dir {
-    font-size: var(--font-size-nano); font-weight: 700;
-    text-transform: uppercase; letter-spacing: .12em; color: var(--clr-muted);
+    font-size: var(--font-size-base);
+    font-weight: 700;
+    color: var(--clr-primary);
+    letter-spacing: .02em;
   }
   .sp-nav-title {
     font-family: var(--ff-head); font-size: var(--font-size-caption); font-weight: 700;
