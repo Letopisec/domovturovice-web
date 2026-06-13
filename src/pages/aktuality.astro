@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { slugify } from '../utils/slug';
 
 const allPosts = await getCollection('clanky');
 const posts = allPosts.sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf());
@@ -158,6 +159,12 @@ function formatDate(date: Date): string {
 .news-card-tag.green { background: rgba(89,152,108,.12); color: var(--clr-green); }
 .news-card-tag.orange { background: rgba(218,136,65,.12); color: var(--clr-orange); }
 .news-card-tag.blue { background: rgba(75,119,171,.12); color: var(--clr-blue); }
+.news-card-tag {
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.news-card-tag:hover { opacity: .75; }
 .news-card-date {
   font-size: var(--font-size-meta);
   color: var(--clr-muted);
@@ -200,6 +207,23 @@ function formatDate(date: Date): string {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+/* proklikatelná celá karta */
+.news-card { position: relative; }
+.news-card-cover-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.news-card-meta { position: relative; z-index: 2; }
+.news-card-tag {
+  position: relative;
+  z-index: 2;
+}
+.news-card-link {
+  position: relative;
+  z-index: 2;
 }
 
 /* no posts */
@@ -364,6 +388,7 @@ function formatDate(date: Date): string {
       )}
       {posts.map(post => (
         <article class="news-card" data-kategorie={post.data.kategorie}>
+          <a href={`/${post.slug}`} class="news-card-cover-link" aria-label={post.data.titulek} tabindex="-1"></a>
           {post.data.nahled
             ? <img class="news-card-img" src={post.data.nahled} alt={post.data.titulek} loading="lazy" />
             : (
@@ -374,7 +399,7 @@ function formatDate(date: Date): string {
           }
           <div class="news-card-body">
             <div class="news-card-meta">
-              <span class="news-card-tag">{post.data.kategorie}</span>
+              <a href={`/${slugify(post.data.kategorie)}`} class="news-card-tag">{post.data.kategorie}</a>
               <span class="news-card-date">{formatDate(post.data.datum)}</span>
             </div>
             <h2>{post.data.titulek}</h2>
