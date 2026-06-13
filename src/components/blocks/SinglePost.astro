@@ -46,25 +46,26 @@ function fmt(d: Date): string {
 ---
 
 <div class="sp-section">
-<div class="sp-page">
 
-  <!-- FULL-WIDTH BLOK: meta + nadpis + cover -->
-  <div class="sp2-fullwidth">
-    <div class="sp-meta-bar">
+  <!-- HERO — přes celou šířku, mimo sp-page -->
+  <div class="sp2-hero">
+    <div class="sp2-hero-inner">
       <div class="sp-meta">
         <span>{autor}</span>
         <span class="sp-meta-sep">|</span>
         <span>{fmt(datum)}</span>
         <span class="sp-meta-sep">|</span>
-        <a class="sp-meta-cat" href={`/${katSlug}`}>{kategorie}</a>
+        <a class="sp-meta-cat-hero" href={`/${katSlug}`}>{kategorie}</a>
       </div>
-      <h1 class="sp-title">{titulek}</h1>
+      <h1 class="sp-title-hero">{titulek}</h1>
     </div>
-
-    {nahled && (
-      <div class="sp-cover" style={`background-image:url('${nahled}')`}></div>
-    )}
   </div>
+
+  {nahled && (
+    <div class="sp-cover-full" style={`background-image:url('${nahled}')`}></div>
+  )}
+
+<div class="sp-page">
 
   <!-- LAYOUT: 3/4 text + 1/4 sidebar -->
   <div class="sp2-layout">
@@ -150,43 +151,50 @@ function fmt(d: Date): string {
   .sp-section {
     background: var(--clr-bg);
     padding: 3rem 1.5rem;
+    margin-bottom: 4rem;
   }
   .sp-page { max-width: 1100px; margin: 0 auto; }
 
-  /* ── FULL-WIDTH HEADER ── */
-  .sp2-fullwidth {
-    background: #fff;
-    border-radius: var(--radius-card) var(--radius-card) 0 0;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,.07);
+  /* ── HERO (Turovice varianta — burgundy přes celou šířku) ── */
+  .sp2-hero {
+    background: var(--clr-primary);
+    width: 100vw;
+    margin-left: calc(-1.5rem);
+    padding: 3rem 0 2.5rem;
   }
-  .sp-meta-bar { padding: 2rem 2.5rem 1.25rem; }
+  .sp2-hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
   .sp-meta {
     font-size: var(--font-size-meta);
-    color: var(--clr-muted);
+    color: rgba(255,255,255,.75);
     display: flex; gap: 6px; align-items: center; flex-wrap: wrap;
     margin-bottom: 1rem;
   }
-  .sp-meta-cat { color: var(--clr-primary); font-weight: 700; text-decoration: none; }
-  .sp-meta-cat:hover { text-decoration: underline; }
-  .sp-meta-sep { color: var(--clr-border); }
-  .sp-title {
+  .sp-meta-sep { color: rgba(255,255,255,.4); }
+  .sp-meta-cat-hero { color: #fff; font-weight: 700; text-decoration: none; }
+  .sp-meta-cat-hero:hover { text-decoration: underline; }
+  .sp-title-hero {
     font-family: var(--ff-head);
     font-size: clamp(28px, 3vw, 42px);
     font-weight: 700;
-    color: var(--clr-heading);
+    color: #fff;
     line-height: 1.2;
     margin: 0;
   }
 
-  /* ── COVER ── */
-  .sp-cover {
-    width: 100%;
+  /* ── COVER — nalepená přímo pod hero, žádná mezera ── */
+  .sp-cover-full {
+    width: 100vw;
+    margin-left: calc(-1.5rem);
     height: 380px;
     background-color: var(--clr-primary-soft);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    margin-bottom: 0;
   }
 
   /* ── LAYOUT 2/3 + 1/3 ── */
@@ -311,12 +319,17 @@ function fmt(d: Date): string {
     gap: 1px; background: var(--clr-border);
   }
   .sp-nav-item {
-    background: var(--clr-bg-alt); padding: 1.25rem 1.5rem;
+    background: var(--clr-primary-soft); padding: 1.25rem 1.5rem;
     text-decoration: none; display: flex; flex-direction: column; gap: 4px;
-    transition: background .2s;
+    transition: transform .2s ease, box-shadow .2s ease;
   }
-  .sp-nav-item:hover { background: var(--clr-primary-soft); }
-  .sp-nav-empty { pointer-events: none; }
+  .sp-nav-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,.13);
+    background: var(--clr-primary-soft);
+  }
+  .sp-nav-empty { pointer-events: none; background: var(--clr-bg-alt); }
+  .sp-nav-empty:hover { transform: none; box-shadow: none; }
   .sp-nav-item.next { text-align: right; }
   .sp-nav-dir {
     font-size: var(--font-size-nano); font-weight: 700;
@@ -394,9 +407,9 @@ function fmt(d: Date): string {
   }
   @media (max-width: 600px) {
     .sp-section { padding: 1.5rem .75rem; }
-    .sp-meta-bar { padding: 1.5rem 1.25rem .75rem; }
     .sp-body { padding: 1.25rem; }
-    .sp-cover { height: 220px; }
     .sp-nav { grid-template-columns: 1fr; }
+    .sp2-hero { margin-left: -.75rem; padding: 2rem 0 1.75rem; }
+    .sp-cover-full { margin-left: -.75rem; height: 220px; }
   }
 </style>
