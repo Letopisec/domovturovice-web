@@ -1,27 +1,35 @@
 ---
 // ════════════════════════════════════════════════════════════════
 // PLOCHÁ DYNAMICKÁ ROUTA — vše na domena.cz/[slug]
-// Rozlišuje 3 typy obsahu na stejné úrovni URL:
-//   1. ČLÁNEK     → domena.cz/jak-funguje-tepelne-cerpadlo
-//   2. KATEGORIE  → domena.cz/dotace (rozcestník článků kategorie)
-//   3. ŠTÍTEK     → domena.cz/novostavba (rozcestník článků se štítkem)
-// Žádné prefixy, žádné breadcrumbs.
+//   1. ČLÁNEK     → SinglePost (Molti varianta 2)
+//   2. KATEGORIE  → rozcestník článků kategorie
+//   3. ŠTÍTEK     → rozcestník článků se štítkem
 // ════════════════════════════════════════════════════════════════
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import SinglePost from '../components/blocks/SinglePost.astro';
 import { slugify } from '../utils/slug';
 
-function formatDate(date: Date): string {
-  return date.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
+function fmt(d: Date): string {
+  return d.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
 export async function getStaticPaths() {
   const clanky = await getCollection('clanky');
 
+  // řazení nejnovější první (pro navigaci a "další příspěvky")
+  const serazene = [...clanky].sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf());
+
   // 1) Cesty článků
-  const clanekPaths = clanky.map((clanek) => ({
+  const clanekPaths = serazene.map((clanek, i) => ({
     params: { slug: clanek.slug },
-    props: { type: 'clanek', clanek },
+    props: {
+      type: 'clanek',
+      clanek,
+      // navigace: novější = prev (vlevo), starší = next (vpravo)
+      prev: serazene[i - 1] ? { titulek: serazene[i - 1].data.titulek, slug: serazene[i - 1].slug } : null,
+      next: serazene[i + 1] ? { titulek: serazene[i + 1].data.titulek, slug: serazene[i + 1].slug } : null,
+    },
   }));
 
   // 2) Cesty kategorií (unikátní)
@@ -46,7 +54,7 @@ export async function getStaticPaths() {
     },
   }));
 
-  // KONTROLA KOLIZÍ: žádné dva slugy se nesmí krýt
+  // KONTROLA KOLIZÍ
   const all = [...clanekPaths, ...kategoriePaths, ...stitkyPaths];
   const seen = new Set();
   for (const p of all) {
@@ -62,14 +70,35 @@ export async function getStaticPaths() {
 const { type } = Astro.props;
 
 // ── ČLÁNEK ──
-let Content, d;
+let Content, d, prev, next, kategorieList: any[] = [], dalsiClanky: any[] = [], stitkySlugy: any[] = [];
 if (type === 'clanek') {
   const rendered = await Astro.props.clanek.render();
   Content = rendered.Content;
   d = Astro.props.clanek.data;
+  prev = Astro.props.prev;
+  next = Astro.props.next;
+
+  const vsechny = await getCollection('clanky');
+
+  // počty článků v kategoriích (do sidebaru)
+  const pocty: Record<string, number> = {};
+  vsechny.forEach((c) => { pocty[c.data.kategorie] = (pocty[c.data.kategorie] || 0) + 1; });
+  kategorieList = Object.entries(pocty).map(([nazev, pocet]) => ({
+    nazev, slug: slugify(nazev), pocet,
+  }));
+
+  // další příspěvky (3 nejnovější kromě aktuálního)
+  dalsiClanky = vsechny
+    .filter((c) => c.slug !== Astro.props.clanek.slug)
+    .sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf())
+    .slice(0, 3)
+    .map((c) => ({ titulek: c.data.titulek, slug: c.slug, datum: c.data.datum, nahled: c.data.nahled }));
+
+  // štítky s odkazy
+  stitkySlugy = d.stitky.map((t: string) => ({ nazev: t, slug: slugify(t) }));
 }
 
-// ── ROZCESTNÍK (kategorie / štítek) ──
+// ── ROZCESTNÍK ──
 const { nazev, clanky: vypisClanky } = Astro.props;
 
 const schema = type === 'clanek'
@@ -81,22 +110,21 @@ const pageDesc = type === 'clanek' ? (d.popis || d.perex) : `Články v kategori
 ---
 <Layout title={pageTitle} description={pageDesc} schema={schema}>
   {type === 'clanek' ? (
-    <article class="single-post">
-      <div class="container">
-        <div class="single-post__head">
-          <a class="single-post__cat" href={`/${slugify(d.kategorie)}`}>{d.kategorie}</a>
-          <h1>{d.titulek}</h1>
-          <p class="single-post__meta">{d.autor} · {formatDate(d.datum)}</p>
-        </div>
-        {d.nahled && <img class="single-post__cover" src={d.nahled} alt={d.titulek} />}
-        <div class="single-post__body"><Content /></div>
-        {d.stitky.length > 0 && (
-          <div class="single-post__tags">
-            {d.stitky.map((t) => <a href={`/${slugify(t)}`} class="post-tag">{t}</a>)}
-          </div>
-        )}
-      </div>
-    </article>
+    <SinglePost
+      titulek={d.titulek}
+      datum={d.datum}
+      kategorie={d.kategorie}
+      katSlug={slugify(d.kategorie)}
+      stitkySlugy={stitkySlugy}
+      nahled={d.nahled}
+      autor={d.autor}
+      kategorieList={kategorieList}
+      dalsiClanky={dalsiClanky}
+      prev={prev}
+      next={next}
+    >
+      <Content />
+    </SinglePost>
   ) : (
     <section class="archive">
       <div class="container">
@@ -109,7 +137,7 @@ const pageDesc = type === 'clanek' ? (d.popis || d.perex) : `Články v kategori
               <span class="related-card__body">
                 <span class="related-card__cat">{c.data.kategorie}</span>
                 <span class="related-card__title">{c.data.titulek}</span>
-                <span class="related-card__date">{formatDate(c.data.datum)}</span>
+                <span class="related-card__date">{fmt(c.data.datum)}</span>
               </span>
             </a>
           ))}
@@ -120,151 +148,7 @@ const pageDesc = type === 'clanek' ? (d.popis || d.perex) : `Články v kategori
 </Layout>
 
 <style>
-  /* ════════════════════════════════════════════════════════════
-     SINGLE POST — vzhled detailu článku (typografie podle Molti vzoru)
-     Vše přes tokeny. Vzdušné sekce, výrazná hierarchie nadpisů.
-     ════════════════════════════════════════════════════════════ */
-  .single-post { padding: var(--space-8) 0 var(--space-12); }
-  .single-post .container { max-width: 760px; }
-
-  /* ── HLAVIČKA ČLÁNKU ── */
-  .single-post__head { margin-bottom: var(--space-6); text-align: center; }
-  .single-post__cat {
-    display: inline-block;
-    font-size: var(--text-label);
-    font-weight: var(--font-bold);
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--clr-primary);
-    text-decoration: none;
-    margin-bottom: var(--space-3);
-  }
-  .single-post__cat:hover { text-decoration: underline; }
-  .single-post h1 {
-    font-family: var(--ff-head);
-    font-size: clamp(1.9rem, 4vw, 2.7rem);
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--clr-heading);
-    margin: 0 0 var(--space-3);
-  }
-  .single-post__meta {
-    color: var(--clr-muted);
-    font-size: var(--text-sm);
-  }
-
-  /* ── ÚVODNÍ FOTKA ── */
-  .single-post__cover {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border-radius: var(--radius-lg);
-    margin-bottom: var(--space-8);
-  }
-
-  /* ── TĚLO ČLÁNKU ── */
-  .single-post__body {
-    font-size: 1.075rem;
-    line-height: 1.75;
-    color: var(--clr-text-body);
-  }
-  .single-post__body :global(h2) {
-    font-family: var(--ff-head);
-    font-size: clamp(1.4rem, 2.6vw, 1.75rem);
-    font-weight: 700;
-    color: var(--clr-heading);
-    line-height: 1.3;
-    margin: var(--space-8) 0 var(--space-3);
-    padding-top: var(--space-2);
-  }
-  .single-post__body :global(h3) {
-    font-family: var(--ff-head);
-    font-size: clamp(1.15rem, 2vw, 1.35rem);
-    font-weight: 700;
-    color: var(--clr-heading);
-    margin: var(--space-5) 0 var(--space-2);
-  }
-  .single-post__body :global(p) {
-    margin: 0 0 var(--space-4);
-  }
-  .single-post__body :global(strong) { color: var(--clr-heading); font-weight: 700; }
-  .single-post__body :global(ul),
-  .single-post__body :global(ol) {
-    margin: 0 0 var(--space-4);
-    padding-left: 1.4em;
-  }
-  .single-post__body :global(li) { margin-bottom: var(--space-2); line-height: 1.7; }
-  .single-post__body :global(a) {
-    color: var(--clr-primary);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  .single-post__body :global(a:hover) { color: var(--clr-primary-hover); }
-  .single-post__body :global(img) {
-    width: 100%;
-    border-radius: var(--radius-md);
-    margin: var(--space-5) 0;
-  }
-  .single-post__body :global(hr) {
-    border: none;
-    border-top: 1px solid var(--clr-border);
-    margin: var(--space-8) 0;
-  }
-  .single-post__body :global(blockquote) {
-    border-left: 3px solid var(--clr-primary);
-    padding: var(--space-2) 0 var(--space-2) var(--space-4);
-    margin: var(--space-5) 0;
-    color: var(--clr-muted);
-    font-style: italic;
-  }
-  .single-post__body :global(em) { color: var(--clr-muted); }
-
-  /* ── TABULKA V ČLÁNKU ── */
-  .single-post__body :global(table) {
-    width: 100%;
-    border-collapse: collapse;
-    margin: var(--space-5) 0;
-    font-size: var(--text-sm);
-  }
-  .single-post__body :global(thead th) {
-    background: var(--clr-primary-soft);
-    color: var(--clr-heading);
-    font-weight: 700;
-    text-align: left;
-    padding: var(--space-2) var(--space-3);
-    border-bottom: 2px solid var(--clr-primary);
-  }
-  .single-post__body :global(tbody td) {
-    padding: var(--space-2) var(--space-3);
-    border-bottom: 1px solid var(--clr-border);
-  }
-  .single-post__body :global(tbody tr:nth-child(even)) {
-    background: var(--clr-bg-alt);
-  }
-
-  /* ── ŠTÍTKY POD ČLÁNKEM ── */
-  .single-post__tags {
-    display: flex;
-    gap: var(--space-2);
-    flex-wrap: wrap;
-    margin-top: var(--space-8);
-    padding-top: var(--space-5);
-    border-top: 1px solid var(--clr-border);
-  }
-  .post-tag {
-    font-size: var(--text-sm);
-    background: var(--clr-primary-soft);
-    color: var(--clr-primary);
-    padding: 6px 14px;
-    border-radius: 999px;
-    text-decoration: none;
-    transition: background .2s, color .2s;
-  }
-  .post-tag:hover { background: var(--clr-primary); color: #fff; }
-
-  /* ════════════════════════════════════════════════════════════
-     ARCHIV (rozcestník kategorie / štítku)
-     ════════════════════════════════════════════════════════════ */
+  /* ARCHIV (rozcestník kategorie / štítku) */
   .archive { padding: var(--space-12) 0; }
   .section-label {
     display: inline-block;
