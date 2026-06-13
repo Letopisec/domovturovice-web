@@ -76,13 +76,6 @@ function fmt(d: Date): string {
         </div>
       </div>
 
-      {stitkySlugy.length > 0 && (
-        <div class="sp-footer">
-          <span class="sp-footer-label">Štítky:</span>
-          {stitkySlugy.map((t) => <a href={`/${t.slug}`} class="sp-tag">{t.nazev}</a>)}
-        </div>
-      )}
-
       {(prev || next) && (
         <div class="sp-nav">
           {prev ? (
@@ -145,7 +138,7 @@ function fmt(d: Date): string {
 <style>
   /* ── SEKCE s kontrastním pozadím (bílé karty vyniknou) ── */
   .sp-section {
-    background: var(--clr-surface);
+    background: var(--clr-bg);
     padding: 3rem 1.5rem;
   }
   .sp-page { max-width: 1100px; margin: 0 auto; }
@@ -249,11 +242,10 @@ function fmt(d: Date): string {
     color: var(--clr-heading); margin: 0;
   }
   .sp-content :global(a) {
-    color: var(--clr-primary); text-decoration: none;
-    border-bottom: 1px solid var(--clr-primary-soft);
-    transition: border-color .2s, color .2s;
+    color: var(--clr-primary); text-decoration: underline;
+    transition: color .2s;
   }
-  .sp-content :global(a:hover) { color: var(--clr-primary-hover); border-bottom-color: var(--clr-primary); }
+  .sp-content :global(a:hover) { color: var(--clr-primary-hover); text-decoration: underline; }
   .sp-content :global(img) { width: 100%; border-radius: var(--radius-card); margin: 1.75rem 0; }
 
   /* tabulka */
@@ -272,24 +264,6 @@ function fmt(d: Date): string {
     border-bottom: 1px solid var(--clr-border);
   }
   .sp-content :global(tbody tr:nth-child(even)) { background: var(--clr-bg-alt); }
-
-  /* ── TAGY ── */
-  .sp-footer {
-    padding: 1.25rem 2.5rem 1.5rem;
-    border-top: 1px solid var(--clr-border);
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  }
-  .sp-footer-label {
-    font-size: var(--font-size-micro); font-weight: 700;
-    text-transform: uppercase; letter-spacing: .1em; color: var(--clr-muted);
-  }
-  .sp-tag {
-    display: inline-block; padding: 4px 12px;
-    background: var(--clr-bg-alt); border-radius: var(--radius-btn);
-    font-size: var(--font-size-label); font-weight: 600; color: var(--clr-text-body);
-    text-decoration: none; transition: background .2s, color .2s;
-  }
-  .sp-tag:hover { background: var(--clr-primary-soft); color: var(--clr-primary); }
 
   /* ── NAVIGACE ── */
   .sp-nav {
@@ -384,6 +358,5 @@ function fmt(d: Date): string {
     .sp-body { padding: 1.25rem; }
     .sp-cover { height: 220px; }
     .sp-nav { grid-template-columns: 1fr; }
-    .sp-footer { padding: 1rem 1.25rem; }
   }
 </style>
