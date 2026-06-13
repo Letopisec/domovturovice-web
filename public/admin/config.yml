@@ -1,10 +1,12 @@
 # ════════════════════════════════════════════════════════════════
 # DECAP CMS — konfigurace administrace obsahu
-# Klient edituje blog/poradnu přes rozhraní na /admin
+# (Pozn.: blog se primárně plní přes Google Drive most — viz BLOG_DRIVE_SYSTEM.
+#  Tato konfigurace zůstává jako záložní/přímá editace. Pole = česká, shodná
+#  se schématem v src/content/config.ts.)
 # ════════════════════════════════════════════════════════════════
 
 backend:
-  name: git-gateway        # připraveno pro Google/e-mail login přes Netlify Identity / Cloudflare
+  name: git-gateway
   branch: main
 
 # Lokální editace bez přihlášení (pro vývoj): spustit `npx decap-server`
@@ -14,26 +16,25 @@ backend:
 media_folder: "public/images/uploads"   # kam se nahrávají obrázky (v repu)
 public_folder: "/images/uploads"         # jak se na ně odkazuje na webu
 
-# Čeština v rozhraní
 locale: "cs"
 
 collections:
-  # ── BLOG / PORADNA ──
+  # ── BLOG / AKTUALITY ──
   - name: "clanky"
-    label: "Články (Poradna / Blog)"
+    label: "Články (Aktuality / Blog)"
     label_singular: "Článek"
     folder: "src/content/clanky"
     create: true
     slug: "{{slug}}"
-    summary: "{{title}} — {{publishDate}}"
-    sortable_fields: ["publishDate", "title"]
+    summary: "{{titulek}} — {{datum}}"
+    sortable_fields: ["datum", "titulek"]
     fields:
-      - { name: "title", label: "Nadpis článku", widget: "string" }
-      - { name: "publishDate", label: "Datum publikace", widget: "datetime", format: "DD.MM.YYYY", date_format: "DD.MM.YYYY", time_format: false }
-      - { name: "category", label: "Kategorie", widget: "select", options: ["Dotace", "Technologie", "Praxe", "Legislativa", "Tipy"] }
-      - { name: "tags", label: "Štítky", widget: "list", required: false, hint: "Volitelné štítky – každý vytvoří rozcestník na domena.cz/stitek" }
-      - { name: "cover", label: "Úvodní fotka", widget: "image", required: false }
-      - { name: "excerpt", label: "Krátký úvod (perex)", widget: "text", hint: "1–2 věty, zobrazí se v náhledu článku" }
-      - { name: "author", label: "Autor", widget: "string", default: "Martin Kadeřábek" }
+      - { name: "titulek", label: "Nadpis článku", widget: "string" }
+      - { name: "datum", label: "Datum publikace", widget: "datetime", format: "DD.MM.YYYY", date_format: "DD.MM.YYYY", time_format: false }
+      - { name: "kategorie", label: "Kategorie", widget: "string", hint: "Volný text — každá kategorie vytvoří rozcestník na domena.cz/nazev-kategorie" }
+      - { name: "stitky", label: "Štítky", widget: "list", required: false, hint: "Volitelné štítky – každý vytvoří rozcestník na domena.cz/stitek" }
+      - { name: "nahled", label: "Úvodní fotka", widget: "image", required: false }
+      - { name: "perex", label: "Krátký úvod (perex)", widget: "text", hint: "1–2 věty, zobrazí se v náhledu článku" }
+      - { name: "autor", label: "Autor", widget: "string", default: "Domov Turovice" }
       - { name: "body", label: "Text článku", widget: "markdown", hint: "Plný editor: nadpisy, tučné, odrážky, odkazy, obrázky" }
-      - { name: "metaDescription", label: "SEO popis (Google)", widget: "string", required: false, hint: "Max 155 znaků — co se zobrazí ve vyhledávači" }
+      - { name: "popis", label: "SEO popis (Google)", widget: "string", required: false, hint: "Max 155 znaků — co se zobrazí ve vyhledávači" }

@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('clanky');
 const posts = allPosts.sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf());
 
 const categories = ['Vše', ...Array.from(new Set(posts.map(p => p.data.kategorie)))];
@@ -364,8 +364,8 @@ function formatDate(date: Date): string {
       )}
       {posts.map(post => (
         <article class="news-card" data-kategorie={post.data.kategorie}>
-          {post.data.nahledovyObrazek
-            ? <img class="news-card-img" src={post.data.nahledovyObrazek} alt={post.data.titulek} loading="lazy" />
+          {post.data.nahled
+            ? <img class="news-card-img" src={post.data.nahled} alt={post.data.titulek} loading="lazy" />
             : (
               <div class="news-card-img-placeholder">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>

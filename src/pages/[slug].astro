@@ -11,6 +11,10 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import { slugify } from '../utils/slug';
 
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
 export async function getStaticPaths() {
   const clanky = await getCollection('clanky');
 
@@ -21,24 +25,24 @@ export async function getStaticPaths() {
   }));
 
   // 2) Cesty kategorií (unikátní)
-  const kategorie = [...new Set(clanky.map((c) => c.data.category))];
+  const kategorie = [...new Set(clanky.map((c) => c.data.kategorie))];
   const kategoriePaths = kategorie.map((kat) => ({
     params: { slug: slugify(kat) },
     props: {
       type: 'kategorie',
       nazev: kat,
-      clanky: clanky.filter((c) => c.data.category === kat),
+      clanky: clanky.filter((c) => c.data.kategorie === kat),
     },
   }));
 
   // 3) Cesty štítků (unikátní)
-  const stitky = [...new Set(clanky.flatMap((c) => c.data.tags))];
+  const stitky = [...new Set(clanky.flatMap((c) => c.data.stitky))];
   const stitkyPaths = stitky.map((tag) => ({
     params: { slug: slugify(tag) },
     props: {
       type: 'stitek',
       nazev: tag,
-      clanky: clanky.filter((c) => c.data.tags.includes(tag)),
+      clanky: clanky.filter((c) => c.data.stitky.includes(tag)),
     },
   }));
 
@@ -69,26 +73,26 @@ if (type === 'clanek') {
 const { nazev, clanky: vypisClanky } = Astro.props;
 
 const schema = type === 'clanek'
-  ? { '@type': 'Article', headline: d.title, datePublished: d.publishDate, author: { '@type': 'Person', name: d.author }, articleSection: d.category }
+  ? { '@type': 'Article', headline: d.titulek, datePublished: d.datum.toISOString(), author: { '@type': 'Person', name: d.autor }, articleSection: d.kategorie }
   : { '@type': 'CollectionPage', name: nazev };
 
-const pageTitle = type === 'clanek' ? `${d.title}` : `${nazev} – články`;
-const pageDesc = type === 'clanek' ? (d.metaDescription || d.excerpt) : `Články v kategorii ${nazev}.`;
+const pageTitle = type === 'clanek' ? `${d.titulek}` : `${nazev} – články`;
+const pageDesc = type === 'clanek' ? (d.popis || d.perex) : `Články v kategorii ${nazev}.`;
 ---
 <Layout title={pageTitle} description={pageDesc} schema={schema}>
   {type === 'clanek' ? (
     <article class="single-post">
       <div class="container">
         <div class="single-post__head">
-          <a class="single-post__cat" href={`/${slugify(d.category)}`}>{d.category}</a>
-          <h1>{d.title}</h1>
-          <p class="single-post__meta">{d.author} · {d.publishDate}</p>
+          <a class="single-post__cat" href={`/${slugify(d.kategorie)}`}>{d.kategorie}</a>
+          <h1>{d.titulek}</h1>
+          <p class="single-post__meta">{d.autor} · {formatDate(d.datum)}</p>
         </div>
-        {d.cover && <img class="single-post__cover" src={d.cover} alt={d.title} />}
+        {d.nahled && <img class="single-post__cover" src={d.nahled} alt={d.titulek} />}
         <div class="single-post__body"><Content /></div>
-        {d.tags.length > 0 && (
+        {d.stitky.length > 0 && (
           <div class="single-post__tags">
-            {d.tags.map((t) => <a href={`/${slugify(t)}`} class="post-tag">{t}</a>)}
+            {d.stitky.map((t) => <a href={`/${slugify(t)}`} class="post-tag">{t}</a>)}
           </div>
         )}
       </div>
@@ -101,11 +105,11 @@ const pageDesc = type === 'clanek' ? (d.metaDescription || d.excerpt) : `Článk
         <div class="archive-grid">
           {vypisClanky.map((c) => (
             <a href={`/${c.slug}`} class="related-card">
-              <span class="related-card__img">{c.data.cover ? <img src={c.data.cover} alt={c.data.title} /> : '[ foto ]'}</span>
+              <span class="related-card__img">{c.data.nahled ? <img src={c.data.nahled} alt={c.data.titulek} /> : '[ foto ]'}</span>
               <span class="related-card__body">
-                <span class="related-card__cat">{c.data.category}</span>
-                <span class="related-card__title">{c.data.title}</span>
-                <span class="related-card__date">{c.data.publishDate}</span>
+                <span class="related-card__cat">{c.data.kategorie}</span>
+                <span class="related-card__title">{c.data.titulek}</span>
+                <span class="related-card__date">{formatDate(c.data.datum)}</span>
               </span>
             </a>
           ))}
