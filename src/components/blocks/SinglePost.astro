@@ -61,11 +61,11 @@ function fmt(d: Date): string {
     </div>
   </div>
 
+<div class="sp-page">
+
   {nahled && (
     <div class="sp-cover-full" style={`background-image:url('${nahled}')`}></div>
   )}
-
-<div class="sp-page">
 
   <!-- LAYOUT: 3/4 text + 1/4 sidebar -->
   <div class="sp2-layout">
@@ -187,14 +187,14 @@ function fmt(d: Date): string {
 
   /* ── COVER — nalepená přímo pod hero, žádná mezera ── */
   .sp-cover-full {
-    width: 100vw;
-    margin-left: calc(-1.5rem);
+    width: 100%;
     height: 380px;
     background-color: var(--clr-primary-soft);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    margin-bottom: 0;
+    margin-bottom: 1.75rem;
+    border-radius: var(--radius-card) var(--radius-card) 0 0;
   }
 
   /* ── LAYOUT 2/3 + 1/3 ── */
@@ -323,7 +323,7 @@ function fmt(d: Date): string {
     text-decoration: none; display: flex; flex-direction: column; gap: 6px;
     transition: transform .2s ease, box-shadow .2s ease;
   }
-  .sp-nav-item.prev { border-left: 4px solid var(--clr-primary); border-right: 1px solid var(--clr-border); }
+  .sp-nav-item.prev { border-left: 4px solid var(--clr-primary); box-shadow: inset -1px 0 0 var(--clr-border); }
   .sp-nav-item.next { border-right: 4px solid var(--clr-primary); text-align: right; }
   .sp-nav-item:hover {
     transform: translateY(-3px);
@@ -416,6 +416,6 @@ function fmt(d: Date): string {
     .sp-body { padding: 1.25rem; }
     .sp-nav { grid-template-columns: 1fr; }
     .sp2-hero { margin-left: -.75rem; padding: 2rem 0 1.75rem; }
-    .sp-cover-full { margin-left: -.75rem; height: 220px; }
+    .sp-cover-full { height: 220px; }
   }
 </style>
