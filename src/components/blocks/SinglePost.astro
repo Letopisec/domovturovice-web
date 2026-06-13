@@ -316,14 +316,14 @@ function fmt(d: Date): string {
   /* ── NAVIGACE ── */
   .sp-nav {
     display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1px; background: var(--clr-border);
+    gap: 0;
   }
   .sp-nav-item {
     background: var(--clr-primary-soft); padding: 1.25rem 1.5rem;
     text-decoration: none; display: flex; flex-direction: column; gap: 6px;
     transition: transform .2s ease, box-shadow .2s ease;
   }
-  .sp-nav-item.prev { border-left: 4px solid var(--clr-primary); }
+  .sp-nav-item.prev { border-left: 4px solid var(--clr-primary); border-right: 1px solid var(--clr-border); }
   .sp-nav-item.next { border-right: 4px solid var(--clr-primary); text-align: right; }
   .sp-nav-item:hover {
     transform: translateY(-3px);
